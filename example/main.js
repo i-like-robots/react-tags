@@ -32,7 +32,8 @@ const App = React.createClass({
     getInitialState() {
         return {
             tags: [ {id: 1, text: "Thailand"}, {id: 2, text: "India"} ],
-            suggestions: Countries
+            suggestions: Countries,
+            busy: false
         }
     },
 
@@ -51,14 +52,25 @@ const App = React.createClass({
         this.setState({tags: tags});
     },
 
+    handleToggle() {
+      this.setState({
+        busy: !this.state.busy
+      });
+    },
+
     render() {
         var tags = this.state.tags;
         var suggestions = this.state.suggestions;
         return (
             <div>
+                <label style={{float: 'left', margin: '0 1em 0 0', padding: '2px'}}>
+                  <input type="checkbox" ref="busy" onClick={this.handleToggle} />
+                  <span> Busy?</span>
+                </label>
                 <Tags
                     tags={tags}
                     suggestions={Countries}
+                    busy={this.state.busy}
                     handleDelete={this.handleDelete}
                     handleAddition={this.handleAddition} />
                 <hr />

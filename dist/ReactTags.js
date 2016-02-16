@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
 var Tag = require('./Tag');
 var Suggestions = require('./Suggestions');
 
@@ -19,28 +18,28 @@ module.exports = React.createClass({
     displayName: 'exports',
 
     propTypes: {
+        busy: React.PropTypes.bool,
         tags: React.PropTypes.array,
         placeholder: React.PropTypes.string,
         labelField: React.PropTypes.string,
         suggestions: React.PropTypes.array,
-        delimeters: React.PropTypes.array,
+        delimiters: React.PropTypes.array,
         autofocus: React.PropTypes.bool,
         handleDelete: React.PropTypes.func.isRequired,
         handleAddition: React.PropTypes.func.isRequired,
         handleInputChange: React.PropTypes.func,
-        minQueryLength: React.PropTypes.number,
-        autocomplete: React.PropTypes.bool
+        minQueryLength: React.PropTypes.number
     },
 
     getDefaultProps: function getDefaultProps() {
         return {
+            busy: false,
             placeholder: 'Add new tag',
             tags: [],
             suggestions: [],
-            delimeters: [Keys.ENTER, Keys.TAB],
+            delimiters: [Keys.ENTER, Keys.TAB],
             autofocus: true,
-            minQueryLength: 2,
-            autocomplete: false
+            minQueryLength: 2
         };
     },
 
@@ -109,7 +108,7 @@ module.exports = React.createClass({
         // When one of the terminating keys is pressed, add current query to the
         // tags. If no text is typed in so far, ignore the action - so we don't
         // end up with a terminating character typed in.
-        if (this.props.delimeters.indexOf(e.keyCode) !== -1) {
+        if (this.props.delimiters.indexOf(e.keyCode) !== -1) {
             if (e.keyCode !== Keys.TAB) {
                 e.preventDefault();
             }
@@ -198,6 +197,7 @@ module.exports = React.createClass({
                 'aria-label': placeholder,
                 onChange: this.handleChange,
                 onKeyDown: this.handleKeyDown }),
+            this.props.busy ? React.createElement('div', { className: 'ReactTags__busy' }) : null,
             React.createElement(Suggestions, {
                 query: query,
                 suggestions: this.state.suggestions,
@@ -212,9 +212,9 @@ module.exports = React.createClass({
             React.createElement(
                 'div',
                 { className: 'ReactTags__selected' },
-                tagItems,
-                tagInput
-            )
+                tagItems
+            ),
+            tagInput
         );
     }
 });

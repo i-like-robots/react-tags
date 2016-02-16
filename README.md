@@ -74,15 +74,15 @@ React.render(<App />, document.getElementById('app'));
 
 - [`tags`](#tagsOption)
 - [`suggestions`](#suggestionsOption)
-- [`delimeters`](#delimeters)
+- [`busy`](#suggestionsOption)
+- [`delimiters`](#delimitersOption)
 - [`placeholder`](#placeholderOption)
 - [`labelField`](#labelFieldOption)
 - [`handleAddition`](#handleAdditionOption)
 - [`handleDelete`](#handleDeleteOption)
-- [`autofocus`](#autofocus)
+- [`autofocus`](#autofocusOption)
 - [`handleInputChange`](#handleInputChange)
 - [`minQueryLength`](#minQueryLength)
-- [`autocomplete`](#autocomplete)
 
 <a name="tagsOption"></a>
 ##### tags (optional)
@@ -100,10 +100,13 @@ An array of suggestions that are used as basis for showing suggestions. At the m
 var suggestions = ["mango", "pineapple", "orange", "pear"];
 ```
 
-<a name="delimeters"></a>
-##### delimeters (optional)
-Specifies which characters should terminate tags input (default: enter and tab). A list of character codes.
+<a name="busy"></a>
+##### busy (optional)
+Whether to display the loading indicator or not (default: false). Useful if loading new `suggestions` asynchronously.
 
+<a name="delimitersOption"></a>
+##### delimiters (optional)
+Specifies which characters should terminate tags input (default: enter and tab). A list of character codes.
 
 <a name="placeholderOption"></a>
 ##### placeholder (optional)
@@ -150,7 +153,7 @@ function(tag, currPos, newPos) {
     // remove tag from currPos and add in newPos
 }
 ```
-<a name="autofocus"></a>
+<a name="autofocusOption"></a>
 ##### autofocus (optional)
 Optional boolean param to control whether the text-input should be autofocused on mount.
 
