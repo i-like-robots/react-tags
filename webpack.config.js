@@ -1,20 +1,14 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
 
 module.exports = {
-    entry: "./lib/reactTags.js",
+    entry: './example/main.js',
+    devtool: 'source-map',
     module: {
         loaders: [
             { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }
         ]
     },
-    externals: {
-        'react': 'React',
-        'react-dom': 'ReactDOM',
-        'react-dnd': 'ReactDnD'
-    },
     output: {
-        filename: "dist/ReactTags.min.js",
-        libraryTarget: 'umd',
-        library: 'ReactTags'
+        filename: "example/bundle.js"
     }
 };
