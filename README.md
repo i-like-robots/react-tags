@@ -1,29 +1,14 @@
 ### React-Tags
 
-[![NPM](https://nodei.co/npm/react-tag-input.png?downloads=true)](https://www.npmjs.com/package/react-tag-input)
-
-React tags is a simple tagging component ready to drop in your React projects. The component is inspired by GMail's *To* field in the compose window.
-
-### Features
-- Autocomplete based on a suggestion list
-- Keyboard friendly and mouse support
-
-### Why
-Because I was looking for an excuse to build a standalone component and publish it in the wild? To be honest, I needed a tagging component that provided the above features for my [React-Surveyman](http://github.com/prakhar1989/react-surveyman) project. Since I was unable to find one which met my requirements (and the fact that I generally enjoy re-inventing the wheel) this is what I came up with.
-
-
-### Demo
-![img](demo.gif)
-
-Check it out [here](http://prakhar.me/react-tags/example)
+This is a fork of the [original React tags](http://prakhar.me/react-tags/example) component by Prakhar Srivastav. This version is more opinionated and removes some options and drag-and-drop re-ordering functionality.
 
 ### Installation
+
 The preferred way of using the component is via NPM
 
 ```
-npm install --save react-tag-input
+npm install --save git+https://github.com/i-like-robots/react-tags.git
 ```
-It is, however, also available to be used separately (`dist/ReactTags.min.js`). If you prefer this method remember to include [ReactDND](https://github.com/gaearon/react-dnd) as a dependancy. Refer to the [demo](http://prakhar.me/react-tags/example) to see how this works.
 
 ### Usage
 
@@ -84,111 +69,133 @@ React.render(<App />, document.getElementById('app'));
 - [`busy`](#suggestionsOption)
 - [`delimiters`](#delimitersOption)
 - [`placeholder`](#placeholderOption)
+- [`autofocus`](#autofocusOption)
+- [`minQueryLength`](#minQueryLengthOption)
 - [`handleAddition`](#handleAdditionOption)
 - [`handleDelete`](#handleDeleteOption)
-- [`autofocus`](#autofocusOption)
 - [`handleInputChange`](#handleInputChange)
-- [`minQueryLength`](#minQueryLength)
 
 <a name="tagsOption"></a>
-##### tags (optional)
-An array of tags that are displayed as pre-selected. Each tag should have an `id` and a `text` property which is used to display.
+#### tags (optional)
+
+An array of tags that are displayed as pre-selected. Each tag must have an `id` and a `name` property. Default: `[]`.
 
 ```js
-var tags =  [ {id: 1, text: "Apples"} ]
+var tags =  [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Pears" }
+];
 ```
 
 <a name="suggestionsOption"></a>
-##### suggestions (optional)
-An array of suggestions that are used as basis for showing suggestions. At the moment, this should be an array of strings.
+#### suggestions (optional)
+
+An array of suggestions that are used as basis for showing suggestions. Each suggestion must have an `id` and a `name` property. Default: `[]`.
 
 ```js
-var suggestions = ["mango", "pineapple", "orange", "pear"];
+var suggestions = [
+    { id: 3, name: "Bananas" },
+    { id: 4, name: "Mangos" },
+    { id: 5, name: "Lemons" },
+    { id: 6, name: "Apricots" }
+];
 ```
 
 <a name="busy"></a>
-##### busy (optional)
-Whether to display the loading indicator or not (default: false). Useful if loading new `suggestions` asynchronously.
+#### busy (optional)
+
+A boolean flag used to display the busy indicator or not. Useful when loading new `suggestions` asynchronously. Default: `false`.
 
 <a name="delimitersOption"></a>
-##### delimiters (optional)
-Specifies which characters should terminate tags input (default: enter and tab). A list of character codes.
+#### delimiters (optional)
+
+An array of keycodes which should terminate tags input. Default: `[13, 9]`.
 
 <a name="placeholderOption"></a>
-##### placeholder (optional)
-The placeholder shown for the input. Defaults to `Add new tag`.
+#### placeholder (optional)
+
+The placeholder string shown for the input. Default: `'Add new tag'`.
+
+<a name="autofocusOption"></a>
+#### autofocus (optional)
+
+Boolean parameter to control whether the text-input should be autofocused on mount. Default: `true`.
+
+<a name="minQueryLengthOption"></a>
+#### minQueryLength (optional)
+
+How many characters are needed for suggestions to appear. Default: `2`.
 
 <a name="handleAdditionOption"></a>
-##### handleAddition (required)
-Function called when the user wants to add a tag (either a click, a tab press or carriage return)
+#### handleAddition (required)
+
+Function called when the user wants to add a tag. Receives the tag.
 
 ```js
 function(tag) {
-    // add the tag to the tag list
+    // Add the tag { id, name } to the tag list
+    tags.push(tag);
 }
 ```
 
 <a name="handleDeleteOption"></a>
-##### handleDelete (required)
-Function called when the user wants to delete a tag
+#### handleDelete (required)
+
+Function called when the user wants to delete a tag. Receives the tag index.
 
 ```js
 function(i) {
-    // delete the tag at index i
+    // Delete the tag at index i
+    tags.splice(i, 1);
 }
-```
-
-```js
-function(tag, currPos, newPos) {
-    // remove tag from currPos and add in newPos
-}
-```
-<a name="autofocusOption"></a>
-##### autofocus (optional)
-Optional boolean param to control whether the text-input should be autofocused on mount.
-
-```js
-<ReactTags
-    autofocus={false}
-    ...>
 ```
 
 <a name="handleInputChange"></a>
-##### handleInputChange (optional)
-Optional event handler for input onChange
+#### handleInputChange (optional)
+
+Optional event handler when the input changes. Receives the current input value.
 
 ```js
-<ReactTags
-    handleInputChange={this.handleInputChange}
-    ...>
+function(input) {
+    if (this.state.busy) {
+        return;
+    } else {
+        this.setState({ busy: true });
+
+        fetch(`query=${input}`).then(function(result) {
+            this.setState({ busy: true });
+        });
+    }
+}
 ```
 
-<a name="minQueryLength"></a>
-##### minQueryLength (optional)
-How many characters are needed for suggestions to appear (default: 2).
-
 ### Styling
+
 `<ReactTags>` does not come up with any styles. However, it is very easy to customize the look of the component the way you want it. The component provides the following classes with which you can style -
 
-- `ReactTags__tags`
+- `ReactTags`
 - `ReactTags__tagInput`
+- `ReactTags__busy`
 - `ReactTags__selected`
-- `ReactTags__selected ReactTags__tag`
-- `ReactTags__selected ReactTags__remove`
+- `ReactTags__tag`
+- `ReactTags__remove`
 - `ReactTags__suggestions`
 
 An example can be found in `/example/reactTags.css`.
 
 ### Dev
+
 The component is written in ES6 and uses [Webpack](http://webpack.github.io/) as its build tool.
+
 ```
 npm install
-npm run dev
-python -m SimpleHTTPServer ### open in browser
+npm run dev # open http://localhost:8090
 ```
 
 ### Contributing
+
 Got ideas on how to make this better? Open an issue! I'm yet to add tests so keep your PRs on hold :grinning:
 
 ### Thanks
+
 The autocomplete dropdown is inspired by Lea Verou's [awesomeplete](https://github.com/LeaVerou/awesomplete) library.
