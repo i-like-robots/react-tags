@@ -35,30 +35,37 @@ var ReactTags = require('react-tag-input');
 var App = React.createClass({
     getInitialState: function() {
         return {
-            tags: [ {id: 1, text: "Apples"} ],
-            suggestions: ["Banana", "Mango", "Pear", "Apricot"]
+            tags: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Pears" }
+            ],
+            suggestions: [
+                { id: 3, name: "Bananas" },
+                { id: 4, name: "Mangos" },
+                { id: 5, name: "Lemons" },
+                { id: 6, name: "Apricots" }
+            ]
         }
     },
     handleDelete: function(i) {
         var tags = this.state.tags;
         tags.splice(i, 1);
-        this.setState({tags: tags});
+        this.setState({ tags: tags });
     },
     handleAddition: function(tag) {
         var tags = this.state.tags;
         tags.push({
             id: tags.length + 1,
-            text: tag
+            name: tag
         });
-        this.setState({tags: tags});
+        this.setState({ tags: tags });
     },
     render: function() {
-        var tags = this.state.tags;
-        var suggestions = this.state.suggestions;
         return (
             <div>
-                <ReactTags tags={tags}
-                    suggestions={suggestions}
+                <ReactTags
+                    tags={this.state.tags}
+                    suggestions={this.state.suggestions}
                     handleDelete={this.handleDelete}
                     handleAddition={this.handleAddition} />
             </div>
@@ -77,7 +84,6 @@ React.render(<App />, document.getElementById('app'));
 - [`busy`](#suggestionsOption)
 - [`delimiters`](#delimitersOption)
 - [`placeholder`](#placeholderOption)
-- [`labelField`](#labelFieldOption)
 - [`handleAddition`](#handleAdditionOption)
 - [`handleDelete`](#handleDeleteOption)
 - [`autofocus`](#autofocusOption)
@@ -111,22 +117,6 @@ Specifies which characters should terminate tags input (default: enter and tab).
 <a name="placeholderOption"></a>
 ##### placeholder (optional)
 The placeholder shown for the input. Defaults to `Add new tag`.
-
-```
-var placeholder = "Add new country"
-```
-
-<a name="labelFieldOption"></a>
-##### labelField (optional)
-Provide an alternative `label` property for the tags. Defaults to `text`.
-
-```
-<ReactTags tags={tags}
-    suggestions={}
-    labelField={'name'} />
-```
-This is useful if your data uses the `text` property for something else.
-
 
 <a name="handleAdditionOption"></a>
 ##### handleAddition (required)

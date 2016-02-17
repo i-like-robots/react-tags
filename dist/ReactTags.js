@@ -21,7 +21,6 @@ module.exports = React.createClass({
         busy: React.PropTypes.bool,
         tags: React.PropTypes.array,
         placeholder: React.PropTypes.string,
-        labelField: React.PropTypes.string,
         suggestions: React.PropTypes.array,
         delimiters: React.PropTypes.array,
         autofocus: React.PropTypes.bool,
@@ -60,7 +59,7 @@ module.exports = React.createClass({
 
     filteredSuggestions: function filteredSuggestions(query, suggestions) {
         return suggestions.filter(function (item) {
-            return item.toLowerCase().indexOf(query.toLowerCase()) === 0;
+            return item.name.toLowerCase().indexOf(query.toLowerCase()) === 0;
         });
     },
 
@@ -115,6 +114,8 @@ module.exports = React.createClass({
 
             if (this.state.selectionMode) {
                 this.addTag(this.state.suggestions[this.state.selectedIndex]);
+            } else if (this.state.suggestions.length === 1) {
+                this.addTag(this.state.suggestions[0]);
             }
         }
 
@@ -167,7 +168,7 @@ module.exports = React.createClass({
         this.refs.input.focus();
     },
 
-    handleSuggestionClick: function handleSuggestionClick(i, e) {
+    handleSuggestionClick: function handleSuggestionClick(i) {
         this.addTag(this.state.suggestions[i]);
     },
 
@@ -176,11 +177,9 @@ module.exports = React.createClass({
 
         var tagItems = this.props.tags.map(function (tag, i) {
             return React.createElement(Tag, {
-                key: tag.id,
+                key: i,
                 tag: tag,
-                labelField: _this.props.labelField,
-                onDelete: _this.handleDelete.bind(_this, i),
-                moveTag: _this.moveTag,
+                onDelete: _this.handleDelete.bind(null, i),
                 removeComponent: _this.props.removeComponent });
         });
 

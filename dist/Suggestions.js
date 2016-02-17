@@ -31,7 +31,7 @@ module.exports = React.createClass({
                     key: i,
                     onClick: _this.props.handleClick.bind(null, i),
                     className: i == _this.props.selectedIndex ? 'active' : '' },
-                React.createElement('span', { dangerouslySetInnerHTML: _this.markIt(item, _this.props.query) })
+                React.createElement('span', { dangerouslySetInnerHTML: _this.markIt(item.name, _this.props.query) })
             );
         });
 

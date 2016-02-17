@@ -1,5 +1,5 @@
 // Set up test data
-const Countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas"
+const countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas"
       ,"Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands"
       ,"Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica"
       ,"Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea"
@@ -15,14 +15,6 @@ const Countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguill
       ,"Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)"
       ,"Yemen","Zambia","Zimbabwe"];
 
-/*
- * If your app already uses react-dnd, then having multiple
- * backend will raise an integrity violation exception. In such cases
- * use the WithOutContext version of the component.
- * var Tags = ReactTags.WithOutContext;
- * The example below uses the `WithContext` since this the sole component
- * using the react-dnd component.
-*/
 const React = require('react');
 const ReactDom = require('react-dom');
 const Tags = require('../lib/ReactTags');
@@ -31,8 +23,8 @@ const App = React.createClass({
 
     getInitialState() {
         return {
-            tags: [ {id: 1, text: "Thailand"}, {id: 2, text: "India"} ],
-            suggestions: Countries,
+            tags: [ { id: 184, name: "Thailand" }, { id: 86, name: "India" } ],
+            suggestions: countries.map((item, i) => { return { id: i, name: item } }),
             busy: false
         }
     },
@@ -40,16 +32,13 @@ const App = React.createClass({
     handleDelete(i) {
         var tags = this.state.tags;
         tags.splice(i, 1);
-        this.setState({tags: tags});
+        this.setState({ tags: tags });
     },
 
     handleAddition(tag) {
         var tags = this.state.tags;
-        tags.push({
-            id: tags.length + 1,
-            text: tag
-        });
-        this.setState({tags: tags});
+        tags.push(tag);
+        this.setState({ tags: tags });
     },
 
     handleToggle() {
@@ -59,17 +48,18 @@ const App = React.createClass({
     },
 
     render() {
-        var tags = this.state.tags;
-        var suggestions = this.state.suggestions;
+        const tags = this.state.tags;
+        const suggestions = this.state.suggestions;
+
         return (
             <div>
                 <label style={{float: 'left', margin: '0 1em 0 0', padding: '2px'}}>
                   <input type="checkbox" ref="busy" onClick={this.handleToggle} />
-                  <span> Busy?</span>
+                  <span>&nbsp;Busy?</span>
                 </label>
                 <Tags
                     tags={tags}
-                    suggestions={Countries}
+                    suggestions={suggestions}
                     busy={this.state.busy}
                     handleDelete={this.handleDelete}
                     handleAddition={this.handleAddition} />
