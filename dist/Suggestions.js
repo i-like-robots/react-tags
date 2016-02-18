@@ -29,8 +29,10 @@ module.exports = React.createClass({
                 'li',
                 {
                     key: i,
+                    role: 'option',
+                    id: _this.props.listboxId + '-' + i,
                     onClick: _this.props.handleClick.bind(null, i),
-                    className: i == _this.props.selectedIndex ? 'active' : '' },
+                    className: i === _this.props.selectedIndex ? 'active' : '' },
                 React.createElement('span', { dangerouslySetInnerHTML: _this.markIt(item.name, _this.props.query) })
             );
         });
@@ -44,7 +46,7 @@ module.exports = React.createClass({
             { className: 'ReactTags__suggestions' },
             React.createElement(
                 'ul',
-                null,
+                { role: 'listbox', id: this.props.listboxId },
                 suggestions
             )
         );

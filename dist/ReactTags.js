@@ -175,6 +175,8 @@ module.exports = React.createClass({
     render: function render() {
         var _this = this;
 
+        var listboxId = 'ReactTags-listbox';
+
         var tagItems = this.props.tags.map(function (tag, i) {
             return React.createElement(Tag, {
                 key: i,
@@ -185,6 +187,7 @@ module.exports = React.createClass({
 
         var query = this.state.query.trim();
         var placeholder = this.props.placeholder;
+        var selectedIndex = this.state.selectedIndex;
 
         var tagInput = React.createElement(
             'div',
@@ -192,15 +195,21 @@ module.exports = React.createClass({
             React.createElement('input', {
                 ref: 'input',
                 type: 'text',
+                role: 'combobox',
                 placeholder: placeholder,
                 'aria-label': placeholder,
+                'aria-owns': listboxId,
+                'aria-autocomplete': 'list',
+                'aria-activedescendant': selectedIndex !== -1 ? listboxId + '-' + selectedIndex : null,
+                'aria-expanded': true,
                 onChange: this.handleChange,
                 onKeyDown: this.handleKeyDown }),
             this.props.busy ? React.createElement('div', { className: 'ReactTags__busy' }) : null,
             React.createElement(Suggestions, {
+                listboxId: listboxId,
                 query: query,
+                selectedIndex: selectedIndex,
                 suggestions: this.state.suggestions,
-                selectedIndex: this.state.selectedIndex,
                 handleClick: this.handleSuggestionClick,
                 minQueryLength: this.props.minQueryLength })
         );

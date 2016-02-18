@@ -1,6 +1,6 @@
 ### React-Tags
 
-This is a fork of the [original React tags](http://prakhar.me/react-tags/example) component by Prakhar Srivastav. This version is more opinionated and removes some options and drag-and-drop re-ordering functionality.
+This is a fork of the [original React tags](http://prakhar.me/react-tags/example) component by Prakhar Srivastav. This version is more opinionated, removes some options including the drag-and-drop re-ordering functionality and adds appropriate roles and ARIA states.
 
 ### Installation
 
