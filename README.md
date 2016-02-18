@@ -171,7 +171,7 @@ function(input) {
 
 ### Styling
 
-`<ReactTags>` does not come up with any styles. However, it is very easy to customize the look of the component the way you want it. The component provides the following classes with which you can style -
+`<ReactTags>` does not come up with any styles. However, it is very easy to customize the look of the component the way you want it. The component provides the following classes with which you can style:-
 
 - `ReactTags`
 - `ReactTags__tagInput`
@@ -181,7 +181,7 @@ function(input) {
 - `ReactTags__remove`
 - `ReactTags__suggestions`
 
-An example can be found in `/example/reactTags.css`.
+An example can be found in `/example/styles.css`.
 
 ### Dev
 

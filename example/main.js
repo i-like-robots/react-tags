@@ -53,16 +53,17 @@ const App = React.createClass({
 
         return (
             <div>
-                <label style={{float: 'left', margin: '0 1em 0 0', padding: '2px'}}>
-                  <input type="checkbox" ref="busy" onClick={this.handleToggle} />
-                  <span>&nbsp;Busy?</span>
-                </label>
                 <Tags
                     tags={tags}
                     suggestions={suggestions}
                     busy={this.state.busy}
                     handleDelete={this.handleDelete}
                     handleAddition={this.handleAddition} />
+                <br />
+                <label>
+                  <input type="checkbox" ref="busy" onClick={this.handleToggle} />
+                  <span>&nbsp;Toggle busy state</span>
+                </label>
                 <hr />
                 <pre>
                     <code>{JSON.stringify(tags, null, 2)}</code>
