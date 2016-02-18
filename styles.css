@@ -1,0 +1,98 @@
+/* Example Styles for React Tags*/
+.ReactTags {
+}
+
+/* Styles for the input */
+.ReactTags__tagInput {
+    position: relative;
+    width: 200px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.ReactTags__tagInput input,
+.ReactTags__tagInput input:focus {
+    height: 31px;
+    margin: 0;
+    font-size: 12px;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+/* Busy indicator */
+.ReactTags__busy {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border-top: 2px solid rgba(15, 15, 15, 0.2);
+    border-right: 2px solid rgba(15, 15, 15, 0.2);
+    border-bottom: 2px solid rgba(15, 15, 15, 0.2);
+    border-left: 2px solid rgba(15, 15, 15, 0.85);
+    transform: translateZ(0);
+    animation: busy 1.1s infinite linear;
+}
+
+@keyframes busy {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Styles for selected tags */
+.ReactTags__selected {
+    float: left;
+}
+
+.ReactTags__tag {
+    border: 1px solid #ddd;
+    background: #eee;
+    font-size: 12px;
+    display: inline-block;
+    padding: 5px;
+    margin: 0 10px 0 0;
+    border-radius: 2px;
+}
+.ReactTags__remove {
+    background: none;
+    border: none;
+    height: auto;
+    padding: 0;
+    color: #aaa;
+    line-height: 1;
+    margin: 0 0 0 5px;
+    cursor: pointer;
+}
+
+/* Styles for suggestions */
+.ReactTags__suggestions {
+    position: absolute;
+}
+
+.ReactTags__suggestions ul {
+    list-style-type: none;
+    box-shadow: .05em .01em .5em rgba(0,0,0,.2);
+    background: white;
+    width: 200px;
+}
+.ReactTags__suggestions li {
+    border-bottom: 1px solid #ddd;
+    padding: 5px 10px;
+    margin: 0;
+}
+
+.ReactTags__suggestions li mark {
+    text-decoration: underline;
+    background: none;
+    font-weight: 600;
+}
+
+.ReactTags__suggestions li.active {
+    background: #b7cfe0;
+    cursor: pointer;
+}

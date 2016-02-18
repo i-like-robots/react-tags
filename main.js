@@ -1,5 +1,5 @@
 // Set up test data
-var Countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas"
+const countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas"
       ,"Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands"
       ,"Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica"
       ,"Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea"
@@ -12,59 +12,58 @@ var Countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla"
       ,"Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles"
       ,"Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","St. Lucia","Sudan"
       ,"Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia"
-      ,"Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","Uruguay","Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)"
+      ,"Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)"
       ,"Yemen","Zambia","Zimbabwe"];
 
-/*
- * If your app already uses react-dnd, then having multiple
- * backend will raise an integrity violation exception. In such cases
- * use the WithOutContext version of the component. 
- * var Tags = ReactTags.WithOutContext;
- * The example below uses the `WithContext` since this the sole component 
- * using the react-dnd component.
-*/
-var Tags = ReactTags.WithContext;
+const React = require('react');
+const ReactDom = require('react-dom');
+const Tags = require('../lib/ReactTags');
 
-var App = React.createClass({
-    getInitialState: function() {
+const App = React.createClass({
+
+    getInitialState() {
         return {
-            tags: [ {id: 1, text: "Thailand"}, {id: 2, text: "India"} ],
-            suggestions: Countries
+            tags: [ { id: 184, name: "Thailand" }, { id: 86, name: "India" } ],
+            suggestions: countries.map((item, i) => { return { id: i, name: item } }),
+            busy: false
         }
     },
-    handleDelete: function(i) {
+
+    handleDelete(i) {
         var tags = this.state.tags;
         tags.splice(i, 1);
-        this.setState({tags: tags});
-    },
-    handleAddition: function(tag) {
-        var tags = this.state.tags;
-        tags.push({
-            id: tags.length + 1,
-            text: tag
-        });
-        this.setState({tags: tags});
-    },
-    handleDrag: function(tag, currPos, newPos) {
-        var tags = this.state.tags;
-
-        // mutate array
-        tags.splice(currPos, 1);
-        tags.splice(newPos, 0, tag);
-
-        // re-render
         this.setState({ tags: tags });
     },
-    render: function() {
+
+    handleAddition(tag) {
         var tags = this.state.tags;
-        var suggestions = this.state.suggestions;
+        tags.push(tag);
+        this.setState({ tags: tags });
+    },
+
+    handleToggle() {
+      this.setState({
+        busy: !this.state.busy
+      });
+    },
+
+    render() {
+        const tags = this.state.tags;
+        const suggestions = this.state.suggestions;
+
         return (
             <div>
-                <Tags tags={tags} 
-                    suggestions={Countries}
+                <Tags
+                    tags={tags}
+                    suggestions={suggestions}
+                    busy={this.state.busy}
                     handleDelete={this.handleDelete}
-                    handleAddition={this.handleAddition}
-                    handleDrag={this.handleDrag} />
+                    handleAddition={this.handleAddition} />
+                <br />
+                <label>
+                  <input type="checkbox" ref="busy" onClick={this.handleToggle} />
+                  <span>&nbsp;Toggle busy state</span>
+                </label>
                 <hr />
                 <pre>
                     <code>{JSON.stringify(tags, null, 2)}</code>
@@ -72,6 +71,7 @@ var App = React.createClass({
             </div>
         )
     }
+
 });
 
-React.render(<App />, document.getElementById('app'));
+ReactDom.render(<App />, document.getElementById('app'));
