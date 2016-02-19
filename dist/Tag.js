@@ -21,8 +21,12 @@ module.exports = React.createClass({
             ),
             React.createElement(
                 'button',
-                { className: 'ReactTags__remove', 'aria-title': 'Remove tag', onClick: this.props.onDelete },
-                '✕'
+                { className: 'ReactTags__remove', title: 'Click to remove tag', onClick: this.props.onDelete },
+                React.createElement(
+                    'span',
+                    { 'aria-hidden': 'true' },
+                    '✕'
+                )
             )
         );
     }

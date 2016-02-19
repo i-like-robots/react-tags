@@ -50,10 +50,9 @@ module.exports = React.createClass({
 
     getInitialState: function getInitialState() {
         return {
-            suggestions: this.props.suggestions,
             query: '',
-            selectedIndex: -1,
-            selectionMode: false
+            suggestions: this.props.suggestions,
+            selectedIndex: -1
         };
     },
 
@@ -99,7 +98,6 @@ module.exports = React.createClass({
 
             this.setState({
                 selectedIndex: -1,
-                selectionMode: false,
                 suggestions: []
             });
         }
@@ -112,7 +110,7 @@ module.exports = React.createClass({
                 e.preventDefault();
             }
 
-            if (this.state.selectionMode) {
+            if (this.state.selectedIndex > -1) {
                 this.addTag(this.state.suggestions[this.state.selectedIndex]);
             } else if (this.state.suggestions.length === 1) {
                 this.addTag(this.state.suggestions[0]);
@@ -131,13 +129,11 @@ module.exports = React.createClass({
             // if last item, cycle to the bottom
             if (this.state.selectedIndex <= 0) {
                 this.setState({
-                    selectedIndex: this.state.suggestions.length - 1,
-                    selectionMode: true
+                    selectedIndex: this.state.suggestions.length - 1
                 });
             } else {
                 this.setState({
-                    selectedIndex: this.state.selectedIndex - 1,
-                    selectionMode: true
+                    selectedIndex: this.state.selectedIndex - 1
                 });
             }
         }
@@ -147,8 +143,7 @@ module.exports = React.createClass({
             e.preventDefault();
 
             this.setState({
-                selectedIndex: (this.state.selectedIndex + 1) % suggestions.length,
-                selectionMode: true
+                selectedIndex: (this.state.selectedIndex + 1) % suggestions.length
             });
         }
     },
@@ -159,7 +154,6 @@ module.exports = React.createClass({
         // reset the state
         this.setState({
             query: '',
-            selectionMode: false,
             selectedIndex: -1
         });
 
@@ -175,8 +169,6 @@ module.exports = React.createClass({
     render: function render() {
         var _this = this;
 
-        var listboxId = 'ReactTags-listbox';
-
         var tagItems = this.props.tags.map(function (tag, i) {
             return React.createElement(Tag, {
                 key: i,
@@ -185,6 +177,7 @@ module.exports = React.createClass({
                 removeComponent: _this.props.removeComponent });
         });
 
+        var listboxId = 'ReactTags-listbox';
         var query = this.state.query.trim();
         var placeholder = this.props.placeholder;
         var selectedIndex = this.state.selectedIndex;
@@ -200,8 +193,9 @@ module.exports = React.createClass({
                 'aria-label': placeholder,
                 'aria-owns': listboxId,
                 'aria-autocomplete': 'list',
-                'aria-activedescendant': selectedIndex !== -1 ? listboxId + '-' + selectedIndex : null,
-                'aria-expanded': true,
+                'aria-activedescendant': selectedIndex > -1 ? listboxId + '-' + selectedIndex : null,
+                'aria-expanded': selectedIndex > -1,
+                'aria-busy': this.props.busy,
                 onChange: this.handleChange,
                 onKeyDown: this.handleKeyDown }),
             this.props.busy ? React.createElement('div', { className: 'ReactTags__busy' }) : null,
@@ -219,7 +213,7 @@ module.exports = React.createClass({
             { className: 'ReactTags' },
             React.createElement(
                 'div',
-                { className: 'ReactTags__selected' },
+                { className: 'ReactTags__selected', 'aria-live': 'polite', 'aria-relevant': 'additions removals' },
                 tagItems
             ),
             tagInput

@@ -25,14 +25,16 @@ module.exports = React.createClass({
         var _this = this;
 
         var suggestions = this.props.suggestions.map(function (item, i) {
+            var key = _this.props.listboxId + '-' + i;
+
             return React.createElement(
                 'li',
                 {
-                    key: i,
+                    id: key,
+                    key: key,
                     role: 'option',
-                    id: _this.props.listboxId + '-' + i,
                     onClick: _this.props.handleClick.bind(null, i),
-                    className: i === _this.props.selectedIndex ? 'active' : '' },
+                    className: i === _this.props.selectedIndex ? 'is-active' : '' },
                 React.createElement('span', { dangerouslySetInnerHTML: _this.markIt(item.name, _this.props.query) })
             );
         });
