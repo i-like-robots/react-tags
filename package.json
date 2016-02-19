@@ -1,7 +1,7 @@
 {
-  "name": "react-tag-input",
+  "name": "react-tag-autocomplete",
   "version": "3.0.0",
-  "description": "React tags is a fantastically simple tagging component for your React projects",
+  "description": "React Tag Autocomplete is a simple tagging component ready to drop in your React projects.",
   "main": "dist/ReactTags.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,7 +16,10 @@
     "autosuggest",
     "autocomplete"
   ],
-  "author": "Prakhar Srivastav",
+  "contributors": [
+    "Prakhar Srivastav",
+    "Matt Hinchliffe"
+  ],
   "license": "MIT",
   "repository": "https://github.com/i-like-robots/react-tags",
   "peerDependencies": {
