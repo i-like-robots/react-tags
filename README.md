@@ -90,14 +90,14 @@ var tags =  [
 <a name="suggestionsOption"></a>
 #### suggestions (optional)
 
-An array of suggestions that are used as basis for showing suggestions. Each suggestion must have an `id` and a `name` property. Default: `[]`.
+An array of suggestions that are used as basis for showing suggestions. Each suggestion must have an `id` and a `name` property and an optional `disabled` property. Default: `[]`.
 
 ```js
 var suggestions = [
     { id: 3, name: "Bananas" },
     { id: 4, name: "Mangos" },
     { id: 5, name: "Lemons" },
-    { id: 6, name: "Apricots" }
+    { id: 6, name: "Apricots", disabled: true }
 ];
 ```
 

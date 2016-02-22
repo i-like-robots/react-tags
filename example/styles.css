@@ -76,7 +76,7 @@
 
 .ReactTags__suggestions ul {
     list-style-type: none;
-    box-shadow: .05em .01em .5em rgba(0,0,0,.2);
+    box-shadow: .05em .01em .5em rgba(0, 0, 0, 0.2);
     background: white;
     width: 200px;
 }
@@ -95,4 +95,9 @@
 .ReactTags__suggestions li.is-active {
     background: #b7cfe0;
     cursor: pointer;
+}
+
+.ReactTags__suggestions li.is-disabled {
+    opacity: 0.5;
+    cursor: auto;
 }

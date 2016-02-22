@@ -106,7 +106,7 @@ module.exports = React.createClass({
         // tags. If no text is typed in so far, ignore the action - so we don't
         // end up with a terminating character typed in.
         if (this.props.delimiters.indexOf(e.keyCode) !== -1) {
-            if (e.keyCode !== Keys.TAB) {
+            if (e.keyCode !== Keys.TAB || this.state.suggestions.length) {
                 e.preventDefault();
             }
 
@@ -149,6 +149,10 @@ module.exports = React.createClass({
     },
 
     addTag: function addTag(tag) {
+        if (tag.disabled) {
+            return;
+        }
+
         this.props.handleAddition(tag);
 
         // reset the state
