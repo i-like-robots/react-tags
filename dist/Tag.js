@@ -12,21 +12,12 @@ module.exports = React.createClass({
 
     render: function render() {
         return React.createElement(
-            'span',
-            { className: 'ReactTags__tag' },
+            'button',
+            { className: 'ReactTags__tag', title: 'Click to remove tag', onClick: this.props.onDelete },
             React.createElement(
                 'span',
                 { className: 'ReactTags__tagName' },
                 this.props.tag.name
-            ),
-            React.createElement(
-                'button',
-                { className: 'ReactTags__remove', title: 'Click to remove tag', onClick: this.props.onDelete },
-                React.createElement(
-                    'span',
-                    { 'aria-hidden': 'true' },
-                    '✕'
-                )
             )
         );
     }

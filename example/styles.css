@@ -10,13 +10,18 @@
     display: inline-block;
 }
 
-.ReactTags__tagInput input,
-.ReactTags__tagInput input:focus {
-    height: 31px;
-    margin: 0;
-    font-size: 12px;
+.ReactTags__tagInput input {
+    display: inline-block;
+    box-sizing: border-box;
     width: 100%;
-    border: 1px solid #ddd;
+    height: 34px;
+    margin: 0;
+    padding: 6px 10px;
+    border: 1px solid #D1D1D1;
+    border-radius: 2px;
+    background: #FFFFFF;
+    font-size: 12px;
+    line-height: normal;
 }
 
 /* Busy indicator */
@@ -50,23 +55,22 @@
 }
 
 .ReactTags__tag {
-    border: 1px solid #ddd;
-    background: #eee;
-    font-size: 12px;
     display: inline-block;
-    padding: 5px;
+    box-sizing: border-box;
+    height: 34px;
     margin: 0 10px 0 0;
+    padding: 6px;
+    border: 1px solid #D1D1D1;
     border-radius: 2px;
+    background: #F1F1F1;
+    font-size: 12px;
+    line-height: normal;
 }
-.ReactTags__remove {
-    background: none;
-    border: none;
-    height: auto;
-    padding: 0;
-    color: #aaa;
-    line-height: 1;
-    margin: 0 0 0 5px;
-    cursor: pointer;
+
+.ReactTags__tag:after {
+    content: '\2715';
+    color: #AAA;
+    margin-left: 6px;
 }
 
 /* Styles for suggestions */
@@ -75,7 +79,9 @@
 }
 
 .ReactTags__suggestions ul {
-    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
     box-shadow: .05em .01em .5em rgba(0, 0, 0, 0.2);
     background: white;
     width: 200px;
