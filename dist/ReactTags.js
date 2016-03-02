@@ -106,14 +106,12 @@ module.exports = React.createClass({
         // tags. If no text is typed in so far, ignore the action - so we don't
         // end up with a terminating character typed in.
         if (this.props.delimiters.indexOf(e.keyCode) !== -1) {
-            if (e.keyCode !== Keys.TAB || this.state.suggestions.length) {
+            if (e.keyCode !== Keys.TAB || query) {
                 e.preventDefault();
             }
 
             if (this.state.selectedIndex > -1) {
                 this.addTag(this.state.suggestions[this.state.selectedIndex]);
-            } else if (this.state.suggestions.length === 1) {
-                this.addTag(this.state.suggestions[0]);
             }
         }
 
