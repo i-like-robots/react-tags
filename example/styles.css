@@ -10,13 +10,12 @@
     border-radius: 2px;
 }
 
-.ReactTags__tagInput input,
-.ReactTags__tagInput .ReactTags__sizer {
+.ReactTags__tagInput input {
     display: inline-block;
-    box-sizing: border-box;
-    height: 34px;
+    height: 22px;
     margin: 0;
-    padding: 6px 10px;
+    /* allow space for busy indicator */
+    padding: 6px 30px 6px 10px;
     border: 1px solid #D1D1D1;
     border-radius: 2px;
     background: #FFFFFF;
@@ -27,7 +26,7 @@
 /* Busy indicator */
 .ReactTags__busy {
     position: absolute;
-    top: 5px;
+    top: 6px;
     right: 5px;
     width: 18px;
     height: 18px;
@@ -56,8 +55,8 @@
 
 .ReactTags__tag {
     display: inline-block;
-    box-sizing: border-box;
-    height: 34px;
+    box-sizing: content-box;
+    height: 22px;
     margin: 0 10px 0 0;
     padding: 6px;
     border: 1px solid #D1D1D1;
