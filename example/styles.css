@@ -6,21 +6,22 @@
 .ReactTags__tagInput {
     position: relative;
     display: inline-block;
+    box-sizing: border-box;
     max-width: 100%;
+    height: 34px;
+    font-size: 12px;
+    padding: 6px 30px 6px 10px;
+    border: 1px solid #D1D1D1;
     border-radius: 2px;
 }
 
 .ReactTags__tagInput input {
-    display: inline-block;
-    height: 22px;
+    max-width: 100%;
     margin: 0;
-    /* allow space for busy indicator */
-    padding: 6px 30px 6px 10px;
-    border: 1px solid #D1D1D1;
-    border-radius: 2px;
-    background: #FFFFFF;
-    font-size: 12px;
-    line-height: normal;
+    padding: 0;
+    border: 0;
+    outline: none;
+    font: inherit;
 }
 
 /* Busy indicator */
@@ -55,8 +56,8 @@
 
 .ReactTags__tag {
     display: inline-block;
-    box-sizing: content-box;
-    height: 22px;
+    box-sizing: border-box;
+    height: 34px;
     margin: 0 10px 0 0;
     padding: 6px;
     border: 1px solid #D1D1D1;
@@ -64,6 +65,7 @@
     background: #F1F1F1;
     font-size: 12px;
     line-height: normal;
+    vertical-align: bottom;
 }
 
 .ReactTags__tag:after {
