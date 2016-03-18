@@ -24,6 +24,14 @@
     font: inherit;
 }
 
+/* sizer styles */
+.ReactTags__tagInput input + input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
 /* Busy indicator */
 .ReactTags__busy {
     position: absolute;
