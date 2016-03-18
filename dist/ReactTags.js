@@ -3,8 +3,8 @@
 var React = require('react');
 var Tag = require('./Tag');
 var Suggestions = require('./Suggestions');
+var AutosizeInput = require('react-input-autosize');
 
-// Constants
 var Keys = {
     ENTER: 13,
     TAB: 9,
@@ -42,12 +42,6 @@ module.exports = React.createClass({
         };
     },
 
-    componentDidMount: function componentDidMount() {
-        if (this.props.autofocus) {
-            this.refs.input.focus();
-        }
-    },
-
     getInitialState: function getInitialState() {
         return {
             query: '',
@@ -56,9 +50,15 @@ module.exports = React.createClass({
         };
     },
 
+    componentDidMount: function componentDidMount() {
+        if (this.props.autofocus) {
+            this.refs.input.getInput().focus();
+        }
+    },
+
     filteredSuggestions: function filteredSuggestions(query, suggestions) {
         return suggestions.filter(function (item) {
-            return item.name.toLowerCase().indexOf(query.toLowerCase()) === 0;
+            return item.name.toLowerCase().indexOf(query.trim().toLowerCase()) === 0;
         });
     },
 
@@ -74,7 +74,7 @@ module.exports = React.createClass({
     },
 
     handleChange: function handleChange(e) {
-        var query = e.target.value.trim();
+        var query = e.target.value;
 
         if (this.props.handleInputChange) {
             this.props.handleInputChange(query);
@@ -146,6 +146,10 @@ module.exports = React.createClass({
         }
     },
 
+    handleSuggestionClick: function handleSuggestionClick(i) {
+        this.addTag(this.state.suggestions[i]);
+    },
+
     addTag: function addTag(tag) {
         if (tag.disabled) {
             return;
@@ -160,12 +164,7 @@ module.exports = React.createClass({
         });
 
         // focus back on the input box
-        this.refs.input.value = '';
-        this.refs.input.focus();
-    },
-
-    handleSuggestionClick: function handleSuggestionClick(i) {
-        this.addTag(this.state.suggestions[i]);
+        this.refs.input.getInput().focus();
     },
 
     render: function render() {
@@ -180,35 +179,9 @@ module.exports = React.createClass({
         });
 
         var listboxId = 'ReactTags-listbox';
-        var query = this.state.query.trim();
+        var query = this.state.query;
         var placeholder = this.props.placeholder;
         var selectedIndex = this.state.selectedIndex;
-
-        var tagInput = React.createElement(
-            'div',
-            { className: 'ReactTags__tagInput' },
-            React.createElement('input', {
-                ref: 'input',
-                type: 'text',
-                role: 'combobox',
-                placeholder: placeholder,
-                'aria-label': placeholder,
-                'aria-owns': listboxId,
-                'aria-autocomplete': 'list',
-                'aria-activedescendant': selectedIndex > -1 ? listboxId + '-' + selectedIndex : null,
-                'aria-expanded': selectedIndex > -1,
-                'aria-busy': this.props.busy,
-                onChange: this.handleChange,
-                onKeyDown: this.handleKeyDown }),
-            this.props.busy ? React.createElement('div', { className: 'ReactTags__busy' }) : null,
-            React.createElement(Suggestions, {
-                listboxId: listboxId,
-                query: query,
-                selectedIndex: selectedIndex,
-                suggestions: this.state.suggestions,
-                handleClick: this.handleSuggestionClick,
-                minQueryLength: this.props.minQueryLength })
-        );
 
         return React.createElement(
             'div',
@@ -218,7 +191,32 @@ module.exports = React.createClass({
                 { className: 'ReactTags__selected', 'aria-live': 'polite', 'aria-relevant': 'additions removals' },
                 tagItems
             ),
-            tagInput
+            React.createElement(
+                'div',
+                { className: 'ReactTags__tagInput' },
+                React.createElement(AutosizeInput, {
+                    ref: 'input',
+                    role: 'combobox',
+                    style: { maxWidth: '100%' },
+                    value: query,
+                    placeholder: placeholder,
+                    'aria-label': placeholder,
+                    'aria-owns': listboxId,
+                    'aria-autocomplete': 'list',
+                    'aria-activedescendant': selectedIndex > -1 ? listboxId + '-' + selectedIndex : null,
+                    'aria-expanded': selectedIndex > -1,
+                    'aria-busy': this.props.busy,
+                    onChange: this.handleChange,
+                    onKeyDown: this.handleKeyDown }),
+                this.props.busy ? React.createElement('div', { className: 'ReactTags__busy' }) : null,
+                React.createElement(Suggestions, {
+                    listboxId: listboxId,
+                    query: query,
+                    selectedIndex: selectedIndex,
+                    suggestions: this.state.suggestions,
+                    handleClick: this.handleSuggestionClick,
+                    minQueryLength: this.props.minQueryLength })
+            )
         );
     }
 });
