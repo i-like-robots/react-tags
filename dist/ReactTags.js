@@ -3,7 +3,6 @@
 var React = require('react');
 var Tag = require('./Tag');
 var Suggestions = require('./Suggestions');
-var AutosizeInput = require('react-input-autosize');
 
 var Keys = {
     ENTER: 13,
@@ -24,6 +23,7 @@ module.exports = React.createClass({
         suggestions: React.PropTypes.array,
         delimiters: React.PropTypes.array,
         autofocus: React.PropTypes.bool,
+        autoresize: React.PropTypes.bool,
         handleDelete: React.PropTypes.func.isRequired,
         handleAddition: React.PropTypes.func.isRequired,
         handleInputChange: React.PropTypes.func,
@@ -38,6 +38,7 @@ module.exports = React.createClass({
             suggestions: [],
             delimiters: [Keys.ENTER, Keys.TAB],
             autofocus: true,
+            autoresize: true,
             minQueryLength: 2
         };
     },
@@ -52,7 +53,11 @@ module.exports = React.createClass({
 
     componentDidMount: function componentDidMount() {
         if (this.props.autofocus) {
-            this.refs.input.getInput().focus();
+            this.refs.input.focus();
+        }
+
+        if (this.props.autoresize) {
+            this.updateInputWidth();
         }
     },
 
@@ -66,6 +71,12 @@ module.exports = React.createClass({
         this.setState({
             suggestions: this.filteredSuggestions(this.state.query, props.suggestions)
         });
+    },
+
+    componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
+        if (this.props.autoresize && prevState.query !== this.state.query) {
+            this.updateInputWidth();
+        }
     },
 
     handleDelete: function handleDelete(i) {
@@ -150,6 +161,12 @@ module.exports = React.createClass({
         this.addTag(this.state.suggestions[i]);
     },
 
+    updateInputWidth: function updateInputWidth() {
+        this.setState({
+            inputWidth: Math.max(this.refs.sizer.scrollWidth)
+        });
+    },
+
     addTag: function addTag(tag) {
         if (tag.disabled) {
             return;
@@ -164,7 +181,7 @@ module.exports = React.createClass({
         });
 
         // focus back on the input box
-        this.refs.input.getInput().focus();
+        this.refs.input.focus();
     },
 
     render: function render() {
@@ -182,6 +199,7 @@ module.exports = React.createClass({
         var query = this.state.query;
         var placeholder = this.props.placeholder;
         var selectedIndex = this.state.selectedIndex;
+        var style = this.props.autoresize ? { width: this.state.inputWidth } : null;
 
         return React.createElement(
             'div',
@@ -194,10 +212,10 @@ module.exports = React.createClass({
             React.createElement(
                 'div',
                 { className: 'ReactTags__tagInput' },
-                React.createElement(AutosizeInput, {
+                React.createElement('input', {
                     ref: 'input',
                     role: 'combobox',
-                    style: { maxWidth: '100%' },
+                    style: style,
                     value: query,
                     placeholder: placeholder,
                     'aria-label': placeholder,
@@ -208,6 +226,7 @@ module.exports = React.createClass({
                     'aria-busy': this.props.busy,
                     onChange: this.handleChange,
                     onKeyDown: this.handleKeyDown }),
+                this.props.autoresize ? React.createElement('input', { ref: 'sizer', readOnly: true, value: query || placeholder, 'aria-hidden': 'true' }) : null,
                 this.props.busy ? React.createElement('div', { className: 'ReactTags__busy' }) : null,
                 React.createElement(Suggestions, {
                     listboxId: listboxId,
