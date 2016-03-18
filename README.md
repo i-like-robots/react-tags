@@ -70,6 +70,7 @@ React.render(<App />, document.getElementById('app'));
 - [`delimiters`](#delimitersOption)
 - [`placeholder`](#placeholderOption)
 - [`autofocus`](#autofocusOption)
+- [`autoresize`](#autoresizeOption)
 - [`minQueryLength`](#minQueryLengthOption)
 - [`handleAddition`](#handleAdditionOption)
 - [`handleDelete`](#handleDeleteOption)
@@ -120,6 +121,11 @@ The placeholder string shown for the input. Default: `'Add new tag'`.
 #### autofocus (optional)
 
 Boolean parameter to control whether the text-input should be autofocused on mount. Default: `true`.
+
+<a name="autoresizeOption"></a>
+#### autoresize (optional)
+
+Boolean parameter to control whether the text-input should be automatically resized to fit its value. Default: `true`.
 
 <a name="minQueryLengthOption"></a>
 #### minQueryLength (optional)
