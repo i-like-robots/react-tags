@@ -2,68 +2,25 @@
 .ReactTags {
 }
 
-/* Styles for the input */
-.ReactTags__tagInput {
-    position: relative;
-    display: inline-block;
-    box-sizing: border-box;
-    max-width: 100%;
-    height: 34px;
-    font-size: 12px;
-    padding: 6px 30px 6px 10px;
-    border: 1px solid #D1D1D1;
-    border-radius: 2px;
-}
-
-.ReactTags__tagInput input {
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: none;
-    font: inherit;
-}
-
-/* Busy indicator */
-.ReactTags__busy {
-    position: absolute;
-    top: 6px;
-    right: 5px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border-top: 2px solid rgba(15, 15, 15, 0.2);
-    border-right: 2px solid rgba(15, 15, 15, 0.2);
-    border-bottom: 2px solid rgba(15, 15, 15, 0.2);
-    border-left: 2px solid rgba(15, 15, 15, 0.85);
-    transform: translateZ(0);
-    animation: busy 1.1s infinite linear;
-}
-
-@keyframes busy {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Styles for selected tags */
+/* Styles for the currently selected tags */
 .ReactTags__selected {
     display: inline;
 }
 
-.ReactTags__tag {
+.ReactTags__tag,
+.ReactTags__tagInput {
     display: inline-block;
     box-sizing: border-box;
-    height: 34px;
-    margin: 0 10px 0 0;
-    padding: 6px;
+    height: 36px;
+    padding: 6px 8px;
     border: 1px solid #D1D1D1;
     border-radius: 2px;
-    background: #F1F1F1;
     font-size: 12px;
+}
+
+.ReactTags__tag {
+    margin: 0 10px 0 0;
+    background: #F1F1F1;
     line-height: normal;
     vertical-align: bottom;
 }
@@ -74,18 +31,77 @@
     margin-left: 6px;
 }
 
+/* Styles for the input area */
+.ReactTags__tagInput {
+    /* this will be the offsetParent for suggestions and busy indicator */
+    position: relative;
+
+    /* but allow space for busy indicator */
+    padding-right: 32px;
+
+    /* prevent autoresize overflowing the container */
+    max-width: 100%;
+}
+
+.ReactTags__tagInput input {
+    /* prevent autoresize overflowing the container */
+    max-width: 100%;
+
+    /* remove styles and layout from this element */
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+
+    /* normalize the font styles */
+    font: inherit;
+}
+
+.ReactTags__tagInput input[readonly] {
+    /* visually hide the sizer input */
+    position: absolute;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+/* Busy indicator */
+.ReactTags__busy {
+    position: absolute;
+    top: 6px;
+    right: 5px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(15, 15, 15, 0.2);
+    border-top-color: rgba(15, 15, 15, 0.85);
+    transform: translateZ(0);
+    animation: busy-spinner 1.1s infinite linear;
+}
+
+@keyframes busy-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* Styles for suggestions */
 .ReactTags__suggestions {
     position: absolute;
+    top: 100%;
+    left: 0;
 }
 
 .ReactTags__suggestions ul {
     margin: 0;
     padding: 0;
+    width: 200px;
     list-style: none;
     box-shadow: .05em .01em .5em rgba(0, 0, 0, 0.2);
     background: white;
-    width: 200px;
 }
 .ReactTags__suggestions li {
     border-bottom: 1px solid #ddd;
