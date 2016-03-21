@@ -62,8 +62,9 @@ module.exports = React.createClass({
     },
 
     filteredSuggestions: function filteredSuggestions(query, suggestions) {
+        var regex = new RegExp('\\b' + query.toLowerCase().trim(), 'i');
         return suggestions.filter(function (item) {
-            return item.name.toLowerCase().indexOf(query.trim().toLowerCase()) === 0;
+            return regex.test(item.name);
         });
     },
 
