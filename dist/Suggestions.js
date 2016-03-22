@@ -16,6 +16,7 @@ module.exports = React.createClass({
     markIt: function markIt(input, query) {
         var escapedRegex = query.trim().replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
         var r = RegExp(escapedRegex, 'gi');
+
         return {
             __html: input.replace(r, '<mark>$&</mark>')
         };
