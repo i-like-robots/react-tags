@@ -1,7 +1,10 @@
 'use strict';
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
+
 var React = require('react');
 var Tag = require('./Tag');
+var Input = require('./Input');
 var Suggestions = require('./Suggestions');
 
 var Keys = {
@@ -33,8 +36,8 @@ module.exports = React.createClass({
     getDefaultProps: function getDefaultProps() {
         return {
             busy: false,
-            placeholder: 'Add new tag',
             tags: [],
+            placeholder: 'Add new tag',
             suggestions: [],
             delimiters: [Keys.ENTER, Keys.TAB],
             autofocus: true,
@@ -46,7 +49,7 @@ module.exports = React.createClass({
     getInitialState: function getInitialState() {
         return {
             query: '',
-            suggestions: this.props.suggestions,
+            suggestions: [].concat(_toConsumableArray(this.props.suggestions)),
             selectedIndex: -1
         };
     },
@@ -54,10 +57,6 @@ module.exports = React.createClass({
     componentDidMount: function componentDidMount() {
         if (this.props.autofocus) {
             this.refs.input.focus();
-        }
-
-        if (this.props.autoresize) {
-            this.updateInputWidth();
         }
     },
 
@@ -68,16 +67,10 @@ module.exports = React.createClass({
         });
     },
 
-    componentWillReceiveProps: function componentWillReceiveProps(props) {
+    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
         this.setState({
-            suggestions: this.filteredSuggestions(this.state.query, props.suggestions)
+            suggestions: this.filteredSuggestions(this.state.query, newProps.suggestions)
         });
-    },
-
-    componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
-        if (this.props.autoresize && prevState.query !== this.state.query) {
-            this.updateInputWidth();
-        }
     },
 
     handleDelete: function handleDelete(i) {
@@ -162,12 +155,6 @@ module.exports = React.createClass({
         this.addTag(this.state.suggestions[i]);
     },
 
-    updateInputWidth: function updateInputWidth() {
-        this.setState({
-            inputWidth: Math.max(this.refs.sizer.scrollWidth)
-        });
-    },
-
     addTag: function addTag(tag) {
         if (tag.disabled) {
             return;
@@ -197,10 +184,16 @@ module.exports = React.createClass({
         });
 
         var listboxId = 'ReactTags-listbox';
-        var query = this.state.query;
-        var placeholder = this.props.placeholder;
-        var selectedIndex = this.state.selectedIndex;
-        var style = this.props.autoresize ? { width: this.state.inputWidth } : null;
+        var selectedId = listboxId + '-' + selectedIndex;
+        var _state2 = this.state;
+        var query = _state2.query;
+        var selectedIndex = _state2.selectedIndex;
+        var suggestions = _state2.suggestions;
+        var _props = this.props;
+        var placeholder = _props.placeholder;
+        var busy = _props.busy;
+        var minQueryLength = _props.minQueryLength;
+        var autoresize = _props.autoresize;
 
         return React.createElement(
             'div',
@@ -213,29 +206,28 @@ module.exports = React.createClass({
             React.createElement(
                 'div',
                 { className: 'ReactTags__tagInput' },
-                React.createElement('input', {
+                React.createElement(Input, {
                     ref: 'input',
-                    role: 'combobox',
-                    style: style,
                     value: query,
                     placeholder: placeholder,
+                    autoresize: autoresize,
+                    role: 'combobox',
+                    'aria-autocomplete': 'list',
                     'aria-label': placeholder,
                     'aria-owns': listboxId,
-                    'aria-autocomplete': 'list',
-                    'aria-activedescendant': selectedIndex > -1 ? listboxId + '-' + selectedIndex : null,
+                    'aria-activedescendant': selectedIndex > -1 ? selectedId : null,
                     'aria-expanded': selectedIndex > -1,
-                    'aria-busy': this.props.busy,
+                    'aria-busy': busy,
                     onChange: this.handleChange,
                     onKeyDown: this.handleKeyDown }),
-                this.props.autoresize ? React.createElement('input', { ref: 'sizer', readOnly: true, value: query || placeholder, 'aria-hidden': 'true' }) : null,
-                this.props.busy ? React.createElement('div', { className: 'ReactTags__busy' }) : null,
+                busy ? React.createElement('div', { className: 'ReactTags__busy' }) : null,
                 React.createElement(Suggestions, {
                     listboxId: listboxId,
                     query: query,
                     selectedIndex: selectedIndex,
-                    suggestions: this.state.suggestions,
+                    suggestions: suggestions,
                     handleClick: this.handleSuggestionClick,
-                    minQueryLength: this.props.minQueryLength })
+                    minQueryLength: minQueryLength })
             )
         );
     }
