@@ -1,8 +1,10 @@
-### React Tag Autocomplete
+# React Tag Autocomplete
 
 React Tag Autocomplete is a simple tagging component ready to drop in your React projects. This is a fork of the [original React Tags project](http://prakhar.me/react-tags/example) by Prakhar Srivastav. This version cleans out a few options, removes the drag-and-drop re-ordering functionality and adds appropriate roles and ARIA states.
 
-### Installation
+![React Tags Autocomplete](https://dl.dropboxusercontent.com/u/2664340/ReactTags.png)
+
+## Installation
 
 The preferred way of using the component is via NPM
 
@@ -10,11 +12,11 @@ The preferred way of using the component is via NPM
 npm install --save react-tag-autocomplete
 ```
 
-### Usage
+## Usage
 
 Here's a sample implementation that initializes the component with a list of initial `tags` and `suggestions` list. Apart from this, there are multiple events, handlers for which need to be set. For more details, go through the [API](#Options).
 
-```javascript
+```js
 var ReactTags = require('react-tag-autocomplete');
 
 var App = React.createClass({
@@ -47,13 +49,11 @@ var App = React.createClass({
     },
     render: function() {
         return (
-            <div>
-                <ReactTags
-                    tags={this.state.tags}
-                    suggestions={this.state.suggestions}
-                    handleDelete={this.handleDelete}
-                    handleAddition={this.handleAddition} />
-            </div>
+            <ReactTags
+                tags={this.state.tags}
+                suggestions={this.state.suggestions}
+                handleDelete={this.handleDelete}
+                handleAddition={this.handleAddition} />
         )
     }
 });
@@ -61,7 +61,6 @@ var App = React.createClass({
 React.render(<App />, document.getElementById('app'));
 ```
 
-<a name="Options"></a>
 ### Options
 
 - [`tags`](#tagsOption)
@@ -184,12 +183,11 @@ function(input) {
 - `ReactTags__busy`
 - `ReactTags__selected`
 - `ReactTags__tag`
-- `ReactTags__remove`
 - `ReactTags__suggestions`
 
 An example can be found in `/example/styles.css`.
 
-### Dev
+### Development
 
 The component is written in ES6 and uses [Webpack](http://webpack.github.io/) as its build tool.
 
@@ -198,10 +196,10 @@ npm install
 npm run dev # open http://localhost:8090
 ```
 
-### Contributing
+## Contributing
 
 Got ideas on how to make this better? Open an issue! I'm yet to add tests so keep your PRs on hold :grinning:
 
-### Thanks
+## Thanks
 
 The autocomplete dropdown is inspired by Lea Verou's [awesomeplete](https://github.com/LeaVerou/awesomplete) library.
