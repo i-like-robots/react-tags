@@ -56,7 +56,7 @@ module.exports = React.createClass({
 
     componentDidMount: function componentDidMount() {
         if (this.props.autofocus) {
-            this.refs.input.focus();
+            this.refs.input.input.focus();
         }
     },
 
@@ -155,6 +155,12 @@ module.exports = React.createClass({
         this.addTag(this.state.suggestions[i]);
     },
 
+    handleClick: function handleClick(e) {
+        if (document.activeElement !== e.target) {
+            this.refs.input.input.focus();
+        }
+    },
+
     addTag: function addTag(tag) {
         if (tag.disabled) {
             return;
@@ -169,7 +175,7 @@ module.exports = React.createClass({
         });
 
         // focus back on the input box
-        this.refs.input.focus();
+        this.refs.input.input.focus();
     },
 
     render: function render() {
@@ -197,7 +203,7 @@ module.exports = React.createClass({
 
         return React.createElement(
             'div',
-            { className: 'ReactTags' },
+            { className: 'ReactTags', onClick: this.handleClick },
             React.createElement(
                 'div',
                 { className: 'ReactTags__selected', 'aria-live': 'polite', 'aria-relevant': 'additions removals' },

@@ -25,15 +25,13 @@ module.exports = React.createClass({
 
     updateInputWidth: function updateInputWidth() {
         this.setState({
-            inputWidth: Math.max(this.refs.sizer.scrollWidth) + 2
+            inputWidth: Math.max(this.sizer.scrollWidth) + 2
         });
     },
 
-    focus: function focus() {
-        this.refs.input.focus();
-    },
-
     render: function render() {
+        var _this = this;
+
         var _props = this.props;
         var value = _props.value;
         var placeholder = _props.placeholder;
@@ -43,8 +41,12 @@ module.exports = React.createClass({
         return React.createElement(
             'div',
             null,
-            React.createElement('input', _extends({ ref: 'input' }, this.props, { style: style })),
-            React.createElement('input', { ref: 'sizer', readOnly: true, value: value || placeholder, 'aria-hidden': 'true' })
+            React.createElement('input', _extends({ ref: function (c) {
+                    return _this.input = c;
+                } }, this.props, { style: style })),
+            React.createElement('input', { ref: function (c) {
+                    return _this.sizer = c;
+                }, readOnly: true, value: value || placeholder, 'aria-hidden': 'true' })
         );
     }
 
