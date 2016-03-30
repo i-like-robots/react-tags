@@ -1,6 +1,6 @@
 # React Tag Autocomplete
 
-React Tag Autocomplete is a simple tagging component ready to drop in your React projects. This is a fork of the [original React Tags project](http://prakhar.me/react-tags/example) by Prakhar Srivastav. This version cleans out a few options, removes the drag-and-drop re-ordering functionality and adds appropriate roles and ARIA states.
+React Tag Autocomplete is a simple tagging component ready to drop in your React projects. Originally based on the [React Tags project](http://prakhar.me/react-tags/example) by Prakhar Srivastav this version removes the drag-and-drop re-ordering functionality, adds appropriate roles and ARIA states and introduces a resizing text input.
 
 ![React Tags Autocomplete](https://dl.dropboxusercontent.com/u/2664340/ReactTags.png)
 
@@ -14,7 +14,7 @@ npm install --save react-tag-autocomplete
 
 ## Usage
 
-Here's a sample implementation that initializes the component with a list of initial `tags` and `suggestions` list. Apart from this, there are multiple events, handlers for which need to be set. For more details, go through the [API](#Options).
+Here's a sample implementation that initializes the component with a list of preselected `tags` and a `suggestions` list. For more details, go through the [API](#Options).
 
 ```js
 var ReactTags = require('react-tag-autocomplete');
@@ -176,7 +176,7 @@ function(input) {
 
 ### Styling
 
-`<ReactTags>` does not come up with any styles. However, it is very easy to customize the look of the component the way you want it. The component provides the following classes with which you can style:-
+It is  easy to customize the look of the component the way you want it. The component provides the following classes with which you can style:-
 
 - `ReactTags`
 - `ReactTags__tagInput`
@@ -199,7 +199,3 @@ npm run dev # open http://localhost:8090
 ## Contributing
 
 Got ideas on how to make this better? Open an issue! I'm yet to add tests so keep your PRs on hold :grinning:
-
-## Thanks
-
-The autocomplete dropdown is inspired by Lea Verou's [awesomeplete](https://github.com/LeaVerou/awesomplete) library.
