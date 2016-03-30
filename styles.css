@@ -77,12 +77,8 @@
     line-height: inherit;
 }
 
-.ReactTags__tagInput input[readonly] {
-    /* visually hide the sizer input */
-    position: absolute;
-    width: 0;
-    height: 0;
-    visibility: hidden;
+.ReactTags__tagInput input::-ms-clear {
+    display: none;
 }
 
 /* Busy indicator */
