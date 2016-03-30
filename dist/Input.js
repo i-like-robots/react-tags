@@ -4,6 +4,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var React = require('react');
 
+var sizerStyles = {
+    position: 'absolute',
+    width: 0,
+    height: 0,
+    visibility: 'hidden',
+    overflow: 'scroll',
+    whiteSpace: 'pre'
+};
+
 module.exports = React.createClass({
     displayName: 'exports',
 
@@ -13,6 +22,7 @@ module.exports = React.createClass({
 
     componentDidMount: function componentDidMount() {
         if (this.props.autoresize) {
+            this.copyInputStyles();
             this.updateInputWidth();
         }
     },
@@ -23,9 +33,19 @@ module.exports = React.createClass({
         }
     },
 
+    copyInputStyles: function copyInputStyles() {
+        var inputStyle = window.getComputedStyle(this.input);
+
+        this.sizer.style.fontSize = inputStyle.fontSize;
+        this.sizer.style.fontFamily = inputStyle.fontFamily;
+        this.sizer.style.fontWeight = inputStyle.fontWeight;
+        this.sizer.style.fontStyle = inputStyle.fontStyle;
+        this.sizer.style.letterSpacing = inputStyle.letterSpacing;
+    },
+
     updateInputWidth: function updateInputWidth() {
         this.setState({
-            inputWidth: Math.max(this.sizer.scrollWidth) + 2
+            inputWidth: Math.ceil(this.sizer.scrollWidth) + 2
         });
     },
 
@@ -44,9 +64,13 @@ module.exports = React.createClass({
             React.createElement('input', _extends({ ref: function (c) {
                     return _this.input = c;
                 } }, this.props, { style: style })),
-            React.createElement('input', { ref: function (c) {
-                    return _this.sizer = c;
-                }, readOnly: true, value: value || placeholder, 'aria-hidden': 'true' })
+            React.createElement(
+                'div',
+                { ref: function (c) {
+                        return _this.sizer = c;
+                    }, style: sizerStyles },
+                value || placeholder
+            )
         );
     }
 
