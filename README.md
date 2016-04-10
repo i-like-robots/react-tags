@@ -65,7 +65,6 @@ React.render(<App />, document.getElementById('app'));
 
 - [`tags`](#tagsOption)
 - [`suggestions`](#suggestionsOption)
-- [`busy`](#suggestionsOption)
 - [`delimiters`](#delimitersOption)
 - [`placeholder`](#placeholderOption)
 - [`autofocus`](#autofocusOption)
@@ -100,11 +99,6 @@ var suggestions = [
     { id: 6, name: "Apricots", disabled: true }
 ];
 ```
-
-<a name="busy"></a>
-#### busy (optional)
-
-A boolean flag used to display the busy indicator or not. Useful when loading new `suggestions` asynchronously. Default: `false`.
 
 <a name="delimitersOption"></a>
 #### delimiters (optional)
@@ -167,8 +161,8 @@ function(input) {
     } else {
         this.setState({ busy: true });
 
-        fetch(`query=${input}`).then(function(result) {
-            this.setState({ busy: true });
+        return fetch(`query=${input}`).then(function(result) {
+            this.setState({ busy: false });
         });
     }
 }
@@ -179,10 +173,9 @@ function(input) {
 It is  easy to customize the look of the component the way you want it. The component provides the following classes with which you can style:-
 
 - `ReactTags`
-- `ReactTags__tagInput`
-- `ReactTags__busy`
 - `ReactTags__selected`
 - `ReactTags__tag`
+- `ReactTags__tagInput`
 - `ReactTags__suggestions`
 
 An example can be found in `/example/styles.css`.
