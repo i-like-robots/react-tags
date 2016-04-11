@@ -71,6 +71,7 @@ React.render(<App />, document.getElementById('app'));
 - [`autofocus`](#autofocusOption)
 - [`autoresize`](#autoresizeOption)
 - [`minQueryLength`](#minQueryLengthOption)
+- [`maxSuggestionsLength`](#maxSuggestionsLengthOption)
 - [`handleAddition`](#handleAdditionOption)
 - [`handleDelete`](#handleDeleteOption)
 - [`handleInputChange`](#handleInputChange)
@@ -130,6 +131,11 @@ Boolean parameter to control whether the text-input should be automatically resi
 #### minQueryLength (optional)
 
 How many characters are needed for suggestions to appear. Default: `2`.
+
+<a name="maxSuggestionsLengthOption"></a>
+#### maxSuggestionsLength (optional)
+
+Maximum number of suggestions to display. Default: `6`.
 
 <a name="handleAdditionOption"></a>
 #### handleAddition (required)
