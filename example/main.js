@@ -24,8 +24,7 @@ const App = React.createClass({
     getInitialState() {
         return {
             tags: [ { id: 184, name: "Thailand" }, { id: 86, name: "India" } ],
-            suggestions: countries.map((item, i) => { return { id: i, name: item } }),
-            busy: false
+            suggestions: countries.map((item, i) => { return { id: i, name: item } })
         }
     },
 
@@ -41,12 +40,6 @@ const App = React.createClass({
         this.setState({ tags: tags });
     },
 
-    handleToggle() {
-      this.setState({
-        busy: !this.state.busy
-      });
-    },
-
     render() {
         const tags = this.state.tags;
         const suggestions = this.state.suggestions;
@@ -56,14 +49,8 @@ const App = React.createClass({
                 <Tags
                     tags={tags}
                     suggestions={suggestions}
-                    busy={this.state.busy}
                     handleDelete={this.handleDelete}
                     handleAddition={this.handleAddition} />
-                <br />
-                <label>
-                  <input type="checkbox" ref="busy" onClick={this.handleToggle} />
-                  <span>&nbsp;Toggle busy state</span>
-                </label>
                 <hr />
                 <pre>
                     <code>{JSON.stringify(tags, null, 2)}</code>

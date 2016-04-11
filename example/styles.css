@@ -42,7 +42,7 @@
 .ReactTags__tagInput {
     display: inline-block;
 
-    /* match tag layout and allow space for the busy indicator */
+    /* match tag layout */
     padding: 7px 2px;
     margin-bottom: 6px;
 
@@ -53,11 +53,8 @@
 @media screen and (min-width: 30em) {
 
     .ReactTags__tagInput {
-        /* this will be the offsetParent for suggestions and busy indicator */
+        /* this will be the offsetParent for suggestions */
         position: relative;
-
-        /* match tag layout and allow space for the busy indicator */
-        padding-right: 32px;
     }
 
 }
@@ -81,38 +78,6 @@
     display: none;
 }
 
-/* Busy indicator */
-.ReactTags__busy {
-    display: none;
-    position: absolute;
-    top: 6px;
-    right: 4px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 2px solid rgba(15, 15, 15, 0.2);
-    border-top-color: rgba(15, 15, 15, 0.85);
-    transform: translateZ(0);
-    animation: busy-spinner 1.1s infinite linear;
-}
-
-@media screen and (min-width: 30em) {
-
-    .ReactTags__busy {
-        display: block;
-    }
-
-}
-
-@keyframes busy-spinner {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 /* Styles for suggestions */
 .ReactTags__suggestions {
     position: absolute;
@@ -130,7 +95,7 @@
 }
 
 .ReactTags__suggestions ul {
-    margin: 0;
+    margin: 4px -1px;
     padding: 0;
     list-style: none;
     background: white;
@@ -138,6 +103,7 @@
     border-radius: 2px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
+
 .ReactTags__suggestions li {
     border-bottom: 1px solid #ddd;
     padding: 6px 8px;
