@@ -20,7 +20,6 @@ module.exports = React.createClass({
     displayName: 'exports',
 
     propTypes: {
-        busy: React.PropTypes.bool,
         tags: React.PropTypes.array,
         placeholder: React.PropTypes.string,
         suggestions: React.PropTypes.array,
@@ -30,19 +29,20 @@ module.exports = React.createClass({
         handleDelete: React.PropTypes.func.isRequired,
         handleAddition: React.PropTypes.func.isRequired,
         handleInputChange: React.PropTypes.func,
-        minQueryLength: React.PropTypes.number
+        minQueryLength: React.PropTypes.number,
+        maxSuggestionsLength: React.PropTypes.number
     },
 
     getDefaultProps: function getDefaultProps() {
         return {
-            busy: false,
             tags: [],
             placeholder: 'Add new tag',
             suggestions: [],
             delimiters: [Keys.ENTER, Keys.TAB],
             autofocus: true,
             autoresize: true,
-            minQueryLength: 2
+            minQueryLength: 2,
+            maxSuggestionsLength: 6
         };
     },
 
@@ -69,7 +69,7 @@ module.exports = React.createClass({
 
     componentWillReceiveProps: function componentWillReceiveProps(newProps) {
         this.setState({
-            suggestions: this.filteredSuggestions(this.state.query, newProps.suggestions)
+            suggestions: this.filteredSuggestions(this.state.query, newProps.suggestions).slice(0, this.props.maxSuggestionsLength)
         });
     },
 
@@ -87,7 +87,7 @@ module.exports = React.createClass({
 
         this.setState({
             query: query,
-            suggestions: this.filteredSuggestions(query, this.props.suggestions)
+            suggestions: this.filteredSuggestions(query, this.props.suggestions).slice(0, this.props.maxSuggestionsLength)
         });
     },
 
@@ -197,7 +197,6 @@ module.exports = React.createClass({
         var suggestions = _state2.suggestions;
         var _props = this.props;
         var placeholder = _props.placeholder;
-        var busy = _props.busy;
         var minQueryLength = _props.minQueryLength;
         var autoresize = _props.autoresize;
 
@@ -223,10 +222,8 @@ module.exports = React.createClass({
                     'aria-owns': listboxId,
                     'aria-activedescendant': selectedIndex > -1 ? selectedId : null,
                     'aria-expanded': selectedIndex > -1,
-                    'aria-busy': busy,
                     onChange: this.handleChange,
                     onKeyDown: this.handleKeyDown }),
-                busy ? React.createElement('div', { className: 'ReactTags__busy' }) : null,
                 React.createElement(Suggestions, {
                     listboxId: listboxId,
                     query: query,
