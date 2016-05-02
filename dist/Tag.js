@@ -13,7 +13,7 @@ module.exports = React.createClass({
     render: function render() {
         return React.createElement(
             'button',
-            { className: 'ReactTags__tag', title: 'Click to remove tag', onClick: this.props.onDelete },
+            { type: 'button', className: 'ReactTags__tag', title: 'Click to remove tag', onClick: this.props.onDelete },
             React.createElement(
                 'span',
                 { className: 'ReactTags__tagName' },
