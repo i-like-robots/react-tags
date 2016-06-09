@@ -74,6 +74,7 @@ React.render(<App />, document.getElementById('app'));
 - [`handleAddition`](#handleAdditionOption)
 - [`handleDelete`](#handleDeleteOption)
 - [`handleInputChange`](#handleInputChange)
+- [`allowNew`](#allowNew)
 
 <a name="tagsOption"></a>
 #### tags (optional)
@@ -172,6 +173,20 @@ function(input) {
         });
     }
 }
+```
+
+<a name="allowNew"></a>
+#### allowNew (optional)
+
+Allows users to add new (not suggested) tags. Default: `false`.
+
+To enable it, just add `allowNew` as a component property:
+
+```js
+<ReactTags
+    handleDelete={this.handleDelete}
+    handleAddition={this.handleAddition}
+    allowNew />
 ```
 
 ### Styling
