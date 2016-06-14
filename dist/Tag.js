@@ -7,16 +7,17 @@ module.exports = React.createClass({
 
     propTypes: {
         onDelete: React.PropTypes.func.isRequired,
-        tag: React.PropTypes.object.isRequired
+        tag: React.PropTypes.object.isRequired,
+        classNames: React.PropTypes.object
     },
 
     render: function render() {
         return React.createElement(
             'button',
-            { type: 'button', className: 'ReactTags__tag', title: 'Click to remove tag', onClick: this.props.onDelete },
+            { type: 'button', className: this.props.classNames.tag, title: 'Click to remove tag', onClick: this.props.onDelete },
             React.createElement(
                 'span',
-                { className: 'ReactTags__tagName' },
+                { className: this.props.classNames.tagName },
                 this.props.tag.name
             )
         );

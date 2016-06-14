@@ -10,7 +10,8 @@ module.exports = React.createClass({
         selectedIndex: React.PropTypes.number.isRequired,
         suggestions: React.PropTypes.array.isRequired,
         handleClick: React.PropTypes.func.isRequired,
-        minQueryLength: React.PropTypes.number
+        minQueryLength: React.PropTypes.number,
+        classNames: React.PropTypes.object
     },
 
     markIt: function markIt(input, query) {
@@ -28,7 +29,7 @@ module.exports = React.createClass({
         var suggestions = this.props.suggestions.map(function (item, i) {
             var key = _this.props.listboxId + '-' + i;
 
-            var classNames = [_this.props.selectedIndex === i ? 'is-active' : '', item.disabled ? 'is-disabled' : ''];
+            var classNames = [_this.props.selectedIndex === i ? _this.props.classNames.isActive : '', item.disabled ? _this.props.classNames.isDisabled : ''];
 
             return React.createElement(
                 'li',
@@ -44,12 +45,12 @@ module.exports = React.createClass({
         });
 
         if (suggestions.length === 0 || this.props.query.length < this.props.minQueryLength) {
-            return React.createElement('div', { className: 'ReactTags__suggestions' });
+            return React.createElement('div', { className: this.props.classNames.suggestions });
         }
 
         return React.createElement(
             'div',
-            { className: 'ReactTags__suggestions' },
+            { className: this.props.classNames.suggestions },
             React.createElement(
                 'ul',
                 { role: 'listbox', id: this.props.listboxId },
