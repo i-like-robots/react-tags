@@ -16,6 +16,17 @@ var Keys = {
     ESCAPE: 27
 };
 
+var DefaultClassNames = {
+    root: 'ReactTags',
+    tagInput: 'ReactTags__tagInput',
+    selected: 'ReactTags__selected',
+    tag: 'ReactTags__tag',
+    tagName: 'ReactTags__tagName',
+    suggestions: 'ReactTags__suggestions',
+    isActive: 'is-active',
+    isDisabled: 'is-disabled'
+};
+
 module.exports = React.createClass({
     displayName: 'exports',
 
@@ -30,7 +41,8 @@ module.exports = React.createClass({
         handleAddition: React.PropTypes.func.isRequired,
         handleInputChange: React.PropTypes.func,
         minQueryLength: React.PropTypes.number,
-        maxSuggestionsLength: React.PropTypes.number
+        maxSuggestionsLength: React.PropTypes.number,
+        classNames: React.PropTypes.object
     },
 
     getDefaultProps: function getDefaultProps() {
@@ -54,6 +66,12 @@ module.exports = React.createClass({
         };
     },
 
+    componentWillMount: function componentWillMount() {
+        this.setState({
+            classNames: Object.assign({}, DefaultClassNames, this.props.classNames)
+        });
+    },
+
     componentDidMount: function componentDidMount() {
         if (this.props.autofocus) {
             this.refs.input.input.focus();
@@ -69,7 +87,8 @@ module.exports = React.createClass({
 
     componentWillReceiveProps: function componentWillReceiveProps(newProps) {
         this.setState({
-            suggestions: this.filteredSuggestions(this.state.query, newProps.suggestions).slice(0, this.props.maxSuggestionsLength)
+            suggestions: this.filteredSuggestions(this.state.query, newProps.suggestions).slice(0, this.props.maxSuggestionsLength),
+            classNames: Object.assign({}, DefaultClassNames, newProps.classNames)
         });
     },
 
@@ -186,7 +205,8 @@ module.exports = React.createClass({
                 key: i,
                 tag: tag,
                 onDelete: _this.handleDelete.bind(null, i),
-                removeComponent: _this.props.removeComponent });
+                removeComponent: _this.props.removeComponent,
+                classNames: _this.state.classNames });
         });
 
         var listboxId = 'ReactTags-listbox';
@@ -195,6 +215,7 @@ module.exports = React.createClass({
         var query = _state2.query;
         var selectedIndex = _state2.selectedIndex;
         var suggestions = _state2.suggestions;
+        var classNames = _state2.classNames;
         var _props = this.props;
         var placeholder = _props.placeholder;
         var minQueryLength = _props.minQueryLength;
@@ -202,15 +223,15 @@ module.exports = React.createClass({
 
         return React.createElement(
             'div',
-            { className: 'ReactTags', onClick: this.handleClick },
+            { className: classNames.root, onClick: this.handleClick },
             React.createElement(
                 'div',
-                { className: 'ReactTags__selected', 'aria-live': 'polite', 'aria-relevant': 'additions removals' },
+                { className: classNames.selected, 'aria-live': 'polite', 'aria-relevant': 'additions removals' },
                 tagItems
             ),
             React.createElement(
                 'div',
-                { className: 'ReactTags__tagInput' },
+                { className: classNames.tagInput },
                 React.createElement(Input, {
                     ref: 'input',
                     value: query,
@@ -230,7 +251,8 @@ module.exports = React.createClass({
                     selectedIndex: selectedIndex,
                     suggestions: suggestions,
                     handleClick: this.handleSuggestionClick,
-                    minQueryLength: minQueryLength })
+                    minQueryLength: minQueryLength,
+                    classNames: classNames })
             )
         );
     }

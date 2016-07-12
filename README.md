@@ -71,6 +71,7 @@ React.render(<App />, document.getElementById('app'));
 - [`autoresize`](#autoresizeOption)
 - [`minQueryLength`](#minQueryLengthOption)
 - [`maxSuggestionsLength`](#maxSuggestionsLengthOption)
+- [`classNames`](#classNamesOption)
 - [`handleAddition`](#handleAdditionOption)
 - [`handleDelete`](#handleDeleteOption)
 - [`handleInputChange`](#handleInputChange)
@@ -131,6 +132,24 @@ How many characters are needed for suggestions to appear. Default: `2`.
 
 Maximum number of suggestions to display. Default: `6`.
 
+<a name="classNamesOption"></a>
+#### classNames (optional)
+
+Override the default class names. Defaults:
+
+```js
+{
+    root: 'ReactTags',
+    tagInput: 'ReactTags__tagInput',
+    selected: 'ReactTags__selected',
+    tag: 'ReactTags__tag',
+    tagName: 'ReactTags__tagName',
+    suggestions: 'ReactTags__suggestions',
+    isActive: 'is-active',
+    isDisabled: 'is-disabled'
+}
+```
+
 <a name="handleAdditionOption"></a>
 #### handleAddition (required)
 
@@ -176,15 +195,7 @@ function(input) {
 
 ### Styling
 
-It is  easy to customize the look of the component the way you want it. The component provides the following classes with which you can style:-
-
-- `ReactTags`
-- `ReactTags__selected`
-- `ReactTags__tag`
-- `ReactTags__tagInput`
-- `ReactTags__suggestions`
-
-An example can be found in `/example/styles.css`.
+It is possible to customize the look of the component the way you want it. An example can be found in `/example/styles.css`.
 
 ### Development
 
