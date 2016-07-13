@@ -75,6 +75,7 @@ React.render(<App />, document.getElementById('app'));
 - [`handleAddition`](#handleAdditionOption)
 - [`handleDelete`](#handleDeleteOption)
 - [`handleInputChange`](#handleInputChange)
+- [`allowNew`](#allowNew)
 
 <a name="tagsOption"></a>
 #### tags (optional)
@@ -192,6 +193,11 @@ function(input) {
     }
 }
 ```
+
+<a name="allowNew"></a>
+#### allowNew (optional)
+
+Boolean parameter to control whether the users can create new tags. Default: `false`.
 
 ### Styling
 
