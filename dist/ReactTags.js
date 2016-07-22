@@ -209,8 +209,6 @@ module.exports = React.createClass({
                 classNames: _this.state.classNames });
         });
 
-        var listboxId = 'ReactTags-listbox';
-        var selectedId = listboxId + '-' + selectedIndex;
         var _state2 = this.state;
         var query = _state2.query;
         var selectedIndex = _state2.selectedIndex;
@@ -220,6 +218,9 @@ module.exports = React.createClass({
         var placeholder = _props.placeholder;
         var minQueryLength = _props.minQueryLength;
         var autoresize = _props.autoresize;
+
+        var listboxId = 'ReactTags-listbox';
+        var selectedId = listboxId + '-' + selectedIndex;
 
         return React.createElement(
             'div',
