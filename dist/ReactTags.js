@@ -42,7 +42,8 @@ module.exports = React.createClass({
         handleInputChange: React.PropTypes.func,
         minQueryLength: React.PropTypes.number,
         maxSuggestionsLength: React.PropTypes.number,
-        classNames: React.PropTypes.object
+        classNames: React.PropTypes.object,
+        allowNew: React.PropTypes.bool
     },
 
     getDefaultProps: function getDefaultProps() {
@@ -54,7 +55,8 @@ module.exports = React.createClass({
             autofocus: true,
             autoresize: true,
             minQueryLength: 2,
-            maxSuggestionsLength: 6
+            maxSuggestionsLength: 6,
+            allowNew: false
         };
     },
 
@@ -134,8 +136,19 @@ module.exports = React.createClass({
                 e.preventDefault();
             }
 
-            if (this.state.selectedIndex > -1) {
-                this.addTag(this.state.suggestions[this.state.selectedIndex]);
+            if (query && query.length >= this.props.minQueryLength) {
+                // Check if the user typed in an existing suggestion.
+                var match = suggestions.findIndex(function (suggestion) {
+                    return suggestion.name.search(new RegExp('^' + query + '$', 'i')) === 0;
+                });
+
+                var index = selectedIndex === -1 ? match : selectedIndex;
+
+                if (index > -1) {
+                    this.addTag(suggestions[index]);
+                } else if (this.props.allowNew) {
+                    this.addTag({ name: query });
+                }
             }
         }
 
@@ -149,13 +162,13 @@ module.exports = React.createClass({
             e.preventDefault();
 
             // if last item, cycle to the bottom
-            if (this.state.selectedIndex <= 0) {
+            if (selectedIndex <= 0) {
                 this.setState({
-                    selectedIndex: this.state.suggestions.length - 1
+                    selectedIndex: suggestions.length - 1
                 });
             } else {
                 this.setState({
-                    selectedIndex: this.state.selectedIndex - 1
+                    selectedIndex: selectedIndex - 1
                 });
             }
         }
@@ -165,7 +178,7 @@ module.exports = React.createClass({
             e.preventDefault();
 
             this.setState({
-                selectedIndex: (this.state.selectedIndex + 1) % suggestions.length
+                selectedIndex: (selectedIndex + 1) % suggestions.length
             });
         }
     },
