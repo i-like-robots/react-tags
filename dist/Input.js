@@ -52,10 +52,6 @@ module.exports = React.createClass({
     render: function render() {
         var _this = this;
 
-        var _props = this.props;
-        var value = _props.value;
-        var placeholder = _props.placeholder;
-
         var style = this.props.autoresize ? { width: this.state.inputWidth } : null;
 
         return React.createElement(
@@ -69,7 +65,7 @@ module.exports = React.createClass({
                 { ref: function (c) {
                         return _this.sizer = c;
                     }, style: sizerStyles },
-                value || placeholder
+                this.props.value || this.props.placeholder
             )
         );
     }
