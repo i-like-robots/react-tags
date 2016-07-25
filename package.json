@@ -24,8 +24,8 @@
   "license": "MIT",
   "repository": "https://github.com/i-like-robots/react-tags",
   "peerDependencies": {
-    "react": "^15.2.1",
-    "react-dom": "^15.2.1"
+    "react": "^0.14.0 || ^15.0.0",
+    "react-dom": "^0.14.0 || ^15.0.0"
   },
   "devDependencies": {
     "babel": "^5.3.3",
