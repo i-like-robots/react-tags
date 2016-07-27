@@ -30,8 +30,12 @@
   "devDependencies": {
     "babel": "^5.3.3",
     "babel-loader": "^5.1.2",
+    "jasmine": "^2.4.1",
+    "jsdom": "^9.4.1",
     "react": "^15.2.1",
+    "react-addons-test-utils": "^15.2.1",
     "react-dom": "^15.2.1",
+    "sinon": "^1.17.5",
     "webpack": "^1.9.4",
     "webpack-dev-server": "^1.8.2"
   }
