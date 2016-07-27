@@ -218,9 +218,5 @@ The component is written in ES6 and uses [Webpack](http://webpack.github.io/) as
 
 ```
 npm install
-npm run dev # open http://localhost:8090
+npm run dev # open http://localhost:8080
 ```
-
-## Contributing
-
-Got ideas on how to make this better? Open an issue! I'm yet to add tests so keep your PRs on hold :grinning:

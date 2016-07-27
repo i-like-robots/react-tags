@@ -16,4 +16,4 @@ const countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "An
     , "Turkey", "Turkmenistan", "Turks & Caicos", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Venezuela", "Vietnam", "Virgin Islands (US)"
     , "Yemen", "Zambia", "Zimbabwe"];
 
-module.exports = () => countries.map((name, id) => { return { id, name } });
+module.exports = (() => countries.map((name, id) => { return { id, name } }))();
