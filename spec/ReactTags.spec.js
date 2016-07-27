@@ -70,14 +70,12 @@ describe('React Tags', () => {
         });
     });
 
-    describe('input placeholder', () => {
+    describe('input', () => {
         it('assigns the given placeholder', () => {
             createInstance({ placeholder: 'Please enter a tag' });
             expect($('input').placeholder).toEqual('Please enter a tag');
         });
-    });
 
-    describe('input autofocus', () => {
         it('autofocuses on the input', () => {
             createInstance({ autofocus: true });
             expect(document.activeElement).toEqual($('input'));
@@ -214,7 +212,7 @@ describe('React Tags', () => {
         })
     });
 
-    describe('Tags', () => {
+    describe('tags', () => {
         beforeEach(() => {
             createInstance({ tags: [ fixture[0], fixture[1] ] });
         });
@@ -235,6 +233,41 @@ describe('React Tags', () => {
 
             sinon.assert.calledOnce(props.handleDelete);
             sinon.assert.calledWith(props.handleDelete, sinon.match(instance.props.tags.length - 1));
+        });
+    });
+
+    describe('sizer', () => {
+        beforeEach(() => {
+            createInstance();
+        });
+
+        it('appends a sizer element', () => {
+            expect($('input + div[style]')).toBeTruthy();
+        });
+
+        it('removes the sizer from the layout', () => {
+            const result = Array.from($('input + div').style);
+
+            expect(result).toContain('position');
+            expect(result).toContain('visibility');
+        });
+
+        it('copies styles from the input', () => {
+            const result = Array.from($('input + div').style);
+
+            expect(result).toContain('font-family');
+            expect(result).toContain('letter-spacing');
+        });
+
+        it('copies the input placeholder or value into the sizer', () => {
+            const input = $('input');
+            const sizer = $('input + div');
+
+            expect(sizer.textContent).toEqual(input.placeholder);
+
+            type('hello world');
+
+            expect(sizer.textContent).toEqual(input.value);
         });
     });
 
