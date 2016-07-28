@@ -1,4 +1,4 @@
-# React Tag Autocomplete
+# React Tag Autocomplete ![Build status](https://api.travis-ci.org/i-like-robots/react-tags.svg?branch=master)
 
 React Tag Autocomplete is a simple tagging component ready to drop in your React projects. Originally based on the [React Tags project](http://prakhar.me/react-tags/example) by Prakhar Srivastav this version removes the drag-and-drop re-ordering functionality, adds appropriate roles and ARIA states and introduces a resizing text input.
 
@@ -199,15 +199,6 @@ function(input) {
 
 Allows users to add new (not suggested) tags. Default: `false`.
 
-To enable it, just add `allowNew` as a component property:
-
-```js
-<ReactTags
-    handleDelete={this.handleDelete}
-    handleAddition={this.handleAddition}
-    allowNew />
-```
-
 ### Styling
 
 It is possible to customize the look of the component the way you want it. An example can be found in `/example/styles.css`.
@@ -218,9 +209,5 @@ The component is written in ES6 and uses [Webpack](http://webpack.github.io/) as
 
 ```
 npm install
-npm run dev # open http://localhost:8090
+npm run dev # open http://localhost:8080
 ```
-
-## Contributing
-
-Got ideas on how to make this better? Open an issue! I'm yet to add tests so keep your PRs on hold :grinning:
