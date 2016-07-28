@@ -33,7 +33,7 @@ function $ (selector) {
 }
 
 function $$ (selector) {
-    return document.querySelectorAll(selector);
+    return Array.from(document.querySelectorAll(selector));
 }
 
 function type (value) {
@@ -174,10 +174,10 @@ describe('React Tags', () => {
             expect(input.getAttribute('aria-activedescendant')).toEqual(results[0].id);
             expect(results[0].className).toMatch(/is-active/);
 
-            key('up');
+            key('up', 'up');
 
-            expect(input.getAttribute('aria-activedescendant')).toEqual(results[2].id);
-            expect(results[2].className).toMatch(/is-active/);
+            expect(input.getAttribute('aria-activedescendant')).toEqual(results[1].id);
+            expect(results[1].className).toMatch(/is-active/);
         });
 
         it('hides the suggestions list when the escape key is pressed', () => {
@@ -186,6 +186,22 @@ describe('React Tags', () => {
 
             key('escape');
             expect($('ul[role="listbox"]')).toBeNull();
+        });
+
+        it('does not allow selection of disabled options', () => {
+            createInstance({
+                suggestions: fixture.map((item) => Object.assign({}, item, { disabled: true }))
+            });
+
+            type(query);
+
+            $$('li[role="option"]').forEach((option) => {
+                expect(option.matches('[aria-disabled="true"]')).toBeTruthy();
+            })
+
+            key('down', 'enter');
+
+            sinon.assert.notCalled(props.handleAddition);
         });
 
         it('triggers addition when a suggestion is clicked', () => {
@@ -268,6 +284,17 @@ describe('React Tags', () => {
             type('hello world');
 
             expect(sizer.textContent).toEqual(input.value);
+        });
+
+        it('resizes input to match sizer width', () => {
+            const input = $('input');
+            const sizer = $('input + div');
+
+            sizer.scrollWidth = 200;
+
+            type('hello world');
+
+            expect(getComputedStyle(input).width).toEqual('202px');
         });
     });
 
