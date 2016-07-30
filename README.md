@@ -147,7 +147,8 @@ Override the default class names. Defaults:
     tagName: 'ReactTags__tagName',
     suggestions: 'ReactTags__suggestions',
     isActive: 'is-active',
-    isDisabled: 'is-disabled'
+    isDisabled: 'is-disabled',
+    isFocused: 'is-focused'
 }
 ```
 
