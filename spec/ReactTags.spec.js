@@ -6,7 +6,7 @@ const TestUtils = require('react-addons-test-utils');
 const keycode = require('keycode');
 const sinon = require('sinon');
 const fixture = require('./fixtures/countries');
-const Subject = require('./compiled/ReactTags');
+const Subject = require('../dist-es5/ReactTags');
 
 let props;
 let instance;
