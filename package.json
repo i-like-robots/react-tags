@@ -2,12 +2,23 @@
   "name": "react-tag-autocomplete",
   "version": "4.3.1",
   "description": "React Tag Autocomplete is a simple tagging component ready to drop in your React projects.",
-  "main": "dist/ReactTags.js",
+  "main": "dist/es5/ReactTags.js",
+  "jsnext:main": "dist/es6/ReactTags.js",
   "scripts": {
     "test": "buble lib -o spec/compiled -t node:4 && jasmine",
-    "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --colors",
-    "release": "webpack -p && buble lib -o dist"
+    "dev": "webpack-dev-server --progress --colors",
+    "build:example": "webpack -p",
+    "build:es5": "buble lib -o dist/es5",
+    "build:es6": "buble lib -o dist/es6 -t node:6",
+    "prepublish": "npm run build:example && npm run build:es5 && npm run build:es6"
   },
+  "files": [
+    "lib",
+    "dist",
+    "example",
+    "LICENSE",
+    "README.md"
+  ],
   "keywords": [
     "react",
     "tags",
