@@ -1,4 +1,7 @@
+.DS_Store
 node_modules
 npm-debug.log
-.idea
-spec/compiled
+dist-es5
+dist-es6
+example/bundle.js
+example/bundle.js.map

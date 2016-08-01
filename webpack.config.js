@@ -5,7 +5,7 @@ module.exports = {
     devtool: 'source-map',
     module: {
         loaders: [
-            { test: /\.js$/, loader: 'babel', exclude: /node_modules/ }
+            { test: /\.js$/, loader: 'buble', exclude: /node_modules/ }
         ]
     },
     plugins: [
@@ -14,6 +14,6 @@ module.exports = {
         })
     ],
     output: {
-        filename: "example/bundle.js"
+        filename: 'example/bundle.js'
     }
 };

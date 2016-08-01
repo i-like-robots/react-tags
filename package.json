@@ -2,13 +2,24 @@
   "name": "react-tag-autocomplete",
   "version": "4.3.1",
   "description": "React Tag Autocomplete is a simple tagging component ready to drop in your React projects.",
-  "main": "dist/ReactTags.js",
+  "main": "dist-es5/ReactTags.js",
+  "jsnext:main": "dist-es6/ReactTags.js",
   "scripts": {
-    "test": "npm run build -- --out-dir spec/compiled --optional runtime && jasmine",
-    "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --colors",
-    "build": "babel ./lib",
-    "release": "webpack -p && npm run build -- --out-dir dist"
+    "test": "npm run build:es5 && jasmine",
+    "dev": "webpack-dev-server --progress --colors",
+    "build:example": "webpack -p",
+    "build:es5": "buble lib -o dist-es5",
+    "build:es6": "buble lib -o dist-es6 -t node:6",
+    "prepublish": "npm run build:es5 && npm run build:es6"
   },
+  "files": [
+    "lib",
+    "example",
+    "dist-es5",
+    "dist-es6",
+    "LICENSE",
+    "README.md"
+  ],
   "keywords": [
     "react",
     "tags",
@@ -29,9 +40,8 @@
     "react-dom": "^0.14.0 || ^15.0.0"
   },
   "devDependencies": {
-    "babel": "^5.3.3",
-    "babel-loader": "^5.1.2",
-    "babel-runtime": "^6.11.6",
+    "buble": "^0.12.5",
+    "buble-loader": "^0.2.2",
     "jasmine": "^2.4.1",
     "jsdom": "^9.4.1",
     "keycode": "^2.1.2",
