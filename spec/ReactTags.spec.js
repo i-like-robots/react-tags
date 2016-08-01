@@ -252,11 +252,16 @@ describe('React Tags', () => {
             sinon.assert.calledWith(props.handleDelete, sinon.match(0));
         });
 
-        it('deletes the last selected tag when backspace is pressed', () => {
+        it('deletes the last selected tag when backspace is pressed and query is empty', () => {
             type(''), key('backspace');
 
             sinon.assert.calledOnce(props.handleDelete);
             sinon.assert.calledWith(props.handleDelete, sinon.match(instance.props.tags.length - 1));
+        });
+
+        it('does not delete the last selected tag when backspace is pressed and query is not empty', () => {
+            type('uni'), key('backspace');
+            sinon.assert.notCalled(props.handleDelete);
         });
     });
 
