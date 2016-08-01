@@ -66,7 +66,6 @@ describe('React Tags', () => {
             expect($('.ReactTags')).toBeTruthy();
             expect($('.ReactTags__selected')).toBeTruthy();
             expect($('.ReactTags__tagInput')).toBeTruthy();
-            expect($('.ReactTags__suggestions')).toBeTruthy();
         });
     });
 
@@ -151,6 +150,15 @@ describe('React Tags', () => {
 
             type('xyz');
             expect($$('li[role="option"]').length).toEqual(0);
+        });
+
+        it('marks the matching text', () => {
+            type(query);
+
+            $$('li[role="option"]').forEach((option) => {
+                expect(option.querySelector('mark')).toBeTruthy();
+                expect(option.querySelector('mark').textContent).toMatch(new RegExp(query, 'i'));
+            });
         });
 
         it('handles up/down keys and can wrap', () => {
