@@ -66,7 +66,6 @@ describe('React Tags', () => {
             expect($('.ReactTags')).toBeTruthy();
             expect($('.ReactTags__selected')).toBeTruthy();
             expect($('.ReactTags__tagInput')).toBeTruthy();
-            expect($('.ReactTags__suggestions')).toBeTruthy();
         });
     });
 
@@ -151,6 +150,15 @@ describe('React Tags', () => {
 
             type('xyz');
             expect($$('li[role="option"]').length).toEqual(0);
+        });
+
+        it('marks the matching text', () => {
+            type(query);
+
+            $$('li[role="option"]').forEach((option) => {
+                expect(option.querySelector('mark')).toBeTruthy();
+                expect(option.querySelector('mark').textContent).toMatch(new RegExp(query, 'i'));
+            });
         });
 
         it('handles up/down keys and can wrap', () => {
@@ -244,11 +252,16 @@ describe('React Tags', () => {
             sinon.assert.calledWith(props.handleDelete, sinon.match(0));
         });
 
-        it('deletes the last selected tag when backspace is pressed', () => {
+        it('deletes the last selected tag when backspace is pressed and query is empty', () => {
             type(''), key('backspace');
 
             sinon.assert.calledOnce(props.handleDelete);
             sinon.assert.calledWith(props.handleDelete, sinon.match(instance.props.tags.length - 1));
+        });
+
+        it('does not delete the last selected tag when backspace is pressed and query is not empty', () => {
+            type('uni'), key('backspace');
+            sinon.assert.notCalled(props.handleDelete);
         });
     });
 
