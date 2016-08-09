@@ -48,6 +48,8 @@ function key () {
 }
 
 function click (target) {
+    TestUtils.Simulate.mouseDown(target);
+    TestUtils.Simulate.mouseUp(target);
     TestUtils.Simulate.click(target);
 }
 

@@ -115,9 +115,13 @@
     font-weight: 600;
 }
 
+.ReactTags__suggestions li:hover {
+    cursor: pointer;
+    background: #eee;
+}
+
 .ReactTags__suggestions li.is-active {
     background: #b7cfe0;
-    cursor: pointer;
 }
 
 .ReactTags__suggestions li.is-disabled {
