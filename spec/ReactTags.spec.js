@@ -190,14 +190,6 @@ describe('React Tags', () => {
             expect(results[1].className).toMatch(/is-active/);
         });
 
-        xit('hides the suggestions list when the escape key is pressed', () => {
-            type(query);
-            expect($('ul[role="listbox"]')).toBeTruthy();
-
-            key('escape');
-            expect($('ul[role="listbox"]')).toBeNull();
-        });
-
         it('does not allow selection of disabled options', () => {
             createInstance({
                 suggestions: fixture.map((item) => Object.assign({}, item, { disabled: true }))
