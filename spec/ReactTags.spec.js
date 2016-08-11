@@ -86,6 +86,22 @@ describe('React Tags', () => {
             createInstance({ autofocus: false });
             expect(document.activeElement).not.toEqual($('input'));
         });
+
+        it('updates state when suggestions list is expanded', () => {
+            createInstance();
+
+            const input = $('input');
+
+            expect(input.getAttribute('aria-expanded')).toEqual('false');
+
+            type('uni');
+
+            expect(input.getAttribute('aria-expanded')).toEqual('true');
+
+            TestUtils.Simulate.blur(input);
+
+            expect(input.getAttribute('aria-expanded')).toEqual('false');
+        });
     });
 
     describe('query', () => {
@@ -98,14 +114,6 @@ describe('React Tags', () => {
         it('updates the internal state', () => {
             type(query);
             expect(instance.state.query).toEqual(query);
-        });
-
-        it('filters suggestions to those that match', () => {
-            type(query);
-
-            instance.suggestions.state.options.forEach((suggestion) => {
-                expect(suggestion).toMatch(new RegExp('^' + query, 'i'));
-            });
         });
 
         it('triggers the change callback', () => {
@@ -146,12 +154,30 @@ describe('React Tags', () => {
             expect($('ul[role="listbox"]')).toBeTruthy();
         });
 
+        it('filters suggestions to those that match', () => {
+            type(query);
+
+            instance.suggestions.state.options.forEach((suggestion) => {
+                expect(suggestion.name).toMatch(new RegExp('^' + query, 'i'));
+            });
+        });
+
         it('shows the suggestions list when there are suggestions available', () => {
             type(query);
             expect($$('li[role="option"]').length).toEqual(3);
 
             type('xyz');
             expect($$('li[role="option"]').length).toEqual(0);
+        });
+
+        it('hides the suggestions list when the input is not focused', () => {
+          type(query);
+
+          expect($('ul[role="listbox"]')).toBeTruthy();
+
+          TestUtils.Simulate.blur($('input'));
+
+          expect($('ul[role="listbox"]')).toBeFalsy();
         });
 
         it('marks the matching text', () => {
