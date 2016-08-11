@@ -65,9 +65,10 @@ describe('React Tags', () => {
     })
 
     it('renders the basic components', () => {
-      expect($('.ReactTags')).toBeTruthy()
-      expect($('.ReactTags__selected')).toBeTruthy()
-      expect($('.ReactTags__tagInput')).toBeTruthy()
+      expect($('.react-tags')).toBeTruthy()
+      expect($('.react-tags__selected')).toBeTruthy()
+      expect($('.react-tags__search')).toBeTruthy()
+      expect($('.react-tags__search-input')).toBeTruthy()
     })
   })
 
@@ -271,11 +272,11 @@ describe('React Tags', () => {
     })
 
     it('renders selected tags', () => {
-      expect($$('.ReactTags__tag').length).toEqual(instance.props.tags.length)
+      expect($$('.react-tags__selected-tag').length).toEqual(instance.props.tags.length)
     })
 
     it('triggers removal when a tag is clicked', () => {
-      click($('.ReactTags__tag'))
+      click($('.react-tags__selected-tag'))
 
       sinon.assert.calledOnce(props.handleDelete)
       sinon.assert.calledWith(props.handleDelete, sinon.match(0))

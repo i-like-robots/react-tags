@@ -131,12 +131,13 @@ Override the default class names. Defaults:
 
 ```js
 {
-  root: 'ReactTags',
-  tagInput: 'ReactTags__tagInput',
-  selected: 'ReactTags__selected',
-  tag: 'ReactTags__tag',
-  tagName: 'ReactTags__tagName',
-  suggestions: 'ReactTags__suggestions',
+  root: 'react-tags',
+  selected: 'react-tags__selected',
+  selectedTag: 'react-tags__selected-tag',
+  selectedTagName: 'react-tags__selected-tag-name',
+  search: 'react-tags__search',
+  searchInput: 'react-tags__search-input',
+  suggestions: 'react-tags__suggestions',
   isActive: 'is-active',
   isDisabled: 'is-disabled'
 }
