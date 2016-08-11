@@ -65,7 +65,6 @@ React.render(<App />, document.getElementById('app'));
 
 - [`tags`](#tagsOption)
 - [`suggestions`](#suggestionsOption)
-- [`delimiters`](#delimitersOption)
 - [`placeholder`](#placeholderOption)
 - [`autofocus`](#autofocusOption)
 - [`autoresize`](#autoresizeOption)
@@ -102,11 +101,6 @@ var suggestions = [
     { id: 6, name: "Apricots", disabled: true }
 ];
 ```
-
-<a name="delimitersOption"></a>
-#### delimiters (optional)
-
-An array of keycodes which should terminate tags input. Default: `[13, 9]`.
 
 <a name="placeholderOption"></a>
 #### placeholder (optional)
