@@ -1,5 +1,5 @@
 /* Example Styles for React Tags*/
-.ReactTags {
+.react-tags {
     position: relative;
     padding: 6px 0 0 6px;
     border: 1px solid #D1D1D1;
@@ -14,11 +14,11 @@
 }
 
 /* Styles for the currently selected tags */
-.ReactTags__selected {
+.react-tags__selected {
     display: inline;
 }
 
-.ReactTags__tag {
+.react-tags__selected-tag {
     display: inline-block;
     box-sizing: border-box;
     margin: 0 6px 6px 0;
@@ -32,14 +32,14 @@
     line-height: inherit;
 }
 
-.ReactTags__tag:after {
+.react-tags__selected-tag:after {
     content: '\2715';
     color: #AAA;
-    margin-left: 6px;
+    margin-left: 8px;
 }
 
-/* Styles for the input area */
-.ReactTags__tagInput {
+/* Styles for the search area */
+.react-tags__search {
     display: inline-block;
 
     /* match tag layout */
@@ -52,14 +52,14 @@
 
 @media screen and (min-width: 30em) {
 
-    .ReactTags__tagInput {
+    .react-tags__search {
         /* this will be the offsetParent for suggestions */
         position: relative;
     }
 
 }
 
-.ReactTags__tagInput input {
+.react-tags__search input {
     /* prevent autoresize overflowing the container */
     max-width: 100%;
 
@@ -74,12 +74,12 @@
     line-height: inherit;
 }
 
-.ReactTags__tagInput input::-ms-clear {
+.react-tags__search input::-ms-clear {
     display: none;
 }
 
 /* Styles for suggestions */
-.ReactTags__suggestions {
+.react-tags__suggestions {
     position: absolute;
     top: 100%;
     left: 0;
@@ -88,13 +88,13 @@
 
 @media screen and (min-width: 30em) {
 
-    .ReactTags__suggestions {
+    .react-tags__suggestions {
         width: 240px;
     }
 
 }
 
-.ReactTags__suggestions ul {
+.react-tags__suggestions ul {
     margin: 4px -1px;
     padding: 0;
     list-style: none;
@@ -104,27 +104,27 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.ReactTags__suggestions li {
+.react-tags__suggestions li {
     border-bottom: 1px solid #ddd;
     padding: 6px 8px;
 }
 
-.ReactTags__suggestions li mark {
+.react-tags__suggestions li mark {
     text-decoration: underline;
     background: none;
     font-weight: 600;
 }
 
-.ReactTags__suggestions li:hover {
+.react-tags__suggestions li:hover {
     cursor: pointer;
     background: #eee;
 }
 
-.ReactTags__suggestions li.is-active {
+.react-tags__suggestions li.is-active {
     background: #b7cfe0;
 }
 
-.ReactTags__suggestions li.is-disabled {
+.react-tags__suggestions li.is-disabled {
     opacity: 0.5;
     cursor: auto;
 }

@@ -8,6 +8,7 @@
 - Added functionality to hide suggestions list when input is blurred
 - Refactored components to ES6 class syntax and stateless functions
 - Refactored components to use Standard code style
+- Refactored `classNames` option to better match usage and use BEM naming convention
 
 ## 4.3.1
 
