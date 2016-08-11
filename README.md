@@ -20,45 +20,42 @@ Here's a sample implementation that initializes the component with a list of pre
 var ReactTags = require('react-tag-autocomplete');
 
 var App = React.createClass({
-    getInitialState: function() {
-        return {
-            tags: [
-                { id: 1, name: "Apples" },
-                { id: 2, name: "Pears" }
-            ],
-            suggestions: [
-                { id: 3, name: "Bananas" },
-                { id: 4, name: "Mangos" },
-                { id: 5, name: "Lemons" },
-                { id: 6, name: "Apricots" }
-            ]
-        }
-    },
-    handleDelete: function(i) {
-        var tags = this.state.tags;
-        tags.splice(i, 1);
-        this.setState({ tags: tags });
-    },
-    handleAddition: function(tag) {
-        var tags = this.state.tags;
-        tags.push({
-            id: tags.length + 1,
-            name: tag
-        });
-        this.setState({ tags: tags });
-    },
-    render: function() {
-        return (
-            <ReactTags
-                tags={this.state.tags}
-                suggestions={this.state.suggestions}
-                handleDelete={this.handleDelete}
-                handleAddition={this.handleAddition} />
-        )
+  getInitialState: function () {
+    return {
+      tags: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Pears" }
+      ],
+      suggestions: [
+        { id: 3, name: "Bananas" },
+        { id: 4, name: "Mangos" },
+        { id: 5, name: "Lemons" },
+        { id: 6, name: "Apricots" }
+      ]
     }
-});
+  },
+  handleDelete: function (i) {
+    var tags = this.state.tags
+    tags.splice(i, 1)
+    this.setState({ tags: tags })
+  },
+  handleAddition: function (tag) {
+    var tags = this.state.tags
+    tags.push(tag)
+    this.setState({ tags: tags })
+  },
+  render: function () {
+    return (
+      <ReactTags
+        tags={this.state.tags}
+        suggestions={this.state.suggestions}
+        handleDelete={this.handleDelete}
+        handleAddition={this.handleAddition} />
+    )
+  }
+})
 
-React.render(<App />, document.getElementById('app'));
+React.render(<App />, document.getElementById('app'))
 ```
 
 ### Options
@@ -83,9 +80,9 @@ An array of tags that are displayed as pre-selected. Each tag must have an `id` 
 
 ```js
 var tags =  [
-    { id: 1, name: "Apples" },
-    { id: 2, name: "Pears" }
-];
+  { id: 1, name: "Apples" },
+  { id: 2, name: "Pears" }
+]
 ```
 
 <a name="suggestionsOption"></a>
@@ -95,11 +92,11 @@ An array of suggestions that are used as basis for showing suggestions. Each sug
 
 ```js
 var suggestions = [
-    { id: 3, name: "Bananas" },
-    { id: 4, name: "Mangos" },
-    { id: 5, name: "Lemons" },
-    { id: 6, name: "Apricots", disabled: true }
-];
+  { id: 3, name: "Bananas" },
+  { id: 4, name: "Mangos" },
+  { id: 5, name: "Lemons" },
+  { id: 6, name: "Apricots", disabled: true }
+]
 ```
 
 <a name="placeholderOption"></a>
@@ -134,14 +131,14 @@ Override the default class names. Defaults:
 
 ```js
 {
-    root: 'ReactTags',
-    tagInput: 'ReactTags__tagInput',
-    selected: 'ReactTags__selected',
-    tag: 'ReactTags__tag',
-    tagName: 'ReactTags__tagName',
-    suggestions: 'ReactTags__suggestions',
-    isActive: 'is-active',
-    isDisabled: 'is-disabled'
+  root: 'ReactTags',
+  tagInput: 'ReactTags__tagInput',
+  selected: 'ReactTags__selected',
+  tag: 'ReactTags__tag',
+  tagName: 'ReactTags__tagName',
+  suggestions: 'ReactTags__suggestions',
+  isActive: 'is-active',
+  isDisabled: 'is-disabled'
 }
 ```
 
@@ -151,9 +148,9 @@ Override the default class names. Defaults:
 Function called when the user wants to add a tag. Receives the tag.
 
 ```js
-function(tag) {
-    // Add the tag { id, name } to the tag list
-    tags.push(tag);
+function (tag) {
+  // Add the tag { id, name } to the tag list
+  tags.push(tag)
 }
 ```
 
@@ -163,9 +160,9 @@ function(tag) {
 Function called when the user wants to delete a tag. Receives the tag index.
 
 ```js
-function(i) {
-    // Delete the tag at index i
-    tags.splice(i, 1);
+function (i) {
+  // Delete the tag at index i
+  tags.splice(i, 1)
 }
 ```
 
@@ -175,16 +172,16 @@ function(i) {
 Optional event handler when the input changes. Receives the current input value.
 
 ```js
-function(input) {
-    if (this.state.busy) {
-        return;
-    } else {
-        this.setState({ busy: true });
+function (input) {
+  if (this.state.busy) {
+    return
+  } else {
+    this.setState({ busy: true })
 
-        return fetch(`query=${input}`).then(function(result) {
-            this.setState({ busy: false });
-        });
-    }
+    return fetch(`query=${input}`).then(function (result) {
+      this.setState({ busy: false })
+    })
+  }
 }
 ```
 
