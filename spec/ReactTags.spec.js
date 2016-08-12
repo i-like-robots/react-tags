@@ -151,24 +151,16 @@ describe('React Tags', () => {
       type(query.slice(0, 2))
       expect($('ul[role="listbox"]')).toBeNull()
 
-      type(query)
+      type(query.slice(0, 3))
       expect($('ul[role="listbox"]')).toBeTruthy()
-    })
-
-    it('filters suggestions to those that match', () => {
-      type(query)
-
-      instance.suggestions.state.options.forEach((suggestion) => {
-        expect(suggestion.name).toMatch(new RegExp('^' + query, 'i'))
-      })
     })
 
     it('shows the suggestions list when there are suggestions available', () => {
       type(query)
-      expect($$('li[role="option"]').length).toEqual(3)
+      expect($('ul[role="listbox"]')).toBeTruthy()
 
       type('xyz')
-      expect($$('li[role="option"]').length).toEqual(0)
+      expect($('ul[role="listbox"]')).toBeNull()
     })
 
     it('hides the suggestions list when the input is not focused', () => {
@@ -178,7 +170,15 @@ describe('React Tags', () => {
 
       TestUtils.Simulate.blur($('input'))
 
-      expect($('ul[role="listbox"]')).toBeFalsy()
+      expect($('ul[role="listbox"]')).toBeNull()
+    })
+
+    it('filters suggestions to those that match', () => {
+      type(query)
+
+      $$('li[role="option"]').forEach((option) => {
+        expect(option.textContent).toMatch(new RegExp(query, 'i'))
+      })
     })
 
     it('marks the matching text', () => {
@@ -186,7 +186,7 @@ describe('React Tags', () => {
 
       $$('li[role="option"]').forEach((option) => {
         expect(option.querySelector('mark')).toBeTruthy()
-        expect(option.querySelector('mark').textContent).toMatch(new RegExp(query, 'i'))
+        expect(option.querySelector('mark').textContent).toMatch(new RegExp('^' + query + '$', 'i'))
       })
     })
 
@@ -251,7 +251,7 @@ describe('React Tags', () => {
       sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
     })
 
-    it('triggers addition for an unselected, matching suggestion when a delimeter is pressed', () => {
+    it('triggers addition for an unselected but matching suggestion when a delimeter is pressed', () => {
       type('united kingdom'), key('enter')
       sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
     })
