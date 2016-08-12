@@ -1,3 +1,5 @@
+/* eslint-env jasmine */
+
 'use strict'
 
 const React = require('react')
@@ -5,7 +7,7 @@ const ReactDOM = require('react-dom')
 const TestUtils = require('react-addons-test-utils')
 const keycode = require('keycode')
 const sinon = require('sinon')
-const fixture = require('./fixtures/countries')
+const fixture = require('../example/countries')
 const Subject = require('../dist-es5/ReactTags')
 
 let props
@@ -54,7 +56,6 @@ function click (target) {
 }
 
 describe('React Tags', () => {
-
   afterEach(() => {
     teardownInstance()
   })
@@ -127,7 +128,7 @@ describe('React Tags', () => {
     it('can allow new, non-suggested tags to be added', () => {
       createInstance({ allowNew: false })
 
-      type(query), key('enter')
+      type(query); key('enter')
 
       sinon.assert.notCalled(props.handleAddition)
 
@@ -234,7 +235,7 @@ describe('React Tags', () => {
     })
 
     it('triggers addition when a suggestion is clicked', () => {
-      type(query), click($('li[role="option"]:nth-child(2)'))
+      type(query); click($('li[role="option"]:nth-child(2)'))
 
       sinon.assert.calledOnce(props.handleAddition)
       sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
@@ -245,19 +246,19 @@ describe('React Tags', () => {
 
       sinon.assert.notCalled(props.handleAddition)
 
-      type(query), key('down', 'down', 'enter')
+      type(query); key('down', 'down', 'enter')
 
       sinon.assert.calledOnce(props.handleAddition)
       sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
     })
 
     it('triggers addition for an unselected but matching suggestion when a delimeter is pressed', () => {
-      type('united kingdom'), key('enter')
+      type('united kingdom'); key('enter')
       sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
     })
 
     it('clears the input when an addition is triggered', () => {
-      type(query), key('down', 'down', 'enter')
+      type(query); key('down', 'down', 'enter')
 
       const input = $('input')
 
@@ -268,7 +269,7 @@ describe('React Tags', () => {
 
   describe('tags', () => {
     beforeEach(() => {
-      createInstance({ tags: [ fixture[0], fixture[1]] })
+      createInstance({ tags: [fixture[0], fixture[1]] })
     })
 
     it('renders selected tags', () => {
@@ -283,14 +284,14 @@ describe('React Tags', () => {
     })
 
     it('deletes the last selected tag when backspace is pressed and query is empty', () => {
-      type(''), key('backspace')
+      type(''); key('backspace')
 
       sinon.assert.calledOnce(props.handleDelete)
       sinon.assert.calledWith(props.handleDelete, sinon.match(instance.props.tags.length - 1))
     })
 
     it('does not delete the last selected tag when backspace is pressed and query is not empty', () => {
-      type('uni'), key('backspace')
+      type('uni'); key('backspace')
       sinon.assert.notCalled(props.handleDelete)
     })
   })
@@ -337,7 +338,7 @@ describe('React Tags', () => {
 
       type('hello world')
 
-      expect(getComputedStyle(input).width).toEqual('202px')
+      expect(window.getComputedStyle(input).width).toEqual('202px')
     })
   })
 })

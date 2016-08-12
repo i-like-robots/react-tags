@@ -5,7 +5,7 @@
   "main": "dist-es5/ReactTags.js",
   "jsnext:main": "dist-es6/ReactTags.js",
   "scripts": {
-    "test": "standard lib && npm run build:es5 && jasmine",
+    "test": "standard lib/*.js spec/*.js && npm run build:es5 && jasmine",
     "dev": "webpack-dev-server --progress --colors",
     "build:example": "webpack -p",
     "build:es5": "buble lib -o dist-es5",
