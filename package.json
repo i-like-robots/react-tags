@@ -45,6 +45,7 @@
   "devDependencies": {
     "buble": "^0.12.5",
     "buble-loader": "^0.2.2",
+    "coveralls": "^2.11.12",
     "istanbul": "^0.4.4",
     "jasmine": "^2.4.1",
     "jsdom": "^9.4.1",
