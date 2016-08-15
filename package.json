@@ -5,7 +5,10 @@
   "main": "dist-es5/ReactTags.js",
   "jsnext:main": "dist-es6/ReactTags.js",
   "scripts": {
-    "test": "standard lib/*.js spec/*.js && npm run build:es5 && jasmine",
+    "pretest": "npm run lint && npm run build:es5",
+    "test": "jasmine",
+    "coverage": "istanbul cover -i 'dist-es5/**' jasmine",
+    "lint": "standard lib/*.js spec/*.js",
     "dev": "webpack-dev-server --progress --colors",
     "build:example": "webpack -p",
     "build:es5": "buble lib -o dist-es5",
@@ -42,6 +45,7 @@
   "devDependencies": {
     "buble": "^0.12.5",
     "buble-loader": "^0.2.2",
+    "istanbul": "^0.4.4",
     "jasmine": "^2.4.1",
     "jsdom": "^9.4.1",
     "keycode": "^2.1.2",
