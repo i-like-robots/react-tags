@@ -36,6 +36,10 @@
   cursor: text;
 }
 
+.react-tags.is-focused {
+  border-color: #B1B1B1;
+}
+
 .react-tags__selected {
   display: inline;
 }
@@ -58,6 +62,11 @@
   content: '\2715';
   color: #AAA;
   margin-left: 8px;
+}
+
+.react-tags__selected-tag:hover,
+.react-tags__selected-tag:focus {
+  border-color: #B1B1B1;
 }
 
 .react-tags__search {
