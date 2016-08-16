@@ -6,6 +6,7 @@
 - Added support for jsnext entry point
 - Removed functionality to hide suggestions list when escape is pressed
 - Added functionality to hide suggestions list when input is blurred
+- Added class name to component root when input is focused
 - Refactored components to ES6 class syntax and stateless functions
 - Refactored components to use Standard code style
 - Refactored `classNames` option to better match usage and use BEM naming convention

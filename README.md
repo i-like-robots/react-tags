@@ -141,7 +141,8 @@ Override the default class names. Defaults:
   searchInput: 'react-tags__search-input',
   suggestions: 'react-tags__suggestions',
   isActive: 'is-active',
-  isDisabled: 'is-disabled'
+  isDisabled: 'is-disabled',
+  isFocused: 'is-focused'
 }
 ```
 

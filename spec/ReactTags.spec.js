@@ -104,6 +104,16 @@ describe('React Tags', () => {
 
       expect(input.getAttribute('aria-expanded')).toEqual('false')
     })
+
+    it('decorates the component root when focused', () => {
+      createInstance()
+
+      TestUtils.Simulate.focus($('input'))
+      expect($('.is-focused')).toBeTruthy()
+
+      TestUtils.Simulate.blur($('input'))
+      expect($('.is-focused')).toBeNull()
+    })
   })
 
   describe('query', () => {
