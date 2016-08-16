@@ -177,9 +177,7 @@ Optional event handler when the input changes. Receives the current input value.
 
 ```js
 function (input) {
-  if (this.state.busy) {
-    return
-  } else {
+  if (!this.state.busy) {
     this.setState({ busy: true })
 
     return fetch(`query=${input}`).then(function (result) {
@@ -206,3 +204,33 @@ The component is written in ES6 and uses [Webpack](http://webpack.github.io/) as
 npm install
 npm run dev # open http://localhost:8080
 ```
+
+### Upgrading from 4.x to 5.0
+
+1. The `delimiters` has been removed, any references to this will now be ignored.
+2. The `classNames` option has been updated:
+
+  ```udiff
+  {
+  -  root: 'ReactTags',
+  -  tagInput: 'ReactTags__tagInput',
+  -  selected: 'ReactTags__selected',
+  -  tag: 'ReactTags__tag',
+  -  tagName: 'ReactTags__tagName',
+  -  suggestions: 'ReactTags__suggestions',
+  -  isActive: 'is-active',
+  -  isDisabled: 'is-disabled'
+  +  root: 'react-tags',
+  +  rootFocused: 'is-focused',
+  +  selected: 'react-tags__selected',
+  +  selectedTag: 'react-tags__selected-tag',
+  +  selectedTagName: 'react-tags__selected-tag-name',
+  +  search: 'react-tags__search',
+  +  searchInput: 'react-tags__search-input',
+  +  suggestions: 'react-tags__suggestions',
+  +  suggestionActive: 'is-active',
+  +  suggestionDisabled: 'is-disabled'
+  }
+  ```
+
+For smaller changes refer to [the changelog](CHANGELOG.md).
