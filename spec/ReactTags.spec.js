@@ -1,301 +1,354 @@
-'use strict';
+/* eslint-env jasmine */
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const TestUtils = require('react-addons-test-utils');
-const keycode = require('keycode');
-const sinon = require('sinon');
-const fixture = require('./fixtures/countries');
-const Subject = require('./compiled/ReactTags');
+'use strict'
 
-let props;
-let instance;
+const React = require('react')
+const ReactDOM = require('react-dom')
+const TestUtils = require('react-addons-test-utils')
+const keycode = require('keycode')
+const sinon = require('sinon')
+const fixture = require('../example/countries')
+const Subject = require('../dist-es5/ReactTags')
+
+let props
+let instance
 
 function createInstance (data) {
-    const defaults = {
-        tags: [],
-        suggestions: [],
-        handleDelete: sinon.stub(),
-        handleAddition: sinon.stub(),
-        handleInputChange: sinon.stub()
-    };
+  const defaults = {
+    tags: [],
+    suggestions: [],
+    handleDelete: sinon.stub(),
+    handleAddition: sinon.stub(),
+    handleInputChange: sinon.stub()
+  }
 
-    props = Object.assign(defaults, data || {});
-    instance = ReactDOM.render(React.createElement(Subject, props), document.getElementById('app'));
+  props = Object.assign(defaults, data || {})
+  instance = ReactDOM.render(React.createElement(Subject, props), document.getElementById('app'))
 }
 
 function teardownInstance () {
-    ReactDOM.unmountComponentAtNode(document.getElementById('app'));
+  ReactDOM.unmountComponentAtNode(document.getElementById('app'))
 }
 
 function $ (selector) {
-    return document.querySelector(selector);
+  return document.querySelector(selector)
 }
 
 function $$ (selector) {
-    return Array.from(document.querySelectorAll(selector));
+  return Array.from(document.querySelectorAll(selector))
 }
 
 function type (value) {
-    $('input').value = value;
-    TestUtils.Simulate.change($('input'));
+  $('input').value = value
+  TestUtils.Simulate.change($('input'))
 }
 
 function key () {
-    Array.from(arguments).forEach((value) => {
-        TestUtils.Simulate.keyDown($('input'), { value, keyCode: keycode(value) });
-    });
+  Array.from(arguments).forEach((value) => {
+    TestUtils.Simulate.keyDown($('input'), { value, keyCode: keycode(value) })
+  })
 }
 
 function click (target) {
-    TestUtils.Simulate.click(target);
+  TestUtils.Simulate.mouseDown(target)
+  TestUtils.Simulate.mouseUp(target)
+  TestUtils.Simulate.click(target)
 }
 
 describe('React Tags', () => {
+  afterEach(() => {
+    teardownInstance()
+  })
 
-    afterEach(() => {
-        teardownInstance();
-    });
+  describe('basic rendering', () => {
+    beforeEach(() => {
+      createInstance()
+    })
 
-    describe('basic rendering', () => {
-        beforeEach(() => {
-            createInstance();
-        });
+    it('renders the basic components', () => {
+      expect($('.react-tags')).toBeTruthy()
+      expect($('.react-tags__selected')).toBeTruthy()
+      expect($('.react-tags__search')).toBeTruthy()
+      expect($('.react-tags__search-input')).toBeTruthy()
+    })
+  })
 
-        it('renders the basic components', () => {
-            expect($('.ReactTags')).toBeTruthy();
-            expect($('.ReactTags__selected')).toBeTruthy();
-            expect($('.ReactTags__tagInput')).toBeTruthy();
-            expect($('.ReactTags__suggestions')).toBeTruthy();
-        });
-    });
+  describe('input', () => {
+    it('assigns the given placeholder', () => {
+      createInstance({ placeholder: 'Please enter a tag' })
+      expect($('input').placeholder).toEqual('Please enter a tag')
+    })
 
-    describe('input', () => {
-        it('assigns the given placeholder', () => {
-            createInstance({ placeholder: 'Please enter a tag' });
-            expect($('input').placeholder).toEqual('Please enter a tag');
-        });
+    it('autofocuses on the input', () => {
+      createInstance({ autofocus: true })
+      expect(document.activeElement).toEqual($('input'))
+    })
 
-        it('autofocuses on the input', () => {
-            createInstance({ autofocus: true });
-            expect(document.activeElement).toEqual($('input'));
-        });
+    it('does not autofocus on the input', () => {
+      createInstance({ autofocus: false })
+      expect(document.activeElement).not.toEqual($('input'))
+    })
 
-        it('does not autofocus on the input', () => {
-            createInstance({ autofocus: false });
-            expect(document.activeElement).not.toEqual($('input'));
-        });
-    });
+    it('updates state when suggestions list is expanded', () => {
+      createInstance()
 
-    describe('query', () => {
-        const query = 'united';
+      const input = $('input')
 
-        beforeEach(() => {
-            createInstance();
-        });
+      expect(input.getAttribute('aria-expanded')).toEqual('false')
 
-        it('updates the internal state', () => {
-            type(query);
-            expect(instance.state.query).toEqual(query);
-        });
+      type('uni')
 
-        it('filters suggestions to those that match', () => {
-            type(query);
+      expect(input.getAttribute('aria-expanded')).toEqual('true')
 
-            instance.state.suggestions.forEach((suggestion) => {
-                expect(suggestion).toMatch(new RegExp('^' + query, 'i'));
-            });
-        });
+      TestUtils.Simulate.blur(input)
 
-        it('triggers the change callback', () => {
-            type(query);
+      expect(input.getAttribute('aria-expanded')).toEqual('false')
+    })
 
-            sinon.assert.calledOnce(props.handleInputChange);
-            sinon.assert.calledWith(props.handleInputChange, query);
-        });
+    it('decorates the component root when focused', () => {
+      createInstance()
 
-        it('can allow new, non-suggested tags to be added', () => {
-            createInstance({ allowNew: false });
+      TestUtils.Simulate.focus($('input'))
+      expect($('.is-focused')).toBeTruthy()
 
-            type(query), key('enter');
+      TestUtils.Simulate.blur($('input'))
+      expect($('.is-focused')).toBeNull()
+    })
+  })
 
-            sinon.assert.notCalled(props.handleAddition);
+  describe('query', () => {
+    const query = 'united'
 
-            createInstance({ allowNew: true });
+    beforeEach(() => {
+      createInstance()
+    })
 
-            key('enter');
+    it('updates the internal state', () => {
+      type(query)
+      expect(instance.state.query).toEqual(query)
+    })
 
-            sinon.assert.calledOnce(props.handleAddition);
-            sinon.assert.calledWith(props.handleAddition, { name: query });
-        });
-    });
+    it('triggers the change callback', () => {
+      type(query)
 
-    describe('suggestions', () => {
-        const query = 'united';
+      sinon.assert.calledOnce(props.handleInputChange)
+      sinon.assert.calledWith(props.handleInputChange, query)
+    })
 
-        beforeEach(() => {
-            createInstance({ minQueryLength: 3, suggestions: fixture });
-        });
+    it('can allow new, non-suggested tags to be added', () => {
+      createInstance({ allowNew: false })
 
-        it('shows suggestions list when the query is long enough', () => {
-            type(query.slice(0, 2));
-            expect($('ul[role="listbox"]')).toBeNull();
+      type(query); key('enter')
 
-            type(query);
-            expect($('ul[role="listbox"]')).toBeTruthy();
-        });
+      sinon.assert.notCalled(props.handleAddition)
 
-        it('shows the suggestions list when there are suggestions available', () => {
-            type(query);
-            expect($$('li[role="option"]').length).toEqual(3);
+      createInstance({ allowNew: true })
 
-            type('xyz');
-            expect($$('li[role="option"]').length).toEqual(0);
-        });
+      key('enter')
 
-        it('handles up/down keys and can wrap', () => {
-            type(query);
+      sinon.assert.calledOnce(props.handleAddition)
+      sinon.assert.calledWith(props.handleAddition, { name: query })
+    })
+  })
 
-            const input = $('input');
-            const results = $$('li[role="option"]');
+  describe('suggestions', () => {
+    const query = 'united'
 
-            key('down');
+    beforeEach(() => {
+      createInstance({ minQueryLength: 3, suggestions: fixture })
+    })
 
-            expect(input.getAttribute('aria-activedescendant')).toEqual(results[0].id);
-            expect(results[0].className).toMatch(/is-active/);
+    it('shows suggestions list when the query is long enough', () => {
+      type(query.slice(0, 2))
+      expect($('ul[role="listbox"]')).toBeNull()
 
-            key('down', 'down');
+      type(query.slice(0, 3))
+      expect($('ul[role="listbox"]')).toBeTruthy()
+    })
 
-            expect(input.getAttribute('aria-activedescendant')).toEqual(results[2].id);
-            expect(results[2].className).toMatch(/is-active/);
+    it('shows the suggestions list when there are suggestions available', () => {
+      type(query)
+      expect($('ul[role="listbox"]')).toBeTruthy()
 
-            key('down');
+      type('xyz')
+      expect($('ul[role="listbox"]')).toBeNull()
+    })
 
-            expect(input.getAttribute('aria-activedescendant')).toEqual(results[0].id);
-            expect(results[0].className).toMatch(/is-active/);
+    it('hides the suggestions list when the input is not focused', () => {
+      type(query)
 
-            key('up', 'up');
+      expect($('ul[role="listbox"]')).toBeTruthy()
 
-            expect(input.getAttribute('aria-activedescendant')).toEqual(results[1].id);
-            expect(results[1].className).toMatch(/is-active/);
-        });
+      TestUtils.Simulate.blur($('input'))
 
-        it('hides the suggestions list when the escape key is pressed', () => {
-            type(query);
-            expect($('ul[role="listbox"]')).toBeTruthy();
+      expect($('ul[role="listbox"]')).toBeNull()
+    })
 
-            key('escape');
-            expect($('ul[role="listbox"]')).toBeNull();
-        });
+    it('filters suggestions to those that match', () => {
+      type(query)
 
-        it('does not allow selection of disabled options', () => {
-            createInstance({
-                suggestions: fixture.map((item) => Object.assign({}, item, { disabled: true }))
-            });
+      $$('li[role="option"]').forEach((option) => {
+        expect(option.textContent).toMatch(new RegExp(query, 'i'))
+      })
+    })
 
-            type(query);
+    it('marks the matching text', () => {
+      type(query)
 
-            $$('li[role="option"]').forEach((option) => {
-                expect(option.matches('[aria-disabled="true"]')).toBeTruthy();
-            })
+      $$('li[role="option"]').forEach((option) => {
+        expect(option.querySelector('mark')).toBeTruthy()
+        expect(option.querySelector('mark').textContent).toMatch(new RegExp('^' + query + '$', 'i'))
+      })
+    })
 
-            key('down', 'enter');
+    it('handles up/down keys and can wrap', () => {
+      type(query)
 
-            sinon.assert.notCalled(props.handleAddition);
-        });
+      const input = $('input')
+      const results = $$('li[role="option"]')
 
-        it('triggers addition when a suggestion is clicked', () => {
-            type(query), click($('li[role="option"]:nth-child(2)'));
+      key('down')
 
-            sinon.assert.calledOnce(props.handleAddition);
-            sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' });
-        });
+      expect(input.getAttribute('aria-activedescendant')).toEqual(results[0].id)
+      expect(results[0].className).toMatch(/is-active/)
 
-        it('triggers addition for the selected suggestion when a delimeter is pressed', () => {
-            key('enter');
+      key('down', 'down')
 
-            sinon.assert.notCalled(props.handleAddition);
+      expect(input.getAttribute('aria-activedescendant')).toEqual(results[2].id)
+      expect(results[2].className).toMatch(/is-active/)
 
-            type(query), key('down', 'down', 'enter');
+      key('down')
 
-            sinon.assert.calledOnce(props.handleAddition);
-            sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' });
-        });
+      expect(input.getAttribute('aria-activedescendant')).toEqual(results[0].id)
+      expect(results[0].className).toMatch(/is-active/)
 
-        it('triggers addition for an unselected, matching suggestion when a delimeter is pressed', () =>{
-            type('united kingdom'), key('enter');
-            sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' });
-        })
-    });
+      key('up', 'up')
 
-    describe('tags', () => {
-        beforeEach(() => {
-            createInstance({ tags: [ fixture[0], fixture[1] ] });
-        });
+      expect(input.getAttribute('aria-activedescendant')).toEqual(results[1].id)
+      expect(results[1].className).toMatch(/is-active/)
+    })
 
-        it('renders selected tags', () => {
-            expect($$('.ReactTags__tag').length).toEqual(instance.props.tags.length);
-        });
+    it('does not allow selection of disabled options', () => {
+      createInstance({
+        suggestions: fixture.map((item) => Object.assign({}, item, { disabled: true }))
+      })
 
-        it('triggers removal when a tag is clicked', () => {
-            click($('.ReactTags__tag'));
+      type(query)
 
-            sinon.assert.calledOnce(props.handleDelete);
-            sinon.assert.calledWith(props.handleDelete, sinon.match(0));
-        });
+      $$('li[role="option"]').forEach((option) => {
+        expect(option.matches('[aria-disabled="true"]')).toBeTruthy()
+      })
 
-        it('deletes the last selected tag when backspace is pressed', () => {
-            type(''), key('backspace');
+      key('down', 'enter')
 
-            sinon.assert.calledOnce(props.handleDelete);
-            sinon.assert.calledWith(props.handleDelete, sinon.match(instance.props.tags.length - 1));
-        });
-    });
+      sinon.assert.notCalled(props.handleAddition)
+    })
 
-    describe('sizer', () => {
-        beforeEach(() => {
-            createInstance();
-        });
+    it('triggers addition when a suggestion is clicked', () => {
+      type(query); click($('li[role="option"]:nth-child(2)'))
 
-        it('appends a sizer element', () => {
-            expect($('input + div[style]')).toBeTruthy();
-        });
+      sinon.assert.calledOnce(props.handleAddition)
+      sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+    })
 
-        it('removes the sizer from the layout', () => {
-            const result = Array.from($('input + div').style);
+    it('triggers addition for the selected suggestion when a delimeter is pressed', () => {
+      key('enter')
 
-            expect(result).toContain('position');
-            expect(result).toContain('visibility');
-        });
+      sinon.assert.notCalled(props.handleAddition)
 
-        it('copies styles from the input', () => {
-            const result = Array.from($('input + div').style);
+      type(query); key('down', 'down', 'enter')
 
-            expect(result).toContain('font-family');
-            expect(result).toContain('letter-spacing');
-        });
+      sinon.assert.calledOnce(props.handleAddition)
+      sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+    })
 
-        it('copies the input placeholder or value into the sizer', () => {
-            const input = $('input');
-            const sizer = $('input + div');
+    it('triggers addition for an unselected but matching suggestion when a delimeter is pressed', () => {
+      type('united kingdom'); key('enter')
+      sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+    })
 
-            expect(sizer.textContent).toEqual(input.placeholder);
+    it('clears the input when an addition is triggered', () => {
+      type(query); key('down', 'down', 'enter')
 
-            type('hello world');
+      const input = $('input')
 
-            expect(sizer.textContent).toEqual(input.value);
-        });
+      expect(input.value).toEqual('')
+      expect(document.activeElement).toEqual(input)
+    })
+  })
 
-        it('resizes input to match sizer width', () => {
-            const input = $('input');
-            const sizer = $('input + div');
+  describe('tags', () => {
+    beforeEach(() => {
+      createInstance({ tags: [fixture[0], fixture[1]] })
+    })
 
-            sizer.scrollWidth = 200;
+    it('renders selected tags', () => {
+      expect($$('.react-tags__selected-tag').length).toEqual(instance.props.tags.length)
+    })
 
-            type('hello world');
+    it('triggers removal when a tag is clicked', () => {
+      click($('.react-tags__selected-tag'))
 
-            expect(getComputedStyle(input).width).toEqual('202px');
-        });
-    });
+      sinon.assert.calledOnce(props.handleDelete)
+      sinon.assert.calledWith(props.handleDelete, sinon.match(0))
+    })
 
-});
+    it('deletes the last selected tag when backspace is pressed and query is empty', () => {
+      type(''); key('backspace')
+
+      sinon.assert.calledOnce(props.handleDelete)
+      sinon.assert.calledWith(props.handleDelete, sinon.match(instance.props.tags.length - 1))
+    })
+
+    it('does not delete the last selected tag when backspace is pressed and query is not empty', () => {
+      type('uni'); key('backspace')
+      sinon.assert.notCalled(props.handleDelete)
+    })
+  })
+
+  describe('sizer', () => {
+    beforeEach(() => {
+      createInstance()
+    })
+
+    it('appends a sizer element', () => {
+      expect($('input + div[style]')).toBeTruthy()
+    })
+
+    it('removes the sizer from the layout', () => {
+      const result = Array.from($('input + div').style)
+
+      expect(result).toContain('position')
+      expect(result).toContain('visibility')
+    })
+
+    it('copies styles from the input', () => {
+      const result = Array.from($('input + div').style)
+
+      expect(result).toContain('font-family')
+      expect(result).toContain('letter-spacing')
+    })
+
+    it('copies the input placeholder or value into the sizer', () => {
+      const input = $('input')
+      const sizer = $('input + div')
+
+      expect(sizer.textContent).toEqual(input.placeholder)
+
+      type('hello world')
+
+      expect(sizer.textContent).toEqual(input.value)
+    })
+
+    it('resizes input to match sizer width', () => {
+      const input = $('input')
+      const sizer = $('input + div')
+
+      sizer.scrollWidth = 200
+
+      type('hello world')
+
+      expect(window.getComputedStyle(input).width).toEqual('202px')
+    })
+  })
+})

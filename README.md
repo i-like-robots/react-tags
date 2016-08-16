@@ -1,4 +1,6 @@
-# React Tag Autocomplete ![Build status](https://api.travis-ci.org/i-like-robots/react-tags.svg?branch=master)
+# React Tag Autocomplete
+
+[![Build status](https://api.travis-ci.org/i-like-robots/react-tags.svg?branch=master)](https://travis-ci.org/i-like-robots/react-tags) [![Coverage Status](https://coveralls.io/repos/github/i-like-robots/react-tags/badge.svg?branch=master)](https://coveralls.io/github/i-like-robots/react-tags)
 
 React Tag Autocomplete is a simple tagging component ready to drop in your React projects. Originally based on the [React Tags project](http://prakhar.me/react-tags/example) by Prakhar Srivastav this version removes the drag-and-drop re-ordering functionality, adds appropriate roles and ARIA states and introduces a resizing text input.
 
@@ -20,52 +22,48 @@ Here's a sample implementation that initializes the component with a list of pre
 var ReactTags = require('react-tag-autocomplete');
 
 var App = React.createClass({
-    getInitialState: function() {
-        return {
-            tags: [
-                { id: 1, name: "Apples" },
-                { id: 2, name: "Pears" }
-            ],
-            suggestions: [
-                { id: 3, name: "Bananas" },
-                { id: 4, name: "Mangos" },
-                { id: 5, name: "Lemons" },
-                { id: 6, name: "Apricots" }
-            ]
-        }
-    },
-    handleDelete: function(i) {
-        var tags = this.state.tags;
-        tags.splice(i, 1);
-        this.setState({ tags: tags });
-    },
-    handleAddition: function(tag) {
-        var tags = this.state.tags;
-        tags.push({
-            id: tags.length + 1,
-            name: tag
-        });
-        this.setState({ tags: tags });
-    },
-    render: function() {
-        return (
-            <ReactTags
-                tags={this.state.tags}
-                suggestions={this.state.suggestions}
-                handleDelete={this.handleDelete}
-                handleAddition={this.handleAddition} />
-        )
+  getInitialState: function () {
+    return {
+      tags: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Pears" }
+      ],
+      suggestions: [
+        { id: 3, name: "Bananas" },
+        { id: 4, name: "Mangos" },
+        { id: 5, name: "Lemons" },
+        { id: 6, name: "Apricots" }
+      ]
     }
-});
+  },
+  handleDelete: function (i) {
+    var tags = this.state.tags
+    tags.splice(i, 1)
+    this.setState({ tags: tags })
+  },
+  handleAddition: function (tag) {
+    var tags = this.state.tags
+    tags.push(tag)
+    this.setState({ tags: tags })
+  },
+  render: function () {
+    return (
+      <ReactTags
+        tags={this.state.tags}
+        suggestions={this.state.suggestions}
+        handleDelete={this.handleDelete}
+        handleAddition={this.handleAddition} />
+    )
+  }
+})
 
-React.render(<App />, document.getElementById('app'));
+React.render(<App />, document.getElementById('app'))
 ```
 
 ### Options
 
 - [`tags`](#tagsOption)
 - [`suggestions`](#suggestionsOption)
-- [`delimiters`](#delimitersOption)
 - [`placeholder`](#placeholderOption)
 - [`autofocus`](#autofocusOption)
 - [`autoresize`](#autoresizeOption)
@@ -84,9 +82,9 @@ An array of tags that are displayed as pre-selected. Each tag must have an `id` 
 
 ```js
 var tags =  [
-    { id: 1, name: "Apples" },
-    { id: 2, name: "Pears" }
-];
+  { id: 1, name: "Apples" },
+  { id: 2, name: "Pears" }
+]
 ```
 
 <a name="suggestionsOption"></a>
@@ -96,17 +94,12 @@ An array of suggestions that are used as basis for showing suggestions. Each sug
 
 ```js
 var suggestions = [
-    { id: 3, name: "Bananas" },
-    { id: 4, name: "Mangos" },
-    { id: 5, name: "Lemons" },
-    { id: 6, name: "Apricots", disabled: true }
-];
+  { id: 3, name: "Bananas" },
+  { id: 4, name: "Mangos" },
+  { id: 5, name: "Lemons" },
+  { id: 6, name: "Apricots", disabled: true }
+]
 ```
-
-<a name="delimitersOption"></a>
-#### delimiters (optional)
-
-An array of keycodes which should terminate tags input. Default: `[13, 9]`.
 
 <a name="placeholderOption"></a>
 #### placeholder (optional)
@@ -140,14 +133,16 @@ Override the default class names. Defaults:
 
 ```js
 {
-    root: 'ReactTags',
-    tagInput: 'ReactTags__tagInput',
-    selected: 'ReactTags__selected',
-    tag: 'ReactTags__tag',
-    tagName: 'ReactTags__tagName',
-    suggestions: 'ReactTags__suggestions',
-    isActive: 'is-active',
-    isDisabled: 'is-disabled'
+  root: 'react-tags',
+  rootFocused: 'is-focused',
+  selected: 'react-tags__selected',
+  selectedTag: 'react-tags__selected-tag',
+  selectedTagName: 'react-tags__selected-tag-name',
+  search: 'react-tags__search',
+  searchInput: 'react-tags__search-input',
+  suggestions: 'react-tags__suggestions',
+  suggestionActive: 'is-active',
+  suggestionDisabled: 'is-disabled'
 }
 ```
 
@@ -157,9 +152,9 @@ Override the default class names. Defaults:
 Function called when the user wants to add a tag. Receives the tag.
 
 ```js
-function(tag) {
-    // Add the tag { id, name } to the tag list
-    tags.push(tag);
+function (tag) {
+  // Add the tag { id, name } to the tag list
+  tags.push(tag)
 }
 ```
 
@@ -169,9 +164,9 @@ function(tag) {
 Function called when the user wants to delete a tag. Receives the tag index.
 
 ```js
-function(i) {
-    // Delete the tag at index i
-    tags.splice(i, 1);
+function (i) {
+  // Delete the tag at index i
+  tags.splice(i, 1)
 }
 ```
 
@@ -181,16 +176,14 @@ function(i) {
 Optional event handler when the input changes. Receives the current input value.
 
 ```js
-function(input) {
-    if (this.state.busy) {
-        return;
-    } else {
-        this.setState({ busy: true });
+function (input) {
+  if (!this.state.busy) {
+    this.setState({ busy: true })
 
-        return fetch(`query=${input}`).then(function(result) {
-            this.setState({ busy: false });
-        });
-    }
+    return fetch(`query=${input}`).then(function (result) {
+      this.setState({ busy: false })
+    })
+  }
 }
 ```
 
@@ -211,3 +204,33 @@ The component is written in ES6 and uses [Webpack](http://webpack.github.io/) as
 npm install
 npm run dev # open http://localhost:8080
 ```
+
+### Upgrading from 4.x to 5.0
+
+1. The `delimiters` has been removed, any references to this will now be ignored.
+2. The `classNames` option has been updated:
+
+  ```udiff
+  {
+  -  root: 'ReactTags',
+  -  tagInput: 'ReactTags__tagInput',
+  -  selected: 'ReactTags__selected',
+  -  tag: 'ReactTags__tag',
+  -  tagName: 'ReactTags__tagName',
+  -  suggestions: 'ReactTags__suggestions',
+  -  isActive: 'is-active',
+  -  isDisabled: 'is-disabled'
+  +  root: 'react-tags',
+  +  rootFocused: 'is-focused',
+  +  selected: 'react-tags__selected',
+  +  selectedTag: 'react-tags__selected-tag',
+  +  selectedTagName: 'react-tags__selected-tag-name',
+  +  search: 'react-tags__search',
+  +  searchInput: 'react-tags__search-input',
+  +  suggestions: 'react-tags__suggestions',
+  +  suggestionActive: 'is-active',
+  +  suggestionDisabled: 'is-disabled'
+  }
+  ```
+
+For smaller changes refer to [the changelog](CHANGELOG.md).
