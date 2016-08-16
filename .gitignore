@@ -5,3 +5,4 @@ dist-es5
 dist-es6
 example/bundle.js
 example/bundle.js.map
+coverage
