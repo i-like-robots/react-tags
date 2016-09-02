@@ -192,6 +192,18 @@ describe('React Tags', () => {
       })
     })
 
+    it('can limit the number of suggestions', () => {
+      type('uni')
+
+      expect($$('li[role="option"]').length).toEqual(3)
+
+      createInstance({ maxSuggestionsLength: 1, suggestions: fixture })
+
+      type('uni')
+
+      expect($$('li[role="option"]').length).toEqual(1)
+    })
+
     it('marks the matching text', () => {
       type(query)
 
