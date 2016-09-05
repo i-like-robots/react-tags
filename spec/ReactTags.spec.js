@@ -192,6 +192,10 @@ describe('React Tags', () => {
       })
     })
 
+    it('escapes the query before matching', () => {
+      expect(() => { type(query + '\\') }).not.toThrow()
+    })
+
     it('can limit the number of suggestions', () => {
       type('uni')
 
