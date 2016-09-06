@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.0.2
+
+- Fixed unescaped queries throwing an exception when being converted to regexp
+
+## 5.0.1
+
+- Fixed `maxSuggestionsLength` not being passed to suggestions component
+
 ## 5.0.0
 
 - Removed `delimiters` option
