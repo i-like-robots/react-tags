@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.3
+
+- Fixed word boundary regex restricting suggestions to ascii characters
+
 ## 5.0.2
 
 - Fixed unescaped queries throwing an exception when being converted to regexp
