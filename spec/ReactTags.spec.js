@@ -192,6 +192,16 @@ describe('React Tags', () => {
       })
     })
 
+    it('can handle non-ascii characters', () => {
+      const cities = ['Закаменск', 'Заозёрный', 'Заозёрск', 'Западная Двина', 'Заполярный', 'Зарайск']
+
+      createInstance({ minQueryLength: 3, suggestions: cities.map((city, i) => ({ name: city, id: i })) })
+
+      type('Зап')
+
+      expect($$('li[role="option"]').length).toEqual(2)
+    })
+
     it('escapes the query before matching', () => {
       expect(() => { type(query + '\\') }).not.toThrow()
     })
