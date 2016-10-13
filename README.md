@@ -205,9 +205,9 @@ npm install
 npm run dev # open http://localhost:8080
 ```
 
-### Upgrading from 4.x to 5.0
+### Upgrading from 4.x to 5.x
 
-1. The `delimiters` has been removed, any references to this will now be ignored.
+1. The `delimiters` option has been removed, any references to this will now be ignored.
 2. The `classNames` option has been updated:
 
   ```udiff
