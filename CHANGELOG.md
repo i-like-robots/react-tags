@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.4
+
+- Fixed cursor focus being lost when clicking a suggestion
+
 ## 5.0.3
 
 - Fixed word boundary regex restricting suggestions to ascii characters
