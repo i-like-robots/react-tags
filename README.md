@@ -74,6 +74,7 @@ React.render(<App />, document.getElementById('app'))
 - [`handleDelete`](#handleDeleteOption)
 - [`handleInputChange`](#handleInputChange)
 - [`allowNew`](#allowNew)
+- [`tagComponent`](#tagComponent)
 
 <a name="tagsOption"></a>
 #### tags (optional)
@@ -191,6 +192,11 @@ function (input) {
 #### allowNew (optional)
 
 Allows users to add new (not suggested) tags. Default: `false`.
+
+<a name="tagComponent"></a>
+#### tagComponent (optional)
+
+Provide a custom tag component to render. Default: `null`.
 
 ### Styling
 
