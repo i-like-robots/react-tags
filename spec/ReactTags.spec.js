@@ -330,6 +330,19 @@ describe('React Tags', () => {
       type('uni'); key('backspace')
       sinon.assert.notCalled(props.handleDelete)
     })
+
+    it('can render a custom tag component when provided', () => {
+      const Tag = (props) => (
+        React.createElement('button', { className: 'custom-tag' }, props.tag.name)
+      )
+
+      createInstance({
+        tags: [fixture[0], fixture[1]],
+        tagComponent: Tag
+      })
+
+      expect($$('.custom-tag').length).toEqual(2)
+    })
   })
 
   describe('sizer', () => {
