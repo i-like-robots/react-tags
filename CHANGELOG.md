@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.1.0
+
+- Added `tagComponent` option to allow the rendering of a custom tag component
+
 ## 5.0.4
 
 - Fixed cursor focus being lost when clicking a suggestion
