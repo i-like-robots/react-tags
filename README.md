@@ -37,13 +37,12 @@ var App = React.createClass({
     }
   },
   handleDelete: function (i) {
-    var tags = this.state.tags
+    var tags = this.state.tags.slice(0)
     tags.splice(i, 1)
     this.setState({ tags: tags })
   },
   handleAddition: function (tag) {
-    var tags = this.state.tags
-    tags.push(tag)
+    var tags = this.state.tags.concat(tag)
     this.setState({ tags: tags })
   },
   render: function () {
