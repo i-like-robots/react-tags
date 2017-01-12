@@ -14,14 +14,13 @@ const App = React.createClass({
   },
 
   handleDelete (i) {
-    const tags = this.state.tags
+    const tags = this.state.tags.slice(0)
     tags.splice(i, 1)
     this.setState({ tags })
   },
 
   handleAddition (tag) {
-    const tags = this.state.tags
-    tags.push(tag)
+    const tags = this.state.tags.concat(tag)
     this.setState({ tags })
   },
 
