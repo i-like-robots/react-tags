@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.2.0
+
+- Add `allowBackspace` option to disable the ability to delete the selected tags when backspace is pressed while focussed on the text input
+
 ## 5.1.0
 
 - Added `tagComponent` option to allow the rendering of a custom tag component

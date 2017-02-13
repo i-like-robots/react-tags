@@ -192,6 +192,11 @@ function (input) {
 
 Allows users to add new (not suggested) tags. Default: `false`.
 
+<a name="allowBackspace"></a>
+#### allowBackspace (optional)
+
+Disables ability to delete the selected tags when backspace is pressed while focussed on the text input. Default: `true`.
+
 <a name="tagComponent"></a>
 #### tagComponent (optional)
 

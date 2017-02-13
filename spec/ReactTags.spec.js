@@ -331,6 +331,17 @@ describe('React Tags', () => {
       sinon.assert.notCalled(props.handleDelete)
     })
 
+    it('does not delete the last selected tag when allowBackspace option is false', () => {
+      createInstance({
+        tags: [fixture[0], fixture[1]],
+        allowBackspace: false
+      })
+
+      type(''); key('backspace')
+
+      sinon.assert.notCalled(props.handleDelete)
+    })
+
     it('can render a custom tag component when provided', () => {
       const Tag = (props) => (
         React.createElement('button', { className: 'custom-tag' }, props.tag.name)
@@ -383,11 +394,12 @@ describe('React Tags', () => {
       const input = $('input')
       const sizer = $('input + div')
 
-      sizer.scrollWidth = 200
-
       type('hello world')
 
-      expect(window.getComputedStyle(input).width).toEqual('202px')
+      // As of JSDom 9.10.0 scrollWidth is a getter only and always 0
+      // TODO: can we test this another way?
+      expect(input.style.width).toBeTruthy()
+      expect(window.getComputedStyle(input).width).toEqual(sizer.scrollWidth + 2 + 'px')
     })
   })
 
@@ -398,12 +410,11 @@ describe('React Tags', () => {
 
     it('does not assign a width to the input', () => {
       const input = $('input')
-      const sizer = $('input + div')
-
-      sizer.scrollWidth = 200
 
       type('hello world')
 
+      // As of JSDom 9.10.0 scrollWidth is a getter only and always 0
+      // TODO: can we test this another way?
       expect(input.style.width).toBeFalsy()
     })
   })
