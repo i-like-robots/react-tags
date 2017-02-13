@@ -331,6 +331,17 @@ describe('React Tags', () => {
       sinon.assert.notCalled(props.handleDelete)
     })
 
+    it('does not delete the last selected tag when allowBackspace option is false', () => {
+      createInstance({
+        tags: [fixture[0], fixture[1]],
+        allowBackspace: false
+      })
+
+      type(''); key('backspace')
+
+      sinon.assert.notCalled(props.handleDelete)
+    })
+
     it('can render a custom tag component when provided', () => {
       const Tag = (props) => (
         React.createElement('button', { className: 'custom-tag' }, props.tag.name)
