@@ -390,4 +390,21 @@ describe('React Tags', () => {
       expect(window.getComputedStyle(input).width).toEqual('202px')
     })
   })
+
+  describe('without autoresize', () => {
+    beforeEach(() => {
+      createInstance({ autoresize: false })
+    })
+
+    it('does not assign a width to the input', () => {
+      const input = $('input')
+      const sizer = $('input + div')
+
+      sizer.scrollWidth = 200
+
+      type('hello world')
+
+      expect(input.style.width).toBeFalsy()
+    })
+  })
 })
