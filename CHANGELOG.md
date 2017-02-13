@@ -3,6 +3,7 @@
 ## 5.2.0
 
 - Add `allowBackspace` option to disable the ability to delete the selected tags when backspace is pressed while focussed on the text input
+- Refactors `updateInputWidth` method to update when any props change ([@joekrill](https://github.com/joekrill))
 
 ## 5.1.0
 
