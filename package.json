@@ -39,8 +39,9 @@
   "license": "MIT",
   "repository": "https://github.com/i-like-robots/react-tags",
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0",
-    "react-dom": "^0.14.0 || ^15.0.0"
+    "prop-types": "^15.0.0",
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0"
   },
   "devDependencies": {
     "buble": "^0.12.5",
@@ -50,9 +51,10 @@
     "jasmine": "^2.4.1",
     "jsdom": "^9.4.1",
     "keycode": "^2.1.2",
-    "react": "^15.2.1",
-    "react-addons-test-utils": "^15.2.1",
-    "react-dom": "^15.2.1",
+    "prop-types": "^15.5.0",
+    "react": "^15.5.0",
+    "react-addons-test-utils": "^15.5.0",
+    "react-dom": "^15.5.0",
     "sinon": "^1.17.5",
     "standard": "^7.1.2",
     "webpack": "^1.9.4",
