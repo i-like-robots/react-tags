@@ -19,11 +19,14 @@ npm install --save react-tag-autocomplete
 Here's a sample implementation that initializes the component with a list of preselected `tags` and a `suggestions` list. For more details, go through the [API](#Options).
 
 ```js
-var ReactTags = require('react-tag-autocomplete');
+const React = require('react')
+const ReactTags = require('react-tag-autocomplete')
 
-var App = React.createClass({
-  getInitialState: function () {
-    return {
+class App extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
       tags: [
         { id: 1, name: "Apples" },
         { id: 2, name: "Pears" }
@@ -35,26 +38,29 @@ var App = React.createClass({
         { id: 6, name: "Apricots" }
       ]
     }
-  },
-  handleDelete: function (i) {
-    var tags = this.state.tags.slice(0)
+  }
+
+  handleDelete (i) {
+    const tags = this.state.tags.slice(0)
     tags.splice(i, 1)
-    this.setState({ tags: tags })
-  },
-  handleAddition: function (tag) {
-    var tags = this.state.tags.concat(tag)
-    this.setState({ tags: tags })
-  },
-  render: function () {
+    this.setState({ tags })
+  }
+
+  handleAddition (tag) {
+    const tags = [].concat(this.state.tags, tag)
+    this.setState({ tags })
+  }
+
+  render () {
     return (
       <ReactTags
         tags={this.state.tags}
         suggestions={this.state.suggestions}
-        handleDelete={this.handleDelete}
-        handleAddition={this.handleAddition} />
+        handleDelete={this.handleDelete.bind(this)}
+        handleAddition={this.handleAddition.bind(this)} />
     )
   }
-})
+}
 
 React.render(<App />, document.getElementById('app'))
 ```
@@ -81,7 +87,7 @@ React.render(<App />, document.getElementById('app'))
 An array of tags that are displayed as pre-selected. Each tag must have an `id` and a `name` property. Default: `[]`.
 
 ```js
-var tags =  [
+const tags =  [
   { id: 1, name: "Apples" },
   { id: 2, name: "Pears" }
 ]
@@ -93,7 +99,7 @@ var tags =  [
 An array of suggestions that are used as basis for showing suggestions. Each suggestion must have an `id` and a `name` property and an optional `disabled` property. Default: `[]`.
 
 ```js
-var suggestions = [
+const suggestions = [
   { id: 3, name: "Bananas" },
   { id: 4, name: "Mangos" },
   { id: 5, name: "Lemons" },
@@ -180,7 +186,7 @@ function (input) {
   if (!this.state.busy) {
     this.setState({ busy: true })
 
-    return fetch(`query=${input}`).then(function (result) {
+    return fetch(`query=${input}`).then((result) => {
       this.setState({ busy: false })
     })
   }
