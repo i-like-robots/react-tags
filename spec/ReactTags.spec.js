@@ -233,8 +233,6 @@ describe('React Tags', () => {
       const input = $('input')
       const results = $$('li[role="option"]')
 
-      key('down')
-
       expect(input.getAttribute('aria-activedescendant')).toEqual(results[0].id)
       expect(results[0].className).toMatch(/is-active/)
 
@@ -282,7 +280,7 @@ describe('React Tags', () => {
 
       sinon.assert.notCalled(props.handleAddition)
 
-      type(query); key('down', 'down', 'enter')
+      type(query); key('down', 'enter')
 
       sinon.assert.calledOnce(props.handleAddition)
       sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
