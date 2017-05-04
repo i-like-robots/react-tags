@@ -44,6 +44,7 @@
     "react-dom": "^15.0.0"
   },
   "devDependencies": {
+		"object-assign": "^4.1.1",
     "buble": "^0.12.5",
     "buble-loader": "^0.2.2",
     "coveralls": "^2.11.12",
