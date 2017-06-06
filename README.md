@@ -72,6 +72,7 @@ React.render(<App />, document.getElementById('app'))
 - [`placeholder`](#placeholderOption)
 - [`autofocus`](#autofocusOption)
 - [`autoresize`](#autoresizeOption)
+- [`delimiters`](#delimitersOption)
 - [`minQueryLength`](#minQueryLengthOption)
 - [`maxSuggestionsLength`](#maxSuggestionsLengthOption)
 - [`classNames`](#classNamesOption)
@@ -81,7 +82,7 @@ React.render(<App />, document.getElementById('app'))
 - [`allowNew`](#allowNew)
 - [`tagComponent`](#tagComponent)
 
-<a name="tagsOption"></a>
+<span id="tagsOption"></span>
 #### tags (optional)
 
 An array of tags that are displayed as pre-selected. Each tag must have an `id` and a `name` property. Default: `[]`.
@@ -93,7 +94,7 @@ const tags =  [
 ]
 ```
 
-<a name="suggestionsOption"></a>
+<span id="suggestionsOption"></span>
 #### suggestions (optional)
 
 An array of suggestions that are used as basis for showing suggestions. Each suggestion must have an `id` and a `name` property and an optional `disabled` property. Default: `[]`.
@@ -107,32 +108,37 @@ const suggestions = [
 ]
 ```
 
-<a name="placeholderOption"></a>
+<span id="placeholderOption"></span>
 #### placeholder (optional)
 
 The placeholder string shown for the input. Default: `'Add new tag'`.
 
-<a name="autofocusOption"></a>
+<span id="autofocusOption"></span>
 #### autofocus (optional)
 
 Boolean parameter to control whether the text-input should be autofocused on mount. Default: `true`.
 
-<a name="autoresizeOption"></a>
+<span id="autoresizeOption"></span>
 #### autoresize (optional)
 
 Boolean parameter to control whether the text-input should be automatically resized to fit its value. Default: `true`.
 
-<a name="minQueryLengthOption"></a>
+<span id="delimitersOption"></span>
+#### delimiters (optional)
+
+Array of integers matching keyboard event `keyCode` values. When a corresponding key is pressed, the preceding string is finalised as tag. Default: `['8','13']`.
+
+<span id="minQueryLengthOption"></span>
 #### minQueryLength (optional)
 
 How many characters are needed for suggestions to appear. Default: `2`.
 
-<a name="maxSuggestionsLengthOption"></a>
+<span id="maxSuggestionsLengthOption"></span>
 #### maxSuggestionsLength (optional)
 
 Maximum number of suggestions to display. Default: `6`.
 
-<a name="classNamesOption"></a>
+<span id="classNamesOption"></span>
 #### classNames (optional)
 
 Override the default class names. Defaults:
@@ -152,7 +158,7 @@ Override the default class names. Defaults:
 }
 ```
 
-<a name="handleAdditionOption"></a>
+<span id="handleAdditionOption"></span>
 #### handleAddition (required)
 
 Function called when the user wants to add a tag. Receives the tag.
@@ -164,7 +170,7 @@ function (tag) {
 }
 ```
 
-<a name="handleDeleteOption"></a>
+<span id="handleDeleteOption"></span>
 #### handleDelete (required)
 
 Function called when the user wants to delete a tag. Receives the tag index.
@@ -176,7 +182,7 @@ function (i) {
 }
 ```
 
-<a name="handleInputChange"></a>
+<span id="handleInputChange"></span>
 #### handleInputChange (optional)
 
 Optional event handler when the input changes. Receives the current input value.
@@ -193,17 +199,17 @@ function (input) {
 }
 ```
 
-<a name="allowNew"></a>
+<span id="allowNew"></span>
 #### allowNew (optional)
 
 Allows users to add new (not suggested) tags. Default: `false`.
 
-<a name="allowBackspace"></a>
+<span id="allowBackspace"></span>
 #### allowBackspace (optional)
 
 Disables ability to delete the selected tags when backspace is pressed while focussed on the text input. Default: `true`.
 
-<a name="tagComponent"></a>
+<span id="tagComponent"></span>
 #### tagComponent (optional)
 
 Provide a custom tag component to render. Default: `null`.
