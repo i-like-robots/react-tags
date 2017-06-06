@@ -67,22 +67,21 @@ React.render(<App />, document.getElementById('app'))
 
 ### Options
 
-- [`tags`](#tagsOption)
-- [`suggestions`](#suggestionsOption)
-- [`placeholder`](#placeholderOption)
-- [`autofocus`](#autofocusOption)
-- [`autoresize`](#autoresizeOption)
-- [`delimiters`](#delimitersOption)
-- [`minQueryLength`](#minQueryLengthOption)
-- [`maxSuggestionsLength`](#maxSuggestionsLengthOption)
-- [`classNames`](#classNamesOption)
-- [`handleAddition`](#handleAdditionOption)
-- [`handleDelete`](#handleDeleteOption)
-- [`handleInputChange`](#handleInputChange)
-- [`allowNew`](#allowNew)
-- [`tagComponent`](#tagComponent)
+- [`tags`](#tags-optional)
+- [`suggestions`](#suggestions-optional)
+- [`placeholder`](#placeholder-optional)
+- [`autofocus`](#autofocus-optional)
+- [`autoresize`](#autoresize-optional)
+- [`delimiters`](#delimiters-optional)
+- [`minQueryLength`](#minQueryLength-optional)
+- [`maxSuggestionsLength`](#maxSuggestionsLength-optional)
+- [`classNames`](#classNames-optional)
+- [`handleAddition`](#handleAddition-optional)
+- [`handleDelete`](#handleDelete-optional)
+- [`handleInputChange`](#handleinputchange-optional)
+- [`allowNew`](#allownew-optional)
+- [`tagComponent`](#tagComponent-optional)
 
-<span id="tagsOption"></span>
 #### tags (optional)
 
 An array of tags that are displayed as pre-selected. Each tag must have an `id` and a `name` property. Default: `[]`.
@@ -94,7 +93,6 @@ const tags =  [
 ]
 ```
 
-<span id="suggestionsOption"></span>
 #### suggestions (optional)
 
 An array of suggestions that are used as basis for showing suggestions. Each suggestion must have an `id` and a `name` property and an optional `disabled` property. Default: `[]`.
@@ -108,37 +106,30 @@ const suggestions = [
 ]
 ```
 
-<span id="placeholderOption"></span>
 #### placeholder (optional)
 
 The placeholder string shown for the input. Default: `'Add new tag'`.
 
-<span id="autofocusOption"></span>
 #### autofocus (optional)
 
 Boolean parameter to control whether the text-input should be autofocused on mount. Default: `true`.
 
-<span id="autoresizeOption"></span>
 #### autoresize (optional)
 
 Boolean parameter to control whether the text-input should be automatically resized to fit its value. Default: `true`.
 
-<span id="delimitersOption"></span>
 #### delimiters (optional)
 
 Array of integers matching keyboard event `keyCode` values. When a corresponding key is pressed, the preceding string is finalised as tag. Default: `['8','13']`.
 
-<span id="minQueryLengthOption"></span>
 #### minQueryLength (optional)
 
 How many characters are needed for suggestions to appear. Default: `2`.
 
-<span id="maxSuggestionsLengthOption"></span>
 #### maxSuggestionsLength (optional)
 
 Maximum number of suggestions to display. Default: `6`.
 
-<span id="classNamesOption"></span>
 #### classNames (optional)
 
 Override the default class names. Defaults:
@@ -158,7 +149,6 @@ Override the default class names. Defaults:
 }
 ```
 
-<span id="handleAdditionOption"></span>
 #### handleAddition (required)
 
 Function called when the user wants to add a tag. Receives the tag.
@@ -170,7 +160,6 @@ function (tag) {
 }
 ```
 
-<span id="handleDeleteOption"></span>
 #### handleDelete (required)
 
 Function called when the user wants to delete a tag. Receives the tag index.
@@ -182,7 +171,6 @@ function (i) {
 }
 ```
 
-<span id="handleInputChange"></span>
 #### handleInputChange (optional)
 
 Optional event handler when the input changes. Receives the current input value.
@@ -199,17 +187,14 @@ function (input) {
 }
 ```
 
-<span id="allowNew"></span>
 #### allowNew (optional)
 
 Allows users to add new (not suggested) tags. Default: `false`.
 
-<span id="allowBackspace"></span>
 #### allowBackspace (optional)
 
 Disables ability to delete the selected tags when backspace is pressed while focussed on the text input. Default: `true`.
 
-<span id="tagComponent"></span>
 #### tagComponent (optional)
 
 Provide a custom tag component to render. Default: `null`.
