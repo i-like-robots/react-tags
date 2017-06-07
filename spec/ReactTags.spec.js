@@ -73,39 +73,6 @@ describe('React Tags', () => {
     })
   })
 
-  describe('delimiter', () => {
-    const DelimiterPropType = require('../lib/DelimiterValidator')
-    const propName = 'delimiters'
-    const componentName = 'ReactTags.spec'
-
-    let props = {}
-
-    it('should not be a function', () => {
-      props[propName] = function () {}
-      expect(DelimiterPropType(props, propName, componentName)).toBeDefined()
-    })
-
-    it('should not be an object', () => {
-      props[propName] = {}
-      expect(DelimiterPropType(props, propName, componentName)).toBeDefined()
-    })
-
-    it('should be an array', () => {
-      props[propName] = [20]
-      expect(DelimiterPropType(props, propName, componentName)).toBeUndefined()
-    })
-
-    it('should not be an empty array', () => {
-      props[propName] = []
-      expect(DelimiterPropType(props, propName, componentName)).toBeDefined()
-    })
-
-    it('should be an array of keyCode integers', () => {
-      props[propName] = ['a']
-      expect(DelimiterPropType(props, propName, componentName)).toBeDefined()
-    })
-  })
-
   describe('input', () => {
     it('assigns the given placeholder', () => {
       createInstance({ placeholder: 'Please enter a tag' })
