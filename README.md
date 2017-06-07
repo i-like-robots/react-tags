@@ -120,7 +120,7 @@ Boolean parameter to control whether the text-input should be automatically resi
 
 #### delimiters (optional)
 
-Array of integers matching keyboard event `keyCode` values. When a corresponding key is pressed, the preceding string is finalised as tag. Default: `['8','13']`.
+Array of integers matching keyboard event `keyCode` values. When a corresponding key is pressed, the preceding string is finalised as tag. Default: `[8, 13]`.
 
 #### minQueryLength (optional)
 
