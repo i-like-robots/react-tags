@@ -33,7 +33,6 @@ class App extends React.Component {
     return (
       <div>
         <Tags
-          delimiters={'asdasd'}
           tags={this.state.tags}
           suggestions={this.state.suggestions}
           handleDelete={this.handleDelete.bind(this)}
