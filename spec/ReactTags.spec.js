@@ -73,6 +73,39 @@ describe('React Tags', () => {
     })
   })
 
+  describe('delimiter', () => {
+    const DelimiterPropType = require('../lib/DelimiterValidator')
+    const propName = 'delimiters'
+    const componentName = 'ReactTags.spec'
+
+    let props = {}
+
+    it('should not be a function', () => {
+      props[propName] = function () {}
+      expect(DelimiterPropType(props, propName, componentName)).toBeDefined()
+    })
+
+    it('should not be an object', () => {
+      props[propName] = {}
+      expect(DelimiterPropType(props, propName, componentName)).toBeDefined()
+    })
+
+    it('should be an array', () => {
+      props[propName] = [20]
+      expect(DelimiterPropType(props, propName, componentName)).toBeUndefined()
+    })
+
+    it('should not be an empty array', () => {
+      props[propName] = []
+      expect(DelimiterPropType(props, propName, componentName)).toBeDefined()
+    })
+
+    it('should be an array of keyCode integers', () => {
+      props[propName] = ['a']
+      expect(DelimiterPropType(props, propName, componentName)).toBeDefined()
+    })
+  })
+
   describe('input', () => {
     it('assigns the given placeholder', () => {
       createInstance({ placeholder: 'Please enter a tag' })
@@ -400,6 +433,22 @@ describe('React Tags', () => {
       // TODO: can we test this another way?
       expect(input.style.width).toBeTruthy()
       expect(window.getComputedStyle(input).width).toEqual(sizer.scrollWidth + 2 + 'px')
+    })
+  })
+
+  describe('without autoresize', () => {
+    beforeEach(() => {
+      createInstance({ autoresize: false })
+    })
+
+    it('does not assign a width to the input', () => {
+      const input = $('input')
+
+      type('hello world')
+
+      // As of JSDom 9.10.0 scrollWidth is a getter only and always 0
+      // TODO: can we test this another way?
+      expect(input.style.width).toBeFalsy()
     })
   })
 
