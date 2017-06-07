@@ -5,41 +5,44 @@ const ReactDom = require('react-dom')
 const Tags = require('../lib/ReactTags')
 const suggestions = require('./countries')
 
-const App = React.createClass({
-  getInitialState () {
-    return {
-      tags: [ { id: 184, name: 'Thailand' }, { id: 86, name: 'India' } ],
+class App extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      tags: [
+        { id: 184, name: 'Thailand' },
+        { id: 86, name: 'India' }
+      ],
       suggestions
     }
-  },
+  }
 
   handleDelete (i) {
     const tags = this.state.tags.slice(0)
     tags.splice(i, 1)
     this.setState({ tags })
-  },
+  }
 
   handleAddition (tag) {
-    const tags = this.state.tags.concat(tag)
+    const tags = [].concat(this.state.tags, tag)
     this.setState({ tags })
-  },
+  }
 
   render () {
-    const { tags, suggestions } = this.state
-
     return (
       <div>
         <Tags
-          tags={tags}
-          suggestions={suggestions}
-          handleDelete={this.handleDelete}
-          handleAddition={this.handleAddition} />
+          delimiters={'asdasd'}
+          tags={this.state.tags}
+          suggestions={this.state.suggestions}
+          handleDelete={this.handleDelete.bind(this)}
+          handleAddition={this.handleAddition.bind(this)} />
         <hr />
-        <pre><code>{JSON.stringify(tags, null, 2)}</code></pre>
+        <pre><code>{JSON.stringify(this.state.tags, null, 2)}</code></pre>
       </div>
     )
   }
-
-})
+}
 
 ReactDom.render(<App />, document.getElementById('app'))
