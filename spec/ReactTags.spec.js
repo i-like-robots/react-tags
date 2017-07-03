@@ -418,20 +418,4 @@ describe('React Tags', () => {
       expect(input.style.width).toBeFalsy()
     })
   })
-
-  describe('without autoresize', () => {
-    beforeEach(() => {
-      createInstance({ autoresize: false })
-    })
-
-    it('does not assign a width to the input', () => {
-      const input = $('input')
-
-      type('hello world')
-
-      // As of JSDom 9.10.0 scrollWidth is a getter only and always 0
-      // TODO: can we test this another way?
-      expect(input.style.width).toBeFalsy()
-    })
-  })
 })
