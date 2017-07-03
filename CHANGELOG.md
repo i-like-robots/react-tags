@@ -1,5 +1,18 @@
 # Changelog
 
+## 5.4.1
+
+- Fixed return key submitting containing form when `minQueryLength` is set to 0 and suggestions are active ([Drahoslav7](https://github.com/Drahoslav7))
+
+## 5.4.0
+
+- Added `delimiters` property to override keyboard codes for picking suggestions ([Pomax](https://github.com/Pomax))
+
+## 5.3.0
+
+- Updated component compatibility with React v15.5 which silences deprecation warnings
+- Refactored examples code away from `createClass` to ES6 syntax
+
 ## 5.2.0
 
 - Add `allowBackspace` option to disable the ability to delete the selected tags when backspace is pressed while focussed on the text input
