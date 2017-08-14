@@ -377,14 +377,63 @@ describe('React Tags', () => {
     })
 
     it('can receive tags through paste, respecting delimiters', () => {
-      createInstance({ allowNew: true, delimiterChars: [',', ';'] })
+      // The large range of delimiterChars in the test is to ensure
+      // they don't take on new meaning when used as part of a regex.
+      createInstance({
+        allowNew: true,
+        delimiterChars: ['^', ',', ';', '.', '\\', '['],
+        suggestions: [{ id: 1, name: 'foo' }]
+      })
+
+      paste($('input'), { clipboardData: {
+        types: ['text/plain', 'Text'],
+        getData: (type) => 'foo,bar;baz^fam\\bam[moo'
+      }})
+
+      sinon.assert.callCount(props.handleAddition, 6)
+    })
+
+    it('can receive tags through paste, ignoring new tags', () => {
+      createInstance({
+        allowNew: false,
+        delimiterChars: [','],
+        suggestions: [{ id: 1, name: 'foo' }]
+      })
+
+      paste($('input'), { clipboardData: {
+        types: ['text/plain', 'Text'],
+        getData: (type) => 'foo,bar'
+      }})
+
+      sinon.assert.callCount(props.handleAddition, 1)
+    })
+
+    it('accepts no paste, if there are not delimiterChars', () => {
+      createInstance({
+        allowNew: true,
+        delimiterChars: []
+      })
 
       paste($('input'), { clipboardData: {
         types: ['text/plain', 'Text'],
         getData: (type) => 'foo,bar;baz'
       }})
 
-      sinon.assert.calledThrice(props.handleAddition)
+      sinon.assert.callCount(props.handleAddition, 0)
+    })
+
+    it('adds no tags, if the pasted string is empty', () => {
+      createInstance({
+        allowNew: true,
+        delimiterChars: [',']
+      })
+
+      paste($('input'), { clipboardData: {
+        types: ['text/plain', 'Text'],
+        getData: (type) => ''
+      }})
+
+      sinon.assert.callCount(props.handleAddition, 0)
     })
   })
 
@@ -448,6 +497,25 @@ describe('React Tags', () => {
       // As of JSDom 9.10.0 scrollWidth is a getter only and always 0
       // TODO: can we test this another way?
       expect(input.style.width).toBeFalsy()
+    })
+  })
+
+  describe('event override', () => {
+    it('can receive tags through paste, respecting delimiters', () => {
+      createInstance({
+        allowNew: true,
+        delimiterChars: [','],
+        handlePaste: (e) => {
+          e.preventDefault()
+        }
+      })
+
+      paste($('input'), { clipboardData: {
+        types: ['text/plain', 'Text'],
+        getData: (type) => 'foo,bar;baz'
+      }})
+
+      sinon.assert.callCount(props.handleAddition, 0)
     })
   })
 })
