@@ -14,6 +14,10 @@ let props
 let instance
 
 function createInstance (data) {
+  if (instance) {
+    teardownInstance()
+  }
+
   const defaults = {
     tags: [],
     suggestions: [],
@@ -28,6 +32,7 @@ function createInstance (data) {
 
 function teardownInstance () {
   ReactDOM.unmountComponentAtNode(document.getElementById('app'))
+  instance = null
 }
 
 function $ (selector) {
@@ -39,13 +44,17 @@ function $$ (selector) {
 }
 
 function type (value) {
-  $('input').value = value
-  TestUtils.Simulate.change($('input'))
+  value.split('').forEach((char) => {
+    key(char)
+    $('input').value += char
+    // React calls onchange for every update to maintain state at all times
+    TestUtils.Simulate.change($('input'))
+  })
 }
 
 function key () {
   Array.from(arguments).forEach((value) => {
-    TestUtils.Simulate.keyDown($('input'), { value, keyCode: keycode(value) })
+    TestUtils.Simulate.keyDown($('input'), { value, keyCode: keycode(value), key: value })
   })
 }
 
@@ -131,7 +140,7 @@ describe('React Tags', () => {
     it('triggers the change callback', () => {
       type(query)
 
-      sinon.assert.calledOnce(props.handleInputChange)
+      sinon.assert.called(props.handleInputChange)
       sinon.assert.calledWith(props.handleInputChange, query)
     })
 
@@ -144,10 +153,18 @@ describe('React Tags', () => {
 
       createInstance({ allowNew: true })
 
-      key('enter')
+      type(query); key('enter')
 
       sinon.assert.calledOnce(props.handleAddition)
       sinon.assert.calledWith(props.handleAddition, { name: query })
+    })
+
+    it('can add new tags when a delimiter character is entered', () => {
+      createInstance({ allowNew: true, delimiterChars: [',', ';'] })
+
+      type('foo,bar;baz'); key('enter')
+
+      sinon.assert.calledThrice(props.handleAddition)
     })
   })
 
@@ -162,7 +179,7 @@ describe('React Tags', () => {
       type(query.slice(0, 2))
       expect($('ul[role="listbox"]')).toBeNull()
 
-      type(query.slice(0, 3))
+      type(query.slice(2, 3))
       expect($('ul[role="listbox"]')).toBeTruthy()
     })
 
@@ -277,7 +294,7 @@ describe('React Tags', () => {
       sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
     })
 
-    it('triggers addition for the selected suggestion when a delimeter is pressed', () => {
+    it('triggers addition for the selected suggestion when a delimiter is pressed', () => {
       key('enter')
 
       sinon.assert.notCalled(props.handleAddition)
@@ -288,7 +305,7 @@ describe('React Tags', () => {
       sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
     })
 
-    it('triggers addition for an unselected but matching suggestion when a delimeter is pressed', () => {
+    it('triggers addition for an unselected but matching suggestion when a delimiter is pressed', () => {
       type('united kingdom'); key('enter')
       sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
     })
