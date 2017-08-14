@@ -376,6 +376,14 @@ describe('React Tags', () => {
       expect($$('.custom-tag').length).toEqual(2)
     })
 
+    it('will throw an error if a delimiter is longer than one character', () => {
+      expect(() => createInstance({
+        allowNew: true,
+        delimiterChars: [',', ',X'],
+        suggestions: [{ id: 1, name: 'foo' }]
+      })).toThrow()
+    })
+
     it('can receive tags through paste, respecting delimiters', () => {
       // The large range of delimiterChars in the test is to ensure
       // they don't take on new meaning when used as part of a regex.
