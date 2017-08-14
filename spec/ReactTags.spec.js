@@ -64,6 +64,10 @@ function click (target) {
   TestUtils.Simulate.click(target)
 }
 
+function paste (target, eventData) {
+  TestUtils.Simulate.paste(target, eventData)
+}
+
 describe('React Tags', () => {
   afterEach(() => {
     teardownInstance()
@@ -370,6 +374,17 @@ describe('React Tags', () => {
       })
 
       expect($$('.custom-tag').length).toEqual(2)
+    })
+
+    it('can receive tags through paste, respecting delimiters', () => {
+      createInstance({ allowNew: true, delimiterChars: [',', ';'] })
+
+      paste($('input'), { clipboardData: {
+        types: ['text/plain', 'Text'],
+        getData: (type) => 'foo,bar;baz'
+      }})
+
+      sinon.assert.calledThrice(props.handleAddition)
     })
   })
 
