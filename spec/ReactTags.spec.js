@@ -376,29 +376,38 @@ describe('React Tags', () => {
       expect($$('.custom-tag').length).toEqual(2)
     })
 
-    it('will throw an error if a delimiter is longer than one character', () => {
-      expect(() => createInstance({
-        allowNew: true,
-        delimiterChars: [',', ',X'],
-        suggestions: [{ id: 1, name: 'foo' }]
-      })).toThrow()
-    })
-
-    it('can receive tags through paste, respecting delimiters', () => {
+    it('can receive tags through paste, respecting default delimiter chars', () => {
       // The large range of delimiterChars in the test is to ensure
       // they don't take on new meaning when used as part of a regex.
+      // Also ensure we accept multicharacter separators, in this scenario
+      createInstance({
+        allowNew: true
+      })
+
+      paste($('input'), { clipboardData: {
+        types: ['text/plain', 'Text'],
+        getData: (type) => 'foo\tbar\r\nbaz\rfam\nbam'
+      }})
+
+      sinon.assert.callCount(props.handleAddition, 5)
+    })
+
+    it('can receive tags through paste, respecting delimiter chars', () => {
+      // The large range of delimiterChars in the test is to ensure
+      // they don't take on new meaning when used as part of a regex.
+      // Also ensure we accept multicharacter separators, in this scenario
       createInstance({
         allowNew: true,
-        delimiterChars: ['^', ',', ';', '.', '\\', '['],
+        delimiterChars: ['^', ',', ';', '.', '\\', '[', ']X'],
         suggestions: [{ id: 1, name: 'foo' }]
       })
 
       paste($('input'), { clipboardData: {
         types: ['text/plain', 'Text'],
-        getData: (type) => 'foo,bar;baz^fam\\bam[moo'
+        getData: (type) => 'foo,bar;baz^fam\\bam[moo]Xark'
       }})
 
-      sinon.assert.callCount(props.handleAddition, 6)
+      sinon.assert.callCount(props.handleAddition, 7)
     })
 
     it('can receive tags through paste, ignoring new tags', () => {
