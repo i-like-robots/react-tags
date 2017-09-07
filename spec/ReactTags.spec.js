@@ -410,6 +410,23 @@ describe('React Tags', () => {
       sinon.assert.callCount(props.handleAddition, 7)
     })
 
+    it('ignores paste operation, if no delimiterChars are specified', () => {
+      // The large range of delimiterChars in the test is to ensure
+      // they don't take on new meaning when used as part of a regex.
+      // Also ensure we accept multicharacter separators, in this scenario
+      createInstance({
+        allowNew: true,
+        delimiterChars: []
+      })
+
+      paste($('input'), { clipboardData: {
+        types: ['text/plain', 'Text'],
+        getData: (type) => 'foo\tbar\r\nbaz\rfam\nbam'
+      }})
+
+      sinon.assert.callCount(props.handleAddition, 0)
+    })
+
     it('can receive tags through paste, ignoring new tags', () => {
       createInstance({
         allowNew: false,
