@@ -33,10 +33,13 @@ class App extends React.Component {
     return (
       <div>
         <Tags
+          delimiterChars={[',', ' ', '\t']}
           tags={this.state.tags}
           suggestions={this.state.suggestions}
           handleDelete={this.handleDelete.bind(this)}
-          handleAddition={this.handleAddition.bind(this)} />
+          handleAddition={this.handleAddition.bind(this)}
+          allowNew={true}
+          />
         <hr />
         <pre><code>{JSON.stringify(this.state.tags, null, 2)}</code></pre>
       </div>
