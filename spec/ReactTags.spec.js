@@ -64,6 +64,10 @@ function click (target) {
   TestUtils.Simulate.click(target)
 }
 
+function paste (target, eventData) {
+  TestUtils.Simulate.paste(target, eventData)
+}
+
 describe('React Tags', () => {
   afterEach(() => {
     teardownInstance()
@@ -371,6 +375,100 @@ describe('React Tags', () => {
 
       expect($$('.custom-tag').length).toEqual(2)
     })
+
+    it('can receive tags through paste, respecting default delimiter chars', () => {
+      // The large range of delimiterChars in the test is to ensure
+      // they don't take on new meaning when used as part of a regex.
+      // Also ensure we accept multicharacter separators, in this scenario
+      createInstance({
+        allowNew: true
+      })
+
+      paste($('input'), { clipboardData: {
+        types: ['text/plain', 'Text'],
+        getData: (type) => 'foo\tbar\r\nbaz\rfam\nbam'
+      }})
+
+      sinon.assert.callCount(props.handleAddition, 5)
+    })
+
+    it('can receive tags through paste, respecting delimiter chars', () => {
+      // The large range of delimiterChars in the test is to ensure
+      // they don't take on new meaning when used as part of a regex.
+      // Also ensure we accept multicharacter separators, in this scenario
+      createInstance({
+        allowNew: true,
+        delimiterChars: ['^', ',', ';', '.', '\\', '[', ']X'],
+        suggestions: [{ id: 1, name: 'foo' }]
+      })
+
+      paste($('input'), { clipboardData: {
+        types: ['text/plain', 'Text'],
+        getData: (type) => 'foo,bar;baz^fam\\bam[moo]Xark'
+      }})
+
+      sinon.assert.callCount(props.handleAddition, 7)
+    })
+
+    it('ignores paste operation, if no delimiterChars are specified', () => {
+      // The large range of delimiterChars in the test is to ensure
+      // they don't take on new meaning when used as part of a regex.
+      // Also ensure we accept multicharacter separators, in this scenario
+      createInstance({
+        allowNew: true,
+        delimiterChars: []
+      })
+
+      paste($('input'), { clipboardData: {
+        types: ['text/plain', 'Text'],
+        getData: (type) => 'foo\tbar\r\nbaz\rfam\nbam'
+      }})
+
+      sinon.assert.callCount(props.handleAddition, 0)
+    })
+
+    it('can receive tags through paste, ignoring new tags', () => {
+      createInstance({
+        allowNew: false,
+        delimiterChars: [','],
+        suggestions: [{ id: 1, name: 'foo' }]
+      })
+
+      paste($('input'), { clipboardData: {
+        types: ['text/plain', 'Text'],
+        getData: (type) => 'foo,bar'
+      }})
+
+      sinon.assert.callCount(props.handleAddition, 1)
+    })
+
+    it('accepts no paste, if there are not delimiterChars', () => {
+      createInstance({
+        allowNew: true,
+        delimiterChars: []
+      })
+
+      paste($('input'), { clipboardData: {
+        types: ['text/plain', 'Text'],
+        getData: (type) => 'foo,bar;baz'
+      }})
+
+      sinon.assert.callCount(props.handleAddition, 0)
+    })
+
+    it('adds no tags, if the pasted string is empty', () => {
+      createInstance({
+        allowNew: true,
+        delimiterChars: [',']
+      })
+
+      paste($('input'), { clipboardData: {
+        types: ['text/plain', 'Text'],
+        getData: (type) => ''
+      }})
+
+      sinon.assert.callCount(props.handleAddition, 0)
+    })
   })
 
   describe('sizer', () => {
@@ -433,6 +531,25 @@ describe('React Tags', () => {
       // As of JSDom 9.10.0 scrollWidth is a getter only and always 0
       // TODO: can we test this another way?
       expect(input.style.width).toBeFalsy()
+    })
+  })
+
+  describe('event override', () => {
+    it('can receive tags through paste, respecting delimiters', () => {
+      createInstance({
+        allowNew: true,
+        delimiterChars: [','],
+        handlePaste: (e) => {
+          e.preventDefault()
+        }
+      })
+
+      paste($('input'), { clipboardData: {
+        types: ['text/plain', 'Text'],
+        getData: (type) => 'foo,bar;baz'
+      }})
+
+      sinon.assert.callCount(props.handleAddition, 0)
     })
   })
 })

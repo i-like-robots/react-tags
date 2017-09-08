@@ -16,6 +16,13 @@ module.exports = {
   output: {
     filename: 'example/bundle.js'
   },
+  devServer: {
+    disableHostCheck: true,
+    // listen server to be accessed from another host
+    // useful for mobile testing
+    host: "0.0.0.0",
+    port: process.env.PORT || 8080
+  }
   // resolve: {
   //   alias: {
   //     'react': 'preact-compat',

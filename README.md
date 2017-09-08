@@ -125,7 +125,7 @@ Array of integers matching keyboard event `keyCode` values. When a corresponding
 
 #### delimiterChars (optional)
 
-Array of characters matching keyboard event `key` values. This is useful when needing to support a specific character irrespective of the keyboard layout. Note, that this list is separate from the one specified by the `delimiters` option, so you'll need to set the value there to `[]`, if you wish to disable those keys. Example usage: `delimiterChars={[',', ' ']}`. Default: `[]`
+Array of characters matching keyboard event `key` values. This is useful when needing to support a specific character irrespective of the keyboard layout. Note, that this list is separate from the one specified by the `delimiters` option, so you'll need to set the value there to `[]`, if you wish to disable those keys. Note, that specifying delimiters longer than one character is only supported for paste operations. Example usage: `delimiterChars={[',', ' ']}`. Default: `['\t', '\r\n', '\r', '\n']`
 
 #### minQueryLength (optional)
 
