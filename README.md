@@ -81,7 +81,7 @@ React.render(<App />, document.getElementById('app'))
 - [`handleDelete`](#handledelete-optional)
 - [`handleInputChange`](#handleinputchange-optional)
 - [`allowNew`](#allownew-optional)
-- [`tagComponent`](#tagc`omponent-optional)
+- [`tagComponent`](#tagcomponent-optional)
 
 #### tags (optional)
 
