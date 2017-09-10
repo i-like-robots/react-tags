@@ -73,7 +73,7 @@ React.render(<App />, document.getElementById('app'))
 - [`autofocus`](#autofocus-optional)
 - [`autoresize`](#autoresize-optional)
 - [`delimiters`](#delimiters-optional)
-- [`delimiterChars`](#delimitersChars-optional)
+- [`delimiterChars`](#delimiterChars-optional)
 - [`minQueryLength`](#minquerylength-optional)
 - [`maxSuggestionsLength`](#maxsuggestionslength-optional)
 - [`classNames`](#classnames-optional)
@@ -125,7 +125,7 @@ Array of integers matching keyboard event `keyCode` values. When a corresponding
 
 #### delimiterChars (optional)
 
-Array of characters matching keyboard event `key` values. This is useful when needing to support a specific character irrespective of the keyboard layout. Note, that this list is separate from the one specified by the `delimiters` option, so you'll need to set the value there to `[]`, if you wish to disable those keys. Example usage: `delimiterChars={[',', ' ']}`. Default: `[]`
+Array of characters matching keyboard event `key` values. This is useful when needing to support a specific character irrespective of the keyboard layout. Note, that this list is separate from the one specified by the `delimiters` option, so you'll need to set the value there to `[]`, if you wish to disable those keys. Any value supported by [KeyboardEvent.key](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key) is accepted. Example usage: `delimiterChars={[',', ' ', '\t', 'Tab']}`. Default: `[]`
 
 #### minQueryLength (optional)
 
