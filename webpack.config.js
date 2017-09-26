@@ -1,11 +1,12 @@
 const webpack = require('webpack')
 
-module.exports = {
+module.exports = [{
+  name: 'example',
   entry: './example/main.js',
   devtool: 'source-map',
   module: {
     loaders: [
-      { test: /\.js$/, loader: 'buble', exclude: /node_modules/ }
+      { test: /\.js$/, loader: 'buble-loader?objectAssign=Object.assign', exclude: /node_modules/ }
     ]
   },
   plugins: [
@@ -22,4 +23,4 @@ module.exports = {
   //     'react-dom': 'preact-compat'
   //   }
   // }
-}
+}]

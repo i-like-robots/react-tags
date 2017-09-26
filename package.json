@@ -9,10 +9,10 @@
     "test": "jasmine",
     "coverage": "istanbul cover -i 'dist-es5/**' jasmine",
     "lint": "standard lib/*.js spec/*.js",
-    "dev": "webpack-dev-server --progress --colors",
-    "build:example": "webpack -p",
-    "build:es5": "buble lib -o dist-es5",
-    "build:es6": "buble lib -o dist-es6 -t node:6",
+    "dev": "webpack-dev-server --progress --colors --port ${PORT:-8080} --host 0.0.0.0",
+    "build:example": "webpack -p --config-name example",
+    "build:es5": "buble lib --objectAssign -o dist-es5",
+    "build:es6": "buble lib --objectAssign -o dist-es6 -t node:6",
     "prepublish": "npm run build:es5 && npm run build:es6"
   },
   "files": [
@@ -44,8 +44,8 @@
     "react-dom": "^15.0.0"
   },
   "devDependencies": {
-    "buble": "^0.12.5",
-    "buble-loader": "^0.2.2",
+    "buble": "^0.16.0",
+    "buble-loader": "^0.4.1",
     "coveralls": "^2.11.12",
     "istanbul": "^0.4.4",
     "jasmine": "^2.4.1",
@@ -54,9 +54,9 @@
     "prop-types": "^15.5.0",
     "react": "^15.5.0",
     "react-dom": "^15.5.0",
-    "sinon": "^1.17.5",
-    "standard": "^7.1.2",
-    "webpack": "^1.9.4",
-    "webpack-dev-server": "^1.8.2"
+    "sinon": "^4.0.0",
+    "standard": "^10.0.3",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.8.2"
   }
 }
