@@ -53,7 +53,7 @@ function type (value) {
 }
 
 function paste (value) {
-  $('input').value = value;
+  $('input').value = value
   // React calls onchange following paste
   TestUtils.Simulate.change($('input'))
 }
@@ -179,21 +179,21 @@ describe('React Tags', () => {
       const input = $('input')
 
       paste('antarctica, spain')
-      
+
       sinon.assert.calledOnce(props.handleAddition)
-      sinon.assert.calledWith(props.handleAddition, [{ name: 'antarctica' }])    
-      
-      expect(input.value).toEqual('spain')      
+      sinon.assert.calledWith(props.handleAddition, [{ name: 'antarctica' }])
+
+      expect(input.value).toEqual('spain')
     })
-    
+
     it('adds value on paste, where values are delimiter terminated', () => {
       createInstance({ delimiterChars: [','], allowNew: true, handleAddition: props.handleAddition })
 
       paste('Algeria,Guinea Bissau,')
 
       sinon.assert.calledOnce(props.handleAddition)
-      sinon.assert.calledWith(props.handleAddition, [{ name: 'Algeria' }, { name: 'Guinea Bissau' }])    
-    })    
+      sinon.assert.calledWith(props.handleAddition, [{ name: 'Algeria' }, { name: 'Guinea Bissau' }])
+    })
   })
 
   describe('suggestions', () => {
@@ -356,9 +356,9 @@ describe('React Tags', () => {
     })
 
     it('checks to see if onchange accepts known tags, during paste', () => {
-      createInstance({ 
-        delimiterChars: [','], 
-        allowNew: false, 
+      createInstance({
+        delimiterChars: [','],
+        allowNew: false,
         handleAddition: props.handleAddition,
         suggestions: fixture
       })
@@ -367,13 +367,12 @@ describe('React Tags', () => {
 
       sinon.assert.calledOnce(props.handleAddition)
       sinon.assert.calledWith(props.handleAddition, [{ id: 184, name: 'Thailand' }])
-      
-    })   
+    })
 
     it('checks to see if onchange rejects unknown tags, during paste', () => {
-      createInstance({ 
-        delimiterChars: [','], 
-        allowNew: false, 
+      createInstance({
+        delimiterChars: [','],
+        allowNew: false,
         handleAddition: props.handleAddition,
         suggestions: fixture.map((item) => Object.assign({}, item, { disabled: true }))
       })
@@ -381,7 +380,7 @@ describe('React Tags', () => {
       paste('Algeria, abc,')
 
       sinon.assert.notCalled(props.handleAddition)
-    })    
+    })
   })
 
   describe('tags', () => {
