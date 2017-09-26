@@ -156,7 +156,7 @@ describe('React Tags', () => {
       type(query); key('enter')
 
       sinon.assert.calledOnce(props.handleAddition)
-      sinon.assert.calledWith(props.handleAddition, { name: query })
+      sinon.assert.calledWith(props.handleAddition, [{ name: query }])
     })
 
     it('can add new tags when a delimiter character is entered', () => {
@@ -291,7 +291,7 @@ describe('React Tags', () => {
       type(query); click($('li[role="option"]:nth-child(2)'))
 
       sinon.assert.calledOnce(props.handleAddition)
-      sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+      sinon.assert.calledWith(props.handleAddition, [{ id: 196, name: 'United Kingdom' }])
     })
 
     it('triggers addition for the selected suggestion when a delimiter is pressed', () => {
@@ -302,12 +302,12 @@ describe('React Tags', () => {
       type(query); key('down', 'down', 'enter')
 
       sinon.assert.calledOnce(props.handleAddition)
-      sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+      sinon.assert.calledWith(props.handleAddition, [{ id: 196, name: 'United Kingdom' }])
     })
 
     it('triggers addition for an unselected but matching suggestion when a delimiter is pressed', () => {
       type('united kingdom'); key('enter')
-      sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+      sinon.assert.calledWith(props.handleAddition, [{ id: 196, name: 'United Kingdom' }])
     })
 
     it('clears the input when an addition is triggered', () => {
