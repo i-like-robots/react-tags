@@ -73,7 +73,7 @@ React.render(<App />, document.getElementById('app'))
 - [`autofocus`](#autofocus-optional)
 - [`autoresize`](#autoresize-optional)
 - [`delimiters`](#delimiters-optional)
-- [`delimiterChars`](#delimitersChars-optional)
+- [`delimiterChars`](#delimiterChars-optional)
 - [`minQueryLength`](#minquerylength-optional)
 - [`maxSuggestionsLength`](#maxsuggestionslength-optional)
 - [`classNames`](#classnames-optional)
@@ -125,7 +125,7 @@ Array of integers matching keyboard event `keyCode` values. When a corresponding
 
 #### delimiterChars (optional)
 
-Array of characters matching characters that can be displayed in an input field. This is useful when needing to support a specific character irrespective of the keyboard layout, such as for internationalisation. Example usage: `delimiterChars={[',', ' ']}`. Default: `[',', ' ']`
+Array of characters matching characters that can be displayed in an input field. This is useful when needing to support a specific character irrespective of the keyboard layout, such as for internationalisation. Example usage: `delimiterChars={[',', ' ']}`. Default: `[',']`
 
 #### minQueryLength (optional)
 
