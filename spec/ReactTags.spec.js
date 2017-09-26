@@ -52,6 +52,12 @@ function type (value) {
   })
 }
 
+function paste (value) {
+  $('input').value = value;
+  // React calls onchange following paste
+  TestUtils.Simulate.change($('input'))
+}
+
 function key () {
   Array.from(arguments).forEach((value) => {
     TestUtils.Simulate.keyDown($('input'), { value, keyCode: keycode(value), key: value })
@@ -166,6 +172,28 @@ describe('React Tags', () => {
 
       sinon.assert.calledThrice(props.handleAddition)
     })
+
+    it('decriments maxTagIdx, when final character is not a separator', () => {
+      createInstance({ delimiterChars: [','], allowNew: true })
+
+      const input = $('input')
+
+      paste('antarctica, spain')
+      
+      sinon.assert.calledOnce(props.handleAddition)
+      sinon.assert.calledWith(props.handleAddition, [{ name: 'antarctica' }])    
+      
+      expect(input.value).toEqual('spain')      
+    })
+    
+    it('adds value on paste, where values are delimiter terminated', () => {
+      createInstance({ delimiterChars: [','], allowNew: true, handleAddition: props.handleAddition })
+
+      paste('Algeria,Guinea Bissau,')
+
+      sinon.assert.calledOnce(props.handleAddition)
+      sinon.assert.calledWith(props.handleAddition, [{ name: 'Algeria' }, { name: 'Guinea Bissau' }])    
+    })    
   })
 
   describe('suggestions', () => {
@@ -318,6 +346,42 @@ describe('React Tags', () => {
       expect(input.value).toEqual('')
       expect(document.activeElement).toEqual(input)
     })
+
+    it('does nothing for onchange if there are no delimiterChars', () => {
+      createInstance({ delimiterChars: [] })
+
+      type('united kingdom,')
+
+      sinon.assert.notCalled(props.handleAddition)
+    })
+
+    it('checks to see if onchange accepts known tags, during paste', () => {
+      createInstance({ 
+        delimiterChars: [','], 
+        allowNew: false, 
+        handleAddition: props.handleAddition,
+        suggestions: fixture
+      })
+
+      paste('Thailand,')
+
+      sinon.assert.calledOnce(props.handleAddition)
+      sinon.assert.calledWith(props.handleAddition, [{ id: 184, name: 'Thailand' }])
+      
+    })   
+
+    it('checks to see if onchange rejects unknown tags, during paste', () => {
+      createInstance({ 
+        delimiterChars: [','], 
+        allowNew: false, 
+        handleAddition: props.handleAddition,
+        suggestions: fixture.map((item) => Object.assign({}, item, { disabled: true }))
+      })
+
+      paste('Algeria, abc,')
+
+      sinon.assert.notCalled(props.handleAddition)
+    })    
   })
 
   describe('tags', () => {
