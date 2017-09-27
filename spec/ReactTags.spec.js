@@ -194,6 +194,54 @@ describe('React Tags', () => {
       sinon.assert.calledOnce(props.handleAddition)
       sinon.assert.calledWith(props.handleAddition, [{ name: 'Algeria' }, { name: 'Guinea Bissau' }])
     })
+
+    it('does not process final tag on paste, if unrecognised tag', () => {
+      createInstance({ delimiterChars: [','], allowNew: false, suggestions: fixture })
+
+      paste('Thailand,Indonesia')
+
+      expect($('input').value).toEqual('Indonesia')
+    })
+
+    it('does not process final tag on paste, if unrecognised tag (white-space test)', () => {
+      createInstance({ delimiterChars: [','], allowNew: false, suggestions: fixture })
+
+      paste('Thailand, Algeria, Indonesia')
+
+      expect($('input').value).toEqual('Indonesia')
+    })
+
+    it('does not process final text on paste, if final text is not delimiter terminated', () => {
+      createInstance({ delimiterChars: [','], allowNew: false, suggestions: fixture })
+
+      paste('Thailand,Algeria')
+
+      expect($('input').value).toEqual('Algeria')
+    })
+
+    it('checks the trailing delimiter is removed on paste, when tag unrecognised', () => {
+      createInstance({ delimiterChars: [','], allowNew: false, suggestions: fixture })
+
+      paste('United Arab Emirates, Mars,')
+
+      expect($('input').value).toEqual('United Arab Emirates, Mars')
+    })
+
+    it('checks the trailing delimiter is removed on typing, when tag unrecognised', () => {
+      createInstance({ delimiterChars: [','], allowNew: false, suggestions: fixture })
+
+      type('Mars,')
+
+      expect($('input').value).toEqual('Mars')
+    })
+
+    it('checks last character not removed on paste, if not a delimiter', () => {
+      createInstance({ delimiterChars: [','], allowNew: false, suggestions: fixture })
+
+      paste('xxx, Thailand')
+
+      expect($('input').value).toEqual('xxx, Thailand')
+    })
   })
 
   describe('suggestions', () => {
