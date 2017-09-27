@@ -54,7 +54,7 @@
     "prop-types": "^15.5.0",
     "react": "^15.5.0",
     "react-dom": "^15.5.0",
-    "sinon": "^1.17.5",
+    "sinon": "^4.0.0",
     "standard": "^7.1.2",
     "webpack": "^1.9.4",
     "webpack-dev-server": "^1.8.2"

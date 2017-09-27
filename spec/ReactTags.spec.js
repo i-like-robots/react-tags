@@ -52,6 +52,12 @@ function type (value) {
   })
 }
 
+function paste (value) {
+  $('input').value = value
+  // React calls onchange following paste
+  TestUtils.Simulate.change($('input'))
+}
+
 function key () {
   Array.from(arguments).forEach((value) => {
     TestUtils.Simulate.keyDown($('input'), { value, keyCode: keycode(value), key: value })
@@ -156,7 +162,7 @@ describe('React Tags', () => {
       type(query); key('enter')
 
       sinon.assert.calledOnce(props.handleAddition)
-      sinon.assert.calledWith(props.handleAddition, { name: query })
+      sinon.assert.calledWith(props.handleAddition, [{ name: query }])
     })
 
     it('can add new tags when a delimiter character is entered', () => {
@@ -165,6 +171,76 @@ describe('React Tags', () => {
       type('foo,bar;baz'); key('enter')
 
       sinon.assert.calledThrice(props.handleAddition)
+    })
+
+    it('decriments maxTagIdx, when final character is not a separator', () => {
+      createInstance({ delimiterChars: [','], allowNew: true })
+
+      const input = $('input')
+
+      paste('antarctica, spain')
+
+      sinon.assert.calledOnce(props.handleAddition)
+      sinon.assert.calledWith(props.handleAddition, [{ name: 'antarctica' }])
+
+      expect(input.value).toEqual('spain')
+    })
+
+    it('adds value on paste, where values are delimiter terminated', () => {
+      createInstance({ delimiterChars: [','], allowNew: true, handleAddition: props.handleAddition })
+
+      paste('Algeria,Guinea Bissau,')
+
+      sinon.assert.calledOnce(props.handleAddition)
+      sinon.assert.calledWith(props.handleAddition, [{ name: 'Algeria' }, { name: 'Guinea Bissau' }])
+    })
+
+    it('does not process final tag on paste, if unrecognised tag', () => {
+      createInstance({ delimiterChars: [','], allowNew: false, suggestions: fixture })
+
+      paste('Thailand,Indonesia')
+
+      expect($('input').value).toEqual('Indonesia')
+    })
+
+    it('does not process final tag on paste, if unrecognised tag (white-space test)', () => {
+      createInstance({ delimiterChars: [','], allowNew: false, suggestions: fixture })
+
+      paste('Thailand, Algeria, Indonesia')
+
+      expect($('input').value).toEqual('Indonesia')
+    })
+
+    it('does not process final text on paste, if final text is not delimiter terminated', () => {
+      createInstance({ delimiterChars: [','], allowNew: false, suggestions: fixture })
+
+      paste('Thailand,Algeria')
+
+      expect($('input').value).toEqual('Algeria')
+    })
+
+    it('checks the trailing delimiter is removed on paste, when tag unrecognised', () => {
+      createInstance({ delimiterChars: [','], allowNew: false, suggestions: fixture })
+
+      paste('United Arab Emirates, Mars,')
+
+      expect($('input').value).toEqual('United Arab Emirates, Mars')
+    })
+
+    it('checks the trailing delimiter is removed on typing, when tag unrecognised', () => {
+      createInstance({ delimiterChars: [','], allowNew: false, suggestions: fixture })
+
+      type('Mars,')
+
+      expect($('input').value).toEqual('Mars')
+    })
+
+    it('checks last character not removed on paste, if not a delimiter', () => {
+      createInstance({ delimiterChars: [','], allowNew: false, suggestions: fixture })
+
+      paste('xxx, Thailand')
+
+      expect($('input').value).toEqual('xxx, Thailand')
     })
   })
 
@@ -291,7 +367,7 @@ describe('React Tags', () => {
       type(query); click($('li[role="option"]:nth-child(2)'))
 
       sinon.assert.calledOnce(props.handleAddition)
-      sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+      sinon.assert.calledWith(props.handleAddition, [{ id: 196, name: 'United Kingdom' }])
     })
 
     it('triggers addition for the selected suggestion when a delimiter is pressed', () => {
@@ -302,12 +378,12 @@ describe('React Tags', () => {
       type(query); key('down', 'down', 'enter')
 
       sinon.assert.calledOnce(props.handleAddition)
-      sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+      sinon.assert.calledWith(props.handleAddition, [{ id: 196, name: 'United Kingdom' }])
     })
 
     it('triggers addition for an unselected but matching suggestion when a delimiter is pressed', () => {
       type('united kingdom'); key('enter')
-      sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+      sinon.assert.calledWith(props.handleAddition, [{ id: 196, name: 'United Kingdom' }])
     })
 
     it('clears the input when an addition is triggered', () => {
@@ -317,6 +393,41 @@ describe('React Tags', () => {
 
       expect(input.value).toEqual('')
       expect(document.activeElement).toEqual(input)
+    })
+
+    it('does nothing for onchange if there are no delimiterChars', () => {
+      createInstance({ delimiterChars: [] })
+
+      type('united kingdom,')
+
+      sinon.assert.notCalled(props.handleAddition)
+    })
+
+    it('checks to see if onchange accepts known tags, during paste', () => {
+      createInstance({
+        delimiterChars: [','],
+        allowNew: false,
+        handleAddition: props.handleAddition,
+        suggestions: fixture
+      })
+
+      paste('Thailand,')
+
+      sinon.assert.calledOnce(props.handleAddition)
+      sinon.assert.calledWith(props.handleAddition, [{ id: 184, name: 'Thailand' }])
+    })
+
+    it('checks to see if onchange rejects unknown tags, during paste', () => {
+      createInstance({
+        delimiterChars: [','],
+        allowNew: false,
+        handleAddition: props.handleAddition,
+        suggestions: fixture.map((item) => Object.assign({}, item, { disabled: true }))
+      })
+
+      paste('Algeria, abc,')
+
+      sinon.assert.notCalled(props.handleAddition)
     })
   })
 

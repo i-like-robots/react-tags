@@ -73,7 +73,7 @@ React.render(<App />, document.getElementById('app'))
 - [`autofocus`](#autofocus-optional)
 - [`autoresize`](#autoresize-optional)
 - [`delimiters`](#delimiters-optional)
-- [`delimiterChars`](#delimitersChars-optional)
+- [`delimiterChars`](#delimiterChars-optional)
 - [`minQueryLength`](#minquerylength-optional)
 - [`maxSuggestionsLength`](#maxsuggestionslength-optional)
 - [`classNames`](#classnames-optional)
@@ -121,11 +121,11 @@ Boolean parameter to control whether the text-input should be automatically resi
 
 #### delimiters (optional)
 
-Array of integers matching keyboard event `keyCode` values. When a corresponding key is pressed, the preceding string is finalised as tag. Default: `[9, 13]` (Tab and return keys).
+Array of integers matching keyboard event `keyCode` values. When a corresponding key is pressed, the preceding string is finalised as tag. Best used for non-printable keys, such as the tab and enter/return keys. Default: `[9, 13]` (Tab and return keys).
 
 #### delimiterChars (optional)
 
-Array of characters matching keyboard event `key` values. This is useful when needing to support a specific character irrespective of the keyboard layout. Note, that this list is separate from the one specified by the `delimiters` option, so you'll need to set the value there to `[]`, if you wish to disable those keys. Example usage: `delimiterChars={[',', ' ']}`. Default: `[]`
+Array of characters matching characters that can be displayed in an input field. This is useful when needing to support a specific character irrespective of the keyboard layout, such as for internationalisation. Example usage: `delimiterChars={[',', ' ']}`. Default: `[',']`
 
 #### minQueryLength (optional)
 
@@ -156,7 +156,7 @@ Override the default class names. Defaults:
 
 #### handleAddition (required)
 
-Function called when the user wants to add a tag. Receives the tag.
+Function called when the user wants to add one or more tags. Receives the tag or tags. Value can be a tag or an Array of tags.
 
 ```js
 function (tag) {
