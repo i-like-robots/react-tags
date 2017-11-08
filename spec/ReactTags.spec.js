@@ -123,6 +123,11 @@ describe('React Tags', () => {
       TestUtils.Simulate.blur($('input'))
       expect($('.is-focused')).toBeNull()
     })
+
+    it('assigns the given maxInputLength', () => {
+      createInstance({ maxInputLength: 5 })
+      expect($('input').getAttribute('maxlength')).toEqual('5')
+    })
   })
 
   describe('query', () => {
@@ -370,6 +375,18 @@ describe('React Tags', () => {
       })
 
       expect($$('.custom-tag').length).toEqual(2)
+    })
+
+    it('renders selected tags with custom remove tag title', () => {
+      createInstance({
+        tags: [fixture[0], fixture[1]],
+        removeTagTitle: 'Custom remove tag title'
+      })
+
+      const tags = $$('.react-tags__selected-tag')
+
+      expect(tags[0].getAttribute('title')).toEqual('Custom remove tag title')
+      expect(tags[1].getAttribute('title')).toEqual('Custom remove tag title')
     })
   })
 

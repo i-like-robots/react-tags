@@ -75,12 +75,14 @@ React.render(<App />, document.getElementById('app'))
 - [`delimiters`](#delimiters-optional)
 - [`delimiterChars`](#delimitersChars-optional)
 - [`minQueryLength`](#minquerylength-optional)
+- [`maxInputLength`](#maxinputlength-optional)
 - [`maxSuggestionsLength`](#maxsuggestionslength-optional)
 - [`classNames`](#classnames-optional)
 - [`handleAddition`](#handleaddition-optional)
 - [`handleDelete`](#handledelete-optional)
 - [`handleInputChange`](#handleinputchange-optional)
 - [`allowNew`](#allownew-optional)
+- [`removeTagTitle`](#removetagtitle-optional)
 - [`tagComponent`](#tagcomponent-optional)
 
 #### tags (optional)
@@ -130,6 +132,10 @@ Array of characters matching keyboard event `key` values. This is useful when ne
 #### minQueryLength (optional)
 
 How many characters are needed for suggestions to appear. Default: `2`.
+
+#### maxInputLength (optional)
+
+The maxlength attribute for the input. Default: `-1` (unlimited number of characters).
 
 #### maxSuggestionsLength (optional)
 
@@ -199,6 +205,10 @@ Allows users to add new (not suggested) tags. Default: `false`.
 #### allowBackspace (optional)
 
 Disables ability to delete the selected tags when backspace is pressed while focussed on the text input. Default: `true`.
+
+#### removeTagTitle (optional)
+
+The string for the remove tag title. Default: `Click to remove tag`.
 
 #### tagComponent (optional)
 
