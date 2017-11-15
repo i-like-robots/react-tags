@@ -31,10 +31,12 @@
     "autosuggest",
     "autocomplete"
   ],
+  "author": "Matt Hinchliffe",
   "contributors": [
     "Prakhar Srivastav",
-    "Matt Hinchliffe",
-    "Simon Hötten"
+    "Simon Hötten",
+    "Andre-John Mas",
+    "Mike Kamermans"
   ],
   "license": "MIT",
   "repository": "https://github.com/i-like-robots/react-tags",
