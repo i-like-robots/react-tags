@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-  - "4"
   - "6"
+  - "8"
 after_success:
   - cat coverage/lcov.info | coveralls
 script:

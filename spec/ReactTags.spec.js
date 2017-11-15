@@ -13,7 +13,7 @@ const Subject = require('../dist-es5/ReactTags')
 let props
 let instance
 
-function createInstance (data) {
+function createInstance (data = {}) {
   if (instance) {
     teardownInstance()
   }
@@ -21,13 +21,19 @@ function createInstance (data) {
   const defaults = {
     tags: [],
     suggestions: [],
+    handleBlur: sinon.stub(),
+    handleFocus: sinon.stub(),
     handleDelete: sinon.stub(),
     handleAddition: sinon.stub(),
     handleInputChange: sinon.stub()
   }
 
-  props = Object.assign(defaults, data || {})
-  instance = ReactDOM.render(React.createElement(Subject, props), document.getElementById('app'))
+  props = Object.assign(defaults, data)
+
+  instance = ReactDOM.render(
+    React.createElement(Subject, props),
+    document.getElementById('app')
+  )
 }
 
 function teardownInstance () {
@@ -48,7 +54,7 @@ function type (value) {
     key(char)
     $('input').value += char
     // React calls onchange for every update to maintain state at all times
-    TestUtils.Simulate.change($('input'))
+    TestUtils.Simulate.input($('input'))
   })
 }
 
@@ -122,6 +128,16 @@ describe('React Tags', () => {
 
       TestUtils.Simulate.blur($('input'))
       expect($('.is-focused')).toBeNull()
+    })
+
+    it('calls focus and blur callbacks when provided', () => {
+      createInstance({ autofocus: false })
+
+      TestUtils.Simulate.focus($('input'))
+      sinon.assert.calledOnce(props.handleFocus)
+
+      TestUtils.Simulate.blur($('input'))
+      sinon.assert.calledOnce(props.handleBlur)
     })
   })
 

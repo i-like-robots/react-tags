@@ -4,8 +4,15 @@ module.exports = {
   entry: './example/main.js',
   devtool: 'source-map',
   module: {
-    loaders: [
-      { test: /\.js$/, loader: 'buble', exclude: /node_modules/ }
+    rules: [
+      {
+        test: /\.jsx?$/,
+        loader: 'buble-loader',
+        exclude: /node_modules/,
+        options: {
+          objectAssign: 'Object.assign'
+        }
+      }
     ]
   },
   plugins: [
