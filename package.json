@@ -46,9 +46,9 @@
     "react-dom": "^15.0.0"
   },
   "devDependencies": {
-    "buble": "^0.16.0",
+    "buble": "^0.17.0",
     "buble-loader": "^0.4.1",
-    "coveralls": "^2.11.12",
+    "coveralls": "^3.0.0",
     "istanbul": "^0.4.4",
     "jasmine": "^2.4.1",
     "jsdom": "^9.4.1",
