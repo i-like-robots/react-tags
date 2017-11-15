@@ -6,11 +6,9 @@
 
 const jsdom = require('jsdom')
 
-global.document = jsdom.jsdom('<html><body><div id="app"></div></body></html>', {})
-global.window = document.defaultView
+const { window } = new jsdom.JSDOM('<html><body><div id="app"></div></body></html>', {})
 
-// Add fetch polyfill
-window.fetch = global.fetch
+global.window = window
 
 // from mocha-jsdom https://github.com/rstacruz/mocha-jsdom/blob/master/index.js#L80
 for (const key in window) {
