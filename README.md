@@ -80,6 +80,8 @@ React.render(<App />, document.getElementById('app'))
 - [`handleAddition`](#handleaddition-optional)
 - [`handleDelete`](#handledelete-optional)
 - [`handleInputChange`](#handleinputchange-optional)
+- [`handleFocus`](#handlefocus-optional)
+- [`handleBlur`](#handleblur-optional)
 - [`allowNew`](#allownew-optional)
 - [`tagComponent`](#tagcomponent-optional)
 
@@ -191,6 +193,14 @@ function (input) {
   }
 }
 ```
+
+#### handleFocus (optional)
+
+Optional event handler when the input receives focus. Receives no arguments.
+
+#### handleBlur (optional)
+
+Optional event handler when focus on the input is lost. Receives no arguments.
 
 #### allowNew (optional)
 
