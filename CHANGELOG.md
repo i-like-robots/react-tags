@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.5.0
+
+- Refactored input into a controlled component (also fixes Preact compatibility)
+- Refactored focus and blur handlers to capture events (also fixes Preact compatibility)
+- Added `handleFocus` and `handleBlur` callbacks ([Pomax](https://github.com/Pomax))
+- Updated dependencies ([ajmas](https://github.com/ajmas))
+
 ## 5.4.1
 
 - Fixed return key submitting containing form when `minQueryLength` is set to 0 and suggestions are active ([Drahoslav7](https://github.com/Drahoslav7))
