@@ -24,7 +24,7 @@ function createInstance (data = {}) {
     handleFocus: sinon.stub(),
     handleDelete: sinon.stub(),
     handleAddition: sinon.stub(),
-    handleInputChange: sinon.stub()
+    handleInput: sinon.stub()
   }
 
   props = Object.assign(defaults, data)
@@ -147,8 +147,8 @@ describe('React Tags', () => {
     it('triggers the change callback', () => {
       type(query)
 
-      sinon.assert.called(props.handleInputChange)
-      sinon.assert.calledWith(props.handleInputChange, query)
+      sinon.assert.called(props.handleInput)
+      sinon.assert.calledWith(props.handleInput, query)
     })
 
     it('can allow new, non-suggested tags to be added', () => {
@@ -437,7 +437,6 @@ describe('React Tags', () => {
 
       type('hello world')
 
-      // As of JSDom 9.10.0 scrollWidth is a getter only and always 0
       // TODO: can we test this another way?
       expect(input.style.width).toBeFalsy()
     })

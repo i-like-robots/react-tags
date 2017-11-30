@@ -77,7 +77,7 @@ React.render(<App />, document.getElementById('app'))
 - [`classNames`](#classnames-optional)
 - [`handleAddition`](#handleaddition-optional)
 - [`handleDelete`](#handledelete-optional)
-- [`handleInputChange`](#handleinputchange-optional)
+- [`handleInput`](#handleinput-optional)
 - [`handleFocus`](#handlefocus-optional)
 - [`handleBlur`](#handleblur-optional)
 - [`allowNew`](#allownew-optional)
@@ -168,7 +168,7 @@ function (i) {
 }
 ```
 
-#### handleInputChange (optional)
+#### handleInput (optional)
 
 Optional event handler when the input changes. Receives the current input value.
 
