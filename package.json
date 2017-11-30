@@ -41,7 +41,7 @@
   "license": "MIT",
   "repository": "https://github.com/i-like-robots/react-tags",
   "peerDependencies": {
-    "prop-types": "^16.0.0",
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },
@@ -52,8 +52,9 @@
     "istanbul": "^0.4.4",
     "jasmine": "^2.4.1",
     "jsdom": "^11.3.0",
-    "react": "^15.5.0",
-    "react-dom": "^15.5.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "sinon": "^4.0.0",
     "standard": "^10.0.3",
     "webpack": "^3.6.0",
