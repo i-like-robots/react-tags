@@ -70,7 +70,6 @@ React.render(<App />, document.getElementById('app'))
 - [`tags`](#tags-optional)
 - [`suggestions`](#suggestions-optional)
 - [`placeholder`](#placeholder-optional)
-- [`autofocus`](#autofocus-optional)
 - [`autoresize`](#autoresize-optional)
 - [`delimiters`](#delimiters-optional)
 - [`delimiterChars`](#delimitersChars-optional)
@@ -112,10 +111,6 @@ const suggestions = [
 #### placeholder (optional)
 
 The placeholder string shown for the input. Default: `'Add new tag'`.
-
-#### autofocus (optional)
-
-Boolean parameter to control whether the text-input should be autofocused on mount. Default: `true`.
 
 #### autoresize (optional)
 

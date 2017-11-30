@@ -50,6 +50,8 @@ function $$ (selector) {
 }
 
 function type (value) {
+  $('input').focus()
+
   value.split('').forEach((char) => {
     key(char)
     $('input').value += char
@@ -94,16 +96,6 @@ describe('React Tags', () => {
       expect($('input').placeholder).toEqual('Please enter a tag')
     })
 
-    it('autofocuses on the input', () => {
-      createInstance({ autofocus: true })
-      expect(document.activeElement).toEqual($('input'))
-    })
-
-    it('does not autofocus on the input', () => {
-      createInstance({ autofocus: false })
-      expect(document.activeElement).not.toEqual($('input'))
-    })
-
     it('updates state when suggestions list is expanded', () => {
       createInstance()
 
@@ -131,7 +123,7 @@ describe('React Tags', () => {
     })
 
     it('calls focus and blur callbacks when provided', () => {
-      createInstance({ autofocus: false })
+      createInstance()
 
       TestUtils.Simulate.focus($('input'))
       sinon.assert.calledOnce(props.handleFocus)
