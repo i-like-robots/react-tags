@@ -167,7 +167,7 @@ describe('React Tags', () => {
     })
 
     it('can add new tags when a delimiter character is entered', () => {
-      createInstance({ allowNew: true, delimiterChars: [',', ';'] })
+      createInstance({ allowNew: true, delimiters: ['Enter', ',', ';'] })
 
       type('foo,bar;baz'); key('Enter')
 
