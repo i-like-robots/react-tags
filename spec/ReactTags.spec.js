@@ -5,7 +5,6 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
 const TestUtils = require('react-dom/test-utils')
-const keycode = require('keycode')
 const sinon = require('sinon')
 const fixture = require('../example/countries')
 const Subject = require('../dist-es5/ReactTags')
@@ -62,7 +61,7 @@ function type (value) {
 
 function key () {
   Array.from(arguments).forEach((value) => {
-    TestUtils.Simulate.keyDown($('input'), { value, keyCode: keycode(value), key: value })
+    TestUtils.Simulate.keyDown($('input'), { value, key: value })
   })
 }
 
@@ -155,13 +154,13 @@ describe('React Tags', () => {
     it('can allow new, non-suggested tags to be added', () => {
       createInstance({ allowNew: false })
 
-      type(query); key('enter')
+      type(query); key('Enter')
 
       sinon.assert.notCalled(props.handleAddition)
 
       createInstance({ allowNew: true })
 
-      type(query); key('enter')
+      type(query); key('Enter')
 
       sinon.assert.calledOnce(props.handleAddition)
       sinon.assert.calledWith(props.handleAddition, { name: query })
@@ -170,7 +169,7 @@ describe('React Tags', () => {
     it('can add new tags when a delimiter character is entered', () => {
       createInstance({ allowNew: true, delimiterChars: [',', ';'] })
 
-      type('foo,bar;baz'); key('enter')
+      type('foo,bar;baz'); key('Enter')
 
       sinon.assert.calledThrice(props.handleAddition)
     })
@@ -258,22 +257,22 @@ describe('React Tags', () => {
       const input = $('input')
       const results = $$('li[role="option"]')
 
-      key('down')
+      key('ArrowDown')
 
       expect(input.getAttribute('aria-activedescendant')).toEqual(results[0].id)
       expect(results[0].className).toMatch(/is-active/)
 
-      key('down', 'down')
+      key('ArrowDown', 'ArrowDown')
 
       expect(input.getAttribute('aria-activedescendant')).toEqual(results[2].id)
       expect(results[2].className).toMatch(/is-active/)
 
-      key('down')
+      key('ArrowDown')
 
       expect(input.getAttribute('aria-activedescendant')).toEqual(results[0].id)
       expect(results[0].className).toMatch(/is-active/)
 
-      key('up', 'up')
+      key('ArrowUp', 'ArrowUp')
 
       expect(input.getAttribute('aria-activedescendant')).toEqual(results[1].id)
       expect(results[1].className).toMatch(/is-active/)
@@ -290,7 +289,7 @@ describe('React Tags', () => {
         expect(option.matches('[aria-disabled="true"]')).toBeTruthy()
       })
 
-      key('down', 'enter')
+      key('ArrowDown', 'Enter')
 
       sinon.assert.notCalled(props.handleAddition)
     })
@@ -303,23 +302,23 @@ describe('React Tags', () => {
     })
 
     it('triggers addition for the selected suggestion when a delimiter is pressed', () => {
-      key('enter')
+      key('Enter')
 
       sinon.assert.notCalled(props.handleAddition)
 
-      type(query); key('down', 'down', 'enter')
+      type(query); key('ArrowDown', 'ArrowDown', 'Enter')
 
       sinon.assert.calledOnce(props.handleAddition)
       sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
     })
 
     it('triggers addition for an unselected but matching suggestion when a delimiter is pressed', () => {
-      type('united kingdom'); key('enter')
+      type('united kingdom'); key('Enter')
       sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
     })
 
     it('clears the input when an addition is triggered', () => {
-      type(query); key('down', 'down', 'enter')
+      type(query); key('ArrowDown', 'ArrowDown', 'Enter')
 
       const input = $('input')
 
@@ -345,14 +344,14 @@ describe('React Tags', () => {
     })
 
     it('deletes the last selected tag when backspace is pressed and query is empty', () => {
-      type(''); key('backspace')
+      type(''); key('Backspace')
 
       sinon.assert.calledOnce(props.handleDelete)
       sinon.assert.calledWith(props.handleDelete, sinon.match(instance.props.tags.length - 1))
     })
 
     it('does not delete the last selected tag when backspace is pressed and query is not empty', () => {
-      type('uni'); key('backspace')
+      type('uni'); key('Backspace')
       sinon.assert.notCalled(props.handleDelete)
     })
 
@@ -362,7 +361,7 @@ describe('React Tags', () => {
         allowBackspace: false
       })
 
-      type(''); key('backspace')
+      type(''); key('Backspace')
 
       sinon.assert.notCalled(props.handleDelete)
     })
