@@ -20,11 +20,11 @@ function createInstance (data = {}) {
   const defaults = {
     tags: [],
     suggestions: [],
-    handleBlur: sinon.stub(),
-    handleFocus: sinon.stub(),
-    handleDelete: sinon.stub(),
-    handleAddition: sinon.stub(),
-    handleInput: sinon.stub()
+    onBlur: sinon.stub(),
+    onFocus: sinon.stub(),
+    onDelete: sinon.stub(),
+    onAddition: sinon.stub(),
+    onInput: sinon.stub()
   }
 
   props = Object.assign(defaults, data)
@@ -125,10 +125,10 @@ describe('React Tags', () => {
       createInstance()
 
       TestUtils.Simulate.focus($('input'))
-      sinon.assert.calledOnce(props.handleFocus)
+      sinon.assert.calledOnce(props.onFocus)
 
       TestUtils.Simulate.blur($('input'))
-      sinon.assert.calledOnce(props.handleBlur)
+      sinon.assert.calledOnce(props.onBlur)
     })
   })
 
@@ -147,8 +147,8 @@ describe('React Tags', () => {
     it('triggers the change callback', () => {
       type(query)
 
-      sinon.assert.called(props.handleInput)
-      sinon.assert.calledWith(props.handleInput, query)
+      sinon.assert.called(props.onInput)
+      sinon.assert.calledWith(props.onInput, query)
     })
 
     it('can allow new, non-suggested tags to be added', () => {
@@ -156,14 +156,14 @@ describe('React Tags', () => {
 
       type(query); key('Enter')
 
-      sinon.assert.notCalled(props.handleAddition)
+      sinon.assert.notCalled(props.onAddition)
 
       createInstance({ allowNew: true })
 
       type(query); key('Enter')
 
-      sinon.assert.calledOnce(props.handleAddition)
-      sinon.assert.calledWith(props.handleAddition, { name: query })
+      sinon.assert.calledOnce(props.onAddition)
+      sinon.assert.calledWith(props.onAddition, { name: query })
     })
 
     it('can add new tags when a delimiter character is entered', () => {
@@ -171,7 +171,7 @@ describe('React Tags', () => {
 
       type('foo,bar;baz'); key('Enter')
 
-      sinon.assert.calledThrice(props.handleAddition)
+      sinon.assert.calledThrice(props.onAddition)
     })
   })
 
@@ -291,30 +291,30 @@ describe('React Tags', () => {
 
       key('ArrowDown', 'Enter')
 
-      sinon.assert.notCalled(props.handleAddition)
+      sinon.assert.notCalled(props.onAddition)
     })
 
     it('triggers addition when a suggestion is clicked', () => {
       type(query); click($('li[role="option"]:nth-child(2)'))
 
-      sinon.assert.calledOnce(props.handleAddition)
-      sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+      sinon.assert.calledOnce(props.onAddition)
+      sinon.assert.calledWith(props.onAddition, { id: 196, name: 'United Kingdom' })
     })
 
     it('triggers addition for the selected suggestion when a delimiter is pressed', () => {
       key('Enter')
 
-      sinon.assert.notCalled(props.handleAddition)
+      sinon.assert.notCalled(props.onAddition)
 
       type(query); key('ArrowDown', 'ArrowDown', 'Enter')
 
-      sinon.assert.calledOnce(props.handleAddition)
-      sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+      sinon.assert.calledOnce(props.onAddition)
+      sinon.assert.calledWith(props.onAddition, { id: 196, name: 'United Kingdom' })
     })
 
     it('triggers addition for an unselected but matching suggestion when a delimiter is pressed', () => {
       type('united kingdom'); key('Enter')
-      sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+      sinon.assert.calledWith(props.onAddition, { id: 196, name: 'United Kingdom' })
     })
 
     it('clears the input when an addition is triggered', () => {
@@ -339,20 +339,20 @@ describe('React Tags', () => {
     it('triggers removal when a tag is clicked', () => {
       click($('.react-tags__selected-tag'))
 
-      sinon.assert.calledOnce(props.handleDelete)
-      sinon.assert.calledWith(props.handleDelete, sinon.match(0))
+      sinon.assert.calledOnce(props.onDelete)
+      sinon.assert.calledWith(props.onDelete, sinon.match(0))
     })
 
     it('deletes the last selected tag when backspace is pressed and query is empty', () => {
       type(''); key('Backspace')
 
-      sinon.assert.calledOnce(props.handleDelete)
-      sinon.assert.calledWith(props.handleDelete, sinon.match(instance.props.tags.length - 1))
+      sinon.assert.calledOnce(props.onDelete)
+      sinon.assert.calledWith(props.onDelete, sinon.match(instance.props.tags.length - 1))
     })
 
     it('does not delete the last selected tag when backspace is pressed and query is not empty', () => {
       type('uni'); key('Backspace')
-      sinon.assert.notCalled(props.handleDelete)
+      sinon.assert.notCalled(props.onDelete)
     })
 
     it('does not delete the last selected tag when allowBackspace option is false', () => {
@@ -363,7 +363,7 @@ describe('React Tags', () => {
 
       type(''); key('Backspace')
 
-      sinon.assert.notCalled(props.handleDelete)
+      sinon.assert.notCalled(props.onDelete)
     })
 
     it('can render a custom tag component when provided', () => {

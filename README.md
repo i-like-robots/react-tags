@@ -40,13 +40,13 @@ class App extends React.Component {
     }
   }
 
-  handleDelete (i) {
+  onDelete (i) {
     const tags = this.state.tags.slice(0)
     tags.splice(i, 1)
     this.setState({ tags })
   }
 
-  handleAddition (tag) {
+  onAddition (tag) {
     const tags = [].concat(this.state.tags, tag)
     this.setState({ tags })
   }
@@ -56,8 +56,8 @@ class App extends React.Component {
       <ReactTags
         tags={this.state.tags}
         suggestions={this.state.suggestions}
-        handleDelete={this.handleDelete.bind(this)}
-        handleAddition={this.handleAddition.bind(this)} />
+        onDelete={this.onDelete.bind(this)}
+        onAddition={this.onAddition.bind(this)} />
     )
   }
 }
@@ -75,11 +75,11 @@ React.render(<App />, document.getElementById('app'))
 - [`minQueryLength`](#minquerylength-optional)
 - [`maxSuggestionsLength`](#maxsuggestionslength-optional)
 - [`classNames`](#classnames-optional)
-- [`handleAddition`](#handleaddition-optional)
-- [`handleDelete`](#handledelete-optional)
-- [`handleInput`](#handleinput-optional)
-- [`handleFocus`](#handlefocus-optional)
-- [`handleBlur`](#handleblur-optional)
+- [`onAddition`](#onaddition-optional)
+- [`onDelete`](#ondelete-optional)
+- [`onInput`](#oninput-optional)
+- [`onFocus`](#onfocus-optional)
+- [`onBlur`](#onblur-optional)
 - [`allowNew`](#allownew-optional)
 - [`tagComponent`](#tagcomponent-optional)
 
@@ -146,34 +146,34 @@ Override the default class names. Defaults:
 }
 ```
 
-#### handleAddition (required)
+#### onAddition (required)
 
 Function called when the user wants to add a tag. Receives the tag.
 
 ```js
-function (tag) {
+function onAddition (tag) {
   // Add the tag { id, name } to the tag list
   tags.push(tag)
 }
 ```
 
-#### handleDelete (required)
+#### onDelete (required)
 
 Function called when the user wants to delete a tag. Receives the tag index.
 
 ```js
-function (i) {
+function onDelete (i) {
   // Delete the tag at index i
   tags.splice(i, 1)
 }
 ```
 
-#### handleInput (optional)
+#### onInput (optional)
 
 Optional event handler when the input changes. Receives the current input value.
 
 ```js
-function (input) {
+function onInput (input) {
   if (!this.state.busy) {
     this.setState({ busy: true })
 
@@ -184,11 +184,11 @@ function (input) {
 }
 ```
 
-#### handleFocus (optional)
+#### onFocus (optional)
 
 Optional event handler when the input receives focus. Receives no arguments.
 
-#### handleBlur (optional)
+#### onBlur (optional)
 
 Optional event handler when focus on the input is lost. Receives no arguments.
 

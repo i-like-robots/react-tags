@@ -18,13 +18,13 @@ class App extends React.Component {
     }
   }
 
-  handleDelete (i) {
+  onDelete (i) {
     const tags = this.state.tags.slice(0)
     tags.splice(i, 1)
     this.setState({ tags })
   }
 
-  handleAddition (tag) {
+  onAddition (tag) {
     const tags = [].concat(this.state.tags, tag)
     this.setState({ tags })
   }
@@ -35,8 +35,8 @@ class App extends React.Component {
         <Tags
           tags={this.state.tags}
           suggestions={this.state.suggestions}
-          handleDelete={this.handleDelete.bind(this)}
-          handleAddition={this.handleAddition.bind(this)} />
+          onDelete={this.onDelete.bind(this)}
+          onAddition={this.onAddition.bind(this)} />
         <hr />
         <pre><code>{JSON.stringify(this.state.tags, null, 2)}</code></pre>
       </div>
