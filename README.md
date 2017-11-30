@@ -118,7 +118,7 @@ Boolean parameter to control whether the text-input should be automatically resi
 
 #### delimiters (optional)
 
-Array of integers matching keyboard event `keyCode` values. When a corresponding key is pressed, the preceding string is finalised as tag. Default: `[9, 13]` (Tab and return keys).
+Array of keys matching keyboard event `key` values. When a corresponding key is pressed, the preceding string is finalised as tag. Default: `['Enter', 'Tab']`.
 
 #### delimiterChars (optional)
 
