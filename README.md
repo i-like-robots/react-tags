@@ -72,7 +72,6 @@ React.render(<App />, document.getElementById('app'))
 - [`placeholder`](#placeholder-optional)
 - [`autoresize`](#autoresize-optional)
 - [`delimiters`](#delimiters-optional)
-- [`delimiterChars`](#delimitersChars-optional)
 - [`minQueryLength`](#minquerylength-optional)
 - [`maxSuggestionsLength`](#maxsuggestionslength-optional)
 - [`classNames`](#classnames-optional)
@@ -119,10 +118,6 @@ Boolean parameter to control whether the text-input should be automatically resi
 #### delimiters (optional)
 
 Array of keys matching keyboard event `key` values. When a corresponding key is pressed, the preceding string is finalised as tag. Default: `['Enter', 'Tab']`.
-
-#### delimiterChars (optional)
-
-Array of characters matching keyboard event `key` values. This is useful when needing to support a specific character irrespective of the keyboard layout. Note, that this list is separate from the one specified by the `delimiters` option, so you'll need to set the value there to `[]`, if you wish to disable those keys. Example usage: `delimiterChars={[',', ' ']}`. Default: `[]`
 
 #### minQueryLength (optional)
 
