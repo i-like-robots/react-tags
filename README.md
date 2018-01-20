@@ -81,6 +81,7 @@ React.render(<App />, document.getElementById('app'))
 - [`onFocus`](#onfocus-optional)
 - [`onBlur`](#onblur-optional)
 - [`allowNew`](#allownew-optional)
+- [`allowBackspace`](#allowbackspace-optional)
 - [`tagComponent`](#tagcomponent-optional)
 
 #### tags (optional)
