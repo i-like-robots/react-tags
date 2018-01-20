@@ -20,6 +20,7 @@ Here's a sample implementation that initializes the component with a list of pre
 
 ```js
 const React = require('react')
+const ReactDOM = require('react-dom')
 const ReactTags = require('react-tag-autocomplete')
 
 class App extends React.Component {
@@ -62,7 +63,7 @@ class App extends React.Component {
   }
 }
 
-React.render(<App />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'))
 ```
 
 ### Options
