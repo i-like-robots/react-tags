@@ -3,17 +3,16 @@
   "version": "5.4.1",
   "description": "React Tag Autocomplete is a simple tagging component ready to drop in your React projects.",
   "main": "dist-es5/ReactTags.js",
-  "jsnext:main": "dist-es6/ReactTags.js",
+  "module": "dist-es6/ReactTags.js",
   "scripts": {
-    "pretest": "npm run lint && npm run build:es5",
+    "pretest": "npm run lint && npm run build:dist",
     "test": "jasmine",
     "coverage": "istanbul cover -i 'dist-es5/**' jasmine",
     "lint": "standard lib/*.js spec/*.js",
     "dev": "webpack-dev-server --progress --colors --port ${PORT:-8080} --host 0.0.0.0",
     "build:example": "webpack -p --config-name example",
-    "build:es5": "buble lib --objectAssign -o dist-es5",
-    "build:es6": "buble lib --objectAssign -o dist-es6 -t node:6",
-    "prepublish": "npm run build:es5 && npm run build:es6"
+    "build:dist": "rollup -c rollup.config.js",
+    "prepublish": "npm run build:dist"
   },
   "files": [
     "lib",
@@ -46,7 +45,7 @@
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
-    "buble": "^0.17.0",
+    "buble": "^0.18.0",
     "buble-loader": "^0.4.1",
     "coveralls": "^3.0.0",
     "istanbul": "^0.4.4",
@@ -55,6 +54,8 @@
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "rollup": "^0.54.1",
+    "rollup-plugin-buble": "^0.18.0",
     "sinon": "^4.0.0",
     "standard": "^10.0.3",
     "webpack": "^3.6.0",

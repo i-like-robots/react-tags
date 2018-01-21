@@ -1,9 +1,7 @@
-'use strict'
-
-const React = require('react')
-const ReactDom = require('react-dom')
-const Tags = require('../lib/ReactTags')
-const suggestions = require('./countries')
+import React from 'react'
+import ReactDom from 'react-dom'
+import Tags from '../lib/ReactTags'
+import suggestions from './countries'
 
 class App extends React.Component {
   constructor (props) {
