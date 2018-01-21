@@ -177,8 +177,8 @@ function onInput (input) {
   if (!this.state.busy) {
     this.setState({ busy: true })
 
-    return fetch(`query=${input}`).then((result) => {
-      this.setState({ busy: false })
+    return fetch(`autocomplete?query=${input}`).then((result) => {
+      this.setState({ busy: false, suggestions: result })
     })
   }
 }
@@ -210,7 +210,7 @@ It is possible to customize the look of the component the way you want it. An ex
 
 ### Development
 
-The component is written in ES6 and uses [Webpack](http://webpack.github.io/) as its build tool.
+The component is written in [TypeScript](https://www.typescriptlang.org/) and uses [Webpack](http://webpack.github.io/) as its build tool.
 
 ```
 npm install

@@ -2,7 +2,7 @@
 
 const React = require('react')
 const ReactDom = require('react-dom')
-const Tags = require('../lib/ReactTags')
+const Tags = require('../src/ReactTags')
 const suggestions = require('./countries')
 
 class App extends React.Component {
