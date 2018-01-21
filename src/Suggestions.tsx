@@ -1,26 +1,38 @@
-'use strict'
+/// <reference path="./types.d.ts" />
 
-const React = require('react')
+import * as React from 'react'
 
-function escapeForRegExp (query) {
+export interface SuggestionsProps {
+  query: string,
+  listboxId: string,
+  expanded: boolean,
+  selected: number,
+  suggestions: Array<ReactTags.Tag>,
+  classNames: ReactTags.ClassNames,
+  maxSuggestionsLength: number,
+  addTag: ReactTags.AdditionCallback
+}
+
+export interface SuggestionsState {
+  options: Array<ReactTags.Tag>
+}
+
+function escapeForRegExp (query: string): string {
   return query.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&')
 }
 
-function markIt (input, query) {
+function markIt (input: string, query: string): string {
   const regex = RegExp(escapeForRegExp(query), 'gi')
-
-  return {
-    __html: input.replace(regex, '<mark>$&</mark>')
-  }
+  return input.replace(regex, '<mark>$&</mark>')
 }
 
-function filterSuggestions (query, suggestions, length) {
+function filterSuggestions (query: string, suggestions: Array<ReactTags.Tag>, length: number): Array<ReactTags.Tag> {
   const regex = new RegExp(`(?:^|\\s)${escapeForRegExp(query)}`, 'i')
   return suggestions.filter((item) => regex.test(item.name)).slice(0, length)
 }
 
-class Suggestions extends React.Component {
-  constructor (props) {
+class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
+  constructor (props: SuggestionsProps) {
     super(props)
 
     this.state = {
@@ -28,16 +40,16 @@ class Suggestions extends React.Component {
     }
   }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps (newProps: SuggestionsProps) {
     this.setState({
       options: filterSuggestions(newProps.query, newProps.suggestions, newProps.maxSuggestionsLength)
     })
   }
 
-  onMouseDown (item, e) {
+  onMouseDown (tag: ReactTags.Tag, e: React.MouseEvent<HTMLElement>) {
     // focus is shifted on mouse down but calling preventDefault prevents this
     e.preventDefault()
-    this.props.addTag(item)
+    this.props.addTag(tag)
   }
 
   render () {
@@ -65,7 +77,7 @@ class Suggestions extends React.Component {
           className={classNames.join(' ')}
           aria-disabled={item.disabled === true}
           onMouseDown={this.onMouseDown.bind(this, item)}>
-          <span dangerouslySetInnerHTML={markIt(item.name, this.props.query)} />
+          <span dangerouslySetInnerHTML={{ __html: markIt(item.name, this.props.query) }} />
         </li>
       )
     })
@@ -78,4 +90,4 @@ class Suggestions extends React.Component {
   }
 }
 
-module.exports = Suggestions
+export default Suggestions

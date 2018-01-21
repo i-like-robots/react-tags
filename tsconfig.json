@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "es2015",
+    "allowJs": true,
+    "strict": true,
+    "jsx": "react",
+    "rootDir": "./src"
+  },
+  "include": [
+    "./src/*.tsx"
+  ]
+}

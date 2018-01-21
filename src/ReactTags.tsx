@@ -1,10 +1,37 @@
-'use strict'
+/// <reference path="./types.d.ts" />
 
-const React = require('react')
-const PropTypes = require('prop-types')
-const Tag = require('./Tag')
-const Input = require('./Input')
-const Suggestions = require('./Suggestions')
+import * as React from 'react'
+import * as PropTypes from 'prop-types'
+import Tag, { TagProps } from './Tag'
+import Input from './Input'
+import Suggestions from './Suggestions'
+
+export interface ReactTagsProps {
+  tags: Array<ReactTags.Tag>,
+  suggestions: Array<ReactTags.Tag>,
+  placeholder: string,
+  autoresize: boolean,
+  delimiters: Array<string>,
+  onAddition: ReactTags.AdditionCallback,
+  onDelete: ReactTags.DeleteCallback,
+  onInput: ReactTags.InputCallback,
+  onFocus: () => any,
+  onBlur: () => any,
+  minQueryLength: number,
+  maxSuggestionsLength: number,
+  classNames: ReactTags.ClassNames,
+  allowNew: boolean,
+  allowBackspace: boolean,
+  tagComponent: React.SFC<TagProps>
+}
+
+export interface ReactTagsState {
+  query: string,
+  focused: boolean,
+  expanded: boolean,
+  selected: number,
+  classNames: ReactTags.ClassNames
+}
 
 const KEYS = {
   ENTER: 'Enter',
@@ -27,8 +54,45 @@ const CLASS_NAMES = {
   suggestionDisabled: 'is-disabled'
 }
 
-class ReactTags extends React.Component {
-  constructor (props) {
+class ReactTags extends React.Component<ReactTagsProps, ReactTagsState> {
+  static defaultProps: Partial<ReactTagsProps> = {
+    tags: [],
+    placeholder: 'Add new tag',
+    suggestions: [],
+    autoresize: true,
+    delimiters: [KEYS.TAB, KEYS.ENTER],
+    minQueryLength: 2,
+    maxSuggestionsLength: 6,
+    allowNew: false,
+    allowBackspace: true
+  }
+
+  static propTypes: React.ValidationMap<ReactTagsProps> = {
+    tags: PropTypes.arrayOf(PropTypes.object).isRequired,
+    placeholder: PropTypes.string,
+    suggestions: PropTypes.arrayOf(PropTypes.object).isRequired,
+    autoresize: PropTypes.bool,
+    delimiters: PropTypes.arrayOf(PropTypes.string),
+    onDelete: PropTypes.func.isRequired,
+    onAddition: PropTypes.func.isRequired,
+    onInput: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    minQueryLength: PropTypes.number,
+    maxSuggestionsLength: PropTypes.number,
+    classNames: PropTypes.object,
+    allowNew: PropTypes.bool,
+    allowBackspace: PropTypes.bool,
+    tagComponent: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.element
+    ])
+  }
+
+  input: Input
+  suggestions: Suggestions
+
+  constructor (props: ReactTagsProps) {
     super(props)
 
     this.state = {
@@ -36,17 +100,17 @@ class ReactTags extends React.Component {
       focused: false,
       expanded: false,
       selected: -1,
-      classNames: Object.assign({}, CLASS_NAMES, this.props.classNames)
+      classNames: { ...CLASS_NAMES, ...this.props.classNames }
     }
   }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps (newProps: ReactTagsProps) {
     this.setState({
-      classNames: Object.assign({}, CLASS_NAMES, newProps.classNames)
+      classNames: { ...CLASS_NAMES, ...newProps.classNames }
     })
   }
 
-  onInput (e) {
+  onInput (e: React.ChangeEvent<HTMLInputElement>) {
     const query = e.target.value
 
     if (this.props.onInput) {
@@ -56,9 +120,10 @@ class ReactTags extends React.Component {
     this.setState({ query })
   }
 
-  onKeyDown (e) {
+  onKeyDown (e: React.KeyboardEvent<HTMLInputElement>) {
     const { query, selected } = this.state
     const { delimiters } = this.props
+    const options = this.suggestions ? this.suggestions.state.options : []
 
     // when one of the terminating keys is pressed, add current query to the tags.
     if (delimiters.indexOf(e.key) > -1) {
@@ -68,14 +133,14 @@ class ReactTags extends React.Component {
 
       if (query.length >= this.props.minQueryLength) {
         // Check if the user typed in an existing suggestion.
-        const match = this.suggestions.state.options.findIndex((suggestion) => (
+        const match = options.findIndex((suggestion) => (
           suggestion.name.search(new RegExp(`^${query}$`, 'i')) === 0
         ))
 
         const index = selected === -1 ? match : selected
 
         if (index > -1) {
-          this.addTag(this.suggestions.state.options[index])
+          this.addTag(options[index])
         } else if (this.props.allowNew) {
           this.addTag({ name: query })
         }
@@ -92,7 +157,7 @@ class ReactTags extends React.Component {
 
       // if last item, cycle to the bottom
       if (selected <= 0) {
-        this.setState({ selected: this.suggestions.state.options.length - 1 })
+        this.setState({ selected: options.length - 1 })
       } else {
         this.setState({ selected: selected - 1 })
       }
@@ -101,12 +166,12 @@ class ReactTags extends React.Component {
     if (e.key === KEYS.DOWN_ARROW) {
       e.preventDefault()
 
-      this.setState({ selected: (selected + 1) % this.suggestions.state.options.length })
+      this.setState({ selected: (selected + 1) % options.length })
     }
   }
 
-  onClick (e) {
-    if (document.activeElement !== e.target) {
+  onClick (e: React.MouseEvent<HTMLElement>) {
+    if (this.input && document.activeElement !== e.target) {
       this.input.input.focus()
     }
   }
@@ -127,7 +192,7 @@ class ReactTags extends React.Component {
     }
   }
 
-  addTag (tag) {
+  addTag (tag: ReactTags.Tag) {
     if (tag.disabled) {
       return
     }
@@ -141,7 +206,7 @@ class ReactTags extends React.Component {
     })
   }
 
-  deleteTag (i) {
+  deleteTag (i: number) {
     this.props.onDelete(i)
     this.setState({ query: '' })
   }
@@ -156,7 +221,7 @@ class ReactTags extends React.Component {
         key={i}
         tag={tag}
         classNames={this.state.classNames}
-        onDelete={this.deleteTag.bind(this, i)} />
+        onDelete={() => this.deleteTag(i)} />
     ))
 
     const expanded = this.state.focused && this.state.query.length >= this.props.minQueryLength
@@ -176,13 +241,13 @@ class ReactTags extends React.Component {
           onKeyDown={this.onKeyDown.bind(this)}
           onInput={this.onInput.bind(this)}>
           <Input {...this.state}
-            ref={(c) => { this.input = c }}
+            ref={(c) => { this.input = c as any }}
             listboxId={listboxId}
             autoresize={this.props.autoresize}
             expanded={expanded}
             placeholder={this.props.placeholder} />
           <Suggestions {...this.state}
-            ref={(c) => { this.suggestions = c }}
+            ref={(c) => { this.suggestions = c as any }}
             listboxId={listboxId}
             expanded={expanded}
             suggestions={this.props.suggestions}
@@ -194,39 +259,4 @@ class ReactTags extends React.Component {
   }
 }
 
-ReactTags.defaultProps = {
-  tags: [],
-  placeholder: 'Add new tag',
-  suggestions: [],
-  autoresize: true,
-  delimiters: [KEYS.TAB, KEYS.ENTER],
-  minQueryLength: 2,
-  maxSuggestionsLength: 6,
-  allowNew: false,
-  allowBackspace: true,
-  tagComponent: null
-}
-
-ReactTags.propTypes = {
-  tags: PropTypes.arrayOf(PropTypes.object),
-  placeholder: PropTypes.string,
-  suggestions: PropTypes.arrayOf(PropTypes.object),
-  autoresize: PropTypes.bool,
-  delimiters: PropTypes.arrayOf(PropTypes.string),
-  onDelete: PropTypes.func.isRequired,
-  onAddition: PropTypes.func.isRequired,
-  onInput: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  minQueryLength: PropTypes.number,
-  maxSuggestionsLength: PropTypes.number,
-  classNames: PropTypes.object,
-  allowNew: PropTypes.bool,
-  allowBackspace: PropTypes.bool,
-  tagComponent: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.element
-  ])
-}
-
-module.exports = ReactTags
+export default ReactTags

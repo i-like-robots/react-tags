@@ -2,23 +2,23 @@
   "name": "react-tag-autocomplete",
   "version": "5.4.1",
   "description": "React Tag Autocomplete is a simple tagging component ready to drop in your React projects.",
-  "main": "dist-es5/ReactTags.js",
-  "jsnext:main": "dist-es6/ReactTags.js",
+  "main": "dist/ReactTags-cjs.js",
+  "module": "dist/ReactTags-es6.js",
   "scripts": {
-    "pretest": "npm run lint && npm run build:es5",
+    "pretest": "npm run lint && npm run build:cjs",
     "test": "jasmine",
-    "coverage": "istanbul cover -i 'dist-es5/**' jasmine",
-    "lint": "standard lib/*.js spec/*.js",
+    "coverage": "istanbul cover -i 'dist-cjs/**' jasmine",
+    "lint": "tslint -c tslint.json src/*.tsx spec/*.js",
     "dev": "webpack-dev-server --progress --colors --port ${PORT:-8080} --host 0.0.0.0",
-    "build:example": "webpack -p --config-name example",
-    "build:es5": "buble lib --objectAssign -o dist-es5",
-    "build:es6": "buble lib --objectAssign -o dist-es6 -t node:6",
-    "prepublish": "npm run build:es5 && npm run build:es6"
+    "build:example": "webpack",
+    "build:cjs": "tsc --outDir dist-cjs -m commonjs",
+    "build:es6": "tsc --outDir dist-es6",
+    "prepublish": "npm run build:cjs && npm run build:es6"
   },
   "files": [
     "lib",
     "example",
-    "dist-es5",
+    "dist-cjs",
     "dist-es6",
     "LICENSE",
     "README.md"
@@ -41,13 +41,13 @@
   "license": "MIT",
   "repository": "https://github.com/i-like-robots/react-tags",
   "peerDependencies": {
-    "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
-    "buble": "^0.17.0",
-    "buble-loader": "^0.4.1",
+    "@types/prop-types": "^15.5.2",
+    "@types/react": "^16.0.34",
+    "@types/react-dom": "^16.0.3",
     "coveralls": "^3.0.0",
     "istanbul": "^0.4.4",
     "jasmine": "^2.4.1",
@@ -56,7 +56,10 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "sinon": "^4.0.0",
-    "standard": "^10.0.3",
+    "ts-loader": "^3.2.0",
+    "tslint": "^5.9.1",
+    "tslint-config-standard": "^7.0.0",
+    "typescript": "^2.6.2",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.8.2"
   }

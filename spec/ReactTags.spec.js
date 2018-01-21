@@ -1,5 +1,3 @@
-/* eslint-env jasmine */
-
 'use strict'
 
 const React = require('react')
@@ -7,7 +5,7 @@ const ReactDOM = require('react-dom')
 const TestUtils = require('react-dom/test-utils')
 const sinon = require('sinon')
 const fixture = require('../example/countries')
-const Subject = require('../dist-es5/ReactTags')
+const Subject = require('../dist-cjs/ReactTags').default
 
 let props
 let instance
