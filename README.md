@@ -68,6 +68,7 @@ ReactDOM.render(<App />, document.getElementById('app'))
 
 ### Options
 
+- [`id`](#id-optional)
 - [`tags`](#tags-optional)
 - [`suggestions`](#suggestions-optional)
 - [`placeholder`](#placeholder-optional)
@@ -84,6 +85,10 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`allowNew`](#allownew-optional)
 - [`allowBackspace`](#allowbackspace-optional)
 - [`tagComponent`](#tagcomponent-optional)
+
+#### id (optional)
+
+The ID attribute given to the listbox element. Default: `ReactTags`.
 
 #### tags (optional)
 
