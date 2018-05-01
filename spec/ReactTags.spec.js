@@ -7,7 +7,7 @@ const ReactDOM = require('react-dom')
 const TestUtils = require('react-dom/test-utils')
 const sinon = require('sinon')
 const fixture = require('../example/countries')
-const Subject = require('../dist-es5/ReactTags')
+const Subject = require('../')
 
 let props
 let instance
