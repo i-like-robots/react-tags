@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.0.0
+
+- Added `suggestionComponent` option to allow the rendering of a custom suggestion component  ([tjphopkins](https://github.com/tjphopkins))
+- Added ES6 package and `"module"` entry point
+- Added `id` option to configure the component ID
+- Refactored keyboard event handlers to use `KeyboardEvent.key`
+- Refactored event handlers to use `on` prefixes
+- Updated React dependency to 16+
+
 ## 5.5.0
 
 - Refactored input into a controlled component (also fixes Preact compatibility)
