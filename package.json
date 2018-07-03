@@ -11,7 +11,7 @@
     "coverage": "istanbul cover -i 'dist-es5/**' jasmine",
     "lint": "standard lib/*.js spec/*.js",
     "dev": "webpack-dev-server --progress --colors --port ${PORT:-8080} --host 0.0.0.0",
-    "build:example": "webpack -p --config-name example",
+    "build:example": "webpack -p",
     "build:dist": "rollup -c rollup.config.js",
     "prepublish": "npm run build:dist"
   },
