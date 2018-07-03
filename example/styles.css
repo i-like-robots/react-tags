@@ -6,8 +6,8 @@
  *     </button>
  *   </div>
  *   <div class="react-tags__search">
- *     <div class="react-tags__search-input">
- *       <input />
+ *     <div class="react-tags__search-wrapper">
+ *       <input class="react-tags__search-input" />
  *       <div />
  *     </div>
  *     <div class="react-tags__suggestions">
@@ -89,7 +89,7 @@
 
 }
 
-.react-tags__search input {
+.react-tags__search-input {
   /* prevent autoresize overflowing the container */
   max-width: 100%;
 
@@ -104,7 +104,7 @@
   line-height: inherit;
 }
 
-.react-tags__search input::-ms-clear {
+.react-tags__search-input::-ms-clear {
   display: none;
 }
 
