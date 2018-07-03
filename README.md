@@ -146,6 +146,7 @@ Override the default class names. Defaults:
   selectedTag: 'react-tags__selected-tag',
   selectedTagName: 'react-tags__selected-tag-name',
   search: 'react-tags__search',
+  searchWrapper: 'react-tags__search-wrapper',
   searchInput: 'react-tags__search-input',
   suggestions: 'react-tags__suggestions',
   suggestionActive: 'is-active',
