@@ -325,6 +325,25 @@ describe('React Tags', () => {
       expect(input.value).toEqual('')
       expect(document.activeElement).toEqual(input)
     })
+
+    it('can render a custom suggestion component when provided', () => {
+      const CustomSuggestion = ({ item, query }) => (
+        React.createElement(
+          'div', { className: 'custom-suggestion' }, item.name)
+      )
+
+      createInstance({
+        tags: [],
+        suggestions: fixture,
+        suggestionComponent: CustomSuggestion
+      })
+
+      type(query)
+
+      expect($('ul[role="listbox"]')).toBeTruthy()
+
+      expect($$('.custom-suggestion').length).toEqual(3)
+    })
   })
 
   describe('tags', () => {
