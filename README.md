@@ -212,6 +212,18 @@ Disables ability to delete the selected tags when backspace is pressed while foc
 
 Provide a custom tag component to render. Default: `null`.
 
+#### suggestionComponent (optional)
+
+Provide a custom suggestion component to render. Default: `null`.
+
+### API
+
+#### addTag(tag)
+
+#### deleteTag(index)
+
+#### clearInput()
+
 ### Styling
 
 It is possible to customize the look of the component the way you want it. An example can be found in `/example/styles.css`.
