@@ -130,6 +130,18 @@ describe('React Tags', () => {
       TestUtils.Simulate.blur($('input'))
       sinon.assert.calledOnce(props.onBlur)
     })
+
+    it('can be cleared programmatically', () => {
+      createInstance()
+
+      type('foo')
+
+      expect(instance.state.query.length).toBe(3)
+
+      instance.clearInput()
+
+      expect(instance.state.query.length).toBe(0)
+    })
   })
 
   describe('query', () => {
