@@ -237,7 +237,17 @@ npm install
 npm run dev # open http://localhost:8080
 ```
 
-### Upgrading from 4.x to 5.x
+### Upgrading
+
+To see all changes refer to [the changelog](CHANGELOG.md).
+
+#### Upgrading from 5.x to 6.x
+
+- React 16 or above is now required
+- Event handlers have been renamed to use `on` prefixes (previously `handle`)
+- The `delimiters` option now expects `KeyboardEvent.key` values (previously `KeyboardEvent.keyCode`
+
+#### Upgrading from 4.x to 5.x
 
 1. The `delimiters` option has been removed, any references to this will now be ignored.
 2. The `classNames` option has been updated:
@@ -264,5 +274,3 @@ npm run dev # open http://localhost:8080
   +  suggestionDisabled: 'is-disabled'
   }
   ```
-
-For smaller changes refer to [the changelog](CHANGELOG.md).
