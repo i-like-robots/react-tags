@@ -2,6 +2,7 @@
 
 ## 6.0.0
 
+- Added `clearInput` method to programmatically clear input text
 - Added `suggestionComponent` option to allow the rendering of a custom suggestion component  ([tjphopkins](https://github.com/tjphopkins))
 - Added ES6 package and `"module"` entry point
 - Added `id` option to configure the component ID
