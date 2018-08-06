@@ -25,7 +25,8 @@ function createInstance (data = {}) {
     handleFocus: sinon.stub(),
     handleDelete: sinon.stub(),
     handleAddition: sinon.stub(),
-    handleInputChange: sinon.stub()
+    handleInputChange: sinon.stub(),
+    validateTag: sinon.stub()
   }
 
   props = Object.assign(defaults, data)
@@ -182,6 +183,12 @@ describe('React Tags', () => {
 
       sinon.assert.calledThrice(props.handleAddition)
     })
+
+    it('triggers validation function on add', () => {
+      type(query); key('enter')
+
+      sinon.assert.calledOnce(props.validateTag)
+    })
   })
 
   describe('suggestions', () => {
@@ -324,6 +331,14 @@ describe('React Tags', () => {
     it('triggers addition for an unselected but matching suggestion when a delimiter is pressed', () => {
       type('united kingdom'); key('enter')
       sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+    })
+
+    it('only adds validated tags', () => {
+      createInstance({ validateTag: tag => tag.name.length < 5 })
+      type('USA'); key('enter')
+      type('Sweden'); key('enter')
+      sinon.assert.calledTwice(props.validateTag)
+      sinon.assert.calledOnce(props.handleAddition)
     })
 
     it('clears the input when an addition is triggered', () => {

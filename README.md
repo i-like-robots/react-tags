@@ -82,6 +82,7 @@ React.render(<App />, document.getElementById('app'))
 - [`handleInputChange`](#handleinputchange-optional)
 - [`handleFocus`](#handlefocus-optional)
 - [`handleBlur`](#handleblur-optional)
+- [`validateTag`](#validatetag-optional)
 - [`allowNew`](#allownew-optional)
 - [`tagComponent`](#tagcomponent-optional)
 
@@ -201,6 +202,16 @@ Optional event handler when the input receives focus. Receives no arguments.
 #### handleBlur (optional)
 
 Optional event handler when focus on the input is lost. Receives no arguments.
+
+#### validateTag (optional)
+
+Optional validation function that determines if tag should be added to tags. Receives tag object. Should return true/false depending on validation result.
+
+```js
+function (tag) {
+  return tag.text.length >= 5;
+}
+```
 
 #### allowNew (optional)
 
