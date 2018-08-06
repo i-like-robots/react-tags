@@ -6,7 +6,9 @@
 
 const jsdom = require('jsdom')
 
-const { window } = new jsdom.JSDOM('<html><body><div id="app"></div></body></html>', {})
+const { window } = new jsdom.JSDOM('<html><body><div id="app"></div></body></html>', {
+  url: "http://localhost/"
+})
 
 global.window = window
 
