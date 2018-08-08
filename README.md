@@ -70,6 +70,7 @@ React.render(<App />, document.getElementById('app'))
 - [`tags`](#tags-optional)
 - [`suggestions`](#suggestions-optional)
 - [`placeholder`](#placeholder-optional)
+- [`name`](#name-optional)
 - [`autofocus`](#autofocus-optional)
 - [`autoresize`](#autoresize-optional)
 - [`delimiters`](#delimiters-optional)
@@ -112,6 +113,10 @@ const suggestions = [
 #### placeholder (optional)
 
 The placeholder string shown for the input. Default: `'Add new tag'`.
+
+#### name (optional)
+
+The name attribute is passed down to the input. It can be used to submit the tag as part of a form when JavaScript is disabled. Default: `'tag'`.
 
 #### autofocus (optional)
 
