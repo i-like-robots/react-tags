@@ -85,6 +85,7 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`allowNew`](#allownew-optional)
 - [`allowBackspace`](#allowbackspace-optional)
 - [`tagComponent`](#tagcomponent-optional)
+- [`inputAttributes`](#inputAttributes-optional)
 
 #### id (optional)
 
@@ -215,6 +216,12 @@ Provide a custom tag component to render. Default: `null`.
 #### suggestionComponent (optional)
 
 Provide a custom suggestion component to render. Default: `null`.
+
+#### inputAttributes (optional)
+
+An object containing additional attributes that will be applied to the underlying `<input />` field.
+
+As an example `inputAttributes={{ maxLength: 10 }}` would be applied as `<input maxlength="10" … />`. Note this prop won't overwrite existing attributes, it can only add new ones.
 
 ### API
 
