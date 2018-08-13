@@ -219,7 +219,7 @@ Provide a custom tag component to render. Default: `null`.
 
 An object containing additional attributes that will be applied to the underlying `<input />` field.
 
-As an example `inputAttributes={{ maxlength: 10 }}` would be applied as `<input maxlength="10" … />`. Note this prop won't overwrite existing attributes, it can only add new ones.
+As an example `inputAttributes={{ maxLength: 10 }}` would be applied as `<input maxlength="10" … />`. Note this prop won't overwrite existing attributes, it can only add new ones.
 
 ### Styling
 

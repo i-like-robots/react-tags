@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.6.0
+
+- Added `inputAttributes` option ([juliettepretot](https://github.com/juliettepretot))
+
 ## 5.5.0
 
 - Refactored input into a controlled component (also fixes Preact compatibility)
