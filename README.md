@@ -84,6 +84,7 @@ React.render(<App />, document.getElementById('app'))
 - [`handleBlur`](#handleblur-optional)
 - [`allowNew`](#allownew-optional)
 - [`tagComponent`](#tagcomponent-optional)
+- [`inputAttributes`](#inputAttributes-optional)
 
 #### tags (optional)
 
@@ -213,6 +214,12 @@ Disables ability to delete the selected tags when backspace is pressed while foc
 #### tagComponent (optional)
 
 Provide a custom tag component to render. Default: `null`.
+
+#### inputAttributes (optional)
+
+An object containing additional attributes that will be applied to the underlying `<input />` field.
+
+As an example `inputAttributes={{ maxlength: 10 }}` would be applied as `<input maxlength="10" … />`. Note this prop won't overwrite existing attributes, it can only add new ones.
 
 ### Styling
 
