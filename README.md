@@ -80,7 +80,6 @@ React.render(<App />, document.getElementById('app'))
 - [`handleAddition`](#handleaddition-optional)
 - [`handleDelete`](#handledelete-optional)
 - [`handleInputChange`](#handleinputchange-optional)
-- [`handleInputBlur`](#handleinputblur-optional)
 - [`handleFocus`](#handlefocus-optional)
 - [`handleBlur`](#handleblur-optional)
 - [`allowNew`](#allownew-optional)
@@ -195,11 +194,6 @@ function (input) {
   }
 }
 ```
-
-#### handleInputBlur (optional)
-
-Optional event handler triggered on input blur. Receives the `SyntheticEvent` as parameter.
-
 
 #### handleFocus (optional)
 
