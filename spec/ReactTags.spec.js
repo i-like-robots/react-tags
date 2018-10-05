@@ -139,6 +139,30 @@ describe('React Tags', () => {
       TestUtils.Simulate.blur($('input'))
       sinon.assert.calledOnce(props.handleBlur)
     })
+
+    it('adds tag on blur when query exists', () => {
+      const query = 'query'
+      createInstance({ addTagOnBlur: true, allowNew: true })
+      type(query)
+
+      TestUtils.Simulate.blur($('input'))
+      sinon.assert.calledOnce(props.handleAddition)
+      sinon.assert.calledWith(props.handleAddition, { name: query })
+    })
+
+    it('does not add tag on blur when query does not exist', () => {
+      createInstance({ addTagOnBlur: true, allowNew: true })
+
+      TestUtils.Simulate.blur($('input'))
+      sinon.assert.notCalled(props.handleAddition)
+    })
+
+    it('does not add tag on blur without addTagOnBlur', () => {
+      createInstance({ addTagOnBlur: false, allowNew: true })
+
+      TestUtils.Simulate.blur($('input'))
+      sinon.assert.notCalled(props.handleAddition)
+    })
   })
 
   describe('query', () => {
