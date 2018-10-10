@@ -82,6 +82,7 @@ React.render(<App />, document.getElementById('app'))
 - [`handleInputChange`](#handleinputchange-optional)
 - [`handleFocus`](#handlefocus-optional)
 - [`handleBlur`](#handleblur-optional)
+- [`addOnBlur`](#addonblur-optional)
 - [`allowNew`](#allownew-optional)
 - [`tagComponent`](#tagcomponent-optional)
 - [`inputAttributes`](#inputAttributes-optional)
@@ -202,6 +203,10 @@ Optional event handler when the input receives focus. Receives no arguments.
 #### handleBlur (optional)
 
 Optional event handler when focus on the input is lost. Receives no arguments.
+
+#### addOnBlur (optional)
+
+Creates a tag from the current input value when focus on the input is lost. Default: `false`.
 
 #### allowNew (optional)
 
