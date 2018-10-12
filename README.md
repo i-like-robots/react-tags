@@ -16,7 +16,7 @@ npm install --save react-tag-autocomplete
 
 ## Usage
 
-Here's a sample implementation that initializes the component with a list of preselected `tags` and a `suggestions` list. For more details, go through the [API](#Options).
+Here's a sample implementation that initializes the component with a list of preselected `tags` and a `suggestions` list. For more details, go through the [API](#options).
 
 ```js
 const React = require('react')
@@ -73,7 +73,7 @@ React.render(<App />, document.getElementById('app'))
 - [`autofocus`](#autofocus-optional)
 - [`autoresize`](#autoresize-optional)
 - [`delimiters`](#delimiters-optional)
-- [`delimiterChars`](#delimitersChars-optional)
+- [`delimiterChars`](#delimiterschars-optional)
 - [`minQueryLength`](#minquerylength-optional)
 - [`maxSuggestionsLength`](#maxsuggestionslength-optional)
 - [`classNames`](#classnames-optional)
@@ -84,7 +84,7 @@ React.render(<App />, document.getElementById('app'))
 - [`handleBlur`](#handleblur-optional)
 - [`allowNew`](#allownew-optional)
 - [`tagComponent`](#tagcomponent-optional)
-- [`inputAttributes`](#inputAttributes-optional)
+- [`inputAttributes`](#inputattributes-optional)
 
 #### tags (optional)
 
