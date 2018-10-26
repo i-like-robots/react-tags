@@ -10,10 +10,11 @@
     "test": "jasmine",
     "coverage": "istanbul cover -i 'dist-es5/**' jasmine",
     "lint": "standard lib/*.js spec/*.js",
-    "dev": "webpack-dev-server --progress --colors --port ${PORT:-8080} --host 0.0.0.0",
+    "dev": "webpack-dev-server --progress --env.NODE_ENV=development",
     "build:example": "webpack -p",
-    "build:dist": "rollup -c rollup.config.js",
-    "prepublish": "npm run build:dist"
+    "build:es5": "buble lib --objectAssign -o dist-es5",
+    "build:es6": "buble lib --objectAssign -o dist-es6 -t node:6",
+    "prepublish": "npm run build:es5 && npm run build:es6"
   },
   "files": [
     "lib",
@@ -49,6 +50,7 @@
     "buble-loader": "^0.5.0",
     "coveralls": "^3.0.0",
     "istanbul": "^0.4.4",
+<<<<<<< HEAD
     "jasmine": "^3.1.0",
     "jsdom": "^11.10.0",
     "prop-types": "^15.6.0",
@@ -60,5 +62,17 @@
     "standard": "^11.0.0",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.0"
+=======
+    "jasmine": "^2.4.1",
+    "jsdom": "^11.3.0",
+    "keycode": "^2.1.2",
+    "prop-types": "^15.5.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "sinon": "^4.0.0",
+    "standard": "^10.0.3",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.8.2"
+>>>>>>> master
   }
 }
