@@ -4,11 +4,16 @@
 
 - Added `clearInput` method to programmatically clear input text
 - Added `suggestionComponent` option to allow the rendering of a custom suggestion component  ([tjphopkins](https://github.com/tjphopkins))
+- Added `searchWrapper` to `classNames` option
 - Added ES6 package and `"module"` entry point
 - Added `id` option to configure the component ID
 - Refactored keyboard event handlers to use `KeyboardEvent.key`
 - Refactored event handlers to use `on` prefixes
 - Updated React dependency to 16+
+
+## 5.7.0
+
+- Added `addOnBlur` option ([APILLSBURY](https://github.com/APILLSBURY) and [jedrzejiwanicki](https://github.com/jedrzejiwanicki))
 
 ## 5.6.0
 

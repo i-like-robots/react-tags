@@ -82,6 +82,7 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`onInput`](#oninput-optional)
 - [`onFocus`](#onfocus-optional)
 - [`onBlur`](#onblur-optional)
+- [`addOnBlur`](#addonblur-optional)
 - [`allowNew`](#allownew-optional)
 - [`allowBackspace`](#allowbackspace-optional)
 - [`tagComponent`](#tagcomponent-optional)
@@ -200,6 +201,10 @@ Optional event handler when the input receives focus. Receives no arguments.
 #### onBlur (optional)
 
 Optional event handler when focus on the input is lost. Receives no arguments.
+
+#### addOnBlur (optional)
+
+Creates a tag from the current input value when focus on the input is lost. Default: `false`.
 
 #### allowNew (optional)
 

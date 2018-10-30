@@ -185,6 +185,17 @@ describe('React Tags', () => {
 
       sinon.assert.calledThrice(props.onAddition)
     })
+
+    it('adds tag on blur when addOnBlur is true', () => {
+      createInstance({ allowNew: true, addOnBlur: true })
+
+      type(query)
+
+      TestUtils.Simulate.blur($('input'))
+
+      sinon.assert.calledOnce(props.onAddition)
+      sinon.assert.calledWith(props.onAddition, { name: query })
+    })
   })
 
   describe('suggestions', () => {
