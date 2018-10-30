@@ -9,6 +9,7 @@
 - Added `id` option to configure the component ID
 - Refactored keyboard event handlers to use `KeyboardEvent.key`
 - Refactored event handlers to use `on` prefixes
+- Removed `autofocus` option
 - Updated React dependency to 16+
 
 ## 5.7.0
