@@ -54,7 +54,7 @@ function type (value) {
     key(char)
     $('input').value += char
     // React calls onchange for every update to maintain state at all times
-    TestUtils.Simulate.input($('input'))
+    TestUtils.Simulate.change($('input'))
   })
 }
 
