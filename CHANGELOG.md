@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.7.1
+
+- Fixed missing `onChange` attribute warnings in development mode
+
 ## 5.7.0
 
 - Added `addOnBlur` option ([APILLSBURY](https://github.com/APILLSBURY) and [jedrzejiwanicki](https://github.com/jedrzejiwanicki))
