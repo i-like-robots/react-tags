@@ -54,7 +54,7 @@ function type (value) {
   value.split('').forEach((char) => {
     key(char)
     $('input').value += char
-    // React calls onchange for every update to maintain state at all times
+    // React calls oninput for every value change to maintain state at all times
     TestUtils.Simulate.input($('input'))
   })
 }
