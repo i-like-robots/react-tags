@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.8.0
+
+- Added `handleValidate` option ([axelniklasson](https://github.com/axelniklasson))
+
 ## 5.7.1
 
 - Fixed missing `onChange` attribute warnings in development mode
