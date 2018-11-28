@@ -1,5 +1,17 @@
 # Changelog
 
+## 5.7.1
+
+- Fixed missing `onChange` attribute warnings in development mode
+
+## 5.7.0
+
+- Added `addOnBlur` option ([APILLSBURY](https://github.com/APILLSBURY) and [jedrzejiwanicki](https://github.com/jedrzejiwanicki))
+
+## 5.6.0
+
+- Added `inputAttributes` option ([juliettepretot](https://github.com/juliettepretot))
+
 ## 5.5.0
 
 - Refactored input into a controlled component (also fixes Preact compatibility)

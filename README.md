@@ -83,8 +83,10 @@ React.render(<App />, document.getElementById('app'))
 - [`handleFocus`](#handlefocus-optional)
 - [`handleBlur`](#handleblur-optional)
 - [`validateTag`](#validatetag-optional)
+- [`addOnBlur`](#addonblur-optional)
 - [`allowNew`](#allownew-optional)
 - [`tagComponent`](#tagcomponent-optional)
+- [`inputAttributes`](#inputAttributes-optional)
 
 #### tags (optional)
 
@@ -162,7 +164,7 @@ Override the default class names. Defaults:
 Function called when the user wants to add a tag. Receives the tag.
 
 ```js
-function (tag) {
+function handleAddition(tag) {
   // Add the tag { id, name } to the tag list
   tags.push(tag)
 }
@@ -173,7 +175,7 @@ function (tag) {
 Function called when the user wants to delete a tag. Receives the tag index.
 
 ```js
-function (i) {
+function handleDelete(i) {
   // Delete the tag at index i
   tags.splice(i, 1)
 }
@@ -184,7 +186,7 @@ function (i) {
 Optional event handler when the input changes. Receives the current input value.
 
 ```js
-function (input) {
+function handleInputChange(input) {
   if (!this.state.busy) {
     this.setState({ busy: true })
 
@@ -205,13 +207,17 @@ Optional event handler when focus on the input is lost. Receives no arguments.
 
 #### validateTag (optional)
 
-Optional validation function that determines if tag should be added to tags. Receives tag object. Should return true/false depending on validation result.
+Optional validation function that determines if tag should be added to tags. Receives a tag object. Should return a boolean.
 
 ```js
-function (tag) {
-  return tag.text.length >= 5;
+function validateTag(tag) {
+  return tag.name.length >= 5;
 }
 ```
+
+#### addOnBlur (optional)
+
+Creates a tag from the current input value when focus on the input is lost. Default: `false`.
 
 #### allowNew (optional)
 
@@ -224,6 +230,12 @@ Disables ability to delete the selected tags when backspace is pressed while foc
 #### tagComponent (optional)
 
 Provide a custom tag component to render. Default: `null`.
+
+#### inputAttributes (optional)
+
+An object containing additional attributes that will be applied to the underlying `<input />` field.
+
+As an example `inputAttributes={{ maxLength: 10 }}` would be applied as `<input maxlength="10" … />`. Note this prop won't overwrite existing attributes, it can only add new ones.
 
 ### Styling
 

@@ -53,7 +53,7 @@ function type (value) {
   value.split('').forEach((char) => {
     key(char)
     $('input').value += char
-    // React calls onchange for every update to maintain state at all times
+    // React calls oninput for every value change to maintain state at all times
     TestUtils.Simulate.input($('input'))
   })
 }
@@ -183,7 +183,7 @@ describe('React Tags', () => {
       sinon.assert.calledThrice(props.handleAddition)
     })
 
-    it('only adds validated tags', () => {
+    it('only adds tags which pass the provided validateTag function', () => {
       createInstance({ allowNew: true, validateTag: sinon.stub().returns(false), delimiterChars: [','] })
       type('foo,bar,baz'); key('enter')
       sinon.assert.notCalled(props.handleAddition)
@@ -191,6 +191,17 @@ describe('React Tags', () => {
       createInstance({ allowNew: true, validateTag: sinon.stub().returns(true), delimiterChars: [','] })
       type('foo,bar,baz'); key('enter')
       sinon.assert.calledThrice(props.handleAddition)
+    })
+
+    it('adds tag on blur when addOnBlur is true', () => {
+      createInstance({ allowNew: true, addOnBlur: true })
+
+      type(query)
+
+      TestUtils.Simulate.blur($('input'))
+
+      sinon.assert.calledOnce(props.handleAddition)
+      sinon.assert.calledWith(props.handleAddition, { name: query })
     })
   })
 
