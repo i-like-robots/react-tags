@@ -183,12 +183,12 @@ describe('React Tags', () => {
       sinon.assert.calledThrice(props.handleAddition)
     })
 
-    it('only adds tags which pass the provided validateTag function', () => {
-      createInstance({ allowNew: true, validateTag: sinon.stub().returns(false), delimiterChars: [','] })
+    it('only adds tags which pass the provided handleValidate function', () => {
+      createInstance({ allowNew: true, handleValidate: sinon.stub().returns(false), delimiterChars: [','] })
       type('foo,bar,baz'); key('enter')
       sinon.assert.notCalled(props.handleAddition)
 
-      createInstance({ allowNew: true, validateTag: sinon.stub().returns(true), delimiterChars: [','] })
+      createInstance({ allowNew: true, handleValidate: sinon.stub().returns(true), delimiterChars: [','] })
       type('foo,bar,baz'); key('enter')
       sinon.assert.calledThrice(props.handleAddition)
     })
