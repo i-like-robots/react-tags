@@ -186,6 +186,16 @@ describe('React Tags', () => {
       sinon.assert.calledThrice(props.onAddition)
     })
 
+    it('only adds tags which pass the provided onValidate function', () => {
+      createInstance({ allowNew: true, onValidate: sinon.stub().returns(false), delimiters: ['Enter', ','] })
+      type('foo,bar,baz'); key('Enter')
+      sinon.assert.notCalled(props.onAddition)
+
+      createInstance({ allowNew: true, onValidate: sinon.stub().returns(true), delimiters: ['Enter', ','] })
+      type('foo,bar,baz'); key('Enter')
+      sinon.assert.calledThrice(props.onAddition)
+    })
+
     it('adds tag on blur when addOnBlur is true', () => {
       createInstance({ allowNew: true, addOnBlur: true })
 

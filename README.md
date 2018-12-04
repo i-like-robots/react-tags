@@ -82,6 +82,7 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`onInput`](#oninput-optional)
 - [`onFocus`](#onfocus-optional)
 - [`onBlur`](#onblur-optional)
+- [`onValidate`](#onvalidate-optional)
 - [`addOnBlur`](#addonblur-optional)
 - [`allowNew`](#allownew-optional)
 - [`allowBackspace`](#allowbackspace-optional)
@@ -161,7 +162,7 @@ Override the default class names. Defaults:
 Function called when the user wants to add a tag. Receives the tag.
 
 ```js
-function onAddition (tag) {
+function onAddition(tag) {
   // Add the tag { id, name } to the tag list
   tags.push(tag)
 }
@@ -172,7 +173,7 @@ function onAddition (tag) {
 Function called when the user wants to delete a tag. Receives the tag index.
 
 ```js
-function onDelete (i) {
+function onDelete(i) {
   // Delete the tag at index i
   tags.splice(i, 1)
 }
@@ -183,7 +184,7 @@ function onDelete (i) {
 Optional event handler when the input changes. Receives the current input value.
 
 ```js
-function onInput (input) {
+function onInput(input) {
   if (!this.state.busy) {
     this.setState({ busy: true })
 
@@ -201,6 +202,16 @@ Optional event handler when the input receives focus. Receives no arguments.
 #### onBlur (optional)
 
 Optional event handler when focus on the input is lost. Receives no arguments.
+
+#### onValidate (optional)
+
+Optional validation function that determines if tag should be added to tags. Receives a tag object. Should return a boolean.
+
+```js
+function onValidate(tag) {
+  return tag.name.length >= 5;
+}
+```
 
 #### addOnBlur (optional)
 
