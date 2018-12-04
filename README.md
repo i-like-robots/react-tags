@@ -266,9 +266,11 @@ To see all changes refer to [the changelog](CHANGELOG.md).
 
 #### Upgrading from 5.x to 6.x
 
-- React 16 or above is now required
-- Event handlers have been renamed to use `on` prefixes (previously `handle`)
-- The `delimiters` option now expects `KeyboardEvent.key` values (previously `KeyboardEvent.keyCode`
+- React 16.3 or above is now required.
+- Event handlers and callbacks have been renamed to use `on` prefixes, e.g. the `handleAddition()` callback should now be called `onAddition()`.
+- The `delimiters` option is now an array of `KeyboardEvent.key` values and not `KeyboardEvent.keyCode` codes, e.g. `[13, 9]` should now be written as `['Enter', 'Tab']`. See https://keycode.info/ for more information.
+- The `delimiterChars` option has been removed, use the `delimiters` option instead.
+- The `autofocus` option has been removed.
 
 #### Upgrading from 4.x to 5.x
 

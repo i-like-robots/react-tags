@@ -8,8 +8,9 @@
 - Added ES6 package and `"module"` entry point
 - Added `id` option to configure the component ID
 - Refactored keyboard event handlers to use `KeyboardEvent.key`
-- Refactored event handlers to use `on` prefixes
+- Refactored event handlers and callbacks to use `on` prefixes
 - Removed `autofocus` option
+- Removed `delimiterChars` option
 - Updated React dependency to 16+
 
 ## 5.8.0
