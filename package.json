@@ -8,11 +8,11 @@
     "prepare": "npm run build",
     "prepublish": "npm run build",
     "pretest": "npm run lint && npm run build",
+    "lint": "standard lib/*.js spec/*.js",
     "test": "jasmine",
     "coverage": "istanbul cover -i 'dist/**' jasmine",
-    "lint": "standard lib/*.js spec/*.js",
-    "dev": "webpack-dev-server --progress --env.NODE_ENV=development",
-    "example": "webpack -p",
+    "dev": "NODE_ENV=development rollup -c example/rollup.config.js --watch",
+    "example": "NODE_ENV=production rollup -c example/rollup.config.js",
     "build": "rollup -c rollup.config.js"
   },
   "files": [
@@ -48,8 +48,6 @@
     "react-dom": "^16.3.0"
   },
   "devDependencies": {
-    "buble": "^0.19.0",
-    "buble-loader": "^0.5.0",
     "coveralls": "^3.0.0",
     "istanbul": "^0.4.4",
     "jasmine": "^3.1.0",
@@ -57,11 +55,14 @@
     "prop-types": "^15.6.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
-    "rollup": "^0.62.0",
-    "rollup-plugin-buble": "^0.19.0",
+    "rollup": "^1.0.0",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-replace": "^2.1.0",
+    "rollup-plugin-serve": "^0.6.1",
+    "rollup-plugin-uglify": "^6.0.0",
     "sinon": "^6.1.0",
-    "standard": "^11.0.0",
-    "webpack": "^3.11.0",
-    "webpack-dev-server": "^2.11.0"
+    "standard": "^11.0.0"
   }
 }
