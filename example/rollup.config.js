@@ -1,4 +1,5 @@
 import buble from 'rollup-plugin-buble'
+import serve from 'rollup-plugin-serve'
 import replace from 'rollup-plugin-replace'
 import commonjs from 'rollup-plugin-commonjs'
 import resolve from 'rollup-plugin-node-resolve'
@@ -17,12 +18,14 @@ const plugins = [
   // Use resolve plugin to use Node's module resolution algorithm
   resolve(),
   // Use CommonJS plugin to include non-ES modules
-  commonjs(),
+  commonjs()
 ];
 
 if (process.env.NODE_ENV === 'production') {
     // Use Uglify plugin to minify output
     plugins.push(uglify())
+} else {
+  plugins.push(serve({ open: true, contentBase: 'example' }))
 }
 
 export default {
