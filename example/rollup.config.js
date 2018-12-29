@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'production') {
     // Use Uglify plugin to minify output
     plugins.push(uglify())
 } else {
-  plugins.push(serve({ open: true, contentBase: 'example' }))
+  plugins.push(serve({ open: true, contentBase: 'example', port: 8080 }))
 }
 
 export default {

@@ -242,11 +242,11 @@ It is possible to customize the look of the component the way you want it. An ex
 
 ### Development
 
-The component is written in ES6 and uses [Webpack](http://webpack.github.io/) as its build tool.
+The component is written in ES6 and uses [Rollup](https://rollupjs.org/) as its build tool. Tests are written with [Jasmine](https://jasmine.github.io/) using [JSDOM](https://github.com/jsdom/jsdom).
 
-```
+```sh
 npm install
-npm run dev # open http://localhost:8080
+npm run dev # will open http://localhost:8080 and watch files for changes
 ```
 
 ### Upgrading
