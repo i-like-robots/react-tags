@@ -9,6 +9,7 @@ const keycode = require('keycode')
 const sinon = require('sinon')
 const fixture = require('../example/countries')
 const Subject = require('../dist-es5/ReactTags')
+const Input = require('../dist-es5/Input')
 
 let props
 let instance
@@ -453,7 +454,18 @@ describe('React Tags', () => {
       // As of JSDom 9.10.0 scrollWidth is a getter only and always 0
       // TODO: can we test this another way?
       expect(input.style.width).toBeTruthy()
-      expect(window.getComputedStyle(input).width).toEqual(sizer.scrollWidth + 2 + 'px')
+      expect(window.getComputedStyle(input).width).toEqual(sizer.scrollWidth + 20 + 'px')
+    })
+
+    it('resizes input to match random sizer width', () => {
+      const input = $('input')
+      let rand
+      spyOn(Input.prototype, 'getScrollWidth').and.callFake(() => { rand = Math.floor(Math.random() * Math.floor(100)); return rand })  // scrollWidth was always 0 in test before
+
+      type('hello world')
+
+      expect(input.style.width).toBeTruthy()
+      expect(window.getComputedStyle(input).width).toEqual(rand + 20 + 'px')
     })
   })
 
