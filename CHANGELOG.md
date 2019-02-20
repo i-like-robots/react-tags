@@ -9,6 +9,7 @@
 - Added `id` option to configure the component ID
 - Refactored keyboard event handlers to use `KeyboardEvent.key`
 - Refactored event handlers and callbacks to use `on` prefixes
+- Refactored `classNames` option to avoid creating new and merging objects for each top-level props change
 - Removed `autofocus` option
 - Removed `delimiterChars` option
 - Updated React dependency to 16+
