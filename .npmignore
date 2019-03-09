@@ -1,0 +1,8 @@
+coverage/
+example/
+lib/
+spec/
+.editorconfig
+.travis.yml
+gh-pages.sh
+rollup.config.js
