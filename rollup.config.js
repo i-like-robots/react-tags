@@ -14,7 +14,7 @@ export default [
     input,
     external,
     plugins: [
-      buble({ objectAssign: 'Object.assign', target: { node: 6 } })
+      buble({ objectAssign: 'Object.assign', target: { node: 8 } })
     ],
     output: {
       file: pkg.module,

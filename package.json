@@ -64,5 +64,8 @@
     "rollup-plugin-uglify": "^6.0.0",
     "sinon": "^6.1.0",
     "standard": "^11.0.0"
+  },
+  "engines": {
+    "node": ">= 8.15.0"
   }
 }
