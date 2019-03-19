@@ -7,3 +7,4 @@ dist-es6
 example/bundle.js
 example/bundle.js.map
 coverage
+package-lock.json

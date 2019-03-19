@@ -278,6 +278,16 @@ describe('React Tags', () => {
       expect($$('li[role="option"]').length).toEqual(2)
     })
 
+    it('show suggestions if ignoreFilterSuggestions is false', () => {
+      const cities = ['London', 'Paris']
+
+      createInstance({ minQueryLength: 3, ignoreFilterSuggestions: true, suggestions: cities.map((city, i) => ({ name: city, id: i })) })
+
+      type('Kyiv')
+
+      expect($$('li[role="option"]').length).toEqual(2)
+    })
+
     it('escapes the query before matching', () => {
       expect(() => { type(query + '\\') }).not.toThrow()
     })
