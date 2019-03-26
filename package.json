@@ -15,14 +15,6 @@
     "build:es6": "buble lib --objectAssign -o dist-es6 -t node:6",
     "prepublish": "npm run build:es5 && npm run build:es6"
   },
-  "files": [
-    "lib",
-    "example",
-    "dist-es5",
-    "dist-es6",
-    "LICENSE",
-    "README.md"
-  ],
   "keywords": [
     "react",
     "tags",

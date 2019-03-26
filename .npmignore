@@ -1,7 +1,8 @@
+.git/
 coverage/
 example/
-lib/
 spec/
+.DS_Store
 .editorconfig
 .travis.yml
 gh-pages.sh
