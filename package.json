@@ -1,6 +1,6 @@
 {
   "name": "react-tag-autocomplete",
-  "version": "5.8.0",
+  "version": "5.8.1",
   "description": "React Tag Autocomplete is a simple tagging component ready to drop in your React projects.",
   "main": "dist/ReactTags.cjs.js",
   "module": "dist/ReactTags.esm.js",
@@ -15,13 +15,6 @@
     "example": "NODE_ENV=production rollup -c example/rollup.config.js",
     "build": "rollup -c rollup.config.js"
   },
-  "files": [
-    "lib",
-    "dist",
-    "example",
-    "LICENSE",
-    "README.md"
-  ],
   "keywords": [
     "react",
     "tags",
