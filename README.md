@@ -231,7 +231,7 @@ Disables ability to delete the selected tags when backspace is pressed while foc
 
 #### clearInputOnDelete (optional)
 
-Clear input when tag is deleted. Default: `true`.
+Clear the text input when a tag is deleted. Default: `true`.
 
 #### tagComponent (optional)
 
@@ -239,7 +239,7 @@ Provide a custom tag component to render. Default: `null`.
 
 #### inputAttributes (optional)
 
-An object containing additional attributes that will be applied to the underlying `<input />` field.
+An object containing additional attributes that will be applied to the underlying text `<input />` field.
 
 As an example `inputAttributes={{ maxLength: 10 }}` would be applied as `<input maxlength="10" … />`. Note this prop won't overwrite existing attributes, it can only add new ones.
 
