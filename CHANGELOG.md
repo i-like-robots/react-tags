@@ -14,6 +14,18 @@
 - Removed `delimiterChars` option
 - Updated React dependency to 16+
 
+## 5.9.0
+
+- Added `clearInputOnDelete` option ([yefrem](https://github.com/yefrem))
+
+## 5.8.2
+
+- Updated contents of package tarball to remove unnecessary files and decrease filesize
+
+## 5.8.1
+
+- Removed unnecessary `componentWillReceiveProps()` method from input component
+
 ## 5.8.0
 
 - Added `handleValidate` option ([axelniklasson](https://github.com/axelniklasson))

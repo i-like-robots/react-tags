@@ -1,6 +1,6 @@
 {
   "name": "react-tag-autocomplete",
-  "version": "5.8.1",
+  "version": "5.9.0",
   "description": "React Tag Autocomplete is a simple tagging component ready to drop in your React projects.",
   "main": "dist/ReactTags.cjs.js",
   "module": "dist/ReactTags.esm.js",
@@ -31,7 +31,8 @@
     "Mike Kamermans",
     "Juliette Prétot",
     "Andrew Pillsbury",
-    "Axel Niklasson"
+    "Axel Niklasson",
+    "Serhiy Yefremenko"
   ],
   "license": "MIT",
   "repository": "https://github.com/i-like-robots/react-tags",
@@ -43,7 +44,7 @@
   "devDependencies": {
     "coveralls": "^3.0.0",
     "istanbul": "^0.4.4",
-    "jasmine": "^3.1.0",
+    "jasmine": "^3.3.0",
     "jsdom": "^14.0.0",
     "prop-types": "^15.7.0",
     "react": "^16.8.0",

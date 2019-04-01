@@ -26,3 +26,8 @@ for (const key in window) {
 
   global[key] = window[key]
 }
+
+// A simple requestAnimationFrame shim which is required by React
+window.requestAnimationFrame = (callback) => {
+  setTimeout(callback, 0)
+}
