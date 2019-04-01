@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.9.0
+
+- Added `clearInputOnDelete` option ([yefrem](https://github.com/yefrem))
+
 ## 5.8.2
 
 - Updated contents of package tarball to remove unnecessary files and decrease filesize
