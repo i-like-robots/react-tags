@@ -3,7 +3,8 @@ node_js:
   - 8
   - 10
 after_success:
+  - nyc report --reporter=lcovonly
   - cat coverage/lcov.info | coveralls
 script:
   - npm run pretest
-  - npm run coverage -- --report=lcovonly
+  - npm run coverage
