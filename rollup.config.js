@@ -14,6 +14,18 @@ export default [
     input,
     external,
     plugins: [
+      buble({ objectAssign: 'Object.assign', target: { ie: 11 } })
+    ],
+    output: {
+      name: 'ReactTags',
+      file: pkg.browser,
+      format: 'umd'
+    }
+  },
+  {
+    input,
+    external,
+    plugins: [
       buble({ objectAssign: 'Object.assign', target: { node: 8 } })
     ],
     output: {
@@ -25,7 +37,7 @@ export default [
     input,
     external,
     plugins: [
-      buble({ objectAssign: 'Object.assign' })
+      buble({ objectAssign: 'Object.assign', target: { node: 8 } })
     ],
     output: {
       file: pkg.main,
