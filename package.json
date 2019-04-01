@@ -13,7 +13,7 @@
     "build:example": "webpack -p --env.NODE_ENV=production --config-name example",
     "build:es5": "buble lib --objectAssign -o dist-es5",
     "build:es6": "buble lib --objectAssign -o dist-es6 -t node:6",
-    "prepublish": "npm run build:es5 && npm run build:es6"
+    "prepare": "npm run build:es5 && npm run build:es6"
   },
   "keywords": [
     "react",
