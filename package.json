@@ -10,7 +10,7 @@
     "pretest": "npm run lint && npm run build",
     "lint": "standard lib/*.js spec/*.js",
     "test": "jasmine",
-    "coverage": "istanbul cover -i 'dist/**' jasmine",
+    "coverage": "nyc --include 'dist-es5/**' npm test",
     "dev": "NODE_ENV=development rollup -c example/rollup.config.js --watch",
     "example": "NODE_ENV=production rollup -c example/rollup.config.js",
     "build": "rollup -c rollup.config.js"
@@ -43,9 +43,9 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
-    "istanbul": "^0.4.4",
     "jasmine": "^3.3.0",
     "jsdom": "^14.0.0",
+    "nyc": "^13.3.0",
     "prop-types": "^15.7.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
