@@ -31,15 +31,16 @@ class App extends React.Component {
 
   render () {
     return (
-      <div>
+      <React.Fragment>
+        <p>Select the countries you have visited using React Tags below:</p>
         <Tags
           tags={this.state.tags}
           suggestions={this.state.suggestions}
           handleDelete={this.handleDelete.bind(this)}
           handleAddition={this.handleAddition.bind(this)} />
-        <hr />
+        <p>Output:</p>
         <pre><code>{JSON.stringify(this.state.tags, null, 2)}</code></pre>
-      </div>
+      </React.Fragment>
     )
   }
 }
