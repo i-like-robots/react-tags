@@ -69,6 +69,7 @@ React.render(<App />, document.getElementById('app'))
 
 - [`tags`](#tags-optional)
 - [`suggestions`](#suggestions-optional)
+- [`suggestionFilter`](#suggestionFilter-optional)
 - [`placeholder`](#placeholder-optional)
 - [`autofocus`](#autofocus-optional)
 - [`autoresize`](#autoresize-optional)
@@ -113,6 +114,12 @@ const suggestions = [
   { id: 6, name: "Apricots", disabled: true }
 ]
 ```
+
+#### suggestionFilter (optional)
+
+A function to filter suggestion items on; takes a suggestion `item` as the single argument.
+
+If no function is supplied the default filter is applied. Default: `null`.
 
 #### placeholder (optional)
 
