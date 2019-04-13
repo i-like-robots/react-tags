@@ -69,7 +69,7 @@ React.render(<App />, document.getElementById('app'))
 
 - [`tags`](#tags-optional)
 - [`suggestions`](#suggestions-optional)
-- [`suggestionFilter`](#suggestionFilter-optional)
+- [`suggestionsFilter`](#suggestionsFilter-optional)
 - [`placeholder`](#placeholder-optional)
 - [`autofocus`](#autofocus-optional)
 - [`autoresize`](#autoresize-optional)
@@ -115,7 +115,7 @@ const suggestions = [
 ]
 ```
 
-#### suggestionFilter (optional)
+#### suggestionsFilter (optional)
 
 A function to filter suggestion items on; takes a suggestion `item` as the single argument.
 

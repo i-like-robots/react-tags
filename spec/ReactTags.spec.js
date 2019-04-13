@@ -268,13 +268,13 @@ describe('React Tags', () => {
       })
     })
 
-    it('uses provided suggestionFilter', () => {
+    it('uses provided suggestionsFilter', () => {
       let expectedName = fixture[0].name
 
       createInstance({
         minQueryLength: 3,
         suggestions: fixture,
-        suggestionFilter: (item) => (item.name === expectedName)
+        suggestionsFilter: (item) => (item.name === expectedName)
       })
 
       type(query)
