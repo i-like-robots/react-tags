@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.10.0
+
+- Added `suggestionsFilter` option ([paulshannon](https://github.com/paulshannon))
+
 ## 5.9.0
 
 - Added `clearInputOnDelete` option ([yefrem](https://github.com/yefrem))
