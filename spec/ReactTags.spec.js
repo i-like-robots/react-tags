@@ -271,6 +271,22 @@ describe('React Tags', () => {
       })
     })
 
+    it('uses provided suggestionsFilter', () => {
+      let expectedName = fixture[0].name
+
+      createInstance({
+        minQueryLength: 3,
+        suggestions: fixture,
+        suggestionsFilter: (item) => (item.name === expectedName)
+      })
+
+      type(query)
+
+      $$('li[role="option"]').forEach((option) => {
+        expect(option.textContent).toMatch(expectedName)
+      })
+    })
+
     it('can handle non-ascii characters', () => {
       const cities = ['Закаменск', 'Заозёрный', 'Заозёрск', 'Западная Двина', 'Заполярный', 'Зарайск']
 
