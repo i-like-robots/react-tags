@@ -125,9 +125,9 @@ A function to filter suggestion items on; takes a suggestion `item` as the singl
 
 If no function is supplied the default filter is applied. Default: `null`.
 
-#### placeholder (optional)
+#### placeholderText (optional)
 
-The placeholder string shown for the input. Default: `'Add new tag'`.
+The input placeholder text displayed when no text has been entered. Default: `'Add new tag'`.
 
 #### removeButtonText (optional)
 
