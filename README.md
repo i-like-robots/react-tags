@@ -129,6 +129,10 @@ If no function is supplied the default filter is applied. Default: `null`.
 
 The placeholder string shown for the input. Default: `'Add new tag'`.
 
+#### removeButtonText (optional)
+
+The title text to add to the remove selected tag button. Default `'Click to remove tag'`.
+
 #### autoresize (optional)
 
 Boolean parameter to control whether the text-input should be automatically resized to fit its value. Default: `true`.
