@@ -7,12 +7,14 @@
 - Added `searchWrapper` to `classNames` option
 - Added ES6 package and `"module"` entry point
 - Added `id` option to configure the component ID
+- Added `removeButtonText` option to configure the selected tag remove button title attribute
+- Refactored `placeholder` option to `placeholderText` to match other text options
 - Refactored keyboard event handlers to use `KeyboardEvent.key`
 - Refactored event handlers and callbacks to use `on` prefixes
 - Refactored `classNames` option to avoid creating new and merging objects for each top-level props change
 - Removed `autofocus` option
 - Removed `delimiterChars` option
-- Updated React dependency to 16+
+- Updated React dependency to 16.5+
 
 ## 5.10.0
 
