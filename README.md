@@ -72,7 +72,8 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`tags`](#tags-optional)
 - [`suggestions`](#suggestions-optional)
 - [`suggestionsFilter`](#suggestionsFilter-optional)
-- [`placeholder`](#placeholder-optional)
+- [`placeholderText`](#placeholderText-optional)
+- [`removeButtonText`](#removeButtonText-optional)
 - [`autoresize`](#autoresize-optional)
 - [`delimiters`](#delimiters-optional)
 - [`minQueryLength`](#minquerylength-optional)
@@ -125,9 +126,13 @@ A function to filter suggestion items on; takes a suggestion `item` as the singl
 
 If no function is supplied the default filter is applied. Default: `null`.
 
-#### placeholder (optional)
+#### placeholderText (optional)
 
-The placeholder string shown for the input. Default: `'Add new tag'`.
+The input placeholder text displayed when no text has been entered. Default: `'Add new tag'`.
+
+#### removeButtonText (optional)
+
+The title text to add to the remove selected tag button. Default `'Click to remove tag'`.
 
 #### autoresize (optional)
 

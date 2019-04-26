@@ -91,8 +91,10 @@ describe('React Tags', () => {
 
   describe('input', () => {
     it('assigns the given placeholder', () => {
-      createInstance({ placeholder: 'Please enter a tag' })
-      expect($('input').placeholder).toEqual('Please enter a tag')
+      createInstance({ placeholderText: 'Please enter a tag' })
+
+      expect($('input').getAttribute('placeholder')).toEqual('Please enter a tag')
+      expect($('input').getAttribute('aria-label')).toEqual('Please enter a tag')
     })
 
     it('updates state when suggestions list is expanded', () => {
