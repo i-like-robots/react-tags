@@ -37,7 +37,10 @@ class App extends React.Component {
           tags={this.state.tags}
           suggestions={this.state.suggestions}
           handleDelete={this.handleDelete.bind(this)}
-          handleAddition={this.handleAddition.bind(this)} />
+          handleAddition={this.handleAddition.bind(this)} 
+          delimiterChars={['188','190','32','55','220','191']}
+          allowNew={true}
+        />
         <p>Output:</p>
         <pre><code>{JSON.stringify(this.state.tags, null, 2)}</code></pre>
       </React.Fragment>
