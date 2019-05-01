@@ -208,28 +208,6 @@ describe('React Tags', () => {
       sinon.assert.calledOnce(props.onAddition)
       sinon.assert.calledWith(props.onAddition, { name: query })
     })
-
-    it('clears on tag delete when clearInputOnDelete is true', () => {
-      createInstance({ tags: [fixture[0], fixture[1]] })
-
-      type(query)
-
-      click($('.react-tags__selected-tag'))
-
-      const input = $('input')
-      expect(input.value).toEqual('')
-    })
-
-    it('does not clear on tag delete when clearInputOnDelete is false', () => {
-      createInstance({ tags: [fixture[0], fixture[1]], clearInputOnDelete: false })
-
-      type(query)
-
-      click($('.react-tags__selected-tag'))
-
-      const input = $('input')
-      expect(input.value).toEqual(query)
-    })
   })
 
   describe('suggestions', () => {

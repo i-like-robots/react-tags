@@ -12,6 +12,8 @@
 - Refactored keyboard event handlers to use `KeyboardEvent.key`
 - Refactored event handlers and callbacks to use `on` prefixes
 - Refactored `classNames` option to avoid creating new and merging objects for each top-level props change
+- Refactored `deleteTag` method so it no longer clears the input text when a tag is removed
+- Removed `clearInputOnDelete` option
 - Removed `autofocus` option
 - Removed `delimiterChars` option
 - Updated React dependency to 16.5+
