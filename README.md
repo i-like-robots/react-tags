@@ -88,7 +88,6 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`addOnBlur`](#addonblur-optional)
 - [`allowNew`](#allownew-optional)
 - [`allowBackspace`](#allowbackspace-optional)
-- [`clearInputOnDelete`](#clearinputondelete-optional)
 - [`tagComponent`](#tagcomponent-optional)
 - [`inputAttributes`](#inputAttributes-optional)
 
@@ -237,10 +236,6 @@ Allows users to add new (not suggested) tags. Default: `false`.
 #### allowBackspace (optional)
 
 Disables ability to delete the selected tags when backspace is pressed while focussed on the text input. Default: `true`.
-
-#### clearInputOnDelete (optional)
-
-Clear the text input when a tag is deleted. Default: `true`.
 
 #### tagComponent (optional)
 
