@@ -268,20 +268,19 @@ describe('React Tags', () => {
       })
     })
 
-    it('uses provided suggestionsFilter', () => {
-      let expectedName = fixture[0].name
-
+    it('uses provided suggestionsFilter callback', () => {
       createInstance({
         minQueryLength: 3,
         suggestions: fixture,
-        suggestionsFilter: (item) => (item.name === expectedName)
+        suggestionsFilter: (item, query) => item.name.includes(query)
       })
 
-      type(query)
+      type('uni')
 
-      $$('li[role="option"]').forEach((option) => {
-        expect(option.textContent).toMatch(expectedName)
-      })
+      const results = $$('li[role="option"]')
+
+      expect(results.some((result) => result.textContent === 'Reunion')).toBeTruthy()
+      expect(results.some((result) => result.textContent === 'Tunisia')).toBeTruthy()
     })
 
     it('can handle non-ascii characters', () => {

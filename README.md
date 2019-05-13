@@ -119,9 +119,20 @@ const suggestions = [
 
 #### suggestionsFilter (optional)
 
-A function to filter suggestion items on; takes a suggestion `item` as the single argument.
+A callback function to filter suggestion items with. The callback receives two arguments; a `suggestion` and the current `query` and must return a boolean value.
 
 If no function is supplied the default filter is applied. Default: `null`.
+
+Example of a function which returns items containing `query`:
+
+```js
+import  stringScore from 'string-score'
+
+function suggestionsFilter(item, query) {
+  const score = stringScore(item.name, query)
+  return score > 0.5
+}
+```
 
 #### placeholder (optional)
 
