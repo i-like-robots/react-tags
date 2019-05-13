@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.0
+
+- Added the current query as the second argument for the `suggestionsFilter` option
+
 ## 5.10.0
 
 - Added `suggestionsFilter` option ([paulshannon](https://github.com/paulshannon))
