@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.1
+
+- Fixed an issue with suggestion highlighting when the entered query is blank
+
 ## 5.11.0
 
 - Added the current query as the second argument for the `suggestionsFilter` option
