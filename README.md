@@ -2,7 +2,7 @@
 
 [![Build status](https://api.travis-ci.org/i-like-robots/react-tags.svg?branch=master)](https://travis-ci.org/i-like-robots/react-tags) [![Coverage Status](https://coveralls.io/repos/github/i-like-robots/react-tags/badge.svg?branch=master)](https://coveralls.io/github/i-like-robots/react-tags)
 
-React Tag Autocomplete is a simple tagging component ready to drop in your React projects. Originally based on the [React Tags project](http://prakhar.me/react-tags/example) by Prakhar Srivastav this version removes the drag-and-drop re-ordering functionality, adds appropriate roles and ARIA states and introduces a resizing text input. React Tag Autocomplete is compatible with [Preact](https://preactjs.com/) >= 6.0.0.
+React Tag Autocomplete is a simple tagging component ready to drop in your React projects. Originally based on the [React Tags project](http://prakhar.me/react-tags/example) by Prakhar Srivastav this version removes the drag-and-drop re-ordering functionality, adds appropriate roles and ARIA states and introduces a resizing text input.
 
 **Please note, this version is in beta, you can check out the [latest stable version here](https://github.com/i-like-robots/react-tags)** 📢
 
@@ -10,20 +10,26 @@ React Tag Autocomplete is a simple tagging component ready to drop in your React
 
 ## Installation
 
-The preferred way of using the component is via npm.
+This is a [Node.js] module available through the [npm] registry. Before installing, download and install Node.js.
+
+Installation is done using the [npm install] command:
 
 ```
 npm install --save react-tag-autocomplete@pre-release
 ```
 
+[Node.js]: https://nodejs.org/en/
+[npm]: https://www.npmjs.com/
+[npm install]: https://docs.npmjs.com/getting-started/installing-npm-packages-locally
+
 ## Usage
 
-Here's a sample implementation that initializes the component with a list of preselected `tags` and a `suggestions` list. For more details, go through the [API](#Options).
+Here's a sample implementation that initializes the component with a list of preselected `tags` and a `suggestions` list. For further customization details, see [options](#options).
 
 ```js
-const React = require('react')
-const ReactDOM = require('react-dom')
-const ReactTags = require('react-tag-autocomplete')
+import React from 'react'
+import ReactDOM from 'react-dom'
+import ReactTags from 'react-tag-autocomplete'
 
 class App extends React.Component {
   constructor (props) {
@@ -68,14 +74,15 @@ class App extends React.Component {
 ReactDOM.render(<App />, document.getElementById('app'))
 ```
 
+
 ### Options
 
 - [`id`](#id-optional)
 - [`tags`](#tags-optional)
 - [`suggestions`](#suggestions-optional)
-- [`suggestionsFilter`](#suggestionsFilter-optional)
-- [`placeholderText`](#placeholderText-optional)
-- [`removeButtonText`](#removeButtonText-optional)
+- [`suggestionsFilter`](#suggestionsfilter-optional)
+- [`placeholderText`](#placeholdertext-optional)
+- [`removeButtonText`](#removeButtontext-optional)
 - [`autoresize`](#autoresize-optional)
 - [`delimiters`](#delimiters-optional)
 - [`minQueryLength`](#minquerylength-optional)
@@ -99,25 +106,25 @@ The ID attribute given to the listbox element. Default: `ReactTags`.
 
 #### tags (optional)
 
-An array of tags that are displayed as pre-selected. Each tag must have an `id` and a `name` property. Default: `[]`.
+An array of selected tags. Each tag is an object which must have an `id` and a `name` property. Defaults to `[]`.
 
 ```js
 const tags =  [
-  { id: 1, name: "Apples" },
-  { id: 2, name: "Pears" }
+  { id: 1, name: 'Apples' },
+  { id: 2, name: 'Pears' }
 ]
 ```
 
 #### suggestions (optional)
 
-An array of suggestions that are used as basis for showing suggestions. Each suggestion must have an `id` and a `name` property and an optional `disabled` property. Default: `[]`.
+An array of tag suggestions. Each suggestion is an object which must have an `id` and a `name` property and an optional `disabled` property to make the suggestion non-selectable. Defaults to `[]`.
 
 ```js
 const suggestions = [
-  { id: 3, name: "Bananas" },
-  { id: 4, name: "Mangos" },
-  { id: 5, name: "Lemons" },
-  { id: 6, name: "Apricots", disabled: true }
+  { id: 3, name: 'Bananas' },
+  { id: 4, name: 'Mangos' },
+  { id: 5, name: 'Lemons' },
+  { id: 6, name: 'Apricots', disabled: true }
 ]
 ```
 
@@ -125,22 +132,11 @@ const suggestions = [
 
 A callback function to filter suggestion items with. The callback receives two arguments; a `suggestion` and the current `query` and must return a boolean value.
 
-If no function is supplied the default filter is applied. Default: `null`.
-
-Below is an example of a function which returns items containing `query`:
-
-```js
-import  stringScore from 'string-score'
-
-function suggestionsFilter(item, query) {
-  const score = stringScore(item.name, query)
-  return score > 0.5
-}
-```
+If no function is supplied the default filter is applied. Defaults to `null`.
 
 #### placeholderText (optional)
 
-The input placeholder text displayed when no text has been entered. Default: `'Add new tag'`.
+The placeholder string shown for the input. Defaults to `'Add new tag'`.
 
 #### removeButtonText (optional)
 
@@ -148,23 +144,23 @@ The title text to add to the remove selected tag button. Default `'Click to remo
 
 #### autoresize (optional)
 
-Boolean parameter to control whether the text-input should be automatically resized to fit its value. Default: `true`.
+Boolean parameter to control whether the text-input should be automatically resized to fit its value. Defaults to `true`.
 
 #### delimiters (optional)
 
-Array of keys matching keyboard event `key` values. When a corresponding key is pressed, the preceding string is finalised as tag. Default: `['Enter', 'Tab']`.
+Array of keys matching `KeyboardEvent.key` values. When a corresponding key is pressed it will trigger tag selection or creation. Defaults to `['Enter', 'Tab']`.
 
 #### minQueryLength (optional)
 
-How many characters are needed for suggestions to appear. Default: `2`.
+Minimum query length required to show the suggestions list. Defaults to `2`.
 
 #### maxSuggestionsLength (optional)
 
-Maximum number of suggestions to display. Default: `6`.
+Maximum number of suggestions to display. Defaults to `6`.
 
 #### classNames (optional)
 
-Override the default class names. Defaults:
+Override the default class names used by the component. Defaults to:
 
 ```js
 {
@@ -188,8 +184,8 @@ Function called when the user wants to add a tag. Receives the tag.
 
 ```js
 function onAddition(tag) {
-  // Add the tag { id, name } to the tag list
-  tags.push(tag)
+  const tags = [...this.state.tags, tag]
+  this.setState({ tags })
 }
 ```
 
@@ -199,21 +195,22 @@ Function called when the user wants to delete a tag. Receives the tag index.
 
 ```js
 function onDelete(i) {
-  // Delete the tag at index i
+  const tags = this.state.tags.slice(0)
   tags.splice(i, 1)
+  this.setState({ tags })
 }
 ```
 
 #### onInput (optional)
 
-Optional event handler when the input changes. Receives the current input value.
+Optional event handler when the input value changes. Receives the current query.
 
 ```js
-function onInput(input) {
+function onInput(query) {
   if (!this.state.busy) {
     this.setState({ busy: true })
 
-    return fetch(`query=${input}`).then((result) => {
+    return fetch(`query=${query}`).then((result) => {
       this.setState({ busy: false })
     })
   }
@@ -222,15 +219,15 @@ function onInput(input) {
 
 #### onFocus (optional)
 
-Optional event handler when the input receives focus. Receives no arguments.
+Optional callback function for when the input receives focus. Receives no arguments.
 
 #### onBlur (optional)
 
-Optional event handler when focus on the input is lost. Receives no arguments.
+Optional callback function for when focus on the input is lost. Receives no arguments.
 
 #### onValidate (optional)
 
-Optional validation function that determines if tag should be added to tags. Receives a tag object. Should return a boolean.
+Optional validation function that determines if tag should be added. Receives the tag object and must return a boolean.
 
 ```js
 function onValidate(tag) {
@@ -240,19 +237,19 @@ function onValidate(tag) {
 
 #### addOnBlur (optional)
 
-Creates a tag from the current input value when focus on the input is lost. Default: `false`.
+Creates a tag from the current input value when focus on the input is lost. Defaults to `false`.
 
 #### allowNew (optional)
 
-Allows users to add new (not suggested) tags. Default: `false`.
+Enable users to add new (not suggested) tags. Defaults to `false`.
 
 #### allowBackspace (optional)
 
-Disables ability to delete the selected tags when backspace is pressed while focussed on the text input. Default: `true`.
+Enable users to delete selected tags when backspace is pressed while focussed on the text input when empty. Defaults to `true`.
 
 #### tagComponent (optional)
 
-Provide a custom tag component to render. Default: `null`.
+Provide a custom tag component to render. Defaults to `null`.
 
 #### suggestionComponent (optional)
 
@@ -260,9 +257,8 @@ Provide a custom suggestion component to render. Default: `null`.
 
 #### inputAttributes (optional)
 
-An object containing additional attributes that will be applied to the underlying text `<input />` field.
+An object containing additional attributes that will be applied to the text input. _Please note_ that this prop cannot overwrite existing attributes, it can only add new ones. Defaults to `{}`.
 
-As an example `inputAttributes={{ maxLength: 10 }}` would be applied as `<input maxlength="10" … />`. Note this prop won't overwrite existing attributes, it can only add new ones.
 
 ### API
 
@@ -274,7 +270,8 @@ As an example `inputAttributes={{ maxLength: 10 }}` would be applied as `<input 
 
 ### Styling
 
-It is possible to customize the look of the component the way you want it. An example can be found in `/example/styles.css`.
+It is possible to customize the appearance of the component, the included styles found in `/example/styles.css` are only an example.
+
 
 ### Development
 
