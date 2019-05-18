@@ -2,7 +2,7 @@
 
 [![Build status](https://api.travis-ci.org/i-like-robots/react-tags.svg?branch=master)](https://travis-ci.org/i-like-robots/react-tags) [![Coverage Status](https://coveralls.io/repos/github/i-like-robots/react-tags/badge.svg?branch=master)](https://coveralls.io/github/i-like-robots/react-tags)
 
-React Tag Autocomplete is a simple tagging component ready to drop in your React projects. Originally based on the [React Tags project](http://prakhar.me/react-tags/example) by Prakhar Srivastav this version removes the drag-and-drop re-ordering functionality, adds appropriate roles and ARIA states and introduces a resizing text input. React Tag Autocomplete is compatible with [Preact](https://preactjs.com/) >= 6.0.0.
+React Tag Autocomplete is a simple tagging component ready to drop in your React projects. Originally based on the [React Tags project](http://prakhar.me/react-tags/example) by Prakhar Srivastav this version removes the drag-and-drop re-ordering functionality, adds appropriate roles and ARIA states and introduces a resizing text input.
 
 **Version 6 of this component is in beta! Please [take a look here](https://github.com/i-like-robots/react-tags/tree/6.0)** ✨
 
@@ -10,19 +10,25 @@ React Tag Autocomplete is a simple tagging component ready to drop in your React
 
 ## Installation
 
-The preferred way of using the component is via NPM
+This is a [Node.js] module available through the [npm] registry. Before installing, download and install Node.js.
+
+Installation is done using the [npm install] command:
 
 ```
 npm install --save react-tag-autocomplete
 ```
 
+[Node.js]: https://nodejs.org/en/
+[npm]: https://www.npmjs.com/
+[npm install]: https://docs.npmjs.com/getting-started/installing-npm-packages-locally
+
 ## Usage
 
-Here's a sample implementation that initializes the component with a list of preselected `tags` and a `suggestions` list. For more details, go through the [API](#Options).
+Here's a sample implementation that initializes the component with a list of preselected `tags` and a `suggestions` list. For further customization details, see [options](#options).
 
 ```js
-const React = require('react')
-const ReactTags = require('react-tag-autocomplete')
+import React from 'react'
+import ReactTags from 'react-tag-autocomplete'
 
 class App extends React.Component {
   constructor (props) {
@@ -67,16 +73,17 @@ class App extends React.Component {
 React.render(<App />, document.getElementById('app'))
 ```
 
+
 ### Options
 
 - [`tags`](#tags-optional)
 - [`suggestions`](#suggestions-optional)
-- [`suggestionsFilter`](#suggestionsFilter-optional)
+- [`suggestionsFilter`](#suggestionsfilter-optional)
 - [`placeholder`](#placeholder-optional)
 - [`autofocus`](#autofocus-optional)
 - [`autoresize`](#autoresize-optional)
 - [`delimiters`](#delimiters-optional)
-- [`delimiterChars`](#delimitersChars-optional)
+- [`delimiterChars`](#delimiterschars-optional)
 - [`minQueryLength`](#minquerylength-optional)
 - [`maxSuggestionsLength`](#maxsuggestionslength-optional)
 - [`classNames`](#classnames-optional)
@@ -95,25 +102,25 @@ React.render(<App />, document.getElementById('app'))
 
 #### tags (optional)
 
-An array of tags that are displayed as pre-selected. Each tag must have an `id` and a `name` property. Default: `[]`.
+An array of selected tags. Each tag is an object which must have an `id` and a `name` property. Defaults to `[]`.
 
 ```js
 const tags =  [
-  { id: 1, name: "Apples" },
-  { id: 2, name: "Pears" }
+  { id: 1, name: 'Apples' },
+  { id: 2, name: 'Pears' }
 ]
 ```
 
 #### suggestions (optional)
 
-An array of suggestions that are used as basis for showing suggestions. Each suggestion must have an `id` and a `name` property and an optional `disabled` property. Default: `[]`.
+An array of tag suggestions. Each suggestion is an object which must have an `id` and a `name` property and an optional `disabled` property to make the suggestion non-selectable. Defaults to `[]`.
 
 ```js
 const suggestions = [
-  { id: 3, name: "Bananas" },
-  { id: 4, name: "Mangos" },
-  { id: 5, name: "Lemons" },
-  { id: 6, name: "Apricots", disabled: true }
+  { id: 3, name: 'Bananas' },
+  { id: 4, name: 'Mangos' },
+  { id: 5, name: 'Lemons' },
+  { id: 6, name: 'Apricots', disabled: true }
 ]
 ```
 
@@ -121,50 +128,39 @@ const suggestions = [
 
 A callback function to filter suggestion items with. The callback receives two arguments; a `suggestion` and the current `query` and must return a boolean value.
 
-If no function is supplied the default filter is applied. Default: `null`.
-
-Example of a function which returns items containing `query`:
-
-```js
-import  stringScore from 'string-score'
-
-function suggestionsFilter(item, query) {
-  const score = stringScore(item.name, query)
-  return score > 0.5
-}
-```
+If no function is supplied the default filter is applied. Defaults to `null`.
 
 #### placeholder (optional)
 
-The placeholder string shown for the input. Default: `'Add new tag'`.
+The placeholder string shown for the input. Defaults to `'Add new tag'`.
 
 #### autofocus (optional)
 
-Boolean parameter to control whether the text-input should be autofocused on mount. Default: `true`.
+Boolean parameter to control whether the text-input should be autofocused on mount. Defaults to `true`.
 
 #### autoresize (optional)
 
-Boolean parameter to control whether the text-input should be automatically resized to fit its value. Default: `true`.
+Boolean parameter to control whether the text-input should be automatically resized to fit its value. Defaults to `true`.
 
 #### delimiters (optional)
 
-Array of integers matching keyboard event `keyCode` values. When a corresponding key is pressed, the preceding string is finalised as tag. Default: `[9, 13]` (Tab and return keys).
+An array of numbers matching `KeyboardEvent.keyCode` values. When a corresponding key is pressed it will trigger tag selection or creation. Defaults to `[9, 13]` (Tab and return keys).
 
 #### delimiterChars (optional)
 
-Array of characters matching keyboard event `key` values. This is useful when needing to support a specific character irrespective of the keyboard layout. Note, that this list is separate from the one specified by the `delimiters` option, so you'll need to set the value there to `[]`, if you wish to disable those keys. Example usage: `delimiterChars={[',', ' ']}`. Default: `[]`
+Array of characters matching `KeyboardEvent.key` values. This is useful when needing to support a specific character irrespective of the keyboard layout. Defaults to `[]`.
 
 #### minQueryLength (optional)
 
-How many characters are needed for suggestions to appear. Default: `2`.
+Minimum query length required to show the suggestions list. Defaults to `2`.
 
 #### maxSuggestionsLength (optional)
 
-Maximum number of suggestions to display. Default: `6`.
+Maximum number of suggestions to display. Defaults to `6`.
 
 #### classNames (optional)
 
-Override the default class names. Defaults:
+Override the default class names used by the component. Defaults to:
 
 ```js
 {
@@ -187,8 +183,8 @@ Function called when the user wants to add a tag. Receives the tag.
 
 ```js
 function handleAddition(tag) {
-  // Add the tag { id, name } to the tag list
-  tags.push(tag)
+  const tags = [...this.state.tags, tag]
+  this.setState({ tags })
 }
 ```
 
@@ -198,21 +194,22 @@ Function called when the user wants to delete a tag. Receives the tag index.
 
 ```js
 function handleDelete(i) {
-  // Delete the tag at index i
+  const tags = this.state.tags.slice(0)
   tags.splice(i, 1)
+  this.setState({ tags })
 }
 ```
 
 #### handleInputChange (optional)
 
-Optional event handler when the input changes. Receives the current input value.
+Optional event handler when the input value changes. Receives the current query.
 
 ```js
-function handleInputChange(input) {
+function handleInputChange(query) {
   if (!this.state.busy) {
     this.setState({ busy: true })
 
-    return fetch(`query=${input}`).then((result) => {
+    return fetch(`query=${query}`).then((result) => {
       this.setState({ busy: false })
     })
   }
@@ -221,15 +218,15 @@ function handleInputChange(input) {
 
 #### handleFocus (optional)
 
-Optional event handler when the input receives focus. Receives no arguments.
+Optional callback function for when the input receives focus. Receives no arguments.
 
 #### handleBlur (optional)
 
-Optional event handler when focus on the input is lost. Receives no arguments.
+Optional callback function for when focus on the input is lost. Receives no arguments.
 
 #### handleValidate (optional)
 
-Optional validation function that determines if tag should be added to tags. Receives a tag object. Should return a boolean.
+Optional validation function that determines if tag should be added. Receives the tag object and must return a boolean.
 
 ```js
 function handleValidate(tag) {
@@ -239,33 +236,33 @@ function handleValidate(tag) {
 
 #### addOnBlur (optional)
 
-Creates a tag from the current input value when focus on the input is lost. Default: `false`.
+Creates a tag from the current input value when focus on the input is lost. Defaults to `false`.
 
 #### allowNew (optional)
 
-Allows users to add new (not suggested) tags. Default: `false`.
+Enable users to add new (not suggested) tags. Defaults to `false`.
 
 #### allowBackspace (optional)
 
-Disables ability to delete the selected tags when backspace is pressed while focussed on the text input. Default: `true`.
+Enable users to delete selected tags when backspace is pressed while focussed on the text input when empty. Defaults to `true`.
 
 #### clearInputOnDelete (optional)
 
-Clear the text input when a tag is deleted. Default: `true`.
+Clear the text input when a tag is deleted. Defaults to `true`.
 
 #### tagComponent (optional)
 
-Provide a custom tag component to render. Default: `null`.
+Provide a custom tag component to render. Defaults to `null`.
 
 #### inputAttributes (optional)
 
-An object containing additional attributes that will be applied to the underlying text `<input />` field.
+An object containing additional attributes that will be applied to the text input. _Please note_ that this prop cannot overwrite existing attributes, it can only add new ones. Defaults to `{}`.
 
-As an example `inputAttributes={{ maxLength: 10 }}` would be applied as `<input maxlength="10" … />`. Note this prop won't overwrite existing attributes, it can only add new ones.
 
 ### Styling
 
-It is possible to customize the look of the component the way you want it. An example can be found in `/example/styles.css`.
+It is possible to customize the appearance of the component, the included styles found in `/example/styles.css` are only an example.
+
 
 ### Development
 
@@ -275,6 +272,7 @@ The component is written in ES6 and uses [Webpack](http://webpack.github.io/) as
 npm install
 npm run dev # open http://localhost:8080
 ```
+
 
 ### Upgrading from 4.x to 5.x
 
