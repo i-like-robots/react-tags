@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import Tags from '../'
+import Tags from '../lib/ReactTags'
 import suggestions from './countries'
 
 class App extends React.Component {
