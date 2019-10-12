@@ -384,6 +384,12 @@ describe('React Tags', () => {
       sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
     })
 
+    it('does not trigger addition for a previously selected suggestion when no longer suggested', () => {
+      type('french'); key('down', 'down'); type('fries'); key('enter')
+
+      sinon.assert.notCalled(props.handleAddition)
+    })
+
     it('clears the input when an addition is triggered', () => {
       type(query); key('down', 'down', 'enter')
 
