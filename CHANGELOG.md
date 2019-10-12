@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.11.2
+
+- Fixed an issue with the delimiter key logic which would attempt to add a previously selected suggestion even when it was no longer in the suggestion list.
+
 ## 5.11.1
 
 - Fixed an issue with suggestion highlighting when the entered query is blank
