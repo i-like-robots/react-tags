@@ -400,6 +400,27 @@ describe('React Tags', () => {
 
       expect($$('.custom-suggestion').length).toEqual(3)
     })
+
+    describe('when minQueryLength is zero', () => {
+      beforeEach(() => {
+        createInstance({ minQueryLength: 0, suggestions: fixture })
+      })
+
+      it('shows suggestions list when the input is focused', () => {
+        TestUtils.Simulate.focus($('input'))
+        expect($('ul[role="listbox"]')).toBeTruthy()
+      })
+
+      it('resets the suggestions list when an addition is triggered', () => {
+        type('french')
+
+        expect($$('li[role="option"]').length).toEqual(2)
+
+        key('ArrowDown', 'ArrowDown', 'Enter')
+
+        expect($$('li[role="option"]').length).toEqual(6)
+      })
+    })
   })
 
   describe('tags', () => {
