@@ -85,7 +85,6 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`removeButtonText`](#removeButtontext-optional)
 - [`autoresize`](#autoresize-optional)
 - [`delimiters`](#delimiters-optional)
-- [`delimiterChars`](#delimiterchars-optional)
 - [`minQueryLength`](#minquerylength-optional)
 - [`maxSuggestionsLength`](#maxsuggestionslength-optional)
 - [`classNames`](#classnames-optional)
@@ -150,10 +149,6 @@ Boolean parameter to control whether the text-input should be automatically resi
 #### delimiters (optional)
 
 Array of keys matching `KeyboardEvent.key` values. When a corresponding key is pressed it will trigger tag selection or creation. Defaults to `['Enter', 'Tab']`.
-
-#### delimiterChars (optional)
-
-Array of literal characters. When a corresponding character is entered it will trigger tag selection or creation. Defaults to `[',', ';']`.
 
 #### minQueryLength (optional)
 
@@ -296,7 +291,7 @@ To see all changes refer to [the changelog](CHANGELOG.md).
 - React 16.5 or above is now required.
 - Event handlers and callbacks have been renamed to use `on` prefixes, e.g. the `handleAddition()` callback should now be called `onAddition()`.
 - The `delimiters` option is now an array of `KeyboardEvent.key` values and not `KeyboardEvent.keyCode` codes, e.g. `[13, 9]` should now be written as `['Enter', 'Tab']`. See https://keycode.info/ for more information.
-- The `delimiterChars` option is now an array of literal characters, e.g. `[',', ';']`.
 - The `placeholder` option has been renamed `placeholderText`
+- The `delimiterChars` option has been removed, use the `delimiters` option instead.
 - The `clearInputOnDelete` option has been removed and is now the default behaviour
 - The `autofocus` option has been removed.

@@ -13,6 +13,7 @@
 - Refactored event handlers and callbacks to use `on` prefixes
 - Refactored `classNames` option to avoid creating new and merging objects for each top-level props change
 - Refactored `deleteTag` method so it no longer clears the input text when a tag is removed
+- Refactored `delimiters` option to be an array of `KeyboardEvent.key` values
 - Removed `clearInputOnDelete` option
 - Removed `autofocus` option
 - Removed `delimiterChars` option
