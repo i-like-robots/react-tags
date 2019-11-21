@@ -93,6 +93,7 @@ React.render(<App />, document.getElementById('app'))
 - [`handleFocus`](#handlefocus-optional)
 - [`handleBlur`](#handleblur-optional)
 - [`handleValidate`](#handlevalidate-optional)
+- [`handleKeyPress`](#handlekeypress-optional)
 - [`addOnBlur`](#addonblur-optional)
 - [`allowNew`](#allownew-optional)
 - [`allowBackspace`](#allowbackspace-optional)
@@ -231,6 +232,18 @@ Optional validation function that determines if tag should be added. Receives th
 ```js
 function handleValidate(tag) {
   return tag.name.length >= 5;
+}
+```
+
+#### handleKeyPress (optional)
+
+Optional key press function that can be used to check if specific key was pressed. For example if comma/tab is used to add tags to input then you can use 'Enter' key to submit form or anything else you might want to do.
+
+```js
+function handleKeyPress(e) {
+  if(e.key == 'Enter') {
+    // Submit form or do whatever
+  }
 }
 ```
 
