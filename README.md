@@ -137,7 +137,7 @@ The placeholder string shown for the input. Defaults to `'Add new tag'`.
 
 #### noSuggestionsMessage (optional)
 
-Message shown if there are no matching suggestions. Defaults to `'No suggestions found'`.
+Message shown if there are no matching suggestions. Defaults to `null`.
 
 #### autofocus (optional)
 
