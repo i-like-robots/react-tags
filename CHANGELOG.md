@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.12.0
+
+- Added `noSuggestionsText` option ([jraack](https://github.com/jraack))
+
 ## 5.11.2
 
 - Fixed an issue with the delimiter key logic which would attempt to add a previously selected suggestion even when it was no longer in the suggestion list.
