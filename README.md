@@ -80,7 +80,7 @@ React.render(<App />, document.getElementById('app'))
 - [`suggestions`](#suggestions-optional)
 - [`suggestionsFilter`](#suggestionsfilter-optional)
 - [`placeholder`](#placeholder-optional)
-- [`noSuggestionsMessage`](#nosuggestionsmessage-optional)
+- [`noSuggestionsText`](#noSuggestionsText-optional)
 - [`autofocus`](#autofocus-optional)
 - [`autoresize`](#autoresize-optional)
 - [`delimiters`](#delimiters-optional)
@@ -135,7 +135,7 @@ If no function is supplied the default filter is applied. Defaults to `null`.
 
 The placeholder string shown for the input. Defaults to `'Add new tag'`.
 
-#### noSuggestionsMessage (optional)
+#### noSuggestionsText (optional)
 
 Message shown if there are no matching suggestions. Defaults to `null`.
 

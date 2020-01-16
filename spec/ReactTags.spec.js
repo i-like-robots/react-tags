@@ -248,7 +248,7 @@ describe('React Tags', () => {
     })
 
     it('shows a message when there are no suggestions available', () => {
-      createInstance({ noSuggestionsMessage: 'No suggestions found' })
+      createInstance({ noSuggestionsText: 'No suggestions found' })
 
       type('xyz')
       expect($('ul[role="listbox"] > li:first-child').textContent).toEqual('No suggestions found')
