@@ -35,6 +35,7 @@ class App extends React.Component {
         <p>Select the countries you have visited using React Tags below:</p>
         <Tags
           tags={this.state.tags}
+          noSuggestionsText={'No suggestions found'}
           suggestions={this.state.suggestions}
           handleDelete={this.handleDelete.bind(this)}
           handleAddition={this.handleAddition.bind(this)} />

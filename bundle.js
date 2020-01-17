@@ -29707,7 +29707,7 @@
 	  TAB: 'Tab',
 	  BACKSPACE: 'Backspace',
 	  UP_ARROW: 'ArrowUp',
-	  UP_ARROW_COMPAT: 'UP',
+	  UP_ARROW_COMPAT: 'Up',
 	  DOWN_ARROW: 'ArrowDown',
 	  DOWN_ARROW_COMPAT: 'Down'
 	};
@@ -29817,7 +29817,11 @@
 	      this.props.onInput(query);
 	    }
 
-	    if (query !== this.state.query) {
+	    var lastChar = query.length === this.state.query.length + 1 ? query.slice(-1) : null;
+
+	    if (lastChar && this.props.delimiterChars.indexOf(lastChar) > -1) {
+	      pressDelimiter.call(this);
+	    } else if (query !== this.state.query) {
 	      var options = getOptions.call(this, query);
 	      this.setState({ query: query, options: options });
 	    }
@@ -29941,6 +29945,7 @@
 	  autoresize: true,
 	  classNames: CLASS_NAMES,
 	  delimiters: [KEYS.TAB, KEYS.ENTER],
+	  delimiterChars: [',', ';'],
 	  minQueryLength: 2,
 	  maxSuggestionsLength: 6,
 	  allowNew: false,
@@ -29959,7 +29964,8 @@
 	  suggestions: propTypes.arrayOf(propTypes.object),
 	  suggestionsFilter: propTypes.func,
 	  autoresize: propTypes.bool,
-	  delimiters: propTypes.arrayOf(propTypes.string),
+	  delimiter: propTypes.arrayOf(propTypes.string),
+	  delimiterChars: propTypes.arrayOf(propTypes.string),
 	  onDelete: propTypes.func.isRequired,
 	  onAddition: propTypes.func.isRequired,
 	  onInput: propTypes.func,
@@ -30020,7 +30026,7 @@
 	      react.createElement( react.Fragment, null,
 	        react.createElement( 'p', null, "Select the countries you have visited using React Tags below:" ),
 	        react.createElement( ReactTags, {
-	          minQueryLength: 0, tags: this.state.tags, suggestions: this.state.suggestions, onDelete: this.onDelete.bind(this), onAddition: this.onAddition.bind(this) }),
+	          tags: this.state.tags, suggestions: this.state.suggestions, onDelete: this.onDelete.bind(this), onAddition: this.onAddition.bind(this) }),
 	        react.createElement( 'p', null, "Output:" ),
 	        react.createElement( 'pre', null, react.createElement( 'code', null, JSON.stringify(this.state.tags, null, 2) ) )
 	      )
