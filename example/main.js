@@ -1,8 +1,8 @@
 'use strict'
 
 const React = require('react')
-const ReactDom = require('react-dom')
-const Tags = require('../lib/ReactTags')
+const ReactDOM = require('react-dom')
+const ReactTags = require('../lib/ReactTags')
 const suggestions = require('./countries')
 
 class App extends React.Component {
@@ -33,7 +33,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <p>Select the countries you have visited using React Tags below:</p>
-        <Tags
+        <ReactTags
           tags={this.state.tags}
           noSuggestionsText={'No suggestions found'}
           suggestions={this.state.suggestions}
@@ -46,4 +46,4 @@ class App extends React.Component {
   }
 }
 
-ReactDom.render(<App />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'))
