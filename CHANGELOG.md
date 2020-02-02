@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.12.1
+
+- Fixed an issue where the `componentDidUpdate()` callback of the input component can be called too many times
+
 ## 5.12.0
 
 - Added `noSuggestionsText` option ([jraack](https://github.com/jraack))
