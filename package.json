@@ -9,7 +9,7 @@
     "prepare": "npm run build",
     "prepublish": "npm run build",
     "pretest": "npm run lint && npm run build",
-    "lint": "standard 'lib/*.js spec/*.js",
+    "lint": "standard lib/*.js spec/*.js",
     "test": "jasmine",
     "coverage": "nyc --include 'dist-es5/**' npm test",
     "dev": "NODE_ENV=development rollup -c example/rollup.config.js --watch",

@@ -19,11 +19,11 @@ const plugins = [
   resolve(),
   // Use CommonJS plugin to include non-ES modules
   commonjs()
-];
+]
 
 if (process.env.NODE_ENV === 'production') {
-    // Use Uglify plugin to minify output
-    plugins.push(uglify())
+  // Use Uglify plugin to minify output
+  plugins.push(uglify())
 } else {
   plugins.push(serve({ open: true, contentBase: 'example', port: 8080 }))
 }
