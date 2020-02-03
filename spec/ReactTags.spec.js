@@ -228,9 +228,13 @@ describe('React Tags', () => {
     it('shows the suggestions list when there are suggestions available', () => {
       type(query)
       expect($('ul[role="listbox"]')).toBeTruthy()
+    })
+
+    it('shows a message when there are no suggestions available', () => {
+      createInstance({ noSuggestionsText: 'No suggestions found' })
 
       type('xyz')
-      expect($('ul[role="listbox"]')).toBeNull()
+      expect($('ul[role="listbox"] > li:first-child').textContent).toEqual('No suggestions found')
     })
 
     it('hides the suggestions list when the input is not focused', () => {

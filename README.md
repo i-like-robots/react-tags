@@ -2,7 +2,7 @@
 
 [![Build status](https://api.travis-ci.org/i-like-robots/react-tags.svg?branch=master)](https://travis-ci.org/i-like-robots/react-tags) [![Coverage Status](https://coveralls.io/repos/github/i-like-robots/react-tags/badge.svg?branch=master)](https://coveralls.io/github/i-like-robots/react-tags)
 
-React Tag Autocomplete is a simple tagging component ready to drop in your React projects. Originally based on the [React Tags project](http://prakhar.me/react-tags/example) by Prakhar Srivastav this version removes the drag-and-drop re-ordering functionality, adds appropriate roles and ARIA states and introduces a resizing text input.
+React Tag Autocomplete is a simple tagging component ready to drop in your React projects. Originally based on the [React Tags project](http://prakhar.me/react-tags/example) by Prakhar Srivastav this version removes the drag-and-drop re-ordering functionality, adds appropriate roles and ARIA states and introduces a resizing text input. [View demo](http://i-like-robots.github.io/react-tags/).
 
 **Please note, this version is in beta, you can check out the [latest stable version here](https://github.com/i-like-robots/react-tags)** 📢
 
@@ -83,6 +83,7 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`suggestionsFilter`](#suggestionsfilter-optional)
 - [`placeholderText`](#placeholdertext-optional)
 - [`removeButtonText`](#removeButtontext-optional)
+- [`noSuggestionsText`](#noSuggestionsText-optional)
 - [`autoresize`](#autoresize-optional)
 - [`delimiters`](#delimiters-optional)
 - [`minQueryLength`](#minquerylength-optional)
@@ -141,6 +142,10 @@ The placeholder string shown for the input. Defaults to `'Add new tag'`.
 #### removeButtonText (optional)
 
 The title text to add to the remove selected tag button. Default `'Click to remove tag'`.
+
+#### noSuggestionsText (optional)
+
+Message shown if there are no matching suggestions. Defaults to `null`.
 
 #### autoresize (optional)
 

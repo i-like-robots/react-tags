@@ -1,6 +1,6 @@
 import React from 'react'
-import ReactDom from 'react-dom'
-import Tags from '../lib/ReactTags'
+import ReactDOM from 'react-dom'
+import ReactTags from '../lib/ReactTags'
 import suggestions from './countries'
 
 class App extends React.Component {
@@ -31,7 +31,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <p>Select the countries you have visited using React Tags below:</p>
-        <Tags
+        <ReactTags
           tags={this.state.tags}
           suggestions={this.state.suggestions}
           onDelete={this.onDelete.bind(this)}
@@ -43,4 +43,4 @@ class App extends React.Component {
   }
 }
 
-ReactDom.render(<App />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'))
