@@ -9,7 +9,7 @@
     "prepare": "npm run build",
     "prepublish": "npm run build",
     "pretest": "npm run lint && npm run build",
-    "lint": "standard lib/*.js spec/*.js",
+    "lint": "standard 'lib/*.js spec/*.js",
     "test": "jasmine",
     "coverage": "nyc --include 'dist-es5/**' npm test",
     "dev": "NODE_ENV=development rollup -c example/rollup.config.js --watch",
@@ -45,21 +45,21 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
-    "jasmine": "^3.3.0",
-    "jsdom": "^15.1.0",
-    "nyc": "^14.1.0",
+    "jasmine": "^3.5.0",
+    "jsdom": "^16.1.0",
+    "nyc": "^15.0.0",
     "prop-types": "^15.7.0",
     "react": "^16.10.0",
     "react-dom": "^16.10.0",
-    "rollup": "^1.22.0",
+    "rollup": "^1.30.0",
     "rollup-plugin-buble": "^0.19.6",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-serve": "^1.0.0",
     "rollup-plugin-uglify": "^6.0.0",
-    "sinon": "^7.3.0",
-    "standard": "^12.0.0"
+    "sinon": "^8.1.0",
+    "standard": "^14.3.0"
   },
   "engines": {
     "node": ">= 8.15.0"
