@@ -43,19 +43,20 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "buble": "^0.17.0",
-    "buble-loader": "^0.4.1",
+    "buble": "^0.20.0",
+    "buble-loader": "^0.5.0",
     "coveralls": "^3.0.0",
-    "jasmine": "^3.3.0",
-    "jsdom": "^14.0.0",
-    "keycode": "^2.1.2",
-    "nyc": "^13.3.0",
+    "jasmine": "^3.5.0",
+    "jsdom": "^16.2.0",
+    "keycode": "^2.2.0",
+    "nyc": "^15.0.0",
     "prop-types": "^15.7.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
-    "sinon": "^7.3.0",
-    "standard": "^12.0.1",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.8.2"
+    "sinon": "^9.0.0",
+    "standard": "^14.3.0",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.10.0"
   }
 }
