@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.13.0
+
+- Added `ariaLabel` option ([Herdismaria](https://github.com/Herdismaria))
+
 ## 5.12.1
 
 - Fixed an issue where the `componentDidUpdate()` callback of the input component can be called too many times
