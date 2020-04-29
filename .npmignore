@@ -1,4 +1,6 @@
 .git/
+.github/
+.nyc_output/
 coverage/
 example/
 spec/
