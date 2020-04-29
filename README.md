@@ -82,6 +82,7 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`suggestions`](#suggestions-optional)
 - [`suggestionsFilter`](#suggestionsfilter-optional)
 - [`placeholderText`](#placeholdertext-optional)
+- [`ariaLabelText`](#arialabeltext-optional)
 - [`removeButtonText`](#removeButtontext-optional)
 - [`noSuggestionsText`](#noSuggestionsText-optional)
 - [`autoresize`](#autoresize-optional)
@@ -138,6 +139,10 @@ If no function is supplied the default filter is applied. Defaults to `null`.
 #### placeholderText (optional)
 
 The placeholder string shown for the input. Defaults to `'Add new tag'`.
+
+#### ariaLabelText (optional)
+
+The aria-label string for the input. Defaults to placeholder string.
 
 #### removeButtonText (optional)
 
@@ -297,6 +302,7 @@ To see all changes refer to [the changelog](CHANGELOG.md).
 - Event handlers and callbacks have been renamed to use `on` prefixes, e.g. the `handleAddition()` callback should now be called `onAddition()`.
 - The `delimiters` option is now an array of `KeyboardEvent.key` values and not `KeyboardEvent.keyCode` codes, e.g. `[13, 9]` should now be written as `['Enter', 'Tab']`. See https://keycode.info/ for more information.
 - The `placeholder` option has been renamed `placeholderText`
+- The `ariaLabel` option has been renamed `ariaLabelText`
 - The `delimiterChars` option has been removed, use the `delimiters` option instead.
 - The `clearInputOnDelete` option has been removed and is now the default behaviour
 - The `autofocus` option has been removed.

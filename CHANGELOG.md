@@ -8,6 +8,7 @@
 - Added ES6 package and `"module"` entry point
 - Added `id` option to configure the component ID
 - Added `removeButtonText` option to configure the selected tag remove button title attribute
+- Refactored `ariaLabel` option to `ariaLabelText` to match other text options
 - Refactored `placeholder` option to `placeholderText` to match other text options
 - Refactored keyboard event handlers to use `KeyboardEvent.key`
 - Refactored event handlers and callbacks to use `on` prefixes
@@ -19,6 +20,10 @@
 - Removed `autofocus` option
 - Removed `delimiterChars` option
 - Updated React dependency to 16.5+
+
+## 5.13.0
+
+- Added `ariaLabel` option ([Herdismaria](https://github.com/Herdismaria))
 
 ## 5.12.1
 
