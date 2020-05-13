@@ -12,8 +12,8 @@ const Subject = require('../')
 let props
 let instance
 
-function createInstance (data = {}) {
-  if (instance) {
+function createInstance (data = {}, teardown = true) {
+  if (teardown && instance) {
     teardownInstance()
   }
 
@@ -403,6 +403,23 @@ describe('React Tags', () => {
       expect($('ul[role="listbox"]')).toBeTruthy()
 
       expect($$('.custom-suggestion').length).toEqual(3)
+    })
+
+    it('updates suggestions when top-level prop changes', () => {
+      createInstance({
+        tags: [],
+        suggestions: fixture
+      })
+
+      type('united')
+
+      expect($$('li[role="option"]').length).toEqual(3)
+
+      createInstance({
+        suggestions: [...fixture, { id: 1000, name: 'United Union' }]
+      }, false)
+
+      expect($$('li[role="option"]').length).toEqual(4)
     })
 
     describe('when minQueryLength is zero', () => {
