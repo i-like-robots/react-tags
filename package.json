@@ -11,7 +11,7 @@
     "pretest": "npm run lint && npm run build",
     "lint": "standard lib/*.js spec/*.js",
     "test": "jasmine",
-    "coverage": "nyc --include 'dist-es5/**' npm test",
+    "coverage": "nyc --include 'dist/**' npm test",
     "dev": "NODE_ENV=development rollup -c example/rollup.config.js --watch",
     "example": "NODE_ENV=production rollup -c example/rollup.config.js",
     "build": "rollup -c rollup.config.js"
