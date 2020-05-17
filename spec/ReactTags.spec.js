@@ -460,6 +460,11 @@ describe('React Tags', () => {
       sinon.assert.calledWith(props.onDelete, sinon.match(0))
     })
 
+    it('moves focus to the input when a tag is removed', () => {
+      click($('.react-tags__selected-tag'))
+      expect(document.activeElement).toEqual($('input'))
+    })
+
     it('deletes the last selected tag when backspace is pressed and query is empty', () => {
       type(''); key('Backspace')
 

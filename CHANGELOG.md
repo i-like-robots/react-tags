@@ -21,6 +21,10 @@
 - Removed `delimiterChars` option
 - Updated React dependency to 16.5+
 
+## 5.13.1
+
+- Fixed an issue where cursor focus could be lost after removing a selected tag
+
 ## 5.13.0
 
 - Added `ariaLabel` option ([Herdismaria](https://github.com/Herdismaria))
