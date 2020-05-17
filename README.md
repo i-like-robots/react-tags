@@ -47,6 +47,8 @@ class App extends React.Component {
         { id: 6, name: "Apricots" }
       ]
     }
+
+    this.reactTags = React.createRef()
   }
 
   onDelete (i) {
@@ -63,6 +65,7 @@ class App extends React.Component {
   render () {
     return (
       <ReactTags
+        ref={this.reactTags}
         tags={this.state.tags}
         suggestions={this.state.suggestions}
         onDelete={this.onDelete.bind(this)}
@@ -259,11 +262,31 @@ Enable users to delete selected tags when backspace is pressed while focussed on
 
 #### tagComponent (optional)
 
-Provide a custom tag component to render. Defaults to `null`.
+Provide a custom tag component to render. Receives the tag, button text, and delete callback as props. Defaults to `null`.
+
+```jsx
+function TagComponent({ tag, removeButtonText, onDelete }) {
+  return (
+    <button type='button' title={removeButtonText} onClick={onDelete}>
+      {tag.name}
+    </button>
+  )
+}
+```
 
 #### suggestionComponent (optional)
 
-Provide a custom suggestion component to render. Default: `null`.
+Provide a custom suggestion component to render. Receives the suggestion and current query as props. Defaults to `null`.
+
+```jsx
+function SuggestionComponent({ item, query }) {
+  return (
+    <span id={item.id} className={item.name === query ? 'match' : 'no-match'}>
+      {item.name}
+    </span>
+  )
+}
+```
 
 #### inputAttributes (optional)
 
@@ -272,11 +295,20 @@ An object containing additional attributes that will be applied to the text inpu
 
 ### API
 
-#### addTag(tag)
+By adding a `ref` to any instances of this component you can access its API methods.
 
-#### deleteTag(index)
+#### `addTag(tag)`
 
-#### clearInput()
+Adds a tag to the list of selected tags. This will trigger the validation and addition callbacks.
+
+#### `deleteTag(index)`
+
+Removes a tag from the list of selected tags. This will trigger the delete callback.
+
+#### `clearInput()`
+
+Clears the input and current query.
+
 
 ### Styling
 

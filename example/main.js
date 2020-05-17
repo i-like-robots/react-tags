@@ -14,6 +14,8 @@ class App extends React.Component {
       ],
       suggestions
     }
+
+    this.reactTags = React.createRef()
   }
 
   onDelete (i) {
@@ -32,6 +34,7 @@ class App extends React.Component {
       <>
         <p>Select the countries you have visited using React Tags below:</p>
         <ReactTags
+          ref={this.reactTags}
           tags={this.state.tags}
           suggestions={this.state.suggestions}
           onDelete={this.onDelete.bind(this)}
