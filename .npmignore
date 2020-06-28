@@ -3,9 +3,10 @@
 .nyc_output/
 coverage/
 example/
+lib/
 spec/
 .DS_Store
 .editorconfig
 .travis.yml
 gh-pages.sh
-webpack.config.js
+rollup.config.js

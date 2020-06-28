@@ -5,27 +5,26 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
 const TestUtils = require('react-dom/test-utils')
-const keycode = require('keycode')
 const sinon = require('sinon')
 const fixture = require('../example/countries')
-const Subject = require('../dist-es5/ReactTags')
+const Subject = require('../')
 
 let props
 let instance
 
-function createInstance (data = {}) {
-  if (instance) {
+function createInstance (data = {}, teardown = true) {
+  if (teardown && instance) {
     teardownInstance()
   }
 
   const defaults = {
     tags: [],
     suggestions: [],
-    handleBlur: sinon.stub(),
-    handleFocus: sinon.stub(),
-    handleDelete: sinon.stub(),
-    handleAddition: sinon.stub(),
-    handleInputChange: sinon.stub()
+    onBlur: sinon.stub(),
+    onFocus: sinon.stub(),
+    onDelete: sinon.stub(),
+    onAddition: sinon.stub(),
+    onInput: sinon.stub()
   }
 
   props = Object.assign(defaults, data)
@@ -50,6 +49,8 @@ function $$ (selector) {
 }
 
 function type (value) {
+  $('input').focus()
+
   value.split('').forEach((char) => {
     key(char)
     $('input').value += char
@@ -60,7 +61,7 @@ function type (value) {
 
 function key () {
   Array.from(arguments).forEach((value) => {
-    TestUtils.Simulate.keyDown($('input'), { value, keyCode: keycode(value), key: value })
+    TestUtils.Simulate.keyDown($('input'), { value, key: value })
   })
 }
 
@@ -90,18 +91,10 @@ describe('React Tags', () => {
 
   describe('input', () => {
     it('assigns the given placeholder', () => {
-      createInstance({ placeholder: 'Please enter a tag' })
-      expect($('input').placeholder).toEqual('Please enter a tag')
-    })
+      createInstance({ placeholderText: 'Please enter a tag' })
 
-    it('autofocuses on the input', () => {
-      createInstance({ autofocus: true })
-      expect(document.activeElement).toEqual($('input'))
-    })
-
-    it('does not autofocus on the input', () => {
-      createInstance({ autofocus: false })
-      expect(document.activeElement).not.toEqual($('input'))
+      expect($('input').getAttribute('placeholder')).toEqual('Please enter a tag')
+      expect($('input').getAttribute('aria-label')).toEqual('Please enter a tag')
     })
 
     it('updates state when suggestions list is expanded', () => {
@@ -131,13 +124,25 @@ describe('React Tags', () => {
     })
 
     it('calls focus and blur callbacks when provided', () => {
-      createInstance({ autofocus: false })
+      createInstance()
 
       TestUtils.Simulate.focus($('input'))
-      sinon.assert.calledOnce(props.handleFocus)
+      sinon.assert.calledOnce(props.onFocus)
 
       TestUtils.Simulate.blur($('input'))
-      sinon.assert.calledOnce(props.handleBlur)
+      sinon.assert.calledOnce(props.onBlur)
+    })
+
+    it('can be cleared programmatically', () => {
+      createInstance()
+
+      type('foo')
+
+      expect(instance.state.query.length).toBe(3)
+
+      instance.clearInput()
+
+      expect(instance.state.query.length).toBe(0)
     })
   })
 
@@ -156,41 +161,41 @@ describe('React Tags', () => {
     it('triggers the change callback', () => {
       type(query)
 
-      sinon.assert.called(props.handleInputChange)
-      sinon.assert.calledWith(props.handleInputChange, query)
+      sinon.assert.called(props.onInput)
+      sinon.assert.calledWith(props.onInput, query)
     })
 
     it('can allow new, non-suggested tags to be added', () => {
       createInstance({ allowNew: false })
 
-      type(query); key('enter')
+      type(query); key('Enter')
 
-      sinon.assert.notCalled(props.handleAddition)
+      sinon.assert.notCalled(props.onAddition)
 
       createInstance({ allowNew: true })
 
-      type(query); key('enter')
+      type(query); key('Enter')
 
-      sinon.assert.calledOnce(props.handleAddition)
-      sinon.assert.calledWith(props.handleAddition, { name: query })
+      sinon.assert.calledOnce(props.onAddition)
+      sinon.assert.calledWith(props.onAddition, { name: query })
     })
 
     it('can add new tags when a delimiter character is entered', () => {
-      createInstance({ allowNew: true, delimiterChars: [',', ';'] })
+      createInstance({ allowNew: true, delimiters: ['Enter', ',', ';'] })
 
-      type('foo,bar;baz'); key('enter')
+      type('foo,bar;baz'); key('Enter')
 
-      sinon.assert.calledThrice(props.handleAddition)
+      sinon.assert.calledThrice(props.onAddition)
     })
 
-    it('only adds tags which pass the provided handleValidate function', () => {
-      createInstance({ allowNew: true, handleValidate: sinon.stub().returns(false), delimiterChars: [','] })
-      type('foo,bar,baz'); key('enter')
-      sinon.assert.notCalled(props.handleAddition)
+    it('only adds tags which pass the provided onValidate function', () => {
+      createInstance({ allowNew: true, onValidate: sinon.stub().returns(false), delimiters: ['Enter', ','] })
+      type('foo,bar,baz'); key('Enter')
+      sinon.assert.notCalled(props.onAddition)
 
-      createInstance({ allowNew: true, handleValidate: sinon.stub().returns(true), delimiterChars: [','] })
-      type('foo,bar,baz'); key('enter')
-      sinon.assert.calledThrice(props.handleAddition)
+      createInstance({ allowNew: true, onValidate: sinon.stub().returns(true), delimiters: ['Enter', ','] })
+      type('foo,bar,baz'); key('Enter')
+      sinon.assert.calledThrice(props.onAddition)
     })
 
     it('adds tag on blur when addOnBlur is true', () => {
@@ -200,30 +205,8 @@ describe('React Tags', () => {
 
       TestUtils.Simulate.blur($('input'))
 
-      sinon.assert.calledOnce(props.handleAddition)
-      sinon.assert.calledWith(props.handleAddition, { name: query })
-    })
-
-    it('clears on tag delete when clearInputOnDelete is true', () => {
-      createInstance({ tags: [fixture[0], fixture[1]] })
-
-      type(query)
-
-      click($('.react-tags__selected-tag'))
-
-      const input = $('input')
-      expect(input.value).toEqual('')
-    })
-
-    it('does not clear on tag delete when clearInputOnDelete is false', () => {
-      createInstance({ tags: [fixture[0], fixture[1]], clearInputOnDelete: false })
-
-      type(query)
-
-      click($('.react-tags__selected-tag'))
-
-      const input = $('input')
-      expect(input.value).toEqual(query)
+      sinon.assert.calledOnce(props.onAddition)
+      sinon.assert.calledWith(props.onAddition, { name: query })
     })
   })
 
@@ -328,22 +311,22 @@ describe('React Tags', () => {
       const input = $('input')
       const results = $$('li[role="option"]')
 
-      key('down')
+      key('ArrowDown')
 
       expect(input.getAttribute('aria-activedescendant')).toEqual(results[0].id)
       expect(results[0].className).toMatch(/is-active/)
 
-      key('down', 'down')
+      key('ArrowDown', 'ArrowDown')
 
       expect(input.getAttribute('aria-activedescendant')).toEqual(results[2].id)
       expect(results[2].className).toMatch(/is-active/)
 
-      key('down')
+      key('ArrowDown')
 
       expect(input.getAttribute('aria-activedescendant')).toEqual(results[0].id)
       expect(results[0].className).toMatch(/is-active/)
 
-      key('up', 'up')
+      key('ArrowUp', 'ArrowUp')
 
       expect(input.getAttribute('aria-activedescendant')).toEqual(results[1].id)
       expect(results[1].className).toMatch(/is-active/)
@@ -360,47 +343,104 @@ describe('React Tags', () => {
         expect(option.matches('[aria-disabled="true"]')).toBeTruthy()
       })
 
-      key('down', 'enter')
+      key('ArrowDown', 'Enter')
 
-      sinon.assert.notCalled(props.handleAddition)
+      sinon.assert.notCalled(props.onAddition)
     })
 
     it('triggers addition when a suggestion is clicked', () => {
       type(query); click($('li[role="option"]:nth-child(2)'))
 
-      sinon.assert.calledOnce(props.handleAddition)
-      sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+      sinon.assert.calledOnce(props.onAddition)
+      sinon.assert.calledWith(props.onAddition, { id: 196, name: 'United Kingdom' })
     })
 
     it('triggers addition for the selected suggestion when a delimiter is pressed', () => {
-      key('enter')
+      key('Enter')
 
-      sinon.assert.notCalled(props.handleAddition)
+      sinon.assert.notCalled(props.onAddition)
 
-      type(query); key('down', 'down', 'enter')
+      type(query); key('ArrowDown', 'ArrowDown', 'Enter')
 
-      sinon.assert.calledOnce(props.handleAddition)
-      sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+      sinon.assert.calledOnce(props.onAddition)
+      sinon.assert.calledWith(props.onAddition, { id: 196, name: 'United Kingdom' })
     })
 
     it('triggers addition for an unselected but matching suggestion when a delimiter is pressed', () => {
-      type('united kingdom'); key('enter')
-      sinon.assert.calledWith(props.handleAddition, { id: 196, name: 'United Kingdom' })
+      type('united kingdom'); key('Enter')
+      sinon.assert.calledWith(props.onAddition, { id: 196, name: 'United Kingdom' })
     })
 
     it('does not trigger addition for a previously selected suggestion when no longer suggested', () => {
       type('french'); key('down', 'down'); type('fries'); key('enter')
 
-      sinon.assert.notCalled(props.handleAddition)
+      sinon.assert.notCalled(props.onAddition)
     })
 
     it('clears the input when an addition is triggered', () => {
-      type(query); key('down', 'down', 'enter')
+      type(query); key('ArrowDown', 'ArrowDown', 'Enter')
 
       const input = $('input')
 
       expect(input.value).toEqual('')
       expect(document.activeElement).toEqual(input)
+    })
+
+    it('can render a custom suggestion component when provided', () => {
+      const CustomSuggestion = ({ item, query }) => (
+        React.createElement(
+          'div', { className: 'custom-suggestion' }, item.name)
+      )
+
+      createInstance({
+        tags: [],
+        suggestions: fixture,
+        suggestionComponent: CustomSuggestion
+      })
+
+      type(query)
+
+      expect($('ul[role="listbox"]')).toBeTruthy()
+
+      expect($$('.custom-suggestion').length).toEqual(3)
+    })
+
+    it('updates suggestions when top-level prop changes', () => {
+      createInstance({
+        tags: [],
+        suggestions: fixture
+      })
+
+      type('united')
+
+      expect($$('li[role="option"]').length).toEqual(3)
+
+      createInstance({
+        suggestions: [...fixture, { id: 1000, name: 'United Union' }]
+      }, false)
+
+      expect($$('li[role="option"]').length).toEqual(4)
+    })
+
+    describe('when minQueryLength is zero', () => {
+      beforeEach(() => {
+        createInstance({ minQueryLength: 0, suggestions: fixture })
+      })
+
+      it('shows suggestions list when the input is focused', () => {
+        TestUtils.Simulate.focus($('input'))
+        expect($('ul[role="listbox"]')).toBeTruthy()
+      })
+
+      it('resets the suggestions list when an addition is triggered', () => {
+        type('french')
+
+        expect($$('li[role="option"]').length).toEqual(2)
+
+        key('ArrowDown', 'ArrowDown', 'Enter')
+
+        expect($$('li[role="option"]').length).toEqual(6)
+      })
     })
   })
 
@@ -416,8 +456,8 @@ describe('React Tags', () => {
     it('triggers removal when a tag is clicked', () => {
       click($('.react-tags__selected-tag'))
 
-      sinon.assert.calledOnce(props.handleDelete)
-      sinon.assert.calledWith(props.handleDelete, sinon.match(0))
+      sinon.assert.calledOnce(props.onDelete)
+      sinon.assert.calledWith(props.onDelete, sinon.match(0))
     })
 
     it('moves focus to the input when a tag is removed', () => {
@@ -426,15 +466,15 @@ describe('React Tags', () => {
     })
 
     it('deletes the last selected tag when backspace is pressed and query is empty', () => {
-      type(''); key('backspace')
+      type(''); key('Backspace')
 
-      sinon.assert.calledOnce(props.handleDelete)
-      sinon.assert.calledWith(props.handleDelete, sinon.match(instance.props.tags.length - 1))
+      sinon.assert.calledOnce(props.onDelete)
+      sinon.assert.calledWith(props.onDelete, sinon.match(instance.props.tags.length - 1))
     })
 
     it('does not delete the last selected tag when backspace is pressed and query is not empty', () => {
-      type('uni'); key('backspace')
-      sinon.assert.notCalled(props.handleDelete)
+      type('uni'); key('Backspace')
+      sinon.assert.notCalled(props.onDelete)
     })
 
     it('does not delete the last selected tag when allowBackspace option is false', () => {
@@ -443,9 +483,9 @@ describe('React Tags', () => {
         allowBackspace: false
       })
 
-      type(''); key('backspace')
+      type(''); key('Backspace')
 
-      sinon.assert.notCalled(props.handleDelete)
+      sinon.assert.notCalled(props.onDelete)
     })
 
     it('can render a custom tag component when provided', () => {
@@ -519,7 +559,6 @@ describe('React Tags', () => {
 
       type('hello world')
 
-      // As of JSDom 9.10.0 scrollWidth is a getter only and always 0
       // TODO: can we test this another way?
       expect(input.style.width).toBeFalsy()
     })

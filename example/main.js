@@ -1,9 +1,7 @@
-'use strict'
-
-const React = require('react')
-const ReactDOM = require('react-dom')
-const ReactTags = require('../lib/ReactTags')
-const suggestions = require('./countries')
+import React from 'react'
+import ReactDOM from 'react-dom'
+import ReactTags from '../lib/ReactTags'
+import suggestions from './countries'
 
 class App extends React.Component {
   constructor (props) {
@@ -16,32 +14,35 @@ class App extends React.Component {
       ],
       suggestions
     }
+
+    this.reactTags = React.createRef()
   }
 
-  handleDelete (i) {
+  onDelete (i) {
     const tags = this.state.tags.slice(0)
     tags.splice(i, 1)
     this.setState({ tags })
   }
 
-  handleAddition (tag) {
+  onAddition (tag) {
     const tags = [].concat(this.state.tags, tag)
     this.setState({ tags })
   }
 
   render () {
     return (
-      <React.Fragment>
+      <>
         <p>Select the countries you have visited using React Tags below:</p>
         <ReactTags
+          ref={this.reactTags}
           tags={this.state.tags}
-          noSuggestionsText={'No suggestions found'}
           suggestions={this.state.suggestions}
-          handleDelete={this.handleDelete.bind(this)}
-          handleAddition={this.handleAddition.bind(this)} />
+          onDelete={this.onDelete.bind(this)}
+          onAddition={this.onAddition.bind(this)}
+        />
         <p>Output:</p>
         <pre><code>{JSON.stringify(this.state.tags, null, 2)}</code></pre>
-      </React.Fragment>
+      </>
     )
   }
 }

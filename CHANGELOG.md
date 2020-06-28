@@ -1,5 +1,26 @@
 # Changelog
 
+## 6.0.0
+
+- Added `clearInput` method to programmatically clear input text
+- Added `suggestionComponent` option to allow the rendering of a custom suggestion component  ([tjphopkins](https://github.com/tjphopkins))
+- Added `searchWrapper` to `classNames` option
+- Added ES6 package and `"module"` entry point
+- Added `id` option to configure the component ID
+- Added `removeButtonText` option to configure the selected tag remove button title attribute
+- Refactored `ariaLabel` option to `ariaLabelText` to match other text options
+- Refactored `placeholder` option to `placeholderText` to match other text options
+- Refactored keyboard event handlers to use `KeyboardEvent.key`
+- Refactored event handlers and callbacks to use `on` prefixes
+- Refactored `classNames` option to avoid creating new and merging objects for each top-level props change
+- Refactored `deleteTag` method so it no longer clears the input text when a tag is removed
+- Refactored `delimiters` option to be an array of `KeyboardEvent.key` values
+- Refactored `onInput` callback to provide basic support for `delimiters` entered on soft keyboards
+- Removed `clearInputOnDelete` option
+- Removed `autofocus` option
+- Removed `delimiterChars` option
+- Updated React dependency to 16.5+
+
 ## 5.13.1
 
 - Fixed an issue where cursor focus could be lost after removing a selected tag
