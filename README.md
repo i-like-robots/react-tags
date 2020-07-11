@@ -13,7 +13,7 @@ This is a [Node.js] module available through the [npm] registry. Before installi
 Installation is done using the [npm install] command:
 
 ```
-npm install --save react-tag-autocomplete@pre-release
+npm install --save react-tag-autocomplete
 ```
 
 [Node.js]: https://nodejs.org/en/
@@ -133,9 +133,17 @@ const suggestions = [
 
 #### suggestionsFilter (optional)
 
-A callback function to filter suggestion items with. The callback receives two arguments; a `suggestion` and the current `query` and must return a boolean value.
+A callback function to filter suggestions. The callback receives two arguments; a `query` and the input `suggestions` and must return a list of filtered suggestion.
 
 If no function is supplied the default filter is applied. Defaults to `null`.
+
+```js
+import matchSorter from "match-sorter";
+
+function suggestionsFilter(query, suggestions) {
+  return matchSorter(suggestions, query, { keys: ["name"] });
+}
+```
 
 #### placeholderText (optional)
 
