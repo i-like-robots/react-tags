@@ -133,7 +133,7 @@ const suggestions = [
 
 #### suggestionsFilter (optional)
 
-A callback function to filter suggestions. The callback receives two arguments; a `query` and the input `suggestions` and must return a list of filtered suggestion.
+A callback function to filter suggestions. The callback receives two arguments; a `query` and the input [suggestions](#suggestions-optional) and must return a list of filtered suggestion.
 
 If no function is supplied the default filter is applied. Defaults to `null`.
 
