@@ -267,6 +267,7 @@ describe('React Tags', () => {
 
       const results = $$('li[role="option"]')
 
+      expect(results.some((result) => result.textContent === 'French West Indies')).toBeTruthy()
       expect(results.some((result) => result.textContent === 'India')).toBeTruthy()
       expect(results.some((result) => result.textContent === 'Indonesia')).toBeFalsy()
     })
@@ -282,9 +283,10 @@ describe('React Tags', () => {
 
       const results = $$('li[role="option"]')
 
+      expect(results[0].textContent).toBe('United Arab Emirates') // best matches
+      expect(results[1].textContent).toBe('United Kingdom') // best matches
       expect(results.some((result) => result.textContent === 'Reunion')).toBeTruthy()
       expect(results.some((result) => result.textContent === 'Tunisia')).toBeTruthy()
-      expect(results.some((result) => result.textContent === 'United Kingdom')).toBeTruthy()
     })
 
     it('can handle non-ascii characters', () => {
