@@ -52,6 +52,7 @@
     "coveralls": "^3.0.0",
     "jasmine": "^3.5.0",
     "jsdom": "^16.1.0",
+    "match-sorter": "^4.1.0",
     "nyc": "^15.0.0",
     "prop-types": "^15.7.0",
     "react": "^16.10.0",

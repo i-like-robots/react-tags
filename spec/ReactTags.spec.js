@@ -6,6 +6,8 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const TestUtils = require('react-dom/test-utils')
 const sinon = require('sinon')
+const matchSorter = require('match-sorter').default
+
 const fixture = require('../example/countries')
 const Subject = require('../')
 
@@ -255,11 +257,25 @@ describe('React Tags', () => {
       })
     })
 
+    it('uses default suggestionsFilter', () => {
+      createInstance({
+        minQueryLength: 3,
+        suggestions: fixture
+      })
+
+      type('Indi')
+
+      const results = $$('li[role="option"]')
+
+      expect(results.some((result) => result.textContent === 'India')).toBeTruthy()
+      expect(results.some((result) => result.textContent === 'Indonesia')).toBeFalsy()
+    })
+
     it('uses provided suggestionsFilter callback', () => {
       createInstance({
         minQueryLength: 3,
         suggestions: fixture,
-        suggestionsFilter: (item, query) => item.name.includes(query)
+        suggestionsFilter: (query, suggestions) => matchSorter(suggestions, query, { keys: ['name'] })
       })
 
       type('uni')
@@ -268,6 +284,7 @@ describe('React Tags', () => {
 
       expect(results.some((result) => result.textContent === 'Reunion')).toBeTruthy()
       expect(results.some((result) => result.textContent === 'Tunisia')).toBeTruthy()
+      expect(results.some((result) => result.textContent === 'United Kingdom')).toBeTruthy()
     })
 
     it('can handle non-ascii characters', () => {
