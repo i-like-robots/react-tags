@@ -136,7 +136,7 @@ const suggestions = [
 
 A callback function to filter suggestion items with. The callback receives two arguments; a `suggestion` and the current `query` and must return a boolean value.
 
-If no function is supplied the default filter is applied. Defaults to `null`. 
+If no function is supplied the default filter is applied. Defaults to `null`.
 
 **Note:** This filter will be ignored if [suggestionsTransform](#suggestionsTransform-optional) is supplied.
 
