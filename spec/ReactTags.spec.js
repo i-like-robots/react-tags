@@ -276,7 +276,40 @@ describe('React Tags', () => {
       createInstance({
         minQueryLength: 3,
         suggestions: fixture,
-        suggestionsFilter: (query, suggestions) => matchSorter(suggestions, query, { keys: ['name'] })
+        suggestionsFilter: (item, query) => item.name.includes(query)
+      })
+
+      type('uni')
+
+      const results = $$('li[role="option"]')
+
+      expect(results.some((result) => result.textContent === 'Reunion')).toBeTruthy()
+      expect(results.some((result) => result.textContent === 'Tunisia')).toBeTruthy()
+    })
+
+    it('should ignore suggestionsFilter when suggestionsTransform is provided', () => {
+      const suggestionsFilter = jasmine.createSpy('suggestionsFilter').and.callFake((item, query) => item.name.includes(query))
+
+      createInstance({
+        minQueryLength: 3,
+        suggestions: fixture,
+        suggestionsFilter,
+        suggestionsTransform: (query, suggestions) => matchSorter(suggestions, query, { keys: ['name'] })
+      })
+
+      type('uni')
+
+      const results = $$('li[role="option"]')
+
+      expect(results[0].textContent).toBe('United Arab Emirates') // best matches
+      expect(suggestionsFilter).not.toHaveBeenCalled()
+    })
+
+    it('uses provided suggestionsTransform callback', () => {
+      createInstance({
+        minQueryLength: 3,
+        suggestions: fixture,
+        suggestionsTransform: (query, suggestions) => matchSorter(suggestions, query, { keys: ['name'] })
       })
 
       type('uni')

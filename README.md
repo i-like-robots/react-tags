@@ -82,6 +82,7 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`tags`](#tags-optional)
 - [`suggestions`](#suggestions-optional)
 - [`suggestionsFilter`](#suggestionsfilter-optional)
+- [`suggestionsTransform`](#suggestionsTransform-optional)
 - [`placeholderText`](#placeholdertext-optional)
 - [`ariaLabelText`](#arialabeltext-optional)
 - [`removeButtonText`](#removeButtontext-optional)
@@ -133,9 +134,15 @@ const suggestions = [
 
 #### suggestionsFilter (optional)
 
-A callback function to filter suggestions. The callback receives two arguments; a `query` and the input [suggestions](#suggestions-optional) and must return a list of filtered suggestion.
+A callback function to filter suggestion items with. The callback receives two arguments; a `suggestion` and the current `query` and must return a boolean value.
 
-If no function is supplied the default filter is applied. Defaults to `null`.
+If no function is supplied the default filter is applied. Defaults to `null`. 
+
+**Note:** This filter will be ignored if [suggestionsTransform](#suggestionsTransform-optional) is supplied.
+
+#### suggestionsTransform (optional)
+
+A callback function to apply custom filter to the suggestions. The callback receives two arguments; a `query` and the input [suggestions](#suggestions-optional) and must return a list of filtered suggestion. This will supersede [suggestionsFilter](#suggestionsfilter-optional)
 
 ```js
 import matchSorter from "match-sorter";
