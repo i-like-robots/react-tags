@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.1.0
+
+- Added `suggestionsTransform` option to allow custom filtering and sorting of suggestions ([sibiraj-s](https://github.com/sibiraj-s))
+
 ## 6.0.0
 
 - Added `clearInput` method to programmatically clear input text
