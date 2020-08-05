@@ -142,7 +142,9 @@ If no function is supplied the default filter is applied. Defaults to `null`.
 
 #### suggestionsTransform (optional)
 
-A callback function to apply custom filter to the suggestions. The callback receives two arguments; a `query` and the input [suggestions](#suggestions-optional) and must return a list of filtered suggestion. This will supersede [suggestionsFilter](#suggestionsfilter-optional)
+A callback function to apply a custom filter to the suggestions. The callback receives two arguments; a `query` and the input [suggestions](#suggestions-optional) and must return a new array of suggestion items. Using this option you can filter and sort suggestions.
+
+**Note:** This will supersede [suggestionsFilter](#suggestionsfilter-optional) in future.
 
 ```js
 import matchSorter from "match-sorter";
