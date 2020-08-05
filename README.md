@@ -13,7 +13,7 @@ This is a [Node.js] module available through the [npm] registry. Before installi
 Installation is done using the [npm install] command:
 
 ```
-npm install --save react-tag-autocomplete@pre-release
+npm install --save react-tag-autocomplete
 ```
 
 [Node.js]: https://nodejs.org/en/
@@ -82,6 +82,7 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`tags`](#tags-optional)
 - [`suggestions`](#suggestions-optional)
 - [`suggestionsFilter`](#suggestionsfilter-optional)
+- [`suggestionsTransform`](#suggestionsTransform-optional)
 - [`placeholderText`](#placeholdertext-optional)
 - [`ariaLabelText`](#arialabeltext-optional)
 - [`removeButtonText`](#removeButtontext-optional)
@@ -136,6 +137,20 @@ const suggestions = [
 A callback function to filter suggestion items with. The callback receives two arguments; a `suggestion` and the current `query` and must return a boolean value.
 
 If no function is supplied the default filter is applied. Defaults to `null`.
+
+**Note:** This filter will be ignored if [suggestionsTransform](#suggestionsTransform-optional) is supplied.
+
+#### suggestionsTransform (optional)
+
+A callback function to apply custom filter to the suggestions. The callback receives two arguments; a `query` and the input [suggestions](#suggestions-optional) and must return a list of filtered suggestion. This will supersede [suggestionsFilter](#suggestionsfilter-optional)
+
+```js
+import matchSorter from "match-sorter";
+
+function suggestionsFilter(query, suggestions) {
+  return matchSorter(suggestions, query, { keys: ["name"] });
+}
+```
 
 #### placeholderText (optional)
 
