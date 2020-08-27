@@ -100,6 +100,7 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`onValidate`](#onvalidate-optional)
 - [`addOnBlur`](#addonblur-optional)
 - [`allowNew`](#allownew-optional)
+- [`newTagPrefix`](#newtagprefix-optional)
 - [`allowBackspace`](#allowbackspace-optional)
 - [`tagComponent`](#tagcomponent-optional)
 - [`inputAttributes`](#inputAttributes-optional)
@@ -270,6 +271,10 @@ Creates a tag from the current input value when focus on the input is lost. Defa
 #### allowNew (optional)
 
 Enable users to add new (not suggested) tags. Defaults to `false`.
+
+#### newTagPrefix (optional)
+
+Enables users to show a prompt to add a new tag at the bottom of the suggestions list if `allowNew` is enabled. Defaults to `null`.
 
 #### allowBackspace (optional)
 
