@@ -365,15 +365,10 @@ describe('React Tags', () => {
 
       key('ArrowDown')
 
-      expect(input.getAttribute('aria-activedescendant')).toEqual(results[0].id)
-      expect(results[0].className).toMatch(/is-active/)
+      expect(input.getAttribute('aria-activedescendant')).toEqual(results[1].id)
+      expect(results[1].className).toMatch(/is-active/)
 
       key('ArrowDown', 'ArrowDown')
-
-      expect(input.getAttribute('aria-activedescendant')).toEqual(results[2].id)
-      expect(results[2].className).toMatch(/is-active/)
-
-      key('ArrowDown')
 
       expect(input.getAttribute('aria-activedescendant')).toEqual(results[0].id)
       expect(results[0].className).toMatch(/is-active/)
@@ -412,7 +407,7 @@ describe('React Tags', () => {
 
       sinon.assert.notCalled(props.onAddition)
 
-      type(query); key('ArrowDown', 'ArrowDown', 'Enter')
+      type(query); key('ArrowDown', 'Enter')
 
       sinon.assert.calledOnce(props.onAddition)
       sinon.assert.calledWith(props.onAddition, { id: 196, name: 'United Kingdom' })
