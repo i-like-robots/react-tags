@@ -12,8 +12,8 @@
     "lint": "standard lib/*.js spec/*.js",
     "test": "jasmine",
     "coverage": "nyc --include 'dist/**' npm test",
-    "dev": "NODE_ENV=development rollup -c example/rollup.config.js --watch",
-    "example": "NODE_ENV=production rollup -c example/rollup.config.js",
+    "dev": "rollup --environment=NODE_ENV:development -c example/rollup.config.js --watch",
+    "example": "rollup --environment=NODE_ENV:production -c example/rollup.config.js",
     "build": "rollup -c rollup.config.js"
   },
   "keywords": [
