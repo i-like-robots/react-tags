@@ -6,3 +6,4 @@ dist
 example/bundle.js
 example/bundle.js.map
 coverage
+/.idea/
