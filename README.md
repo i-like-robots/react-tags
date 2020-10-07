@@ -203,7 +203,8 @@ Override the default class names used by the component. Defaults to:
   searchInput: 'react-tags__search-input',
   suggestions: 'react-tags__suggestions',
   suggestionActive: 'is-active',
-  suggestionDisabled: 'is-disabled'
+  suggestionDisabled: 'is-disabled',
+  newTagPrefix: 'react-tags__new-tag-prefix',
 }
 ```
 
