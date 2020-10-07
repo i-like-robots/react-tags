@@ -204,7 +204,7 @@ Override the default class names used by the component. Defaults to:
   suggestions: 'react-tags__suggestions',
   suggestionActive: 'is-active',
   suggestionDisabled: 'is-disabled',
-  newTagPrefix: 'react-tags__new-tag-prefix',
+  suggestionPrefix: 'react-tags__suggestion-prefix'
 }
 ```
 
