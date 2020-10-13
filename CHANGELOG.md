@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.2.0
+
+- Added `newTagPrefix` option to display a prompt in the suggestions list to create a new tag when the `allowNew` option is enabled ([cml391](https://github.com/cml391))
+
 ## 6.1.0
 
 - Added `suggestionsTransform` option to allow custom filtering and sorting of suggestions ([sibiraj-s](https://github.com/sibiraj-s))
