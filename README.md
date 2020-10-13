@@ -100,6 +100,7 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`onValidate`](#onvalidate-optional)
 - [`addOnBlur`](#addonblur-optional)
 - [`allowNew`](#allownew-optional)
+- [`newTagPrefix`](#newtagprefix-optional)
 - [`allowBackspace`](#allowbackspace-optional)
 - [`tagComponent`](#tagcomponent-optional)
 - [`suggestionComponent`](#suggestioncomponent-optional)
@@ -203,7 +204,8 @@ Override the default class names used by the component. Defaults to:
   searchInput: 'react-tags__search-input',
   suggestions: 'react-tags__suggestions',
   suggestionActive: 'is-active',
-  suggestionDisabled: 'is-disabled'
+  suggestionDisabled: 'is-disabled',
+  suggestionPrefix: 'react-tags__suggestion-prefix'
 }
 ```
 
@@ -271,6 +273,10 @@ Creates a tag from the current input value when focus on the input is lost. Defa
 #### allowNew (optional)
 
 Enable users to add new (not suggested) tags. Defaults to `false`.
+
+#### newTagPrefix (optional)
+
+Enables users to show a prompt to add a new tag at the bottom of the suggestions list if `allowNew` is enabled. Defaults to `null`.
 
 #### allowBackspace (optional)
 
