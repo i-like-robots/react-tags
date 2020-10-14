@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import ReactTags from '../lib/ReactTags'
 import suggestions from './countries'
 
-class App extends React.Component {
+class Demo1 extends React.Component {
   constructor (props) {
     super(props)
 
@@ -47,4 +47,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(<Demo1 />, document.getElementById('demo-1'))
