@@ -6,7 +6,7 @@ import suggestions from './countries'
 /**
  * Demo 1 - Country selector
  */
-class Demo1 extends React.Component {
+class CountrySelector extends React.Component {
   constructor (props) {
     super(props)
 
@@ -35,7 +35,7 @@ class Demo1 extends React.Component {
   render () {
     return (
       <>
-        <p>Select the countries you have visited using React Tags below:</p>
+        <p>Select the countries you have visited below:</p>
         <ReactTags
           ref={this.reactTags}
           tags={this.state.tags}
@@ -43,19 +43,19 @@ class Demo1 extends React.Component {
           onDelete={this.onDelete.bind(this)}
           onAddition={this.onAddition.bind(this)}
         />
-        <p>Output:</p>
+        <p><b>Output:</b></p>
         <pre><code>{JSON.stringify(this.state.tags, null, 2)}</code></pre>
       </>
     )
   }
 }
 
-ReactDOM.render(<Demo1 />, document.getElementById('demo-1'))
+ReactDOM.render(<CountrySelector />, document.getElementById('demo-1'))
 
 /**
  * Demo 2 - Custom tags
  */
-class Demo2 extends React.Component {
+class CustomTags extends React.Component {
   constructor (props) {
     super(props)
 
@@ -78,10 +78,14 @@ class Demo2 extends React.Component {
     this.setState({ tags })
   }
 
+  onValidate (tag) {
+    return /^[a-z]{3,12}$/i.test(tag.name);
+  }
+
   render () {
     return (
       <>
-        <p>Enter new tags using React Tags below:</p>
+        <p>Enter new tags meeting the requirements below:</p>
         <ReactTags
           allowNew={true}
           newTagPrefix="Create new tag: "
@@ -90,12 +94,14 @@ class Demo2 extends React.Component {
           suggestions={this.state.suggestions}
           onDelete={this.onDelete.bind(this)}
           onAddition={this.onAddition.bind(this)}
+          onValidate={this.onValidate.bind(this)}
         />
-        <p>Output:</p>
+        <p style={{margin: '0.25rem 0', color: 'gray' }}><small><em>Tags must be 3–12 characters in length and only contain the letters A-Z</em></small></p>
+        <p><b>Output:</b></p>
         <pre><code>{JSON.stringify(this.state.tags, null, 2)}</code></pre>
       </>
     )
   }
 }
 
-ReactDOM.render(<Demo2 />, document.getElementById('demo-2'))
+ReactDOM.render(<CustomTags />, document.getElementById('demo-2'))
