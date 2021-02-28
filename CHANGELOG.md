@@ -3,6 +3,7 @@
 ## 6.2.0
 
 - Added `newTagText` option to display a prompt in the suggestions list to create a new tag when the `allowNew` option is enabled ([cml391](https://github.com/cml391))
+- Refactored call of `onAddition` callback to always provide a new object instead of passing the selected tag by reference.
 
 ## 6.1.0
 

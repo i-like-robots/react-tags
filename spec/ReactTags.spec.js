@@ -179,7 +179,7 @@ describe('React Tags', () => {
       type(query); key('Enter')
 
       sinon.assert.calledOnce(props.onAddition)
-      sinon.assert.calledWith(props.onAddition, { name: query })
+      sinon.assert.calledWith(props.onAddition, sinon.match({ name: query }))
     })
 
     it('can add new tags when a delimiter character is entered', () => {
@@ -208,7 +208,7 @@ describe('React Tags', () => {
       TestUtils.Simulate.blur($('input'))
 
       sinon.assert.calledOnce(props.onAddition)
-      sinon.assert.calledWith(props.onAddition, { name: query })
+      sinon.assert.calledWith(props.onAddition, sinon.match({ name: query }))
     })
   })
 
