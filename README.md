@@ -87,6 +87,7 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`ariaLabelText`](#arialabeltext-optional)
 - [`removeButtonText`](#removeButtontext-optional)
 - [`noSuggestionsText`](#noSuggestionsText-optional)
+- [`newTagText`](#newtagtext-optional)
 - [`autoresize`](#autoresize-optional)
 - [`delimiters`](#delimiters-optional)
 - [`minQueryLength`](#minquerylength-optional)
@@ -100,7 +101,6 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`onValidate`](#onvalidate-optional)
 - [`addOnBlur`](#addonblur-optional)
 - [`allowNew`](#allownew-optional)
-- [`newTagPrefix`](#newtagprefix-optional)
 - [`allowBackspace`](#allowbackspace-optional)
 - [`tagComponent`](#tagcomponent-optional)
 - [`suggestionComponent`](#suggestioncomponent-optional)
@@ -171,6 +171,10 @@ The title text to add to the remove selected tag button. Default `'Click to remo
 #### noSuggestionsText (optional)
 
 Message shown if there are no matching suggestions. Defaults to `null`.
+
+#### newTagText (optional)
+
+Enables users to show a prompt to add a new tag at the bottom of the suggestions list if `allowNew` is enabled. Defaults to `null`.
 
 #### autoresize (optional)
 
@@ -273,10 +277,6 @@ Creates a tag from the current input value when focus on the input is lost. Defa
 #### allowNew (optional)
 
 Enable users to add new (not suggested) tags. Defaults to `false`.
-
-#### newTagPrefix (optional)
-
-Enables users to show a prompt to add a new tag at the bottom of the suggestions list if `allowNew` is enabled. Defaults to `null`.
 
 #### allowBackspace (optional)
 

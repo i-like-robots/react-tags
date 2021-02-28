@@ -40,6 +40,7 @@ class CountrySelector extends React.Component {
           ref={this.reactTags}
           tags={this.state.tags}
           suggestions={this.state.suggestions}
+          noSuggestionsText='No matching countries'
           onDelete={this.onDelete.bind(this)}
           onAddition={this.onAddition.bind(this)}
         />
@@ -88,7 +89,7 @@ class CustomTags extends React.Component {
         <p>Enter new tags meeting the requirements below:</p>
         <ReactTags
           allowNew={true}
-          newTagPrefix="Create new tag: "
+          newTagText="Create new tag: "
           ref={this.reactTags}
           tags={this.state.tags}
           suggestions={this.state.suggestions}
