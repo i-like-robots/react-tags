@@ -148,6 +148,81 @@ describe('React Tags', () => {
     })
   })
 
+  describe('validations', () => {
+    it('validates minTags properly', () => {
+      createInstance({
+        minTags: 1
+      })
+
+      expect(instance.isValid()).toBe(false)
+
+      createInstance({
+        minTags: 1,
+        tags: [{ id: 1, name: 'foo' }]
+      })
+
+      expect(instance.isValid()).toBe(true)
+    })
+
+    it('validates maxTags properly', () => {
+      createInstance({
+        maxTags: 1
+      })
+
+      expect(instance.isValid()).toBe(true)
+
+      createInstance({
+        maxTags: 1,
+        tags: [{ id: 1, name: 'foo' }, { id: 2, name: 'bar' }]
+      })
+
+      expect(instance.isValid()).toBe(false)
+    })
+
+    it('validates minTags and maxTags properly', () => {
+      createInstance({
+        minTags: 1,
+        maxTags: 2
+      })
+
+      expect(instance.isValid()).toBe(false)
+
+      createInstance({
+        minTags: 1,
+        maxTags: 2,
+        tags: [{ id: 1, name: 'foo' }]
+      })
+
+      expect(instance.isValid()).toBe(true)
+
+      createInstance({
+        minTags: 1,
+        maxTags: 2,
+        tags: [{ id: 1, name: 'foo' }, { id: 2, name: 'bar' }, { id: 3, name: 'xyz' }]
+      })
+
+      expect(instance.isValid()).toBe(false)
+    })
+
+    it('it sets correct validation class on root component', () => {
+      createInstance({
+        minTags: 1,
+        tags: []
+      })
+
+      expect($('.react-tags__valid')).toBeFalsy()
+      expect($('.react-tags__invalid')).toBeTruthy()
+
+      createInstance({
+        minTags: 1,
+        tags: [{ id: 1, name: 'foo' }]
+      })
+
+      expect($('.react-tags__valid')).toBeTruthy()
+      expect($('.react-tags__invalid')).toBeFalsy()
+    })
+  })
+
   describe('query', () => {
     const query = 'united'
 

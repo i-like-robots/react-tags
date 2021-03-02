@@ -36,6 +36,14 @@
   cursor: text;
 }
 
+.react-tags.react-tags__valid {
+  border: 1px solid green;
+}
+
+.react-tags.react-tags__invalid {
+  border: 1px solid red;
+}
+
 .react-tags.is-focused {
   border-color: #B1B1B1;
 }

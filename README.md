@@ -105,6 +105,8 @@ ReactDOM.render(<App />, document.getElementById('app'))
 - [`tagComponent`](#tagcomponent-optional)
 - [`suggestionComponent`](#suggestioncomponent-optional)
 - [`inputAttributes`](#inputAttributes-optional)
+- [minTags](#minTags-optional)
+- [maxTags](#maxTags-optional)
 
 #### id (optional)
 
@@ -315,6 +317,20 @@ function SuggestionComponent({ item, query }) {
 An object containing additional attributes that will be applied to the text input. _Please note_ that this prop cannot overwrite existing attributes, it can only add new ones. Defaults to `{}`.
 
 
+#### minTags (optional)
+
+An integer representing the minimum number of tags that should be selected
+by the user. If the amount of selected tags is lower, the input will be
+considered to be in an invalid state.
+
+
+#### maxTags (optional)
+
+An integer representing the maximum number of tags that should be selected
+by the user. If the amount of selected tags is higher, the input will be
+considered to be in an invalid state.
+
+
 ### API
 
 By adding a `ref` to any instances of this component you can access its API methods.
@@ -330,6 +346,12 @@ Removes a tag from the list of selected tags. This will trigger the delete callb
 #### `clearInput()`
 
 Clears the input and current query.
+
+
+#### `isValid()`
+
+Return the validation state of the input. Note that this function will return
+`true` even in the case you haven't specified `minTags` and `maxTags`.
 
 
 ### Styling
