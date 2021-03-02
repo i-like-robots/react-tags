@@ -89,7 +89,7 @@ class CustomTags extends React.Component {
         <p>Enter new tags meeting the requirements below:</p>
         <ReactTags
           allowNew={true}
-          newTagText="Create new tag: "
+          newTagText="Create new tag:"
           ref={this.reactTags}
           tags={this.state.tags}
           suggestions={this.state.suggestions}

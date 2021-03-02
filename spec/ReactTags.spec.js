@@ -452,9 +452,22 @@ describe('React Tags', () => {
 
       type(query)
 
-      expect($('ul[role="listbox"]')).toBeTruthy()
-
       expect($$('.custom-suggestion').length).toEqual(3)
+    })
+
+    it('displays a prompt when allowNew is enabled and newTagText is provided', () => {
+      createInstance({
+        tags: [],
+        suggestions: fixture,
+        allowNew: true,
+        newTagText: 'Create tag:'
+      })
+
+      type(query)
+
+      const lastSuggestion = $('li[role="option"]:last-child')
+
+      expect(lastSuggestion.textContent).toEqual('Create tag: united')
     })
 
     it('updates suggestions when top-level prop changes', () => {
