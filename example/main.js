@@ -80,7 +80,7 @@ class CustomTags extends React.Component {
   }
 
   onValidate (tag) {
-    return /^[a-z]{3,12}$/i.test(tag.name);
+    return /^[a-z]{3,12}$/i.test(tag.name)
   }
 
   render () {
@@ -88,8 +88,8 @@ class CustomTags extends React.Component {
       <>
         <p>Enter new tags meeting the requirements below:</p>
         <ReactTags
-          allowNew={true}
-          newTagText="Create new tag:"
+          allowNew
+          newTagText='Create new tag:'
           ref={this.reactTags}
           tags={this.state.tags}
           suggestions={this.state.suggestions}
@@ -97,7 +97,7 @@ class CustomTags extends React.Component {
           onAddition={this.onAddition.bind(this)}
           onValidate={this.onValidate.bind(this)}
         />
-        <p style={{margin: '0.25rem 0', color: 'gray' }}><small><em>Tags must be 3–12 characters in length and only contain the letters A-Z</em></small></p>
+        <p style={{ margin: '0.25rem 0', color: 'gray' }}><small><em>Tags must be 3–12 characters in length and only contain the letters A-Z</em></small></p>
         <p><b>Output:</b></p>
         <pre><code>{JSON.stringify(this.state.tags, null, 2)}</code></pre>
       </>

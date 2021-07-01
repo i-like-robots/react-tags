@@ -16,7 +16,7 @@ global.window = window
 
 // from mocha-jsdom https://github.com/rstacruz/mocha-jsdom/blob/master/index.js#L80
 for (const key in window) {
-  if (!window.hasOwnProperty(key)) {
+  if (!Object.prototype.hasOwnProperty.call(window, key)) {
     continue
   }
 

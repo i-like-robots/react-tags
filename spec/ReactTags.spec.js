@@ -31,6 +31,7 @@ function createInstance (data = {}, teardown = true) {
 
   props = Object.assign(defaults, data)
 
+  // eslint-disable-next-line react/no-render-return-value
   instance = ReactDOM.render(
     React.createElement(Subject, props),
     document.getElementById('app')
