@@ -4,6 +4,10 @@
 
 - Added `newTagText` option to display a prompt in the suggestions list to create a new tag when the `allowNew` option is enabled ([cml391](https://github.com/cml391))
 - Refactored call of `onAddition` callback to always provide a new object instead of passing the selected tag by reference.
+- Refactored `classNames` option to merge the provided prop with defaults ([alexandernst](https://github.com/alexandernst))
+- Fixed updates to the `placeholder` option which did not recalculate input size ([LarsHassler](https://github.com/LarsHassler))
+- Updated React peer dependency support to include 17+
+- Updated example page with a new demo
 
 ## 6.1.0
 
@@ -28,7 +32,7 @@
 - Removed `clearInputOnDelete` option
 - Removed `autofocus` option
 - Removed `delimiterChars` option
-- Updated React dependency to 16.5+
+- Updated React peer dependency to 16.5+
 
 ## 5.13.1
 
