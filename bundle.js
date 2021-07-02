@@ -1,9 +1,9 @@
 (function () {
 	'use strict';
 
-	function createCommonjsModule(fn, module) {
-		return module = { exports: {} }, fn(module, module.exports), module.exports;
-	}
+	var react = {exports: {}};
+
+	var react_development = {};
 
 	/*
 	object-assign
@@ -101,18 +101,25 @@
 	 * LICENSE file in the root directory of this source tree.
 	 */
 
-	var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+	var ReactPropTypesSecret$2 = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
-	var ReactPropTypesSecret_1 = ReactPropTypesSecret;
+	var ReactPropTypesSecret_1 = ReactPropTypesSecret$2;
 
-	var printWarning = function() {};
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+
+	var printWarning$1 = function() {};
 
 	{
 	  var ReactPropTypesSecret$1 = ReactPropTypesSecret_1;
 	  var loggedTypeFailures = {};
-	  var has = Function.call.bind(Object.prototype.hasOwnProperty);
+	  var has$1 = Function.call.bind(Object.prototype.hasOwnProperty);
 
-	  printWarning = function(text) {
+	  printWarning$1 = function(text) {
 	    var message = 'Warning: ' + text;
 	    if (typeof console !== 'undefined') {
 	      console.error(message);
@@ -137,10 +144,10 @@
 	 * @param {?Function} getStack Returns the component stack.
 	 * @private
 	 */
-	function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+	function checkPropTypes$1(typeSpecs, values, location, componentName, getStack) {
 	  {
 	    for (var typeSpecName in typeSpecs) {
-	      if (has(typeSpecs, typeSpecName)) {
+	      if (has$1(typeSpecs, typeSpecName)) {
 	        var error;
 	        // Prop type validation may throw. In case they do, we don't want to
 	        // fail the render phase where it didn't fail before. So we log it.
@@ -161,7 +168,7 @@
 	          error = ex;
 	        }
 	        if (error && !(error instanceof Error)) {
-	          printWarning(
+	          printWarning$1(
 	            (componentName || 'React class') + ': type specification of ' +
 	            location + ' `' + typeSpecName + '` is invalid; the type checker ' +
 	            'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
@@ -177,7 +184,7 @@
 
 	          var stack = getStack ? getStack() : '';
 
-	          printWarning(
+	          printWarning$1(
 	            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
 	          );
 	        }
@@ -191,15 +198,22 @@
 	 *
 	 * @private
 	 */
-	checkPropTypes.resetWarningCache = function() {
+	checkPropTypes$1.resetWarningCache = function() {
 	  {
 	    loggedTypeFailures = {};
 	  }
 	};
 
-	var checkPropTypes_1 = checkPropTypes;
+	var checkPropTypes_1 = checkPropTypes$1;
 
-	var react_development = createCommonjsModule(function (module, exports) {
+	/** @license React v16.14.0
+	 * react.development.js
+	 *
+	 * Copyright (c) Facebook, Inc. and its affiliates.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
 
 
 
@@ -209,7 +223,7 @@
 	var _assign = objectAssign;
 	var checkPropTypes = checkPropTypes_1;
 
-	var ReactVersion = '16.13.1';
+	var ReactVersion = '16.14.0';
 
 	// The Symbol used to tag the ReactElement-like types. If there is no native Symbol
 	// nor polyfill, then a plain number is used for performance.
@@ -2071,74 +2085,61 @@
 	  only: onlyChild
 	};
 
-	exports.Children = Children;
-	exports.Component = Component;
-	exports.Fragment = REACT_FRAGMENT_TYPE;
-	exports.Profiler = REACT_PROFILER_TYPE;
-	exports.PureComponent = PureComponent;
-	exports.StrictMode = REACT_STRICT_MODE_TYPE;
-	exports.Suspense = REACT_SUSPENSE_TYPE;
-	exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
-	exports.cloneElement = cloneElement$1;
-	exports.createContext = createContext;
-	exports.createElement = createElement$1;
-	exports.createFactory = createFactory;
-	exports.createRef = createRef;
-	exports.forwardRef = forwardRef;
-	exports.isValidElement = isValidElement;
-	exports.lazy = lazy;
-	exports.memo = memo;
-	exports.useCallback = useCallback;
-	exports.useContext = useContext;
-	exports.useDebugValue = useDebugValue;
-	exports.useEffect = useEffect;
-	exports.useImperativeHandle = useImperativeHandle;
-	exports.useLayoutEffect = useLayoutEffect;
-	exports.useMemo = useMemo;
-	exports.useReducer = useReducer;
-	exports.useRef = useRef;
-	exports.useState = useState;
-	exports.version = ReactVersion;
+	react_development.Children = Children;
+	react_development.Component = Component;
+	react_development.Fragment = REACT_FRAGMENT_TYPE;
+	react_development.Profiler = REACT_PROFILER_TYPE;
+	react_development.PureComponent = PureComponent;
+	react_development.StrictMode = REACT_STRICT_MODE_TYPE;
+	react_development.Suspense = REACT_SUSPENSE_TYPE;
+	react_development.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
+	react_development.cloneElement = cloneElement$1;
+	react_development.createContext = createContext;
+	react_development.createElement = createElement$1;
+	react_development.createFactory = createFactory;
+	react_development.createRef = createRef;
+	react_development.forwardRef = forwardRef;
+	react_development.isValidElement = isValidElement;
+	react_development.lazy = lazy;
+	react_development.memo = memo;
+	react_development.useCallback = useCallback;
+	react_development.useContext = useContext;
+	react_development.useDebugValue = useDebugValue;
+	react_development.useEffect = useEffect;
+	react_development.useImperativeHandle = useImperativeHandle;
+	react_development.useLayoutEffect = useLayoutEffect;
+	react_development.useMemo = useMemo;
+	react_development.useReducer = useReducer;
+	react_development.useRef = useRef;
+	react_development.useState = useState;
+	react_development.version = ReactVersion;
 	  })();
 	}
-	});
-	var react_development_1 = react_development.Children;
-	var react_development_2 = react_development.Component;
-	var react_development_3 = react_development.Fragment;
-	var react_development_4 = react_development.Profiler;
-	var react_development_5 = react_development.PureComponent;
-	var react_development_6 = react_development.StrictMode;
-	var react_development_7 = react_development.Suspense;
-	var react_development_8 = react_development.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-	var react_development_9 = react_development.cloneElement;
-	var react_development_10 = react_development.createContext;
-	var react_development_11 = react_development.createElement;
-	var react_development_12 = react_development.createFactory;
-	var react_development_13 = react_development.createRef;
-	var react_development_14 = react_development.forwardRef;
-	var react_development_15 = react_development.isValidElement;
-	var react_development_16 = react_development.lazy;
-	var react_development_17 = react_development.memo;
-	var react_development_18 = react_development.useCallback;
-	var react_development_19 = react_development.useContext;
-	var react_development_20 = react_development.useDebugValue;
-	var react_development_21 = react_development.useEffect;
-	var react_development_22 = react_development.useImperativeHandle;
-	var react_development_23 = react_development.useLayoutEffect;
-	var react_development_24 = react_development.useMemo;
-	var react_development_25 = react_development.useReducer;
-	var react_development_26 = react_development.useRef;
-	var react_development_27 = react_development.useState;
-	var react_development_28 = react_development.version;
-
-	var react = createCommonjsModule(function (module) {
 
 	{
-	  module.exports = react_development;
+	  react.exports = react_development;
 	}
-	});
 
-	var scheduler_development = createCommonjsModule(function (module, exports) {
+	var React = react.exports;
+
+	var reactDom = {exports: {}};
+
+	var reactDom_development = {};
+
+	var scheduler = {exports: {}};
+
+	var scheduler_development = {};
+
+	/** @license React v0.19.1
+	 * scheduler.development.js
+	 *
+	 * Copyright (c) Facebook, Inc. and its affiliates.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+
+	(function (exports) {
 
 
 
@@ -2689,9 +2690,6 @@
 
 	        throw error;
 	      }
-	    } else {
-	      // No catch in prod codepath.
-	      return workLoop(hasTimeRemaining, initialTime);
 	    }
 	  } finally {
 	    currentTask = null;
@@ -2986,35 +2984,26 @@
 	exports.unstable_wrapCallback = unstable_wrapCallback;
 	  })();
 	}
-	});
-	var scheduler_development_1 = scheduler_development.unstable_now;
-	var scheduler_development_2 = scheduler_development.unstable_forceFrameRate;
-	var scheduler_development_3 = scheduler_development.unstable_IdlePriority;
-	var scheduler_development_4 = scheduler_development.unstable_ImmediatePriority;
-	var scheduler_development_5 = scheduler_development.unstable_LowPriority;
-	var scheduler_development_6 = scheduler_development.unstable_NormalPriority;
-	var scheduler_development_7 = scheduler_development.unstable_Profiling;
-	var scheduler_development_8 = scheduler_development.unstable_UserBlockingPriority;
-	var scheduler_development_9 = scheduler_development.unstable_cancelCallback;
-	var scheduler_development_10 = scheduler_development.unstable_continueExecution;
-	var scheduler_development_11 = scheduler_development.unstable_getCurrentPriorityLevel;
-	var scheduler_development_12 = scheduler_development.unstable_getFirstCallbackNode;
-	var scheduler_development_13 = scheduler_development.unstable_next;
-	var scheduler_development_14 = scheduler_development.unstable_pauseExecution;
-	var scheduler_development_15 = scheduler_development.unstable_requestPaint;
-	var scheduler_development_16 = scheduler_development.unstable_runWithPriority;
-	var scheduler_development_17 = scheduler_development.unstable_scheduleCallback;
-	var scheduler_development_18 = scheduler_development.unstable_shouldYield;
-	var scheduler_development_19 = scheduler_development.unstable_wrapCallback;
-
-	var scheduler = createCommonjsModule(function (module) {
+	}(scheduler_development));
 
 	{
-	  module.exports = scheduler_development;
+	  scheduler.exports = scheduler_development;
 	}
-	});
 
-	var schedulerTracing_development = createCommonjsModule(function (module, exports) {
+	var tracing = {exports: {}};
+
+	var schedulerTracing_development = {};
+
+	/** @license React v0.19.1
+	 * scheduler-tracing.development.js
+	 *
+	 * Copyright (c) Facebook, Inc. and its affiliates.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+
+	(function (exports) {
 
 
 
@@ -3353,36 +3342,31 @@
 	exports.unstable_wrap = unstable_wrap;
 	  })();
 	}
-	});
-	var schedulerTracing_development_1 = schedulerTracing_development.__interactionsRef;
-	var schedulerTracing_development_2 = schedulerTracing_development.__subscriberRef;
-	var schedulerTracing_development_3 = schedulerTracing_development.unstable_clear;
-	var schedulerTracing_development_4 = schedulerTracing_development.unstable_getCurrent;
-	var schedulerTracing_development_5 = schedulerTracing_development.unstable_getThreadID;
-	var schedulerTracing_development_6 = schedulerTracing_development.unstable_subscribe;
-	var schedulerTracing_development_7 = schedulerTracing_development.unstable_trace;
-	var schedulerTracing_development_8 = schedulerTracing_development.unstable_unsubscribe;
-	var schedulerTracing_development_9 = schedulerTracing_development.unstable_wrap;
-
-	var tracing = createCommonjsModule(function (module) {
+	}(schedulerTracing_development));
 
 	{
-	  module.exports = schedulerTracing_development;
+	  tracing.exports = schedulerTracing_development;
 	}
-	});
 
-	var reactDom_development = createCommonjsModule(function (module, exports) {
+	/** @license React v16.14.0
+	 * react-dom.development.js
+	 *
+	 * Copyright (c) Facebook, Inc. and its affiliates.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
 
 
 
 	{
 	  (function() {
 
-	var React = react;
+	var React = react.exports;
 	var _assign = objectAssign;
-	var Scheduler = scheduler;
+	var Scheduler = scheduler.exports;
 	var checkPropTypes = checkPropTypes_1;
-	var tracing$1 = tracing;
+	var tracing$1 = tracing.exports;
 
 	var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED; // Prevent newer renderers from RTE when used with older react package versions.
 	// Current owner and dispatcher used to share the same ref,
@@ -4506,12 +4490,6 @@
 	  null, // attributeNamespace
 	  true);
 	});
-
-	var ReactDebugCurrentFrame = null;
-
-	{
-	  ReactDebugCurrentFrame = ReactSharedInternals.ReactDebugCurrentFrame;
-	} // A javascript: URL can contain leading C0 control or \u0020 SPACE,
 	// and any newline or tab are filtered out as if they're not part of the URL.
 	// https://url.spec.whatwg.org/#url-parsing
 	// Tab or newline are defined as \r\n\t:
@@ -17809,7 +17787,7 @@
 	}
 
 	function pushHostContext(fiber) {
-	  var rootInstance = requiredContext(rootInstanceStackCursor.current);
+	  requiredContext(rootInstanceStackCursor.current);
 	  var context = requiredContext(contextStackCursor$1.current);
 	  var nextContext = getChildHostContext(context, fiber.type); // Don't push this Fiber's context unless it's unique.
 
@@ -19841,7 +19819,7 @@
 	          switch (fiber.tag) {
 	            case HostComponent:
 	              var type = fiber.type;
-	              var props = fiber.pendingProps;
+	              fiber.pendingProps;
 	              didNotFindHydratableContainerInstance(parentContainer, type);
 	              break;
 
@@ -19863,7 +19841,7 @@
 	          switch (fiber.tag) {
 	            case HostComponent:
 	              var _type = fiber.type;
-	              var _props = fiber.pendingProps;
+	              fiber.pendingProps;
 	              didNotFindHydratableInstance(parentType, parentProps, parentInstance, _type);
 	              break;
 
@@ -19891,7 +19869,7 @@
 	    case HostComponent:
 	      {
 	        var type = fiber.type;
-	        var props = fiber.pendingProps;
+	        fiber.pendingProps;
 	        var instance = canHydrateInstance(nextInstance, type);
 
 	        if (instance !== null) {
@@ -26861,8 +26839,6 @@
 	          var currentTime = getCurrentTime();
 	          var priorityLevel = inferPriorityFromExpirationTime(currentTime, expirationTime);
 	          hook.onCommitFiberRoot(rendererID, root, priorityLevel, didError);
-	        } else {
-	          hook.onCommitFiberRoot(rendererID, root, undefined, didError);
 	        }
 	      } catch (err) {
 	        if (true) {
@@ -27931,20 +27907,16 @@
 	    // Enables DevTools to append owner stacks to error messages in DEV mode.
 	    getCurrentFiber:  function () {
 	      return current;
-	    } 
+	    }
 	  }));
 	}
-	var IsSomeRendererActing$1 = ReactSharedInternals.IsSomeRendererActing;
-
-	function ReactDOMRoot(container, options) {
-	  this._internalRoot = createRootImpl(container, ConcurrentRoot, options);
-	}
+	ReactSharedInternals.IsSomeRendererActing;
 
 	function ReactDOMBlockingRoot(container, tag, options) {
 	  this._internalRoot = createRootImpl(container, tag, options);
 	}
 
-	ReactDOMRoot.prototype.render = ReactDOMBlockingRoot.prototype.render = function (children) {
+	ReactDOMBlockingRoot.prototype.render = function (children) {
 	  var root = this._internalRoot;
 
 	  {
@@ -27968,7 +27940,7 @@
 	  updateContainer(children, root, null, null);
 	};
 
-	ReactDOMRoot.prototype.unmount = ReactDOMBlockingRoot.prototype.unmount = function () {
+	ReactDOMBlockingRoot.prototype.unmount = function () {
 	  {
 	    if (typeof arguments[0] === 'function') {
 	      error('unmount(...): does not support a callback argument. ' + 'To execute a side effect after rendering, declare it in a component body with useEffect().');
@@ -27985,7 +27957,7 @@
 	function createRootImpl(container, tag, options) {
 	  // Tag is either LegacyRoot or Concurrent Root
 	  var hydrate = options != null && options.hydrate === true;
-	  var hydrationCallbacks = options != null && options.hydrationOptions || null;
+	  options != null && options.hydrationOptions || null;
 	  var root = createContainer(container, tag, hydrate);
 	  markContainerAsRoot(root.current, container);
 
@@ -28283,7 +28255,7 @@
 	  };
 	}
 
-	var ReactVersion = '16.13.1';
+	var ReactVersion = '16.14.0';
 
 	setAttemptUserBlockingHydration(attemptUserBlockingHydration$1);
 	setAttemptContinuousHydration(attemptContinuousHydration$1);
@@ -28360,40 +28332,40 @@
 	  }
 	}
 
-	exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = Internals;
-	exports.createPortal = createPortal$1;
-	exports.findDOMNode = findDOMNode;
-	exports.flushSync = flushSync;
-	exports.hydrate = hydrate;
-	exports.render = render;
-	exports.unmountComponentAtNode = unmountComponentAtNode;
-	exports.unstable_batchedUpdates = batchedUpdates$1;
-	exports.unstable_createPortal = unstable_createPortal;
-	exports.unstable_renderSubtreeIntoContainer = renderSubtreeIntoContainer;
-	exports.version = ReactVersion;
+	reactDom_development.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = Internals;
+	reactDom_development.createPortal = createPortal$1;
+	reactDom_development.findDOMNode = findDOMNode;
+	reactDom_development.flushSync = flushSync;
+	reactDom_development.hydrate = hydrate;
+	reactDom_development.render = render;
+	reactDom_development.unmountComponentAtNode = unmountComponentAtNode;
+	reactDom_development.unstable_batchedUpdates = batchedUpdates$1;
+	reactDom_development.unstable_createPortal = unstable_createPortal;
+	reactDom_development.unstable_renderSubtreeIntoContainer = renderSubtreeIntoContainer;
+	reactDom_development.version = ReactVersion;
 	  })();
 	}
-	});
-	var reactDom_development_1 = reactDom_development.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-	var reactDom_development_2 = reactDom_development.createPortal;
-	var reactDom_development_3 = reactDom_development.findDOMNode;
-	var reactDom_development_4 = reactDom_development.flushSync;
-	var reactDom_development_5 = reactDom_development.hydrate;
-	var reactDom_development_6 = reactDom_development.render;
-	var reactDom_development_7 = reactDom_development.unmountComponentAtNode;
-	var reactDom_development_8 = reactDom_development.unstable_batchedUpdates;
-	var reactDom_development_9 = reactDom_development.unstable_createPortal;
-	var reactDom_development_10 = reactDom_development.unstable_renderSubtreeIntoContainer;
-	var reactDom_development_11 = reactDom_development.version;
-
-	var reactDom = createCommonjsModule(function (module) {
 
 	{
-	  module.exports = reactDom_development;
+	  reactDom.exports = reactDom_development;
 	}
-	});
 
-	var reactIs_development = createCommonjsModule(function (module, exports) {
+	var ReactDOM = reactDom.exports;
+
+	var propTypes = {exports: {}};
+
+	var reactIs = {exports: {}};
+
+	var reactIs_development = {};
+
+	/** @license React v16.13.1
+	 * react-is.development.js
+	 *
+	 * Copyright (c) Facebook, Inc. and its affiliates.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
 
 
 
@@ -28534,78 +28506,59 @@
 	  return typeOf(object) === REACT_SUSPENSE_TYPE;
 	}
 
-	exports.AsyncMode = AsyncMode;
-	exports.ConcurrentMode = ConcurrentMode;
-	exports.ContextConsumer = ContextConsumer;
-	exports.ContextProvider = ContextProvider;
-	exports.Element = Element;
-	exports.ForwardRef = ForwardRef;
-	exports.Fragment = Fragment;
-	exports.Lazy = Lazy;
-	exports.Memo = Memo;
-	exports.Portal = Portal;
-	exports.Profiler = Profiler;
-	exports.StrictMode = StrictMode;
-	exports.Suspense = Suspense;
-	exports.isAsyncMode = isAsyncMode;
-	exports.isConcurrentMode = isConcurrentMode;
-	exports.isContextConsumer = isContextConsumer;
-	exports.isContextProvider = isContextProvider;
-	exports.isElement = isElement;
-	exports.isForwardRef = isForwardRef;
-	exports.isFragment = isFragment;
-	exports.isLazy = isLazy;
-	exports.isMemo = isMemo;
-	exports.isPortal = isPortal;
-	exports.isProfiler = isProfiler;
-	exports.isStrictMode = isStrictMode;
-	exports.isSuspense = isSuspense;
-	exports.isValidElementType = isValidElementType;
-	exports.typeOf = typeOf;
+	reactIs_development.AsyncMode = AsyncMode;
+	reactIs_development.ConcurrentMode = ConcurrentMode;
+	reactIs_development.ContextConsumer = ContextConsumer;
+	reactIs_development.ContextProvider = ContextProvider;
+	reactIs_development.Element = Element;
+	reactIs_development.ForwardRef = ForwardRef;
+	reactIs_development.Fragment = Fragment;
+	reactIs_development.Lazy = Lazy;
+	reactIs_development.Memo = Memo;
+	reactIs_development.Portal = Portal;
+	reactIs_development.Profiler = Profiler;
+	reactIs_development.StrictMode = StrictMode;
+	reactIs_development.Suspense = Suspense;
+	reactIs_development.isAsyncMode = isAsyncMode;
+	reactIs_development.isConcurrentMode = isConcurrentMode;
+	reactIs_development.isContextConsumer = isContextConsumer;
+	reactIs_development.isContextProvider = isContextProvider;
+	reactIs_development.isElement = isElement;
+	reactIs_development.isForwardRef = isForwardRef;
+	reactIs_development.isFragment = isFragment;
+	reactIs_development.isLazy = isLazy;
+	reactIs_development.isMemo = isMemo;
+	reactIs_development.isPortal = isPortal;
+	reactIs_development.isProfiler = isProfiler;
+	reactIs_development.isStrictMode = isStrictMode;
+	reactIs_development.isSuspense = isSuspense;
+	reactIs_development.isValidElementType = isValidElementType;
+	reactIs_development.typeOf = typeOf;
 	  })();
 	}
-	});
-	var reactIs_development_1 = reactIs_development.AsyncMode;
-	var reactIs_development_2 = reactIs_development.ConcurrentMode;
-	var reactIs_development_3 = reactIs_development.ContextConsumer;
-	var reactIs_development_4 = reactIs_development.ContextProvider;
-	var reactIs_development_5 = reactIs_development.Element;
-	var reactIs_development_6 = reactIs_development.ForwardRef;
-	var reactIs_development_7 = reactIs_development.Fragment;
-	var reactIs_development_8 = reactIs_development.Lazy;
-	var reactIs_development_9 = reactIs_development.Memo;
-	var reactIs_development_10 = reactIs_development.Portal;
-	var reactIs_development_11 = reactIs_development.Profiler;
-	var reactIs_development_12 = reactIs_development.StrictMode;
-	var reactIs_development_13 = reactIs_development.Suspense;
-	var reactIs_development_14 = reactIs_development.isAsyncMode;
-	var reactIs_development_15 = reactIs_development.isConcurrentMode;
-	var reactIs_development_16 = reactIs_development.isContextConsumer;
-	var reactIs_development_17 = reactIs_development.isContextProvider;
-	var reactIs_development_18 = reactIs_development.isElement;
-	var reactIs_development_19 = reactIs_development.isForwardRef;
-	var reactIs_development_20 = reactIs_development.isFragment;
-	var reactIs_development_21 = reactIs_development.isLazy;
-	var reactIs_development_22 = reactIs_development.isMemo;
-	var reactIs_development_23 = reactIs_development.isPortal;
-	var reactIs_development_24 = reactIs_development.isProfiler;
-	var reactIs_development_25 = reactIs_development.isStrictMode;
-	var reactIs_development_26 = reactIs_development.isSuspense;
-	var reactIs_development_27 = reactIs_development.isValidElementType;
-	var reactIs_development_28 = reactIs_development.typeOf;
-
-	var reactIs = createCommonjsModule(function (module) {
 
 	{
-	  module.exports = reactIs_development;
+	  reactIs.exports = reactIs_development;
 	}
-	});
 
-	var has$1 = Function.call.bind(Object.prototype.hasOwnProperty);
-	var printWarning$1 = function() {};
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+
+	var ReactIs$1 = reactIs.exports;
+	var assign = objectAssign;
+
+	var ReactPropTypesSecret = ReactPropTypesSecret_1;
+	var checkPropTypes = checkPropTypes_1;
+
+	var has = Function.call.bind(Object.prototype.hasOwnProperty);
+	var printWarning = function() {};
 
 	{
-	  printWarning$1 = function(text) {
+	  printWarning = function(text) {
 	    var message = 'Warning: ' + text;
 	    if (typeof console !== 'undefined') {
 	      console.error(message);
@@ -28763,7 +28716,7 @@
 	      componentName = componentName || ANONYMOUS;
 	      propFullName = propFullName || propName;
 
-	      if (secret !== ReactPropTypesSecret_1) {
+	      if (secret !== ReactPropTypesSecret) {
 	        if (throwOnDirectAccess) {
 	          // New behavior only for users of `prop-types` package
 	          var err = new Error(
@@ -28773,7 +28726,7 @@
 	          );
 	          err.name = 'Invariant Violation';
 	          throw err;
-	        } else if ( typeof console !== 'undefined') {
+	        } else if (typeof console !== 'undefined') {
 	          // Old behavior for people using React.PropTypes
 	          var cacheKey = componentName + ':' + propName;
 	          if (
@@ -28781,7 +28734,7 @@
 	            // Avoid spamming the console because they are often not actionable except for lib authors
 	            manualPropTypeWarningCount < 3
 	          ) {
-	            printWarning$1(
+	            printWarning(
 	              'You are manually calling a React.PropTypes validation ' +
 	              'function for the `' + propFullName + '` prop on `' + componentName  + '`. This is deprecated ' +
 	              'and will throw in the standalone `prop-types` package. ' +
@@ -28844,7 +28797,7 @@
 	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
 	      }
 	      for (var i = 0; i < propValue.length; i++) {
-	        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret_1);
+	        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
 	        if (error instanceof Error) {
 	          return error;
 	        }
@@ -28869,7 +28822,7 @@
 	  function createElementTypeTypeChecker() {
 	    function validate(props, propName, componentName, location, propFullName) {
 	      var propValue = props[propName];
-	      if (!reactIs.isValidElementType(propValue)) {
+	      if (!ReactIs$1.isValidElementType(propValue)) {
 	        var propType = getPropType(propValue);
 	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement type.'));
 	      }
@@ -28894,12 +28847,12 @@
 	    if (!Array.isArray(expectedValues)) {
 	      {
 	        if (arguments.length > 1) {
-	          printWarning$1(
+	          printWarning(
 	            'Invalid arguments supplied to oneOf, expected an array, got ' + arguments.length + ' arguments. ' +
 	            'A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).'
 	          );
 	        } else {
-	          printWarning$1('Invalid argument supplied to oneOf, expected an array.');
+	          printWarning('Invalid argument supplied to oneOf, expected an array.');
 	        }
 	      }
 	      return emptyFunctionThatReturnsNull;
@@ -28936,8 +28889,8 @@
 	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
 	      }
 	      for (var key in propValue) {
-	        if (has$1(propValue, key)) {
-	          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
+	        if (has(propValue, key)) {
+	          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
 	          if (error instanceof Error) {
 	            return error;
 	          }
@@ -28950,14 +28903,14 @@
 
 	  function createUnionTypeChecker(arrayOfTypeCheckers) {
 	    if (!Array.isArray(arrayOfTypeCheckers)) {
-	       printWarning$1('Invalid argument supplied to oneOfType, expected an instance of array.') ;
+	      printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') ;
 	      return emptyFunctionThatReturnsNull;
 	    }
 
 	    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
 	      var checker = arrayOfTypeCheckers[i];
 	      if (typeof checker !== 'function') {
-	        printWarning$1(
+	        printWarning(
 	          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
 	          'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.'
 	        );
@@ -28968,7 +28921,7 @@
 	    function validate(props, propName, componentName, location, propFullName) {
 	      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
 	        var checker = arrayOfTypeCheckers[i];
-	        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret_1) == null) {
+	        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) {
 	          return null;
 	        }
 	      }
@@ -29000,7 +28953,7 @@
 	        if (!checker) {
 	          continue;
 	        }
-	        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
+	        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
 	        if (error) {
 	          return error;
 	        }
@@ -29019,7 +28972,7 @@
 	      }
 	      // We need to check all keys in case some are required but missing from
 	      // props.
-	      var allKeys = objectAssign({}, props[propName], shapeTypes);
+	      var allKeys = assign({}, props[propName], shapeTypes);
 	      for (var key in allKeys) {
 	        var checker = shapeTypes[key];
 	        if (!checker) {
@@ -29029,7 +28982,7 @@
 	            '\nValid keys: ' +  JSON.stringify(Object.keys(shapeTypes), null, '  ')
 	          );
 	        }
-	        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
+	        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
 	        if (error) {
 	          return error;
 	        }
@@ -29171,14 +29124,13 @@
 	    return propValue.constructor.name;
 	  }
 
-	  ReactPropTypes.checkPropTypes = checkPropTypes_1;
-	  ReactPropTypes.resetWarningCache = checkPropTypes_1.resetWarningCache;
+	  ReactPropTypes.checkPropTypes = checkPropTypes;
+	  ReactPropTypes.resetWarningCache = checkPropTypes.resetWarningCache;
 	  ReactPropTypes.PropTypes = ReactPropTypes;
 
 	  return ReactPropTypes;
 	};
 
-	var propTypes = createCommonjsModule(function (module) {
 	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
 	 *
@@ -29187,18 +29139,19 @@
 	 */
 
 	{
-	  var ReactIs = reactIs;
+	  var ReactIs = reactIs.exports;
 
 	  // By explicitly using `prop-types` you are opting into new development behavior.
 	  // http://fb.me/prop-types-in-prod
 	  var throwOnDirectAccess = true;
-	  module.exports = factoryWithTypeCheckers(ReactIs.isElement, throwOnDirectAccess);
+	  propTypes.exports = factoryWithTypeCheckers(ReactIs.isElement, throwOnDirectAccess);
 	}
-	});
+
+	var PropTypes = propTypes.exports;
 
 	function Tag (props) { return (
-	  react.createElement( 'button', { type: 'button', className: props.classNames.selectedTag, title: props.removeButtonText, onClick: props.onDelete },
-	    react.createElement( 'span', { className: props.classNames.selectedTagName }, props.tag.name)
+	  React.createElement( 'button', { type: 'button', className: props.classNames.selectedTag, title: props.removeButtonText, onClick: props.onDelete },
+	    React.createElement( 'span', { className: props.classNames.selectedTagName }, props.tag.name)
 	  )
 	); }
 
@@ -29225,8 +29178,8 @@
 	    superclass.call(this, props);
 	    this.state = { inputWidth: null };
 
-	    this.input = react.createRef();
-	    this.sizer = react.createRef();
+	    this.input = React.createRef();
+	    this.sizer = React.createRef();
 	  }
 
 	  if ( superclass ) Input.__proto__ = superclass;
@@ -29250,12 +29203,12 @@
 	  };
 
 	  Input.prototype.copyInputStyles = function copyInputStyles () {
-	    var this$1 = this;
+	    var this$1$1 = this;
 
 	    var inputStyle = window.getComputedStyle(this.input.current);
 
 	    STYLE_PROPS.forEach(function (prop) {
-	      this$1.sizer.current.style[prop] = inputStyle[prop];
+	      this$1$1.sizer.current.style[prop] = inputStyle[prop];
 	    });
 	  };
 
@@ -29286,16 +29239,16 @@
 	    var index = ref.index;
 
 	    return (
-	      react.createElement( 'div', { className: classNames.searchWrapper },
-	        react.createElement( 'input', Object.assign({},
+	      React.createElement( 'div', { className: classNames.searchWrapper },
+	        React.createElement( 'input', Object.assign({},
 	          inputAttributes, inputEventHandlers, { ref: this.input, value: query, placeholder: placeholderText, className: classNames.searchInput, role: 'combobox', 'aria-autocomplete': 'list', 'aria-label': ariaLabelText || placeholderText, 'aria-owns': id, 'aria-activedescendant': index > -1 ? (id + "-" + index) : null, 'aria-expanded': expanded, style: { width: this.state.inputWidth } })),
-	        react.createElement( 'div', { ref: this.sizer, style: SIZER_STYLES }, query || placeholderText)
+	        React.createElement( 'div', { ref: this.sizer, style: SIZER_STYLES }, query || placeholderText)
 	      )
 	    )
 	  };
 
 	  return Input;
-	}(react.Component));
+	}(React.Component));
 
 	function escapeForRegExp (string) {
 	  return string.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&')
@@ -29323,7 +29276,7 @@
 	  var query = ref.query;
 
 	  return (
-	  react.createElement( 'span', { dangerouslySetInnerHTML: { __html: markIt(item.name, query) } })
+	  React.createElement( 'span', { dangerouslySetInnerHTML: { __html: markIt(item.name, query) } })
 	);
 	};
 
@@ -29343,7 +29296,7 @@
 	  };
 
 	  Suggestions.prototype.render = function render () {
-	    var this$1 = this;
+	    var this$1$1 = this;
 
 	    if (!this.props.expanded || !this.props.options.length) {
 	      return null
@@ -29352,35 +29305,54 @@
 	    var SuggestionComponent = this.props.suggestionComponent || DefaultSuggestionComponent;
 
 	    var options = this.props.options.map(function (item, index) {
-	      var key = (this$1.props.id) + "-" + index;
+	      var key = (this$1$1.props.id) + "-" + index;
 	      var classNames = [];
 
-	      if (this$1.props.index === index) {
-	        classNames.push(this$1.props.classNames.suggestionActive);
+	      if (this$1$1.props.index === index) {
+	        classNames.push(this$1$1.props.classNames.suggestionActive);
 	      }
 
 	      if (item.disabled) {
-	        classNames.push(this$1.props.classNames.suggestionDisabled);
+	        classNames.push(this$1$1.props.classNames.suggestionDisabled);
 	      }
 
 	      return (
-	        react.createElement( 'li', {
-	          id: key, key: key, role: 'option', className: classNames.join(' '), 'aria-disabled': item.disabled === true, onMouseDown: this$1.onMouseDown.bind(this$1, item) },
-	          item.disableMarkIt ? item.name
-	            : react.createElement( SuggestionComponent, { item: item, query: this$1.props.query })
+	        React.createElement( 'li', {
+	          id: key, key: key, role: 'option', className: classNames.join(' '), 'aria-disabled': item.disabled === true, onMouseDown: this$1$1.onMouseDown.bind(this$1$1, item) },
+	          item.prefix
+	            ? React.createElement( 'span', { className: this$1$1.props.classNames.suggestionPrefix }, item.prefix, ' ')
+	            : null,
+	          item.disableMarkIt
+	            ? item.name
+	            : React.createElement( SuggestionComponent, { item: item, query: this$1$1.props.query })
 	        )
 	      )
 	    });
 
 	    return (
-	      react.createElement( 'div', { className: this.props.classNames.suggestions },
-	        react.createElement( 'ul', { role: 'listbox', id: this.props.id }, options)
+	      React.createElement( 'div', { className: this.props.classNames.suggestions },
+	        React.createElement( 'ul', { role: 'listbox', id: this.props.id }, options)
 	      )
 	    )
 	  };
 
 	  return Suggestions;
-	}(react.Component));
+	}(React.Component));
+
+	function focusClosest(scope, currentTarget) {
+	  var interactiveEls = scope.querySelectorAll("a,button,input");
+
+	  var currentEl = Array.prototype.findIndex.call(
+	    interactiveEls,
+	    function (element) { return element === currentTarget; }
+	  );
+
+	  var nextEl = interactiveEls[currentEl - 1] || interactiveEls[currentEl + 1];
+
+	  if (nextEl) {
+	    nextEl.focus();
+	  }
+	}
 
 	var KEYS = {
 	  ENTER: 'Enter',
@@ -29403,22 +29375,23 @@
 	  searchInput: 'react-tags__search-input',
 	  suggestions: 'react-tags__suggestions',
 	  suggestionActive: 'is-active',
-	  suggestionDisabled: 'is-disabled'
+	  suggestionDisabled: 'is-disabled',
+	  suggestionPrefix: 'react-tags__suggestion-prefix'
 	};
 
-	function pressDelimiter () {
-	  var this$1 = this;
+	function findMatchIndex (options, query) {
+	  return options.findIndex(function (option) { return matchExact(query).test(option.name); })
+	}
 
+	function pressDelimiter () {
 	  if (this.state.query.length >= this.props.minQueryLength) {
 	    // Check if the user typed in an existing suggestion.
-	    var match = this.state.options.findIndex(function (option) {
-	      return matchExact(this$1.state.query).test(option.name)
-	    });
-
+	    var match = findMatchIndex(this.state.options, this.state.query);
 	    var index = this.state.index === -1 ? match : this.state.index;
+	    var tag = index > -1 ? this.state.options[index] : null;
 
-	    if (index > -1 && this.state.options[index]) {
-	      this.addTag(this.state.options[index]);
+	    if (tag) {
+	      this.addTag(tag);
 	    } else if (this.props.allowNew) {
 	      this.addTag({ name: this.state.query });
 	    }
@@ -29454,13 +29427,27 @@
 	}
 
 	function getOptions (props, state) {
-	  var options = props.suggestions.filter(function (item) { return props.suggestionsFilter(item, state.query); });
+	  var options;
 
-	  if (options.length === 0 && props.noSuggestionsText) {
-	    options.push({ id: 0, name: props.noSuggestionsText, disabled: true, disableMarkIt: true });
+	  if (props.suggestionsTransform) {
+	    options = props.suggestionsTransform(state.query, props.suggestions);
+	  } else {
+	    options = props.suggestions.filter(function (item) { return props.suggestionsFilter(item, state.query); });
 	  }
 
-	  return options.slice(0, props.maxSuggestionsLength)
+	  options = options.slice(0, props.maxSuggestionsLength);
+
+	  if (props.allowNew) {
+	    if (props.newTagText && findMatchIndex(options, state.query) === -1) {
+	      options.push({ id: 0, name: state.query, prefix: props.newTagText, disableMarkIt: true });
+	    }
+	  } else {
+	    if (props.noSuggestionsText && options.length === 0) {
+	      options.push({ id: 0, name: props.noSuggestionsText, disabled: true, disableMarkIt: true });
+	    }
+	  }
+
+	  return options
 	}
 
 	var ReactTags = /*@__PURE__*/(function (superclass) {
@@ -29484,9 +29471,9 @@
 	      onKeyDown: this.onKeyDown.bind(this)
 	    };
 
-	    this.container = react.createRef();
-	    this.input = react.createRef();
-	    this.suggestions = react.createRef();
+	    this.container = React.createRef();
+	    this.input = React.createRef();
+	    this.suggestions = React.createRef();
 	  }
 
 	  if ( superclass ) ReactTags.__proto__ = superclass;
@@ -29568,17 +29555,7 @@
 	    // Because we'll destroy the element with cursor focus we need to ensure
 	    // it does not get lost and move it to the next interactive element
 	    if (this.container.current) {
-	      var interactiveEls = this.container.current.querySelectorAll('a,button,input');
-
-	      var currentEl = Array.prototype.findIndex.call(interactiveEls, function (element) {
-	        return element === event.currentTarget
-	      });
-
-	      var nextEl = interactiveEls[currentEl - 1] || interactiveEls[currentEl + 1];
-
-	      if (nextEl) {
-	        nextEl.focus();
-	      }
+	      focusClosest(this.container.current, event.currentTarget);
 	    }
 
 	    this.deleteTag(index);
@@ -29593,7 +29570,7 @@
 	      return
 	    }
 
-	    this.props.onAddition(tag);
+	    this.props.onAddition({ id: tag.id, name: tag.name });
 
 	    this.clearInput();
 	  };
@@ -29610,29 +29587,30 @@
 	  };
 
 	  ReactTags.prototype.render = function render () {
-	    var this$1 = this;
+	    var this$1$1 = this;
 
 	    var TagComponent = this.props.tagComponent || Tag;
 
 	    var expanded = this.state.focused && this.state.query.length >= this.props.minQueryLength;
-	    var classNames = [this.props.classNames.root];
+	    var classNames = Object.assign({}, CLASS_NAMES, this.props.classNames);
+	    var rootClassNames = [classNames.root];
 
-	    this.state.focused && classNames.push(this.props.classNames.rootFocused);
+	    this.state.focused && rootClassNames.push(classNames.rootFocused);
 
 	    return (
-	      react.createElement( 'div', { ref: this.container, className: classNames.join(' '), onClick: this.onClick.bind(this) },
-	        react.createElement( 'div', {
-	          className: this.props.classNames.selected, 'aria-relevant': 'additions removals', 'aria-live': 'polite' },
+	      React.createElement( 'div', { ref: this.container, className: rootClassNames.join(' '), onClick: this.onClick.bind(this) },
+	        React.createElement( 'div', {
+	          className: classNames.selected, 'aria-relevant': 'additions removals', 'aria-live': 'polite' },
 	          this.props.tags.map(function (tag, i) { return (
-	            react.createElement( TagComponent, {
-	              key: i, tag: tag, removeButtonText: this$1.props.removeButtonText, classNames: this$1.props.classNames, onDelete: this$1.onDeleteTag.bind(this$1, i) })
+	            React.createElement( TagComponent, {
+	              key: i, tag: tag, removeButtonText: this$1$1.props.removeButtonText, classNames: classNames, onDelete: this$1$1.onDeleteTag.bind(this$1$1, i) })
 	          ); })
 	        ),
-	        react.createElement( 'div', { className: this.props.classNames.search },
-	          react.createElement( Input, Object.assign({},
-	            this.state, { id: this.props.id, ref: this.input, classNames: this.props.classNames, inputAttributes: this.props.inputAttributes, inputEventHandlers: this.inputEventHandlers, autoresize: this.props.autoresize, expanded: expanded, placeholderText: this.props.placeholderText, ariaLabelText: this.props.ariaLabelText })),
-	          react.createElement( Suggestions, Object.assign({},
-	            this.state, { id: this.props.id, ref: this.suggestions, classNames: this.props.classNames, expanded: expanded, addTag: this.addTag.bind(this), suggestionComponent: this.props.suggestionComponent }))
+	        React.createElement( 'div', { className: classNames.search },
+	          React.createElement( Input, Object.assign({},
+	            this.state, { id: this.props.id, ref: this.input, classNames: classNames, inputAttributes: this.props.inputAttributes, inputEventHandlers: this.inputEventHandlers, autoresize: this.props.autoresize, expanded: expanded, placeholderText: this.props.placeholderText, ariaLabelText: this.props.ariaLabelText })),
+	          React.createElement( Suggestions, Object.assign({},
+	            this.state, { id: this.props.id, ref: this.suggestions, classNames: classNames, expanded: expanded, addTag: this.addTag.bind(this), suggestionComponent: this.props.suggestionComponent }))
 	        )
 	      )
 	    )
@@ -29651,7 +29629,7 @@
 	  };
 
 	  return ReactTags;
-	}(react.Component));
+	}(React.Component));
 
 	ReactTags.defaultProps = {
 	  id: 'ReactTags',
@@ -29659,8 +29637,10 @@
 	  placeholderText: 'Add new tag',
 	  removeButtonText: 'Click to remove tag',
 	  noSuggestionsText: null,
+	  newTagText: null,
 	  suggestions: [],
 	  suggestionsFilter: defaultSuggestionsFilter,
+	  suggestionsTransform: null,
 	  autoresize: true,
 	  classNames: CLASS_NAMES,
 	  delimiters: [KEYS.TAB, KEYS.ENTER],
@@ -29675,45 +29655,50 @@
 	};
 
 	ReactTags.propTypes = {
-	  id: propTypes.string,
-	  tags: propTypes.arrayOf(propTypes.object),
-	  placeholderText: propTypes.string,
-	  ariaLabelText: propTypes.string,
-	  removeButtonText: propTypes.string,
-	  noSuggestionsText: propTypes.string,
-	  suggestions: propTypes.arrayOf(propTypes.object),
-	  suggestionsFilter: propTypes.func,
-	  autoresize: propTypes.bool,
-	  delimiters: propTypes.arrayOf(propTypes.string),
-	  onDelete: propTypes.func.isRequired,
-	  onAddition: propTypes.func.isRequired,
-	  onInput: propTypes.func,
-	  onFocus: propTypes.func,
-	  onBlur: propTypes.func,
-	  onValidate: propTypes.func,
-	  minQueryLength: propTypes.number,
-	  maxSuggestionsLength: propTypes.number,
-	  classNames: propTypes.object,
-	  allowNew: propTypes.bool,
-	  allowBackspace: propTypes.bool,
-	  addOnBlur: propTypes.bool,
-	  tagComponent: propTypes.oneOfType([
-	    propTypes.func,
-	    propTypes.element
+	  id: PropTypes.string,
+	  tags: PropTypes.arrayOf(PropTypes.object),
+	  placeholderText: PropTypes.string,
+	  ariaLabelText: PropTypes.string,
+	  removeButtonText: PropTypes.string,
+	  noSuggestionsText: PropTypes.string,
+	  newTagText: PropTypes.string,
+	  suggestions: PropTypes.arrayOf(PropTypes.object),
+	  suggestionsFilter: PropTypes.func,
+	  suggestionsTransform: PropTypes.func,
+	  autoresize: PropTypes.bool,
+	  delimiters: PropTypes.arrayOf(PropTypes.string),
+	  onDelete: PropTypes.func.isRequired,
+	  onAddition: PropTypes.func.isRequired,
+	  onInput: PropTypes.func,
+	  onFocus: PropTypes.func,
+	  onBlur: PropTypes.func,
+	  onValidate: PropTypes.func,
+	  minQueryLength: PropTypes.number,
+	  maxSuggestionsLength: PropTypes.number,
+	  classNames: PropTypes.object,
+	  allowNew: PropTypes.bool,
+	  allowBackspace: PropTypes.bool,
+	  addOnBlur: PropTypes.bool,
+	  tagComponent: PropTypes.oneOfType([
+	    PropTypes.func,
+	    PropTypes.element
 	  ]),
-	  suggestionComponent: propTypes.oneOfType([
-	    propTypes.func,
-	    propTypes.element
+	  suggestionComponent: PropTypes.oneOfType([
+	    PropTypes.func,
+	    PropTypes.element
 	  ]),
-	  inputAttributes: propTypes.object
+	  inputAttributes: PropTypes.object
 	};
 
 	var countries = ['Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Anguilla', 'Antigua & Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan', 'Bolivia', 'Bosnia & Herzegovina', 'Botswana', 'Brazil', 'British Virgin Islands', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon', 'Cape Verde', 'Cayman Islands', 'Chad', 'Chile', 'China', 'Colombia', 'Congo', 'Cook Islands', 'Costa Rica', 'Cote D Ivoire', 'Croatia', 'Cruise Ship', 'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Estonia', 'Ethiopia', 'Falkland Islands', 'Faroe Islands', 'Fiji', 'Finland', 'France', 'French Polynesia', 'French West Indies', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Gibraltar', 'Greece', 'Greenland', 'Grenada', 'Guam', 'Guatemala', 'Guernsey', 'Guinea', 'Guinea Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Isle of Man', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jersey', 'Jordan', 'Kazakhstan', 'Kenya', 'Kuwait', 'Kyrgyz Republic', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macau', 'Macedonia', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Mauritania', 'Mauritius', 'Mexico', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Montserrat', 'Morocco', 'Mozambique', 'Namibia', 'Nepal', 'Netherlands', 'Netherlands Antilles', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'Norway', 'Oman', 'Pakistan', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 'Reunion', 'Romania', 'Russia', 'Rwanda', 'Saint Pierre & Miquelon', 'Samoa', 'San Marino', 'Satellite', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'South Africa', 'South Korea', 'Spain', 'Sri Lanka', 'St Kitts & Nevis', 'St Lucia', 'St Vincent', 'St. Lucia', 'Sudan', 'Suriname', 'Swaziland', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', "Timor L'Este", 'Togo', 'Tonga', 'Trinidad & Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks & Caicos', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States of America', 'Uruguay', 'Uzbekistan', 'Venezuela', 'Vietnam', 'Virgin Islands (US)', 'Yemen', 'Zambia', 'Zimbabwe'];
 
 	var countries_1 = countries.map(function (name, id) { return ({ id: id, name: name }); });
 
-	var App = /*@__PURE__*/(function (superclass) {
-	  function App (props) {
+	/**
+	 * Demo 1 - Country selector
+	 */
+	var CountrySelector = /*@__PURE__*/(function (superclass) {
+	  function CountrySelector (props) {
 	    superclass.call(this, props);
 
 	    this.state = {
@@ -29724,40 +29709,92 @@
 	      suggestions: countries_1
 	    };
 
-	    this.reactTags = react.createRef();
+	    this.reactTags = React.createRef();
 	  }
 
-	  if ( superclass ) App.__proto__ = superclass;
-	  App.prototype = Object.create( superclass && superclass.prototype );
-	  App.prototype.constructor = App;
+	  if ( superclass ) CountrySelector.__proto__ = superclass;
+	  CountrySelector.prototype = Object.create( superclass && superclass.prototype );
+	  CountrySelector.prototype.constructor = CountrySelector;
 
-	  App.prototype.onDelete = function onDelete (i) {
+	  CountrySelector.prototype.onDelete = function onDelete (i) {
 	    var tags = this.state.tags.slice(0);
 	    tags.splice(i, 1);
 	    this.setState({ tags: tags });
 	  };
 
-	  App.prototype.onAddition = function onAddition (tag) {
+	  CountrySelector.prototype.onAddition = function onAddition (tag) {
 	    var tags = [].concat(this.state.tags, tag);
 	    this.setState({ tags: tags });
 	  };
 
-	  App.prototype.render = function render () {
+	  CountrySelector.prototype.render = function render () {
 	    return (
-	      react.createElement( react.Fragment, null,
-	        react.createElement( 'p', null, "Select the countries you have visited using React Tags below:" ),
-	        react.createElement( ReactTags, {
-	          ref: this.reactTags, tags: this.state.tags, suggestions: this.state.suggestions, onDelete: this.onDelete.bind(this), onAddition: this.onAddition.bind(this) }),
-	        react.createElement( 'p', null, "Output:" ),
-	        react.createElement( 'pre', null, react.createElement( 'code', null, JSON.stringify(this.state.tags, null, 2) ) )
+	      React.createElement( React.Fragment, null,
+	        React.createElement( 'p', null, "Select the countries you have visited below:" ),
+	        React.createElement( ReactTags, {
+	          ref: this.reactTags, tags: this.state.tags, suggestions: this.state.suggestions, noSuggestionsText: 'No matching countries', onDelete: this.onDelete.bind(this), onAddition: this.onAddition.bind(this) }),
+	        React.createElement( 'p', null, React.createElement( 'b', null, "Output:" ) ),
+	        React.createElement( 'pre', null, React.createElement( 'code', null, JSON.stringify(this.state.tags, null, 2) ) )
 	      )
 	    )
 	  };
 
-	  return App;
-	}(react.Component));
+	  return CountrySelector;
+	}(React.Component));
 
-	reactDom.render(react.createElement( App, null ), document.getElementById('app'));
+	ReactDOM.render(React.createElement( CountrySelector, null ), document.getElementById('demo-1'));
+
+	/**
+	 * Demo 2 - Custom tags
+	 */
+	var CustomTags = /*@__PURE__*/(function (superclass) {
+	  function CustomTags (props) {
+	    superclass.call(this, props);
+
+	    this.state = {
+	      tags: [],
+	      suggestions: []
+	    };
+
+	    this.reactTags = React.createRef();
+	  }
+
+	  if ( superclass ) CustomTags.__proto__ = superclass;
+	  CustomTags.prototype = Object.create( superclass && superclass.prototype );
+	  CustomTags.prototype.constructor = CustomTags;
+
+	  CustomTags.prototype.onDelete = function onDelete (i) {
+	    var tags = this.state.tags.slice(0);
+	    tags.splice(i, 1);
+	    this.setState({ tags: tags });
+	  };
+
+	  CustomTags.prototype.onAddition = function onAddition (tag) {
+	    var tags = [].concat(this.state.tags, tag);
+	    this.setState({ tags: tags });
+	  };
+
+	  CustomTags.prototype.onValidate = function onValidate (tag) {
+	    return /^[a-z]{3,12}$/i.test(tag.name)
+	  };
+
+	  CustomTags.prototype.render = function render () {
+	    return (
+	      React.createElement( React.Fragment, null,
+	        React.createElement( 'p', null, "Enter new tags meeting the requirements below:" ),
+	        React.createElement( ReactTags, {
+	          allowNew: true, newTagText: 'Create new tag:', ref: this.reactTags, tags: this.state.tags, suggestions: this.state.suggestions, onDelete: this.onDelete.bind(this), onAddition: this.onAddition.bind(this), onValidate: this.onValidate.bind(this) }),
+	        React.createElement( 'p', { style: { margin: '0.25rem 0', color: 'gray' } }, React.createElement( 'small', null, React.createElement( 'em', null, "Tags must be 3–12 characters in length and only contain the letters A-Z" ) )),
+	        React.createElement( 'p', null, React.createElement( 'b', null, "Output:" ) ),
+	        React.createElement( 'pre', null, React.createElement( 'code', null, JSON.stringify(this.state.tags, null, 2) ) )
+	      )
+	    )
+	  };
+
+	  return CustomTags;
+	}(React.Component));
+
+	ReactDOM.render(React.createElement( CustomTags, null ), document.getElementById('demo-2'));
 
 }());
 //# sourceMappingURL=bundle.js.map
