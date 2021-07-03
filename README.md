@@ -331,6 +331,9 @@ Removes a tag from the list of selected tags. This will trigger the delete callb
 
 Clears the input and current query.
 
+#### `focusInput()`
+
+Sets cursor focus to the text input element.
 
 ### Styling
 
