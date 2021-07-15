@@ -1,6 +1,6 @@
 # React Tag Autocomplete
 
-[![Build status](https://api.travis-ci.org/i-like-robots/react-tags.svg?branch=main)](https://travis-ci.org/i-like-robots/react-tags) [![Coverage Status](https://coveralls.io/repos/github/i-like-robots/react-tags/badge.svg?branch=main)](https://coveralls.io/github/i-like-robots/react-tags)
+[![Build status](https://api.travis-ci.com/i-like-robots/react-tags.svg?branch=main)](https://travis-ci.com/i-like-robots/react-tags) [![Coverage Status](https://coveralls.io/repos/github/i-like-robots/react-tags/badge.svg?branch=main)](https://coveralls.io/github/i-like-robots/react-tags)
 
 React Tag Autocomplete is a simple tagging component ready to drop in your React projects. Originally based on the [React Tags project](http://prakhar.me/react-tags/example) by Prakhar Srivastav this version removes the drag-and-drop re-ordering functionality, adds appropriate roles and ARIA states and introduces a resizing text input. [View demo](http://i-like-robots.github.io/react-tags/).
 
