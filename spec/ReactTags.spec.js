@@ -508,6 +508,17 @@ describe('React Tags', () => {
         expect($$('li[role="option"]').length).toEqual(6)
       })
     })
+
+    it('suggestion selection can be cleared programmatically', () => {
+      type('french')
+      key('ArrowDown', 'ArrowDown')
+
+      expect(instance.state.index).toBe(1)
+
+      instance.clearSuggestionSelection()
+
+      expect(instance.state.index).toBe(-1)
+    })
   })
 
   describe('tags', () => {
