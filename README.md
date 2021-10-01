@@ -22,59 +22,45 @@ npm install --save react-tag-autocomplete
 
 ## Usage
 
-Here's a sample implementation that initializes the component with a list of preselected `tags` and a `suggestions` list. For further customization details, see [options](#options).
+Here's a sample implementation that initializes the component with an empty list of `tags` and a pre-populated list of `suggestions`. For further customization details, see [options](#options).
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, { useCallback, useRef, useState } from 'react'
 import ReactTags from 'react-tag-autocomplete'
 
-class App extends React.Component {
-  constructor (props) {
-    super(props)
+function App () {
+  const [tags, setTags] = useState([])
 
-    this.state = {
-      tags: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Pears" }
-      ],
-      suggestions: [
-        { id: 3, name: "Bananas" },
-        { id: 4, name: "Mangos" },
-        { id: 5, name: "Lemons" },
-        { id: 6, name: "Apricots" }
-      ]
-    }
+  const [suggestions, setSuggestions] = useState([
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Pears" }
+    { id: 3, name: "Bananas" },
+    { id: 4, name: "Mangos" },
+    { id: 5, name: "Lemons" },
+    { id: 6, name: "Apricots" }
+  ])
 
-    this.reactTags = React.createRef()
-  }
+  const reactTags = useRef()
 
-  onDelete (i) {
-    const tags = this.state.tags.slice(0)
-    tags.splice(i, 1)
-    this.setState({ tags })
-  }
+  const onDelete = useCallback((tagIndex) => {
+    setTags(tags.filter((_, i) => i !== tagIndex))
+  }, [tags])
 
-  onAddition (tag) {
-    const tags = [].concat(this.state.tags, tag)
-    this.setState({ tags })
-  }
+  const onAddition = useCallback((newTag) => {
+    setTags([...tags, newTag])
+  }, [tags])
 
-  render () {
-    return (
-      <ReactTags
-        ref={this.reactTags}
-        tags={this.state.tags}
-        suggestions={this.state.suggestions}
-        onDelete={this.onDelete.bind(this)}
-        onAddition={this.onAddition.bind(this)} />
-    )
-  }
+  return (
+    <ReactTags
+      ref={reactTags}
+      tags={tags}
+      suggestions={suggestions}
+      onDelete={onDelete}
+      onAddition={onAddition}
+    />
+  )
 }
-
-ReactDOM.render(<App />, document.getElementById('app'))
 ```
-
 
 ### Options
 
@@ -218,9 +204,10 @@ Override the default class names used by the component. Defaults to:
 Function called when the user wants to add a tag. Receives the tag.
 
 ```js
-function onAddition(tag) {
-  const tags = [...this.state.tags, tag]
-  this.setState({ tags })
+const [tags, setTags] = useState([])
+
+function onAddition (newTag) {
+  setTags([...tags, newTag])
 }
 ```
 
@@ -229,10 +216,10 @@ function onAddition(tag) {
 Function called when the user wants to delete a tag. Receives the tag index.
 
 ```js
-function onDelete(i) {
-  const tags = this.state.tags.slice(0)
-  tags.splice(i, 1)
-  this.setState({ tags })
+const [tags, setTags] = useState([])
+
+function onDelete (tagIndex) {
+  setTags(tags.filter((_, i) => i !== tagIndex))
 }
 ```
 
@@ -241,12 +228,14 @@ function onDelete(i) {
 Optional event handler when the input value changes. Receives the current query.
 
 ```js
-function onInput(query) {
-  if (!this.state.busy) {
-    this.setState({ busy: true })
+const [isBusy, setIsBusy] = useState(false)
 
-    return fetch(`query=${query}`).then((result) => {
-      this.setState({ busy: false })
+function onInput (query) {
+  if (!isBusy) {
+    setIsBusy(true)
+
+    return fetch(`?query=${query}`).then((result) => {
+      setIsBusy(false)
     })
   }
 }
@@ -265,7 +254,7 @@ Optional callback function for when focus on the input is lost. Receives no argu
 Optional validation function that determines if tag should be added. Receives the tag object and must return a boolean.
 
 ```js
-function onValidate(tag) {
+function onValidate (tag) {
   return tag.name.length >= 5;
 }
 ```
@@ -287,9 +276,9 @@ Enable users to delete selected tags when backspace is pressed while focussed on
 Provide a custom tag component to render. Receives the tag, button text, and delete callback as props. Defaults to `null`.
 
 ```jsx
-function TagComponent({ tag, removeButtonText, onDelete }) {
+function TagComponent ({ tag, removeButtonText, onDelete }) {
   return (
-    <button type='button' title={removeButtonText} onClick={onDelete}>
+    <button type='button' title={`${removeButtonText}: ${tag.name}`} onClick={onDelete}>
       {tag.name}
     </button>
   )
@@ -301,7 +290,7 @@ function TagComponent({ tag, removeButtonText, onDelete }) {
 Provide a custom suggestion component to render. Receives the suggestion and current query as props. Defaults to `null`.
 
 ```jsx
-function SuggestionComponent({ item, query }) {
+function SuggestionComponent ({ item, query }) {
   return (
     <span id={item.id} className={item.name === query ? 'match' : 'no-match'}>
       {item.name}
