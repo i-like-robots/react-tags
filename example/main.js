@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import ReactTags from '../lib/ReactTags'
 import suggestions from './countries'
@@ -6,49 +6,35 @@ import suggestions from './countries'
 /**
  * Demo 1 - Country selector
  */
-class CountrySelector extends React.Component {
-  constructor (props) {
-    super(props)
 
-    this.state = {
-      tags: [
-        { id: 184, name: 'Thailand' },
-        { id: 86, name: 'India' }
-      ],
-      suggestions
-    }
+function CountrySelector () {
+  const [tags, setTags] = useState([])
 
-    this.reactTags = React.createRef()
-  }
+  const reactTags = useRef()
 
-  onDelete (i) {
-    const tags = this.state.tags.slice(0)
-    tags.splice(i, 1)
-    this.setState({ tags })
-  }
+  const onDelete = useCallback((tagIndex) => {
+    setTags(tags.filter((_, i) => i !== tagIndex))
+  }, [tags])
 
-  onAddition (tag) {
-    const tags = [].concat(this.state.tags, tag)
-    this.setState({ tags })
-  }
+  const onAddition = useCallback((newTag) => {
+    setTags([...tags, newTag])
+  }, [tags])
 
-  render () {
-    return (
-      <>
-        <p>Select the countries you have visited below:</p>
-        <ReactTags
-          ref={this.reactTags}
-          tags={this.state.tags}
-          suggestions={this.state.suggestions}
-          noSuggestionsText='No matching countries'
-          onDelete={this.onDelete.bind(this)}
-          onAddition={this.onAddition.bind(this)}
-        />
-        <p><b>Output:</b></p>
-        <pre><code>{JSON.stringify(this.state.tags, null, 2)}</code></pre>
-      </>
-    )
-  }
+  return (
+    <>
+      <p>Select the countries you have visited below:</p>
+      <ReactTags
+        ref={reactTags}
+        tags={tags}
+        suggestions={suggestions}
+        noSuggestionsText='No matching countries'
+        onDelete={onDelete}
+        onAddition={onAddition}
+      />
+      <p><b>Output:</b></p>
+      <pre><code>{JSON.stringify(tags, null, 2)}</code></pre>
+    </>
+  )
 }
 
 ReactDOM.render(<CountrySelector />, document.getElementById('demo-1'))
@@ -56,53 +42,44 @@ ReactDOM.render(<CountrySelector />, document.getElementById('demo-1'))
 /**
  * Demo 2 - Custom tags
  */
-class CustomTags extends React.Component {
-  constructor (props) {
-    super(props)
 
-    this.state = {
-      tags: [],
-      suggestions: []
-    }
+function CustomTags () {
+  const [tags, setTags] = useState([])
 
-    this.reactTags = React.createRef()
-  }
+  const reactTags = useRef()
 
-  onDelete (i) {
-    const tags = this.state.tags.slice(0)
-    tags.splice(i, 1)
-    this.setState({ tags })
-  }
+  const onDelete = useCallback((tagIndex) => {
+    setTags(tags.filter((_, i) => i !== tagIndex))
+  }, [tags])
 
-  onAddition (tag) {
-    const tags = [].concat(this.state.tags, tag)
-    this.setState({ tags })
-  }
+  const onAddition = useCallback((newTag) => {
+    setTags([...tags, newTag])
+  }, [tags])
 
-  onValidate (tag) {
-    return /^[a-z]{3,12}$/i.test(tag.name)
-  }
+  const onValidate = useCallback((newTag) => {
+    return /^[a-z]{3,12}$/i.test(newTag.name)
+  })
 
-  render () {
-    return (
-      <>
-        <p>Enter new tags meeting the requirements below:</p>
-        <ReactTags
-          allowNew
-          newTagText='Create new tag:'
-          ref={this.reactTags}
-          tags={this.state.tags}
-          suggestions={this.state.suggestions}
-          onDelete={this.onDelete.bind(this)}
-          onAddition={this.onAddition.bind(this)}
-          onValidate={this.onValidate.bind(this)}
-        />
-        <p style={{ margin: '0.25rem 0', color: 'gray' }}><small><em>Tags must be 3–12 characters in length and only contain the letters A-Z</em></small></p>
-        <p><b>Output:</b></p>
-        <pre><code>{JSON.stringify(this.state.tags, null, 2)}</code></pre>
-      </>
-    )
-  }
+  return (
+    <>
+      <p>Enter new tags meeting the requirements below:</p>
+      <ReactTags
+        allowNew
+        newTagText='Create new tag:'
+        ref={reactTags}
+        tags={tags}
+        suggestions={[]}
+        onDelete={onDelete}
+        onAddition={onAddition}
+        onValidate={onValidate}
+      />
+      <p style={{ margin: '0.25rem 0', color: 'gray' }}>
+        <small><em>Tags must be 3–12 characters in length and only contain the letters A-Z</em></small>
+      </p>
+      <p><b>Output:</b></p>
+      <pre><code>{JSON.stringify(tags, null, 2)}</code></pre>
+    </>
+  )
 }
 
 ReactDOM.render(<CustomTags />, document.getElementById('demo-2'))
