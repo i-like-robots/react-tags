@@ -425,7 +425,7 @@ describe('React Tags', () => {
     })
 
     it('does not trigger addition for a previously selected suggestion when no longer suggested', () => {
-      type('french'); key('down', 'down'); type('fries'); key('enter')
+      type('french'); key('ArrowDown', 'ArrowDown'); type('fries'); key('Enter')
 
       sinon.assert.notCalled(props.onAddition)
     })
@@ -507,6 +507,17 @@ describe('React Tags', () => {
 
         expect($$('li[role="option"]').length).toEqual(6)
       })
+    })
+
+    it('suggestion selection can be cleared programmatically', () => {
+      type('french')
+      key('ArrowDown', 'ArrowDown')
+
+      expect(instance.state.index).toBe(1)
+
+      instance.clearSuggestionSelection()
+
+      expect(instance.state.index).toBe(-1)
     })
   })
 
