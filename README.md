@@ -329,11 +329,11 @@ Removes a tag from the list of selected tags. This will trigger the delete callb
 
 #### `clearInput()`
 
-Clears the input, current query and suggestion selection.
+Clears the input, current query and selected suggestion.
 
-#### `clearSuggestionSelection()`
+#### `clearSelectedIndex()`
 
-Clears the suggestion selection.
+Clears the currently selected suggestion.
 
 #### `focusInput()`
 

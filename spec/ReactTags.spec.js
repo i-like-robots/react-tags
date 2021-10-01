@@ -509,13 +509,12 @@ describe('React Tags', () => {
       })
     })
 
-    it('suggestion selection can be cleared programmatically', () => {
-      type('french')
-      key('ArrowDown', 'ArrowDown')
+    it('selected suggestion can be cleared programmatically', () => {
+      type('french'); key('ArrowDown', 'ArrowDown')
 
       expect(instance.state.index).toBe(1)
 
-      instance.clearSuggestionSelection()
+      instance.clearSelectedIndex()
 
       expect(instance.state.index).toBe(-1)
     })
