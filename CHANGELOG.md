@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.3.0
+
+- Added `clearSelectedIndex` method to programmatically clear the currently selected suggestion ([joelposti](https://github.com/joelposti))
 ## 6.2.0
 
 - Added `newTagText` option to display a prompt in the suggestions list to create a new tag when the `allowNew` option is enabled ([cml391](https://github.com/cml391))
