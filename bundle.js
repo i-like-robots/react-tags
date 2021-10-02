@@ -29149,11 +29149,13 @@
 
 	var PropTypes = propTypes.exports;
 
-	function Tag (props) { return (
-	  React.createElement( 'button', { type: 'button', className: props.classNames.selectedTag, title: props.removeButtonText, onClick: props.onDelete },
-	    React.createElement( 'span', { className: props.classNames.selectedTagName }, props.tag.name)
+	function Tag (props) {
+	  return (
+	    React.createElement( 'button', { type: 'button', className: props.classNames.selectedTag, title: props.removeButtonText, onClick: props.onDelete },
+	      React.createElement( 'span', { className: props.classNames.selectedTagName }, props.tag.name)
+	    )
 	  )
-	); }
+	}
 
 	var SIZER_STYLES = {
 	  position: 'absolute',
@@ -29195,9 +29197,9 @@
 
 	  Input.prototype.componentDidUpdate = function componentDidUpdate (ref) {
 	    var query = ref.query;
-	    var placeholder = ref.placeholder;
+	    var placeholderText = ref.placeholderText;
 
-	    if (query !== this.props.query || placeholder !== this.props.placeholder) {
+	    if (query !== this.props.query || placeholderText !== this.props.placeholderText) {
 	      this.updateInputWidth();
 	    }
 	  };
@@ -29271,76 +29273,52 @@
 	  return name.replace(regexp, '<mark>$&</mark>')
 	}
 
-	var DefaultSuggestionComponent = function (ref) {
+	function DefaultSuggestionComponent (ref) {
 	  var item = ref.item;
 	  var query = ref.query;
 
 	  return (
-	  React.createElement( 'span', { dangerouslySetInnerHTML: { __html: markIt(item.name, query) } })
-	);
-	};
+	    React.createElement( 'span', { dangerouslySetInnerHTML: { __html: markIt(item.name, query) } })
+	  )
+	}
 
-	var Suggestions = /*@__PURE__*/(function (superclass) {
-	  function Suggestions () {
-	    superclass.apply(this, arguments);
-	  }
+	function Suggestions (props) {
+	  var SuggestionComponent = props.suggestionComponent || DefaultSuggestionComponent;
 
-	  if ( superclass ) Suggestions.__proto__ = superclass;
-	  Suggestions.prototype = Object.create( superclass && superclass.prototype );
-	  Suggestions.prototype.constructor = Suggestions;
+	  var options = props.options.map(function (item, index) {
+	    var key = (props.id) + "-" + index;
+	    var classNames = [];
 
-	  Suggestions.prototype.onMouseDown = function onMouseDown (item, e) {
-	    // focus is shifted on mouse down but calling preventDefault prevents this
-	    e.preventDefault();
-	    this.props.addTag(item);
-	  };
-
-	  Suggestions.prototype.render = function render () {
-	    var this$1$1 = this;
-
-	    if (!this.props.expanded || !this.props.options.length) {
-	      return null
+	    if (props.index === index) {
+	      classNames.push(props.classNames.suggestionActive);
 	    }
 
-	    var SuggestionComponent = this.props.suggestionComponent || DefaultSuggestionComponent;
-
-	    var options = this.props.options.map(function (item, index) {
-	      var key = (this$1$1.props.id) + "-" + index;
-	      var classNames = [];
-
-	      if (this$1$1.props.index === index) {
-	        classNames.push(this$1$1.props.classNames.suggestionActive);
-	      }
-
-	      if (item.disabled) {
-	        classNames.push(this$1$1.props.classNames.suggestionDisabled);
-	      }
-
-	      return (
-	        React.createElement( 'li', {
-	          id: key, key: key, role: 'option', className: classNames.join(' '), 'aria-disabled': item.disabled === true, onMouseDown: this$1$1.onMouseDown.bind(this$1$1, item) },
-	          item.prefix
-	            ? React.createElement( 'span', { className: this$1$1.props.classNames.suggestionPrefix }, item.prefix, ' ')
-	            : null,
-	          item.disableMarkIt
-	            ? item.name
-	            : React.createElement( SuggestionComponent, { item: item, query: this$1$1.props.query })
-	        )
-	      )
-	    });
+	    if (item.disabled) {
+	      classNames.push(props.classNames.suggestionDisabled);
+	    }
 
 	    return (
-	      React.createElement( 'div', { className: this.props.classNames.suggestions },
-	        React.createElement( 'ul', { role: 'listbox', id: this.props.id }, options)
+	      React.createElement( 'li', {
+	        id: key, key: key, role: 'option', className: classNames.join(' '), 'aria-disabled': Boolean(item.disabled), onMouseDown: function (e) { return e.preventDefault(); }, onClick: function () { return props.addTag(item); } },
+	        item.prefix
+	          ? React.createElement( 'span', { className: props.classNames.suggestionPrefix }, item.prefix, ' ')
+	          : null,
+	        item.disableMarkIt
+	          ? item.name
+	          : React.createElement( SuggestionComponent, { item: item, query: props.query })
 	      )
 	    )
-	  };
+	  });
 
-	  return Suggestions;
-	}(React.Component));
+	  return (
+	    React.createElement( 'div', { className: props.classNames.suggestions },
+	      React.createElement( 'ul', { role: 'listbox', id: props.id }, options)
+	    )
+	  )
+	}
 
-	function focusClosest(scope, currentTarget) {
-	  var interactiveEls = scope.querySelectorAll("a,button,input");
+	function focusNextElement (scope, currentTarget) {
+	  var interactiveEls = scope.querySelectorAll('a,button,input');
 
 	  var currentEl = Array.prototype.findIndex.call(
 	    interactiveEls,
@@ -29437,14 +29415,10 @@
 
 	  options = options.slice(0, props.maxSuggestionsLength);
 
-	  if (props.allowNew) {
-	    if (props.newTagText && findMatchIndex(options, state.query) === -1) {
-	      options.push({ id: 0, name: state.query, prefix: props.newTagText, disableMarkIt: true });
-	    }
-	  } else {
-	    if (props.noSuggestionsText && options.length === 0) {
-	      options.push({ id: 0, name: props.noSuggestionsText, disabled: true, disableMarkIt: true });
-	    }
+	  if (props.allowNew && props.newTagText && findMatchIndex(options, state.query) === -1) {
+	    options.push({ id: 0, name: state.query, prefix: props.newTagText, disableMarkIt: true });
+	  } else if (props.noSuggestionsText && options.length === 0) {
+	    options.push({ id: 0, name: props.noSuggestionsText, disabled: true, disableMarkIt: true });
 	  }
 
 	  return options
@@ -29473,7 +29447,6 @@
 
 	    this.container = React.createRef();
 	    this.input = React.createRef();
-	    this.suggestions = React.createRef();
 	  }
 
 	  if ( superclass ) ReactTags.__proto__ = superclass;
@@ -29527,7 +29500,7 @@
 
 	  ReactTags.prototype.onClick = function onClick (e) {
 	    if (document.activeElement !== e.target) {
-	      this.input.current.input.current.focus();
+	      this.focusInput();
 	    }
 	  };
 
@@ -29555,7 +29528,7 @@
 	    // Because we'll destroy the element with cursor focus we need to ensure
 	    // it does not get lost and move it to the next interactive element
 	    if (this.container.current) {
-	      focusClosest(this.container.current, event.currentTarget);
+	      focusNextElement(this.container.current, event.currentTarget);
 	    }
 
 	    this.deleteTag(index);
@@ -29586,6 +29559,16 @@
 	    });
 	  };
 
+	  ReactTags.prototype.clearSelectedIndex = function clearSelectedIndex () {
+	    this.setState({ index: -1 });
+	  };
+
+	  ReactTags.prototype.focusInput = function focusInput () {
+	    if (this.input.current && this.input.current.input.current) {
+	      this.input.current.input.current.focus();
+	    }
+	  };
+
 	  ReactTags.prototype.render = function render () {
 	    var this$1$1 = this;
 
@@ -29609,8 +29592,10 @@
 	        React.createElement( 'div', { className: classNames.search },
 	          React.createElement( Input, Object.assign({},
 	            this.state, { id: this.props.id, ref: this.input, classNames: classNames, inputAttributes: this.props.inputAttributes, inputEventHandlers: this.inputEventHandlers, autoresize: this.props.autoresize, expanded: expanded, placeholderText: this.props.placeholderText, ariaLabelText: this.props.ariaLabelText })),
-	          React.createElement( Suggestions, Object.assign({},
-	            this.state, { id: this.props.id, ref: this.suggestions, classNames: classNames, expanded: expanded, addTag: this.addTag.bind(this), suggestionComponent: this.props.suggestionComponent }))
+	          expanded && this.state.options.length
+	            ? React.createElement( Suggestions, Object.assign({},
+	                this.state, { id: this.props.id, classNames: classNames, expanded: expanded, addTag: this.addTag.bind(this), suggestionComponent: this.props.suggestionComponent }))
+	            : null
 	        )
 	      )
 	    )
@@ -29697,102 +29682,71 @@
 	/**
 	 * Demo 1 - Country selector
 	 */
-	var CountrySelector = /*@__PURE__*/(function (superclass) {
-	  function CountrySelector (props) {
-	    superclass.call(this, props);
 
-	    this.state = {
-	      tags: [
-	        { id: 184, name: 'Thailand' },
-	        { id: 86, name: 'India' }
-	      ],
-	      suggestions: countries_1
-	    };
+	function CountrySelector () {
+	  var ref = react.exports.useState([]);
+	  var tags = ref[0];
+	  var setTags = ref[1];
 
-	    this.reactTags = React.createRef();
-	  }
+	  var reactTags = react.exports.useRef();
 
-	  if ( superclass ) CountrySelector.__proto__ = superclass;
-	  CountrySelector.prototype = Object.create( superclass && superclass.prototype );
-	  CountrySelector.prototype.constructor = CountrySelector;
+	  var onDelete = react.exports.useCallback(function (tagIndex) {
+	    setTags(tags.filter(function (_, i) { return i !== tagIndex; }));
+	  }, [tags]);
 
-	  CountrySelector.prototype.onDelete = function onDelete (i) {
-	    var tags = this.state.tags.slice(0);
-	    tags.splice(i, 1);
-	    this.setState({ tags: tags });
-	  };
+	  var onAddition = react.exports.useCallback(function (newTag) {
+	    setTags(tags.concat( [newTag]));
+	  }, [tags]);
 
-	  CountrySelector.prototype.onAddition = function onAddition (tag) {
-	    var tags = [].concat(this.state.tags, tag);
-	    this.setState({ tags: tags });
-	  };
-
-	  CountrySelector.prototype.render = function render () {
-	    return (
-	      React.createElement( React.Fragment, null,
-	        React.createElement( 'p', null, "Select the countries you have visited below:" ),
-	        React.createElement( ReactTags, {
-	          ref: this.reactTags, tags: this.state.tags, suggestions: this.state.suggestions, noSuggestionsText: 'No matching countries', onDelete: this.onDelete.bind(this), onAddition: this.onAddition.bind(this) }),
-	        React.createElement( 'p', null, React.createElement( 'b', null, "Output:" ) ),
-	        React.createElement( 'pre', null, React.createElement( 'code', null, JSON.stringify(this.state.tags, null, 2) ) )
-	      )
+	  return (
+	    React.createElement( React.Fragment, null,
+	      React.createElement( 'p', null, "Select the countries you have visited below:" ),
+	      React.createElement( ReactTags, {
+	        ref: reactTags, tags: tags, suggestions: countries_1, noSuggestionsText: 'No matching countries', onDelete: onDelete, onAddition: onAddition }),
+	      React.createElement( 'p', null, React.createElement( 'b', null, "Output:" ) ),
+	      React.createElement( 'pre', null, React.createElement( 'code', null, JSON.stringify(tags, null, 2) ) )
 	    )
-	  };
-
-	  return CountrySelector;
-	}(React.Component));
+	  )
+	}
 
 	ReactDOM.render(React.createElement( CountrySelector, null ), document.getElementById('demo-1'));
 
 	/**
 	 * Demo 2 - Custom tags
 	 */
-	var CustomTags = /*@__PURE__*/(function (superclass) {
-	  function CustomTags (props) {
-	    superclass.call(this, props);
 
-	    this.state = {
-	      tags: [],
-	      suggestions: []
-	    };
+	function CustomTags () {
+	  var ref = react.exports.useState([]);
+	  var tags = ref[0];
+	  var setTags = ref[1];
 
-	    this.reactTags = React.createRef();
-	  }
+	  var reactTags = react.exports.useRef();
 
-	  if ( superclass ) CustomTags.__proto__ = superclass;
-	  CustomTags.prototype = Object.create( superclass && superclass.prototype );
-	  CustomTags.prototype.constructor = CustomTags;
+	  var onDelete = react.exports.useCallback(function (tagIndex) {
+	    setTags(tags.filter(function (_, i) { return i !== tagIndex; }));
+	  }, [tags]);
 
-	  CustomTags.prototype.onDelete = function onDelete (i) {
-	    var tags = this.state.tags.slice(0);
-	    tags.splice(i, 1);
-	    this.setState({ tags: tags });
-	  };
+	  var onAddition = react.exports.useCallback(function (newTag) {
+	    setTags(tags.concat( [newTag]));
+	  }, [tags]);
 
-	  CustomTags.prototype.onAddition = function onAddition (tag) {
-	    var tags = [].concat(this.state.tags, tag);
-	    this.setState({ tags: tags });
-	  };
+	  var onValidate = react.exports.useCallback(function (newTag) {
+	    return /^[a-z]{3,12}$/i.test(newTag.name)
+	  });
 
-	  CustomTags.prototype.onValidate = function onValidate (tag) {
-	    return /^[a-z]{3,12}$/i.test(tag.name)
-	  };
-
-	  CustomTags.prototype.render = function render () {
-	    return (
-	      React.createElement( React.Fragment, null,
-	        React.createElement( 'p', null, "Enter new tags meeting the requirements below:" ),
-	        React.createElement( ReactTags, {
-	          allowNew: true, newTagText: 'Create new tag:', ref: this.reactTags, tags: this.state.tags, suggestions: this.state.suggestions, onDelete: this.onDelete.bind(this), onAddition: this.onAddition.bind(this), onValidate: this.onValidate.bind(this) }),
-	        React.createElement( 'p', { style: { margin: '0.25rem 0', color: 'gray' } }, React.createElement( 'small', null, React.createElement( 'em', null, "Tags must be 3–12 characters in length and only contain the letters A-Z" ) )),
-	        React.createElement( 'p', null, React.createElement( 'b', null, "Output:" ) ),
-	        React.createElement( 'pre', null, React.createElement( 'code', null, JSON.stringify(this.state.tags, null, 2) ) )
-	      )
+	  return (
+	    React.createElement( React.Fragment, null,
+	      React.createElement( 'p', null, "Enter new tags meeting the requirements below:" ),
+	      React.createElement( ReactTags, {
+	        allowNew: true, newTagText: 'Create new tag:', ref: reactTags, tags: tags, suggestions: [], onDelete: onDelete, onAddition: onAddition, onValidate: onValidate }),
+	      React.createElement( 'p', { style: { margin: '0.25rem 0', color: 'gray' } },
+	        React.createElement( 'small', null, React.createElement( 'em', null, "Tags must be 3–12 characters in length and only contain the letters A-Z" ) )
+	      ),
+	      React.createElement( 'p', null, React.createElement( 'b', null, "Output:" ) ),
+	      React.createElement( 'pre', null, React.createElement( 'code', null, JSON.stringify(tags, null, 2) ) )
 	    )
-	  };
-
-	  return CustomTags;
-	}(React.Component));
+	  )
+	}
 
 	ReactDOM.render(React.createElement( CustomTags, null ), document.getElementById('demo-2'));
 
