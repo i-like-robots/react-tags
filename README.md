@@ -33,7 +33,7 @@ function App () {
 
   const [suggestions, setSuggestions] = useState([
     { id: 1, name: "Apples" },
-    { id: 2, name: "Pears" }
+    { id: 2, name: "Pears" },
     { id: 3, name: "Bananas" },
     { id: 4, name: "Mangos" },
     { id: 5, name: "Lemons" },
