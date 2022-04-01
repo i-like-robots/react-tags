@@ -6,6 +6,8 @@ React Tag Autocomplete is a simple tagging component ready to drop in your React
 
 ![Screenshot of React Tag Autocomplete](https://cloud.githubusercontent.com/assets/271645/25478773/54aa2bbe-2b3a-11e7-95cf-d419f3c24418.png)
 
+_Please note:_ Version 7 of the component is under development, to view the upcoming version of React Tag Autocomplete please go to [the beta repository](https://github.com/i-like-robots/react-tag-autocomplete).
+
 ## Installation
 
 This is a [Node.js] module available through the [npm] registry. Before installing, download and install Node.js.
