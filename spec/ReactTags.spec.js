@@ -6,7 +6,7 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const TestUtils = require('react-dom/test-utils')
 const sinon = require('sinon')
-const matchSorter = require('match-sorter').default
+const { matchSorter } = require('match-sorter')
 
 const fixture = require('../example/countries')
 const Subject = require('../')

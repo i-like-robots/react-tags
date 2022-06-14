@@ -1,6 +1,6 @@
 # React Tag Autocomplete
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/i-like-robots/react-tags/blob/main/LICENSE) ![build status](https://github.com/i-like-robots/react-tags/actions/workflows/test.yml/badge.svg?branch=main) [![Coverage Status](https://coveralls.io/repos/github/i-like-robots/react-tags/badge.svg?branch=main)](https://coveralls.io/github/i-like-robots/react-tags) [![npm version](https://img.shields.io/npm/v/react-tag-autocomplete.svg?style=flat)](https://www.npmjs.com/package/react-tag-autocomplete)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/i-like-robots/react-tags/blob/main/LICENSE) ![build status](https://github.com/i-like-robots/react-tags/actions/workflows/test.yml/badge.svg?branch=main) [![Coverage Status](https://coveralls.io/repos/github/i-like-robots/react-tags/badge.svg?branch=main)](https://coveralls.io/github/i-like-robots/react-tags?branch=main) [![npm version](https://img.shields.io/npm/v/react-tag-autocomplete.svg?style=flat)](https://www.npmjs.com/package/react-tag-autocomplete)
 
 
 React Tag Autocomplete is a simple tagging component ready to drop in your React projects. Originally based on the [React Tags project](http://prakhar.me/react-tags/example) by Prakhar Srivastav this version removes the drag-and-drop re-ordering functionality, adds appropriate roles and ARIA states and introduces a resizing text input. [View demo](http://i-like-robots.github.io/react-tags/).
