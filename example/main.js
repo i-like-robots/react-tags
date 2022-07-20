@@ -31,8 +31,6 @@ function CountrySelector() {
         onDelete={onDelete}
         onAddition={onAddition}
         minQueryLength={0}
-        classNameCreateTagSuggestions={'custom-create-tag-suggestions'}
-        classNameCreateTagEmptySuggestions={'custom-create-tag-empty-suggestions'}
       />
       <p><b>Output:</b></p>
       <pre><code>{JSON.stringify(tags, null, 2)}</code></pre>
