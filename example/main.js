@@ -7,7 +7,7 @@ import suggestions from './countries'
  * Demo 1 - Country selector
  */
 
-function CountrySelector () {
+function CountrySelector() {
   const [tags, setTags] = useState([])
 
   const reactTags = useRef()
@@ -30,6 +30,7 @@ function CountrySelector () {
         noSuggestionsText='No matching countries'
         onDelete={onDelete}
         onAddition={onAddition}
+        minQueryLength={0}
       />
       <p><b>Output:</b></p>
       <pre><code>{JSON.stringify(tags, null, 2)}</code></pre>
@@ -43,7 +44,7 @@ ReactDOM.render(<CountrySelector />, document.getElementById('demo-1'))
  * Demo 2 - Custom tags
  */
 
-function CustomTags () {
+function CustomTags() {
   const [tags, setTags] = useState([])
 
   const reactTags = useRef()
