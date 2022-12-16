@@ -1,6 +1,6 @@
 # React Tag Autocomplete
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/i-like-robots/react-tags/blob/main/LICENSE) ![build status](https://github.com/i-like-robots/react-tags/actions/workflows/test.yml/badge.svg?branch=main) [![Coverage Status](https://coveralls.io/repos/github/i-like-robots/react-tags/badge.svg?branch=main)](https://coveralls.io/github/i-like-robots/react-tags?branch=main) [![npm version](https://img.shields.io/npm/v/react-tag-autocomplete.svg?style=flat)](https://www.npmjs.com/package/react-tag-autocomplete)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/i-like-robots/react-tags/blob/main/LICENSE) ![build status](https://github.com/i-like-robots/react-tags/actions/workflows/test.yml/badge.svg?branch=main) [![Coverage Status](https://coveralls.io/repos/github/i-like-robots/react-tags/badge.svg?branch=main)](https://coveralls.io/github/i-like-robots/react-tags?branch=main) [![npm version](https://img.shields.io/npm/v/react-tag-autocomplete.svg?style=flat)](https://www.npmjs.com/package/react-tag-autocomplete-fix)
 
 
 React Tag Autocomplete is a simple tagging component ready to drop in your React projects. Originally based on the [React Tags project](http://prakhar.me/react-tags/example) by Prakhar Srivastav this version removes the drag-and-drop re-ordering functionality, adds appropriate roles and ARIA states and introduces a resizing text input. [View demo](http://i-like-robots.github.io/react-tags/).
@@ -9,6 +9,8 @@ React Tag Autocomplete is a simple tagging component ready to drop in your React
 
 _Please note:_ Version 7 of the component is under development, to view the upcoming version of React Tag Autocomplete please go to [the beta repository](https://github.com/i-like-robots/react-tag-autocomplete).
 
+This module is original forked from https://github.com/i-like-robots/react-tags
+
 ## Installation
 
 This is a [Node.js] module available through the [npm] registry. Before installing, download and install Node.js.
@@ -16,7 +18,7 @@ This is a [Node.js] module available through the [npm] registry. Before installi
 Installation is done using the [npm install] command:
 
 ```
-npm install --save react-tag-autocomplete
+npm install --save react-tag-autocomplete-fix
 ```
 
 [Node.js]: https://nodejs.org/en/
@@ -29,7 +31,7 @@ Here's a sample implementation that initializes the component with an empty list
 
 ```js
 import React, { useCallback, useRef, useState } from 'react'
-import ReactTags from 'react-tag-autocomplete'
+import ReactTags from 'react-tag-autocomplete-fix'
 
 function App () {
   const [tags, setTags] = useState([])
